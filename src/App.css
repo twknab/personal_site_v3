@@ -13,14 +13,18 @@
   }
 }
 
+.App-header h1 {
+  font-size: calc(25px + 5vmin);
+}
+
 .App-header {
-  background-color: #282c34;
+  background-color: #b6ff61;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  font-size: calc(5px + 1.2vmin);
   color: white;
 }
 
