@@ -1,5 +1,5 @@
 $theme-colors: (
-  "primary": #5600ff,
+  // "primary": #5600ff,
   "info": tomato,
   "danger": teal,
 );
@@ -15,6 +15,12 @@ $theme-colors: (
   text-shadow: 2px 2px 4px black;
 }
 
+.primary-nav-icon {
+  margin: 6px;
+  bottom: 2px;
+  position: relative;
+}
+
 /* import bootstrap and default stylings */
 @import "node_modules/bootstrap/scss/bootstrap.scss";
-@import "index.css"
+@import "index.css";
