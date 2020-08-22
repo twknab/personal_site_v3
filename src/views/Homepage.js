@@ -1,8 +1,8 @@
 import React from 'react';
-import PrimaryNavigation from '../components/PrimaryNavigation';
-import PrimaryFooter from '../components/PrimaryFooter';
+import PrimaryNavigation from '../components/Navigation/PrimaryNavigation';
+import PrimaryFooter from '../components/Navigation/PrimaryFooter';
 import MainContent from '../components/MainContent';
-import { Container } from 'react-bootstrap';
+
 function Homepage() {
 
   return (

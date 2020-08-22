@@ -1,0 +1,20 @@
+$theme-colors: (
+  "primary": #5600ff,
+  "info": tomato,
+  "danger": teal,
+);
+
+.footer {
+  position: absolute;
+  bottom: 0;
+}
+
+.nav-link {
+  font-size: 2rem;
+  font-weight: bolder;
+  text-shadow: 2px 2px 4px black;
+}
+
+/* import bootstrap and default stylings */
+@import "node_modules/bootstrap/scss/bootstrap.scss";
+@import "index.css"

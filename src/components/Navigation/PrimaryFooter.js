@@ -5,7 +5,7 @@ function PrimaryFooter() {
 
   return (
     <div>
-      <Container fluid className="footer">
+      <Container fluid className="pl-0 pr-0 footer">
         <Row>
           <Col lg>Footer</Col>
         </Row>
