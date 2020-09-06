@@ -1,18 +1,21 @@
 $theme-colors: (
   // "primary": #5600ff,
-  "info": tomato,
-  "danger": teal,
+    "info": tomato,
+  "danger": teal
 );
 
 .footer {
   position: absolute;
   bottom: 0;
 }
-
+// *********************
+// Nav and Dropdown Menu
+// *********************
 .nav-link {
   font-size: 2rem;
   font-weight: bolder;
   text-shadow: 2px 2px 4px black;
+  font-family: "Bungee", cursive;
 }
 
 .primary-nav-icon {
@@ -21,6 +24,37 @@ $theme-colors: (
   position: relative;
 }
 
+.dropdown-item {
+  font-family: "Montserrat", sans-serif;
+}
+
+.dropdown-menu.show {
+  background-clip: padding-box;
+  background-color: whitesmoke;
+  border: 2px solid rgba(0, 0, 0, 0.15);
+  border-radius: 1rem;
+  font-size: 1.2rem;
+}
+
+.navbar.navbar-expand-lg.navbar-dark.bg-primary {
+  background-color: #d9ff00;
+  background-image: -webkit-gradient(
+    linear,
+    0% 0%,
+    0% 100%,
+    from(#9c0ffb),
+    to(#d9ff00)
+  );
+  background-repeat: repeat no-repeat;
+  color: #b6b6b6;
+}
+
+.navbar-dark.navbar-nav.nav-link {
+    color: #9900ff !important;
+}
+
 /* import bootstrap and default stylings */
 @import "node_modules/bootstrap/scss/bootstrap.scss";
 @import "index.css";
+@import url("https://fonts.googleapis.com/css2?family=Bungee&family=Pacifico&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,800;1,400;1,500&display=swap");
