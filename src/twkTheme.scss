@@ -54,16 +54,13 @@ $theme-colors: (
   color: red;
 }
 
-.navbar-dark .navbar-nav .nav-link:hover,
-.navbar-dark .navbar-nav .nav-link:focus {
-  color: rgba(255, 255, 255, 0.75);
+.navbar-dark .navbar-nav .nav-link {
+    color: rgb(244, 255, 90) !important;
 }
-
-.funkyCoolNav > .navbar-collapse > .navbar-nav > a:hover,
-.funkyCoolNav > .navbar-collapse > .navbar-nav > a:focus,
-.funkyCoolNav > .navbar-collapse > .navbar-nav > div > a:hover,
-.funkyCoolNav > .navbar-collapse > .navbar-nav > div > a:focus {
-  color: #fff;
+.navbar-dark .navbar-nav .nav-link:hover,
+.navbar-dark .navbar-nav .nav-link:active,
+.navbar-dark .navbar-nav .nav-link:focus {
+    color: #00e6ff !important;
 }
 
 .funkyCoolNavDropdown > .dropdown-menu > a:hover  {

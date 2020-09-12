@@ -20,7 +20,7 @@ function PrimaryNavigation() {
   return (
     <div>
       <Container fluid className="pl-0 pr-0">
-        <Navbar collapseOnSelect expand="lg" bg="primary" variant="dark" className="funkyCoolNav">
+        <Navbar collapseOnSelect expand="lg" bg="primary" variant="dark">
           <Navbar.Brand href="#home">
             <img
               src="http://sasquatchcreative.com/wp-content/uploads/2018/03/logo.png"
