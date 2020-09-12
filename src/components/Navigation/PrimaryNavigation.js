@@ -20,7 +20,7 @@ function PrimaryNavigation() {
   return (
     <div>
       <Container fluid className="pl-0 pr-0">
-        <Navbar collapseOnSelect expand="lg" bg="primary" variant="dark">
+        <Navbar collapseOnSelect expand="lg" bg="primary" variant="dark" className="funkyCoolNav">
           <Navbar.Brand href="#home">
             <img
               src="http://sasquatchcreative.com/wp-content/uploads/2018/03/logo.png"
@@ -37,7 +37,7 @@ function PrimaryNavigation() {
                 <FcLibrary className="primary-nav-icon"/>
                 Home
               </Nav.Link>
-              <NavDropdown title={navAboutDropdownTitle} id="collasible-nav-dropdown-about">
+              <NavDropdown title={navAboutDropdownTitle} id="collasible-nav-dropdown-about" className="funkyCoolNavDropdown">
                 <NavDropdown.Item onClick={() => handleNavClick('skills')} active={activeItem === 'skills'}><FcAutomatic className="primary-nav-icon" />Skills</NavDropdown.Item>
                 <NavDropdown.Item onClick={() => handleNavClick('projects')} active={activeItem === 'projects'}><FcLightAtTheEndOfTunnel className="primary-nav-icon" />Projects</NavDropdown.Item>
                 <NavDropdown.Item onClick={() => handleNavClick('education')} active={activeItem === 'education'}><FcGraduationCap className="primary-nav-icon" />Education</NavDropdown.Item>
@@ -45,12 +45,12 @@ function PrimaryNavigation() {
                 <Container fluid>
                   <Row center>
                     <Col>
-                      <NavDropdown.Item onClick={() => handleNavClick('downloadResume')} active={activeItem === 'downloadResume'}><FcNightPortrait className="primary-nav-icon"/>Download Resume</NavDropdown.Item>
+                      <NavDropdown.Item onClick={() => handleNavClick('downloadResume')} active={activeItem === 'downloadResume'} className="download-resume"><FcNightPortrait className="primary-nav-icon"/>Download Resume</NavDropdown.Item>
                     </Col>
                   </Row>
                 </Container>
               </NavDropdown>
-              <NavDropdown title={navInterestsDropdownTitle} id="collasible-nav-dropdown-interests">
+              <NavDropdown title={navInterestsDropdownTitle} id="collasible-nav-dropdown-interests" className="funkyCoolNavDropdown">
                 <NavDropdown.Item onClick={() => handleNavClick('nature')} active={activeItem === 'nature'}><FcLandscape className="primary-nav-icon"/>Nature</NavDropdown.Item>
                 <NavDropdown.Item onClick={() => handleNavClick('drawing')} active={activeItem === 'drawing'}><FcImageFile className="primary-nav-icon"/>Drawing</NavDropdown.Item>
               </NavDropdown>

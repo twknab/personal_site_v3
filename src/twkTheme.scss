@@ -49,9 +49,53 @@ $theme-colors: (
   color: #b6b6b6;
 }
 
-.navbar-dark.navbar-nav.nav-link {
-    color: #9900ff !important;
+.nav-link:hover,
+.nav-link:focus {
+  color: red;
 }
+
+.navbar-dark .navbar-nav .nav-link:hover,
+.navbar-dark .navbar-nav .nav-link:focus {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.funkyCoolNav > .navbar-collapse > .navbar-nav > a:hover,
+.funkyCoolNav > .navbar-collapse > .navbar-nav > a:focus,
+.funkyCoolNav > .navbar-collapse > .navbar-nav > div > a:hover,
+.funkyCoolNav > .navbar-collapse > .navbar-nav > div > a:focus {
+  color: #fff;
+}
+
+.funkyCoolNavDropdown > .dropdown-menu > a:hover  {
+    background-color: #d0d0d06b;
+}
+
+.dropdown-item.active, .dropdown-item:active {
+    background-color: #d0d0d06b !important;
+}
+
+.download-resume {
+  background-color: #ffe6a2 !important;
+  border-radius: 20px;
+}
+
+.download-resume:hover, .download-resume:active {
+  background-color: #ffd45b !important;
+  border-radius: 20px;
+  color: black !important;
+}
+
+.dropdown-item.active, .dropdown-item:active {
+  color: black !important;
+}
+
+.download-resume:visited {
+  color: rgb(59, 59, 59);
+}
+
+// .navbar-dark.navbar-nav.nav-link {
+//     color: #9900ff !important;
+// }
 
 /* import bootstrap and default stylings */
 @import "node_modules/bootstrap/scss/bootstrap.scss";
