@@ -1,13 +1,12 @@
+// *********************
+// Theme Colors
+// *********************
 $theme-colors: (
   // "primary": #5600ff,
     "info": tomato,
   "danger": teal
 );
 
-.footer {
-  position: absolute;
-  bottom: 0;
-}
 // *********************
 // Nav and Dropdown Menu
 // *********************
@@ -24,7 +23,6 @@ $theme-colors: (
   // right: 6px;
   position: relative;
 }
-
 
 .dropdown-item {
   font-family: "Montserrat", sans-serif;
@@ -93,6 +91,33 @@ $theme-colors: (
   color: rgb(59, 59, 59);
 }
 
+// *********************
+// Footer
+// *********************
+.footer {
+  position: absolute;
+  bottom: 0;
+}
+
+// *********************
+// Dark and Light modes
+// *********************
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #2a2a2a !important;
+    color: #ffe9c1d9 !important;
+  }
+}
+@media (prefers-color-scheme: light) {
+  body {
+    background-color: #ffe9c1d9 !important;
+    color: #151515 !important;
+  }
+}
+
+// *********************
+// Imports
+// *********************
 /* import bootstrap and default stylings */
 @import "node_modules/bootstrap/scss/bootstrap.scss";
 @import "index.css";
