@@ -2,11 +2,6 @@ import React, { useState } from 'react';
 import { Container, Row, Col, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import { FcAutomatic, FcNightPortrait, FcElectricity, FcGraduationCap, FcImageFile, FcLandscape, FcLibrary, FcLightAtTheEndOfTunnel, FcMindMap, FcNook, FcReading } from "react-icons/fc";
 
-// TODO: Refactor menu items into the above export (primaryNavItems etc) then loop the stuff below so this component is cleaner
-// import { primaryNavItems, primaryRightSideNavItems} from './navItems.js';
-// console.log(primaryNavItems, primaryRightSideNavItems);
-
-
 function PrimaryNavigation() {
   
   const [activeItem, setActiveItem] = useState('home');
@@ -14,7 +9,7 @@ function PrimaryNavigation() {
     setActiveItem(itemName);
     // TODO: Navigate to item.
   };
-  const navAboutDropdownTitle = <span><FcMindMap className="primary-nav-icon"/> About</span>;
+  const navAboutDropdownTitle = <span><FcMindMap className="primary-nav-icon" /> <span className="nav-dropdown-adjustment">About</span></span>;
   const navInterestsDropdownTitle = <span><FcElectricity className="primary-nav-icon"/> Interests</span>;
 
   return (

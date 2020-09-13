@@ -21,8 +21,10 @@ $theme-colors: (
 .primary-nav-icon {
   margin: 6px;
   bottom: 2px;
+  // right: 6px;
   position: relative;
 }
+
 
 .dropdown-item {
   font-family: "Montserrat", sans-serif;
@@ -37,15 +39,13 @@ $theme-colors: (
 }
 
 .navbar.navbar-expand-lg.navbar-dark.bg-primary {
-  background-color: #d9ff00;
-  background-image: -webkit-gradient(
-    linear,
-    0% 0%,
-    0% 100%,
-    from(#9c0ffb),
-    to(#d9ff00)
+  background: rgb(131, 58, 180);
+  background: linear-gradient(
+    90deg,
+    rgba(131, 58, 180, 1) 0%,
+    rgba(29, 253, 187, 1) 53%,
+    rgba(252, 176, 69, 1) 89%
   );
-  background-repeat: repeat no-repeat;
   color: #b6b6b6;
 }
 
@@ -55,20 +55,21 @@ $theme-colors: (
 }
 
 .navbar-dark .navbar-nav .nav-link {
-    color: rgb(244, 255, 90) !important;
+  color: rgb(244, 255, 90) !important;
 }
 .navbar-dark .navbar-nav .nav-link:hover,
 .navbar-dark .navbar-nav .nav-link:active,
 .navbar-dark .navbar-nav .nav-link:focus {
-    color: #00e6ff !important;
+  color: #00e6ff !important;
 }
 
-.funkyCoolNavDropdown > .dropdown-menu > a:hover  {
-    background-color: #d0d0d06b;
+.funkyCoolNavDropdown > .dropdown-menu > a:hover {
+  background-color: #d0d0d06b;
 }
 
-.dropdown-item.active, .dropdown-item:active {
-    background-color: #d0d0d06b !important;
+.dropdown-item.active,
+.dropdown-item:active {
+  background-color: #d0d0d06b !important;
 }
 
 .download-resume {
@@ -76,23 +77,21 @@ $theme-colors: (
   border-radius: 20px;
 }
 
-.download-resume:hover, .download-resume:active {
+.download-resume:hover,
+.download-resume:active {
   background-color: #ffd45b !important;
   border-radius: 20px;
   color: black !important;
 }
 
-.dropdown-item.active, .dropdown-item:active {
+.dropdown-item.active,
+.dropdown-item:active {
   color: black !important;
 }
 
 .download-resume:visited {
   color: rgb(59, 59, 59);
 }
-
-// .navbar-dark.navbar-nav.nav-link {
-//     color: #9900ff !important;
-// }
 
 /* import bootstrap and default stylings */
 @import "node_modules/bootstrap/scss/bootstrap.scss";
