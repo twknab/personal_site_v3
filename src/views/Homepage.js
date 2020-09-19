@@ -9,7 +9,7 @@ function Homepage() {
     <div>
       <PrimaryNavigation />
       <MainContent />
-      <PrimaryFooter />
+      {/* <PrimaryFooter /> */}
     </div>
   );
 }
