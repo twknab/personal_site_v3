@@ -1,13 +1,37 @@
+// *********************
+// Theme Colors
+// *********************
+$theme-colors: (
+  "info": tomato,
+  "danger": teal,
+);
+
+$themeDarkBackground: #2a2a2a;
+$themeDarkText: #fff;
+
+$themeLightBackground: #efefef;
+$themeLightText: #151515;
+
+$themeOrange: #fcb045;
+$themeGreen: #32efa6;
+$themeBlue: #3d93b9;
+$themePurple: #813db4;
+$themeVibrantYellowGreen: #f4fd5b;
+$themeVibrantYellowGreenLight: #f0f4c2;
+$themeLightOrange: #ffe6a2;
+
+$navLightHover: #e6e6e6;
+$turquoiseLink: #00e6ff;
+
+// *********************
+// HTML & Primary Content
+// *********************
 body {
   line-height: 1.7em !important;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
-
-// h1, h2, h3, h4, h5, h6 {
-//   padding: 1rem;
-//   font-weight: 800;
-//   font-family: "Montserrat", sans-serif;
-// }
-
 h1,
 h2,
 h3,
@@ -20,28 +44,21 @@ h6 {
   clear: both;
   display: block !important;
 }
-
 p {
   font-family: "Raleway", sans-serif;
   padding: 1rem;
   margin-bottom: 0rem !important;
 }
-
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
 .container-fluid a {
   font-weight: 600;
 }
 
 // *********************
-// Theme Colors
-// *********************
-$theme-colors: (
-  // "primary": #5600ff,
-    "info": tomato,
-  "danger": teal
-);
-
-// *********************
-// Nav and Dropdown Menu
+// Navbar and Dropdown Menus
 // *********************
 .nav-link {
   font-size: 2rem;
@@ -49,18 +66,14 @@ $theme-colors: (
   text-shadow: 2px 2px 4px black;
   font-family: "Bungee", cursive;
 }
-
 .primary-nav-icon {
   margin: 6px;
   bottom: 2px;
-  // right: 6px;
   position: relative;
 }
-
 .dropdown-item {
   font-family: "Montserrat", sans-serif;
 }
-
 .dropdown-menu.show {
   background-clip: padding-box;
   background-color: whitesmoke;
@@ -68,49 +81,39 @@ $theme-colors: (
   border-radius: 1rem;
   font-size: 1.2rem;
 }
-
 .navbar.navbar-expand-lg.navbar-dark.bg-primary {
-  background: rgb(131, 58, 180);
+  background: $themePurple;
   background: linear-gradient(
     90deg,
-    rgba(131, 58, 180, 1) 0%,
-    rgba(29, 253, 187, 1) 53%,
-    rgba(252, 176, 69, 1) 89%
+    $themePurple 0%,
+    $themeGreen 53%,
+    $themeOrange 89%
   );
   color: #b6b6b6;
 }
-
-.nav-link:hover,
-.nav-link:focus {
-  color: red;
-}
-
 .navbar-dark .navbar-nav .nav-link {
-  color: rgb(244, 255, 90) !important;
+  color: $themeVibrantYellowGreen !important;
 }
 .navbar-dark .navbar-nav .nav-link:hover,
 .navbar-dark .navbar-nav .nav-link:active,
 .navbar-dark .navbar-nav .nav-link:focus {
-  color: #00e6ff !important;
+  color: $turquoiseLink !important;
 }
-
-.funkyCoolNavDropdown > .dropdown-menu > a:hover {
-  background-color: #d0d0d06b;
+.theme-twk-custom-nav-dropdown > .dropdown-menu > a:hover {
+  background-color: $navLightHover;
 }
 
 .dropdown-item.active,
 .dropdown-item:active {
-  background-color: #d0d0d06b !important;
+  background-color: $navLightHover !important;
 }
-
 .download-resume {
-  background-color: #ffe6a2 !important;
+  background-color: $themeLightOrange !important;
   border-radius: 20px;
 }
-
 .download-resume:hover,
 .download-resume:active {
-  background-color: #ffd45b !important;
+  background-color: $themeVibrantYellowGreen !important;
   border-radius: 20px;
   color: black !important;
 }
@@ -119,7 +122,6 @@ $theme-colors: (
 .dropdown-item:active {
   color: black !important;
 }
-
 .download-resume:visited {
   color: rgb(59, 59, 59);
 }
@@ -137,47 +139,45 @@ $theme-colors: (
 // *********************
 @media (prefers-color-scheme: dark) {
   body {
-    background-color: #2a2a2a !important;
-    color: #fff !important;
+    background-color: $themeDarkBackground !important;
+    color: $themeDarkText !important;
   }
 
   .card {
-    color: #2a2a2a;
-    background-color: #f4fd5b !important;
-    border: 1px solid #f4fd5b !important;
+    color: $themeDarkBackground;
+    background-color: $themeVibrantYellowGreen !important;
+    border: 1px solid $themeVibrantYellowGreen !important;
   }
 
   .mainContent {
     .row {
       a {
-        color: #22e6bb !important;
+        color: $turquoiseLink !important;
       }
       a:hover,
       a:active,
       a:visited {
-        color: #f4fd5b !important;
+        color: $themeVibrantYellowGreen !important;
       }
     }
   }
 }
 @media (prefers-color-scheme: light) {
   body {
-    background-color: #efefef !important;
-    color: #151515 !important;
+    background-color: $themeLightBackground !important;
+    color: $themeLightText !important;
   }
 
   .card {
-    border: 1px solid #f4fd5b57 !important;
-    background-color: #f4fd5b57 !important;
+    border: 1px solid $themeVibrantYellowGreenLight !important;
+    background-color: $themeVibrantYellowGreenLight !important;
   }
 }
 
 // *********************
 // Imports
 // *********************
-/* import bootstrap and default stylings */
 @import "node_modules/bootstrap/scss/bootstrap.scss";
-@import "index.css";
 @import url("https://fonts.googleapis.com/css2?family=Bungee&family=Pacifico&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,800;1,400;1,500&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap");

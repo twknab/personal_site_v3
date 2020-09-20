@@ -32,7 +32,7 @@ function PrimaryNavigation() {
                 <FcLibrary className="primary-nav-icon"/>
                 Home
               </Nav.Link>
-              <NavDropdown title={navAboutDropdownTitle} id="collasible-nav-dropdown-about" className="funkyCoolNavDropdown">
+              <NavDropdown title={navAboutDropdownTitle} id="collasible-nav-dropdown-about" className="theme-twk-custom-nav-dropdown">
                 <NavDropdown.Item onClick={() => handleNavClick('skills')} active={activeItem === 'skills'}><FcAutomatic className="primary-nav-icon" />Skills</NavDropdown.Item>
                 <NavDropdown.Item onClick={() => handleNavClick('projects')} active={activeItem === 'projects'}><FcLightAtTheEndOfTunnel className="primary-nav-icon" />Projects</NavDropdown.Item>
                 <NavDropdown.Item onClick={() => handleNavClick('education')} active={activeItem === 'education'}><FcGraduationCap className="primary-nav-icon" />Education</NavDropdown.Item>
@@ -45,7 +45,7 @@ function PrimaryNavigation() {
                   </Row>
                 </Container>
               </NavDropdown>
-              <NavDropdown title={navInterestsDropdownTitle} id="collasible-nav-dropdown-interests" className="funkyCoolNavDropdown">
+              <NavDropdown title={navInterestsDropdownTitle} id="collasible-nav-dropdown-interests" className="theme-twk-custom-nav-dropdown">
                 <NavDropdown.Item onClick={() => handleNavClick('nature')} active={activeItem === 'nature'}><FcLandscape className="primary-nav-icon"/>Nature</NavDropdown.Item>
                 <NavDropdown.Item onClick={() => handleNavClick('drawing')} active={activeItem === 'drawing'}><FcImageFile className="primary-nav-icon"/>Drawing</NavDropdown.Item>
               </NavDropdown>
