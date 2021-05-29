@@ -140,12 +140,13 @@ code {
 // Center align resume button
 .resume-cta {
   width: 100%;
-  margin-left: auto;
-  margin-right: auto;
+  margin-left: auto !important;
+  margin-right: auto !important;
 }
 .download-resume {
   background-color: $themeLightOrange !important;
   border-radius: 20px;
+  width: 100%;
 }
 .download-resume:hover,
 .download-resume:active {
