@@ -10,10 +10,12 @@ function MainContent() {
             <h1>Column 1</h1>
             <Card>
               <Card.Body>
-                Mauris augue neque gravida in fermentum et. Nulla facilisi cras
-                fermentum odio eu <b>feugiat pretium</b> nibh. Mauris cursus
-                mattis molestie a iaculis at erat pellentesque. Nulla{" "}
-                <i>pellentesque dignissim</i> enim sit amet venenatis urna.
+                <p>
+                  Mauris augue neque gravida in fermentum et. Nulla facilisi
+                  cras fermentum odio eu <b>feugiat pretium</b> nibh. Mauris
+                  cursus mattis molestie a iaculis at erat pellentesque. Nulla{" "}
+                  <i>pellentesque dignissim</i> enim sit amet venenatis urna.
+                </p>
               </Card.Body>
             </Card>
             <p>

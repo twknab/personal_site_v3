@@ -32,6 +32,12 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+h1 {font-size: 4.1em !important;}
+h2 {font-size: 3.1em !important;}
+h3 {font-size: 2.2em !important;}
+h4 {font-size: 1.7em !important;}
+h5 {font-size: 1.2em !important;}
+h6 {font-size: 1.1em !important;}
 h1,
 h2,
 h3,
@@ -41,17 +47,17 @@ h6 {
   padding: 1rem;
   margin-top: 0.5rem !important;
   font-family: "Bungee", cursive;
-  clear: both;
-  display: block !important;
+  width: 100%;
 }
 p {
   font-family: "Raleway", sans-serif;
   padding: 1rem;
-  margin-bottom: 0rem !important;
+  // margin-bottom: 0rem !important;
+  font-size: 22px;
+  line-height: 1.5em;
 }
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+  font-family: 'Roboto Mono', monospace;
 }
 .container-fluid a {
   font-weight: 600;
@@ -60,6 +66,10 @@ code {
 // *********************
 // Navbar and Dropdown Menus
 // *********************
+.timknab-logo {
+  height: 50px;
+}
+
 .nav-link {
   font-size: 2rem;
   font-weight: bolder;
@@ -71,15 +81,34 @@ code {
   bottom: 2px;
   position: relative;
 }
+// Change hamburger menu background color
+.navbar-dark .navbar-toggler {
+  background-color: #ac6fe2;
+  border: unset !important;
+  padding: 10px;
+}
+// Center adjust "About" heading for mobile
+@media (max-width: 992px) {
+  .navbar-collapse {
+    margin-bottom: 20px;
+  }
+  .nav-dropdown-adjustment {
+    margin-left: 31px;
+  }  
+}
+
 .dropdown-item {
-  font-family: "Montserrat", sans-serif;
+  font-family: "Raleway", cursive;
+  font-size: 1.3em;
+  text-align: center !important;
 }
 .dropdown-menu.show {
   background-clip: padding-box;
   background-color: whitesmoke;
   border: 2px solid rgba(0, 0, 0, 0.15);
-  border-radius: 1rem;
+  border-radius: 0.25rem;
   font-size: 1.2rem;
+  padding: 20px 5px;
 }
 .navbar.navbar-expand-lg.navbar-dark.bg-primary {
   background: $themePurple;
@@ -92,7 +121,7 @@ code {
   color: #b6b6b6;
 }
 .navbar-dark .navbar-nav .nav-link {
-  color: $themeVibrantYellowGreen !important;
+  color: $themeLightBackground !important;
 }
 .navbar-dark .navbar-nav .nav-link:hover,
 .navbar-dark .navbar-nav .nav-link:active,
@@ -106,6 +135,13 @@ code {
 .dropdown-item.active,
 .dropdown-item:active {
   background-color: $navLightHover !important;
+}
+
+// Center align resume button
+.resume-cta {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
 }
 .download-resume {
   background-color: $themeLightOrange !important;
@@ -178,6 +214,7 @@ code {
 // Imports
 // *********************
 @import "node_modules/bootstrap/scss/bootstrap.scss";
-@import url("https://fonts.googleapis.com/css2?family=Bungee&family=Pacifico&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bungee&family=Roboto+Mono:ital@0;1&family=Roboto:ital,wght@0,400;0,900;1,400;1,900&display=swap");
+
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,800;1,400;1,500&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap");
