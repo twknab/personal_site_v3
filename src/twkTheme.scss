@@ -162,6 +162,14 @@ code {
   color: rgb(59, 59, 59);
 }
 
+// Set card margins and ensure last paragraph has no padding
+.card {
+  margin: 30px 15px;
+}
+.card p:last-child {
+  margin-bottom: 0px;
+} 
+
 // *********************
 // Footer
 // *********************
