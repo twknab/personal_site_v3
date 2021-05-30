@@ -1,6 +1,6 @@
 # TODOS:
 
-1. Add drop shadow to icon to match menu
+1. Update padding and spacing so things are legit -- make sure cannot go full width on large display -- also make sure that the padding and margin is correct
 2. Clean up footer
 3. Outline your project component -- this is going to be very important to show completed projects
 4. Outline your learning component -- this is where you can show off what you're learning (could you go over algorimthsm here?)
