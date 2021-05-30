@@ -14,8 +14,14 @@ function PrimaryNavigation() {
 
   return (
     <div>
-      <Container fluid className="pl-0 pr-0">
-        <Navbar collapseOnSelect expand="lg" bg="primary" variant="dark">
+      <Container fluid className="pl-0 pr-0 h-100">
+        <Navbar
+          sticky="top"
+          collapseOnSelect
+          expand="lg"
+          bg="primary"
+          variant="dark"
+        >
           <Navbar.Brand href="#home">
             <img
               src="https://timknab.dev/wp-content/uploads/2021/01/timknabdev-logo-light-lg.png"
