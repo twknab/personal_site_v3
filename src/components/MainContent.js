@@ -48,7 +48,7 @@ function MainContent() {
             </p>
           </Col>
         </Row>
-        <Row>
+        <Row className="skills">
           <Col lg>
             <h1>Skills</h1>
             <p>

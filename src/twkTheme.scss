@@ -68,8 +68,10 @@ code {
 .container-fluid a {
   font-weight: 600 !important;
 }
+
 // add margin spacing to top and bottom row
 .row {
+  max-width: 2000px; // prevent width from going full on large displays
   margin: 50px auto !important;
 }
 
@@ -244,6 +246,9 @@ navbar-nav .dropdown-menu {
 
 // ABOUT ME
 .about-me {
+  // TODO: figure out spacing issue before invoking these
+  // border-top: 20px solid #05b3ff;
+  // border-bottom: 20px solid #fcb045;
   background-color: rgb(33, 33, 33);
 }
 
