@@ -81,6 +81,12 @@ code {
   bottom: 2px;
   position: relative;
 }
+
+// Adjust line height for primary navigation items
+.navbar-collapse {
+    line-height: 1.9em;
+}
+
 // Change hamburger menu background color
 .navbar-dark .navbar-toggler {
   background-color: #ac6fe2;
@@ -128,13 +134,18 @@ code {
 .navbar-dark .navbar-nav .nav-link:focus {
   color: $turquoiseLink !important;
 }
-.theme-twk-custom-nav-dropdown > .dropdown-menu > a:hover {
-  background-color: $navLightHover;
+// Set hover and active styles for nav dropdown
+.theme-twk-custom-nav-dropdown > .dropdown-menu > a:hover, .dropdown-item.active,
+.dropdown-item:active, a.dropdown-item.active {
+    background: #813db4cf !important;
+    color: white !important;
+    text-shadow: 2px 2px 4px black;
+    border-radius: 0.25rem;
 }
 
-.dropdown-item.active,
-.dropdown-item:active {
-  background-color: $navLightHover !important;
+// Add line height to dropdown nav
+navbar-nav .dropdown-menu {
+    line-height: 1.5em;
 }
 
 // Center align resume button
@@ -145,23 +156,20 @@ code {
 }
 .download-resume {
   background-color: $themeLightOrange !important;
-  border-radius: 20px;
-  width: 100%;
+  border-radius: .5rem;
+  padding: 12px 25px !important;
+  margin: 0px !important;
 }
 .download-resume:hover,
 .download-resume:active {
-  background-color: $themeVibrantYellowGreen !important;
-  border-radius: 20px;
-  color: black !important;
+  background-color: $themePurple !important;
+    color: white !important;
+    text-shadow: 2px 2px 4px black;
 }
 
-.dropdown-item.active,
-.dropdown-item:active {
-  color: black !important;
-}
-.download-resume:visited {
-  color: rgb(59, 59, 59);
-}
+// .download-resume:visited {
+//   color: rgb(59, 59, 59);
+// }
 
 // Set card margins and ensure last paragraph has no padding
 .card {
@@ -214,8 +222,8 @@ code {
   }
 
   .card {
-    border: 1px solid $themeVibrantYellowGreenLight !important;
-    background-color: $themeVibrantYellowGreenLight !important;
+    border: 1px solid $themeVibrantYellowGreen !important;
+    background-color: $themeVibrantYellowGreen !important;
   }
 }
 

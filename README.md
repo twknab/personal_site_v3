@@ -1,14 +1,9 @@
 # TODOS:
 
-~~1. Remove icons for navigation~~
-~~2. Improve primary design look and feel~~
-~~3. Fix content section columns (remove space up top)~~
-~~4. Hide non MVP items. Could you use Grav to make a blog instead and just link it in or have under a /blog folder? (Would save you technical debt of creating this all from scratch)~~
 1. Add drop shadow to icon to match menu
-2. Clean up padding and spacing around sub-menu
-3. Clean up footer
-4. Outline your project component -- this is going to be very important to show completed projects
-5. Outline your learning component -- this is where you can show off what you're learning (could you go over algorimthsm here?)
+2. Clean up footer
+3. Outline your project component -- this is going to be very important to show completed projects
+4. Outline your learning component -- this is where you can show off what you're learning (could you go over algorimthsm here?)
 
 --------
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
