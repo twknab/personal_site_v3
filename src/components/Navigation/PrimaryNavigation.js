@@ -64,7 +64,7 @@ function PrimaryNavigation() {
                 </NavDropdown.Item>
                 <NavDropdown.Divider />
                 <Container fluid>
-                  <Row center className="resume-cta">
+                  <Row center className="resume-cta row-slim-margin">
                     <Col>
                       <NavDropdown.Item
                         fill

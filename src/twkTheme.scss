@@ -48,6 +48,7 @@ h6 {
   margin-top: 0.5rem !important;
   font-family: "Bungee", cursive;
   width: 100%;
+  text-shadow: 2px 2px 4px black;
 }
 p {
   font-family: "Raleway", sans-serif;
@@ -59,8 +60,21 @@ p {
 code {
   font-family: 'Roboto Mono', monospace;
 }
+
+// make links inside a row bold
+.row a {
+  font-weight: 800 !important;
+}
 .container-fluid a {
-  font-weight: 600;
+  font-weight: 600 !important;
+}
+// add margin spacing to top and bottom row
+.row {
+  margin: 50px auto !important;
+}
+
+.row-slim-margin {
+  margin: 0px !important;
 }
 
 // *********************
@@ -169,7 +183,7 @@ navbar-nav .dropdown-menu {
 
 // Set card margins and ensure last paragraph has no padding
 .card {
-  margin: 30px 15px;
+  margin: auto 15px;
 }
 .card p:last-child {
   margin-bottom: 0px;
@@ -221,6 +235,16 @@ navbar-nav .dropdown-menu {
     border: 1px solid $themeVibrantYellowGreen !important;
     background-color: $themeVibrantYellowGreen !important;
   }
+}
+
+// PROFESSIONAL SUMMARY
+.professional-summary {
+  text-shadow: 2px 2px 4px white;
+}
+
+// ABOUT ME
+.about-me {
+  background-color: rgb(33, 33, 33);
 }
 
 // *********************
