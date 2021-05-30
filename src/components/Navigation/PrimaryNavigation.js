@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Nav, Navbar, NavDropdown } from 'react-bootstrap';
-import { FcAutomatic, FcNightPortrait, FcElectricity, FcGraduationCap, FcImageFile, FcLandscape, FcLibrary, FcLightAtTheEndOfTunnel, FcMindMap, FcNook, FcReading } from "react-icons/fc";
+import {
+  FaFileDownload,
+  // FaHammer,
+  // FaFire,
+  // FaGraduationCap,
+} from "react-icons/fa";
 
 function PrimaryNavigation() {
   
@@ -59,12 +64,16 @@ function PrimaryNavigation() {
                   onClick={() => handleNavClick("education")}
                   active={activeItem === "education"}
                 >
-                  {/* <FcGraduationCap className="primary-nav-icon" /> */}
-                  Education
+                  Experience
                 </NavDropdown.Item>
-                <NavDropdown.Divider />
+                <NavDropdown.Item
+                  onClick={() => handleNavClick("education")}
+                  active={activeItem === "education"}
+                >
+                  Education History
+                </NavDropdown.Item>
                 <Container fluid>
-                  <Row center className="resume-cta row-slim-margin">
+                  <Row center className="resume-cta row-slim-padding">
                     <Col>
                       <NavDropdown.Item
                         fill
@@ -72,6 +81,10 @@ function PrimaryNavigation() {
                         active={activeItem === "downloadResume"}
                         className="download-resume"
                       >
+                        <FaFileDownload
+                          className="primary-nav-icon"
+                          size="1em"
+                        />
                         Download Resume
                       </NavDropdown.Item>
                     </Col>
