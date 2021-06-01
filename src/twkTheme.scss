@@ -359,6 +359,11 @@ navbar-nav .dropdown-menu {
   text-shadow: 2px 2px 4px black;
   text-align: center;
 }
+.wa-state {
+  max-height: 50px;
+  filter: drop-shadow(2px 2px 2px black) !important;
+  margin-left: 15px;
+}
 
 // *********************
 // IMPORTS

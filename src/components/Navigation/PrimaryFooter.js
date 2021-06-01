@@ -1,13 +1,24 @@
 import React from 'react';
-import { Row, Col, Container } from 'react-bootstrap';
+import { Col, Container, Image, Row } from 'react-bootstrap';
+import washingtonStateOutline from '../../assets/images/washington-state-outline.png';
 
 function PrimaryFooter() {
 
   return (
     <div>
-      <Container fluid="true" className="pl-0 pr-0 h-100 container-fluid footer">
+      <Container
+        fluid="true"
+        className="pl-0 pr-0 h-100 container-fluid footer"
+      >
         <Row>
-          <Col lg><p className="handcrafted-tag">Handcrafted with care in Washington State <span role="img" aria-label="Washington State">🌲</span></p>
+          <Col lg>
+            <p className="handcrafted-tag">
+              Handcrafted with care in Washington State{" "}
+              <span role="img" aria-label="Washington State">
+                🌲
+              </span>
+              <Image src={washingtonStateOutline} className="wa-state" />
+            </p>
           </Col>
         </Row>
       </Container>
