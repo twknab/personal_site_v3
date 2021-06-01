@@ -13,11 +13,11 @@ function PrimaryFooter() {
         <Row>
           <Col lg>
             <p className="handcrafted-tag">
-              Handcrafted with care in Washington State{" "}
+              <Image src={washingtonStateOutline} className="wa-state" />
+              Crafted with care in Washington State{" "}
               <span role="img" aria-label="Washington State">
                 🌲
               </span>
-              <Image src={washingtonStateOutline} className="wa-state" />
             </p>
           </Col>
         </Row>
