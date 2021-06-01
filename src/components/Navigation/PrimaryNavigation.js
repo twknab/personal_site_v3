@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Nav, Navbar, NavDropdown } from 'react-bootstrap';
-import {
-  FaFileDownload,
-} from "react-icons/fa";
+import { FaFileDownload } from "react-icons/fa";
 import timknabLogo from '../../assets/images/timknabdev-logo-light-lg.png';
 
 function PrimaryNavigation() {
