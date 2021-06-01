@@ -32,12 +32,17 @@ function MainContent() {
               Summary
             </h1>
             <p>
-              <b>Full stack web application developer/engineer</b>, experienced
-              in a variety of languages and frameworks: JavaScript
+              <b className="highlighter">
+                Full stack web application developer/engineer
+              </b>
+              , experienced in a variety of languages and frameworks: JavaScript
               MEVN/MERN/MEAN (Node, Express, Mongo, Vue/React/Angular), LAMP
               (PHP/Hacklang, XHP/React/Flow), Python (Django, Flask) stacks.
-              Skillful knowledge of MySQL/NoSQL databases. Goal-oriented
-              communicator, strong work ethic.
+              Skillful knowledge of MySQL/NoSQL databases.{" "}
+              <b className="highlighter">Goal-oriented & strong work ethic.</b>
+            </p>
+            <p>
+              socials
             </p>
             {/* </Card.Body>
             </Card> */}
@@ -184,7 +189,7 @@ function MainContent() {
             </p>
           </Col>
         </Row>
-        <Row className="education-history">
+        <Row className="education-history link-light-bg">
           <Col lg>
             <h1 className="light-text-shadow">
               <span role="img" aria-label="about">
