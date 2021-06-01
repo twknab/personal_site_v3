@@ -1,5 +1,6 @@
 import React from "react";
 import { Col, Container, Image, Row } from "react-bootstrap";
+import bioPhoto from '../assets/images/twksmall-966x966.jpeg';
 
 function MainContent() {
   return (
@@ -9,7 +10,7 @@ function MainContent() {
           <Col xs={12} s={12} md={12} lg={4}>
             {/* <Image src="holder.js/171x180" rounded /> */}
             <Image
-              src="https://timknab.dev/wp-content/uploads/2021/01/twksmall-1-966x966.jpg"
+              src={bioPhoto}
               roundedCircle
               fluid
               className="bio-photo"
@@ -41,9 +42,7 @@ function MainContent() {
               Skillful knowledge of MySQL/NoSQL databases.{" "}
               <b className="highlighter">Goal-oriented & strong work ethic.</b>
             </p>
-            <p>
-              socials
-            </p>
+            <p>socials</p>
             {/* </Card.Body>
             </Card> */}
           </Col>

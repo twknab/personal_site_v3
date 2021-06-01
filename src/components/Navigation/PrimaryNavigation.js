@@ -2,10 +2,8 @@ import React, { useState } from 'react';
 import { Container, Row, Col, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import {
   FaFileDownload,
-  // FaHammer,
-  // FaFire,
-  // FaGraduationCap,
 } from "react-icons/fa";
+import timknabLogo from '../../assets/images/timknabdev-logo-light-lg.png';
 
 function PrimaryNavigation() {
   
@@ -29,7 +27,7 @@ function PrimaryNavigation() {
         >
           <Navbar.Brand href="#home">
             <img
-              src="https://timknab.dev/wp-content/uploads/2021/01/timknabdev-logo-light-lg.png"
+              src={timknabLogo}
               className="d-inline-block align-top timknab-logo"
               alt="Full Stack Developer TimKnab.dev"
             />
