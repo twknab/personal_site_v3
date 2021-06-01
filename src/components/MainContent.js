@@ -41,7 +41,7 @@ function MainContent() {
                   target="_new"
                   className="social-linkedin"
                 >
-                  <FaLinkedin size="4em" />
+                  <FaLinkedin size="4em" className="icon-shadow-light" />
                 </a>
               </Col>
               <Col xs={4} s={4} md={4} lg={4}>
@@ -50,7 +50,7 @@ function MainContent() {
                   target="_new"
                   className="social-github"
                 >
-                  <FaGithubSquare size="4em" />
+                  <FaGithubSquare size="4em" className="icon-shadow-light" />
                 </a>
               </Col>
               <Col xs={4} s={4} md={4} lg={4}>
@@ -59,7 +59,7 @@ function MainContent() {
                   target="_new"
                   className="social-stackoverflow"
                 >
-                  <FaStackOverflow size="4em" />
+                  <FaStackOverflow size="4em" className="icon-shadow-light" />
                 </a>
               </Col>
             </Row>
