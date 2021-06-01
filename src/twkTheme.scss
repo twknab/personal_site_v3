@@ -276,8 +276,22 @@ navbar-nav .dropdown-menu {
 .light-text-shadow {
   text-shadow: 2px 2px 4px white;
 }
+.bio-photo {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  box-shadow: 10px 3px 14px 5px #989e21;
+  max-height: 500px;
+}
 
 // ABOUT ME
+
+.professional-summary-description {
+  height: 100%;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
 .about-me {
   // TODO: figure out spacing issue before invoking these
   border-top: 20px solid #c2c76b; // #05b3ff

@@ -1,12 +1,28 @@
 import React from "react";
-import { Card, Row, Col, Container } from "react-bootstrap";
+import { Col, Container, Image, Row } from "react-bootstrap";
 
 function MainContent() {
   return (
     <div>
       <Container fluid="true" className="mainContent">
         <Row className="professional-summary">
-          <Col lg>
+          <Col xs={12} s={12} md={12} lg={4}>
+            {/* <Image src="holder.js/171x180" rounded /> */}
+            <Image
+              src="https://timknab.dev/wp-content/uploads/2021/01/twksmall-1-966x966.jpg"
+              roundedCircle
+              fluid
+              className="bio-photo"
+            />
+          </Col>
+          <Col
+            lg
+            className="professional-summary-description"
+            xs={12}
+            s={12}
+            md={12}
+            lg={8}
+          >
             {/* <Card>
               <Card.Body> */}
             <h1 className="light-text-shadow">
@@ -33,7 +49,7 @@ function MainContent() {
               <span role="img" aria-label="about">
                 🗣
               </span>{" "}
-              About
+              About Me
             </h1>
             <p>
               My background is in web technology{" "}
