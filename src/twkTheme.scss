@@ -89,19 +89,19 @@ code {
 }
 
 .link-light-bg {
-    a {
-      color: $themeBlue !important;
-    }
-    a:hover,
-    a:active,
-    a:visited {
-      color: $themeRed !important;
-    }
+  a {
+    color: $themeBlue !important;
+  }
+  a:hover,
+  a:active,
+  a:visited {
+    color: $themeRed !important;
+  }
 }
 .highlighter {
   background-color: #d8e052;
   padding: 1px 5px 1px 5px;
-  border-radius: .25em;
+  border-radius: 0.25em;
 }
 
 // make links inside a row bold
@@ -115,7 +115,6 @@ code {
 // add margin spacing to top and bottom row
 .row {
   max-width: 2000px; // prevent width from going full on large displays
-  // margin: 50px auto !important;
   margin-left: auto !important;
   margin-right: auto !important;
   padding: 50px 25px !important;
@@ -300,19 +299,22 @@ navbar-nav .dropdown-menu {
   text-align: center;
   max-width: 800px;
 }
-.social-linkedin, .social-linkedin:visited {
-  color: #0E6AA8 !important;
+.social-linkedin,
+.social-linkedin:visited {
+  color: #0e6aa8 !important;
 }
-.social-github, .social-github:visited {
-  color: #2A2A2A !important;
+.social-github,
+.social-github:visited {
+  color: #2a2a2a !important;
 }
-.social-stackoverflow, .social-stackoverflow:visited {
+.social-stackoverflow,
+.social-stackoverflow:visited {
   color: #f2770c !important;
 }
 .social-linkedin:hover,
 .social-github:hover,
 .social-stackoverflow:hover {
-  color: rgb(81, 81, 81) !important; 
+  color: rgb(81, 81, 81) !important;
 }
 @media (max-width: 991px) {
   .bio-photo {
@@ -348,8 +350,14 @@ navbar-nav .dropdown-menu {
 // FOOTER
 // *********************
 .footer {
-  position: absolute;
-  bottom: 0;
+  background-color: $themeBlue;
+  border-top: 20px solid #1e7398;
+}
+.handcrafted-tag {
+  font-weight: bold;
+  color: white;
+  text-shadow: 2px 2px 4px black;
+  text-align: center;
 }
 
 // *********************
