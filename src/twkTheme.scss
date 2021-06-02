@@ -190,6 +190,12 @@ code {
   border: unset !important;
   padding: 10px;
 }
+.navbar-toggler {
+  box-shadow: 2px 2px 2px #8500ff61;
+}
+.navbar-toggler:active {
+  border: unset !important;
+}
 // Center adjust "About" drop down menu heading for mobile
 @media (max-width: 992px) {
   .navbar-collapse {
