@@ -7,7 +7,7 @@ function MainContent() {
   return (
     <div>
       <Container fluid="true" className="mainContent">
-        <Row className="professional-summary">
+        <Row className="professional-summary light-text-shadow">
           <Col xs={12} s={12} md={12} lg={4}>
             <Image src={bioPhoto} roundedCircle fluid className="bio-photo" />
           </Col>
@@ -18,13 +18,13 @@ function MainContent() {
             md={12}
             lg={8}
           >
-            <h1 className="light-text-shadow">
+            <h1>
               <span role="img" aria-label="welcome">
                 👋
               </span>{" "}
               Summary
             </h1>
-            <p>
+            <p className="light-text-shadow">
               <b className="highlighter">
                 Full stack web application developer/engineer
               </b>
@@ -207,8 +207,8 @@ function MainContent() {
           </Col>
         </Row>
         <Row className="education-history link-light-bg">
-          <Col lg>
-            <h1 className="light-text-shadow">
+          <Col lg className="light-text-shadow">
+            <h1>
               <span role="img" aria-label="about">
                 🎓
               </span>{" "}

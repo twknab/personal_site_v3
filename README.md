@@ -1,5 +1,6 @@
 # TODOS:
 
+1. add illustration to end of website for sense of completion
 1. Finish framing out content sections
 2. Clean up footer
 3. Outline your project component -- this is going to be very important to show completed projects
