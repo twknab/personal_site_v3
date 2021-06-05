@@ -1,10 +1,11 @@
 # TODOS:
 
-1. add illustration to end of website for sense of completion
-1. Finish framing out content sections
-2. Anything else you want to add to footer or just keep it simple?
-3. Outline your project component -- this is going to be very important to show completed projects
-4. Outline your learning component -- this is where you can show off what you're learning (could you go over algorimthsm here?)
+1. add illustration to end of website for sense of completion (or illustrations in various places?)
+2. add resume file
+3. Finish framing out content sections
+4. Hide blog for now
+5. Outline your project component -- this is going to be very important to show completed projects
+6. Outline your learning component -- this is where you can show off what you're learning (could you go over algorimthsm here?)
 
 --------
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
