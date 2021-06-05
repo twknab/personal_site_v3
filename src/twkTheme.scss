@@ -119,7 +119,8 @@ code {
   margin-right: auto !important;
   padding: 50px 25px !important;
 }
-.light-text-shadow, .light-text-shadow h1  {
+.light-text-shadow,
+.light-text-shadow h1 {
   text-shadow: 2px 2px 4px white;
 }
 .row-slim-padding {
@@ -377,20 +378,26 @@ navbar-nav .dropdown-menu {
   margin-left: 15px;
 }
 .crafted-with-care {
-    border-radius: 0.9rem;
-    font-style: italic;
-    font-size: 16px;
+  border-radius: 0.9rem;
+  font-style: italic;
+  font-size: 16px;
 }
 .love-icon {
   margin-left: 4px;
   font-style: normal !important;
 }
-// Break WA State icon on word break
-// @media (max-width: 604px) {
-//   .crafted-with-care { position: relative; left: 55px; top: 22px; }
-//   .wa-state { display: block; line-height: 3.5em; }
-//   .wa-state img { margin-left: 0px; margin-right: 10px; max-height: 70px; position: relative; bottom: 15px;}
-// }
+
+.tagline {
+  padding-bottom: 0px !important;
+}
+
+.copyright {
+  padding: 0px 15px !important;
+}
+
+.copyright-text p {
+  font-size: 13px;
+}
 
 // *********************
 // IMPORTS

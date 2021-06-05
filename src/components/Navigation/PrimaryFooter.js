@@ -9,8 +9,8 @@ function PrimaryFooter() {
         fluid="true"
         className="pl-0 pr-0 h-100 container-fluid footer"
       >
-        <Row>
-          <Col lg className="footer-tagline">
+        <Row className="tagline">
+          <Col lg>
             <p className="handcrafted-tag">
               <span className="wa-state">
                 <Image src={washingtonStateOutline} />
@@ -21,6 +21,16 @@ function PrimaryFooter() {
                   💚
                 </span>{" "}
               </span>
+            </p>
+          </Col>
+        </Row>
+        <Row className="copyright">
+          <Col lg className="copyright-text">
+            <p>
+              <span role="img" aria-label="copyright">
+                ©
+              </span>{" "}
+              2021 timknab.dev
             </p>
           </Col>
         </Row>

@@ -2,7 +2,7 @@
 
 1. add illustration to end of website for sense of completion
 1. Finish framing out content sections
-2. Clean up footer
+2. Anything else you want to add to footer or just keep it simple?
 3. Outline your project component -- this is going to be very important to show completed projects
 4. Outline your learning component -- this is where you can show off what you're learning (could you go over algorimthsm here?)
 
