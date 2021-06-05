@@ -12,16 +12,14 @@ function PrimaryFooter() {
         <Row>
           <Col lg className="footer-tagline">
             <p className="handcrafted-tag">
+              <span className="wa-state">
+                <Image src={washingtonStateOutline} />
+              </span>
               <span class="crafted-with-care">
                 Crafted with{" "}
                 <span role="img" aria-label="love" class="love-icon">
                   💚
-                </span>
-                {" "} in
-              </span>
-              <span className="wa-state">
-                <Image src={washingtonStateOutline} />
-                Washington State
+                </span>{" "}
               </span>
             </p>
           </Col>
