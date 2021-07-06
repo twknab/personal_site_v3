@@ -30,7 +30,7 @@ function PrimaryFooter() {
               <span role="img" aria-label="copyright">
                 ©
               </span>{" "}
-              2021 timknab.dev
+              {new Date().getFullYear()} <a href="https://timknab.dev">timknab.dev</a>
             </p>
           </Col>
         </Row>

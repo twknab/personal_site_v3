@@ -68,7 +68,7 @@ h6 {
 p {
   font-family: "Raleway", sans-serif;
   padding: 1rem;
-  // margin-bottom: 0rem !important;
+  margin-bottom: 0rem !important;
   font-size: 22px;
   line-height: 1.5em;
 }
@@ -374,8 +374,7 @@ navbar-nav .dropdown-menu {
 .wa-state img {
   max-height: 45px;
   filter: drop-shadow(2px 2px 2px black) !important;
-  margin-right: 15px;
-  margin-left: 15px;
+  margin-right: 10px;
 }
 .crafted-with-care {
   border-radius: 0.9rem;
@@ -397,6 +396,27 @@ navbar-nav .dropdown-menu {
 
 .copyright-text p {
   font-size: 13px;
+}
+.copyright-text a {
+  color: white;
+  font-weight: 400 !important;
+}
+.copyright-text a:visited {
+  color: white;
+}
+.copyright-text a:hover {
+  color: $themeVibrantYellowGreen;
+  font-weight: bold !important;
+  text-decoration: none;
+}
+@media (max-width: 991px) {
+  .copyright-text {
+    text-align: center;
+  }
+  .handcrafted-tag {
+    position: relative;
+    right: 10px;
+  }
 }
 
 // *********************

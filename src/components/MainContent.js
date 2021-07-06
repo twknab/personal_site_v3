@@ -59,7 +59,10 @@ function MainContent() {
                   target="_new"
                   className="social-stackoverflow"
                 >
-                  <FaStackOverflow size="4em" className="icon-shadow-light-bg" />
+                  <FaStackOverflow
+                    size="4em"
+                    className="icon-shadow-light-bg"
+                  />
                 </a>
               </Col>
             </Row>
@@ -82,14 +85,17 @@ function MainContent() {
               <span role="img" aria-label="nature">
                 🌱
               </span>
-              . I enjoy learning about complex systems and understanding their
-              connections. I believe that our future depends on a healthy
-              relationship with both ecology and technology, working together
-              for us and for the planet{" "}
+              . I enjoy learning about complex systems and their connections. I
+              believe our well-being depends on a healthy relationship with both
+              ecology and technology -- working together -- for us and for the
+              planet{" "}
               <span role="img" aria-label="earth">
                 🌎
               </span>
-              . I wish to be a part of meaningful projects with honest goals. In
+              .
+            </p>
+            <p>
+              I wish to be a part of meaningful projects with honest goals. In
               my free time, I like to explore my backyard in Washington, lounge
               around, or be aimlessly creative.
             </p>
@@ -104,16 +110,16 @@ function MainContent() {
               Skills
             </h1>
             <p>
-              Lorem ipsum <a href="https://duckduckgo.com">dolor sit amet</a>, consectetur adipiscing
-              elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-              aliqua. Vestibulum rhoncus est pellentesque elit ullamcorper.
-              Maecenas ultricies mi eget mauris pharetra et ultrices neque
-              ornare. Ut sem nulla pharetra diam. Mauris augue neque gravida in
-              fermentum et. Nulla facilisi cras fermentum odio eu feugiat
-              pretium nibh. Mauris cursus mattis molestie a iaculis at erat
-              pellentesque. Nulla pellentesque dignissim enim sit amet venenatis
-              urna. Cursus vitae congue mauris rhoncus aenean vel elit.
-              Imperdiet sed euismod nisi porta. Orci nulla pellentesque
+              Lorem ipsum <a href="https://duckduckgo.com">dolor sit amet</a>,
+              consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+              labore et dolore magna aliqua. Vestibulum rhoncus est pellentesque
+              elit ullamcorper. Maecenas ultricies mi eget mauris pharetra et
+              ultrices neque ornare. Ut sem nulla pharetra diam. Mauris augue
+              neque gravida in fermentum et. Nulla facilisi cras fermentum odio
+              eu feugiat pretium nibh. Mauris cursus mattis molestie a iaculis
+              at erat pellentesque. Nulla pellentesque dignissim enim sit amet
+              venenatis urna. Cursus vitae congue mauris rhoncus aenean vel
+              elit. Imperdiet sed euismod nisi porta. Orci nulla pellentesque
               dignissim enim sit amet venenatis urna cursus. Quisque non tellus
               orci ac auctor augue mauris augue neque. Tincidunt lobortis
               feugiat vivamus at augue eget arcu dictum. Sit amet porttitor eget
@@ -141,16 +147,16 @@ function MainContent() {
               Projects
             </h1>
             <p>
-              Lorem ipsum <a href="https://duckduckgo.com">dolor sit amet</a>, consectetur adipiscing
-              elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-              aliqua. Vestibulum rhoncus est pellentesque elit ullamcorper.
-              Maecenas ultricies mi eget mauris pharetra et ultrices neque
-              ornare. Ut sem nulla pharetra diam. Mauris augue neque gravida in
-              fermentum et. Nulla facilisi cras fermentum odio eu feugiat
-              pretium nibh. Mauris cursus mattis molestie a iaculis at erat
-              pellentesque. Nulla pellentesque dignissim enim sit amet venenatis
-              urna. Cursus vitae congue mauris rhoncus aenean vel elit.
-              Imperdiet sed euismod nisi porta. Orci nulla pellentesque
+              Lorem ipsum <a href="https://duckduckgo.com">dolor sit amet</a>,
+              consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+              labore et dolore magna aliqua. Vestibulum rhoncus est pellentesque
+              elit ullamcorper. Maecenas ultricies mi eget mauris pharetra et
+              ultrices neque ornare. Ut sem nulla pharetra diam. Mauris augue
+              neque gravida in fermentum et. Nulla facilisi cras fermentum odio
+              eu feugiat pretium nibh. Mauris cursus mattis molestie a iaculis
+              at erat pellentesque. Nulla pellentesque dignissim enim sit amet
+              venenatis urna. Cursus vitae congue mauris rhoncus aenean vel
+              elit. Imperdiet sed euismod nisi porta. Orci nulla pellentesque
               dignissim enim sit amet venenatis urna cursus. Quisque non tellus
               orci ac auctor augue mauris augue neque. Tincidunt lobortis
               feugiat vivamus at augue eget arcu dictum. Sit amet porttitor eget
@@ -178,16 +184,16 @@ function MainContent() {
               experience
             </h1>
             <p>
-              Lorem ipsum <a href="https://duckduckgo.com">dolor sit amet</a>, consectetur adipiscing
-              elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-              aliqua. Vestibulum rhoncus est pellentesque elit ullamcorper.
-              Maecenas ultricies mi eget mauris pharetra et ultrices neque
-              ornare. Ut sem nulla pharetra diam. Mauris augue neque gravida in
-              fermentum et. Nulla facilisi cras fermentum odio eu feugiat
-              pretium nibh. Mauris cursus mattis molestie a iaculis at erat
-              pellentesque. Nulla pellentesque dignissim enim sit amet venenatis
-              urna. Cursus vitae congue mauris rhoncus aenean vel elit.
-              Imperdiet sed euismod nisi porta. Orci nulla pellentesque
+              Lorem ipsum <a href="https://duckduckgo.com">dolor sit amet</a>,
+              consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+              labore et dolore magna aliqua. Vestibulum rhoncus est pellentesque
+              elit ullamcorper. Maecenas ultricies mi eget mauris pharetra et
+              ultrices neque ornare. Ut sem nulla pharetra diam. Mauris augue
+              neque gravida in fermentum et. Nulla facilisi cras fermentum odio
+              eu feugiat pretium nibh. Mauris cursus mattis molestie a iaculis
+              at erat pellentesque. Nulla pellentesque dignissim enim sit amet
+              venenatis urna. Cursus vitae congue mauris rhoncus aenean vel
+              elit. Imperdiet sed euismod nisi porta. Orci nulla pellentesque
               dignissim enim sit amet venenatis urna cursus. Quisque non tellus
               orci ac auctor augue mauris augue neque. Tincidunt lobortis
               feugiat vivamus at augue eget arcu dictum. Sit amet porttitor eget
@@ -215,16 +221,16 @@ function MainContent() {
               education history
             </h1>
             <p>
-              Lorem ipsum <a href="https://duckduckgo.com">dolor sit amet</a>, consectetur adipiscing
-              elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-              aliqua. Vestibulum rhoncus est pellentesque elit ullamcorper.
-              Maecenas ultricies mi eget mauris pharetra et ultrices neque
-              ornare. Ut sem nulla pharetra diam. Mauris augue neque gravida in
-              fermentum et. Nulla facilisi cras fermentum odio eu feugiat
-              pretium nibh. Mauris cursus mattis molestie a iaculis at erat
-              pellentesque. Nulla pellentesque dignissim enim sit amet venenatis
-              urna. Cursus vitae congue mauris rhoncus aenean vel elit.
-              Imperdiet sed euismod nisi porta. Orci nulla pellentesque
+              Lorem ipsum <a href="https://duckduckgo.com">dolor sit amet</a>,
+              consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+              labore et dolore magna aliqua. Vestibulum rhoncus est pellentesque
+              elit ullamcorper. Maecenas ultricies mi eget mauris pharetra et
+              ultrices neque ornare. Ut sem nulla pharetra diam. Mauris augue
+              neque gravida in fermentum et. Nulla facilisi cras fermentum odio
+              eu feugiat pretium nibh. Mauris cursus mattis molestie a iaculis
+              at erat pellentesque. Nulla pellentesque dignissim enim sit amet
+              venenatis urna. Cursus vitae congue mauris rhoncus aenean vel
+              elit. Imperdiet sed euismod nisi porta. Orci nulla pellentesque
               dignissim enim sit amet venenatis urna cursus. Quisque non tellus
               orci ac auctor augue mauris augue neque. Tincidunt lobortis
               feugiat vivamus at augue eget arcu dictum. Sit amet porttitor eget
