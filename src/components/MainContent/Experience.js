@@ -1,5 +1,6 @@
 import React from "react";
-import { Col, Row } from "react-bootstrap";
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
 
 function Experience() {
   return (
@@ -27,16 +28,6 @@ function Experience() {
             auctor augue mauris augue neque. Tincidunt lobortis feugiat vivamus
             at augue eget arcu dictum. Sit amet porttitor eget dolor. Purus ut
             faucibus pulvinar elementum integer enim neque volutpat.
-          </p>
-          <p>
-            Sed libero enim sed faucibus turpis in eu mi bibendum. Posuere urna
-            nec tincidunt praesent semper feugiat nibh. Eget mauris pharetra et
-            ultrices neque ornare. Maecenas ultricies mi eget mauris pharetra.
-            Et molestie ac feugiat sed lectus vestibulum. Risus ultricies
-            tristique nulla aliquet enim. Velit euismod in pellentesque massa
-            placerat duis ultricies lacus. Netus et malesuada fames ac turpis
-            egestas. Tincidunt eget nullam non nisi. Eget duis at tellus at urna
-            condimentum mattis pellentesque.
           </p>
         </Col>
       </Row>

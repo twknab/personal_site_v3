@@ -1,5 +1,7 @@
 import React from "react";
-import { Col, Image, Row } from "react-bootstrap";
+import Col from "react-bootstrap/Col";
+import Image from "react-bootstrap/Image";
+import Row from "react-bootstrap/Row";
 import hack from "../../assets/images/stacks/hack-md.png";
 import lamp from "../../assets/images/stacks/lamp-stack-sm.png";
 import mean from "../../assets/images/stacks/meanstack.png";

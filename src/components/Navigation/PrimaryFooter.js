@@ -1,5 +1,8 @@
 import React from "react";
-import { Col, Container, Image, Row } from "react-bootstrap";
+import Col from "react-bootstrap/Col";
+import Container from "react-bootstrap/Container";
+import Image from "react-bootstrap/Image";
+import Row from "react-bootstrap/Row";
 import washingtonStateOutline from "../../assets/images/washington-state-outline.png";
 
 function PrimaryFooter() {
@@ -15,9 +18,9 @@ function PrimaryFooter() {
               <span className="wa-state">
                 <Image src={washingtonStateOutline} />
               </span>
-              <span class="crafted-with-care">
+              <span className="crafted-with-care">
                 Crafted with{" "}
-                <span role="img" aria-label="love" class="love-icon">
+                <span role="img" aria-label="love" className="love-icon">
                   💚
                 </span>{" "}
               </span>
