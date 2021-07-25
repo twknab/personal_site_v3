@@ -1,7 +1,18 @@
 import React from "react";
 import { Col, Container, Image, Row } from "react-bootstrap";
 import bioPhoto from "../assets/images/twksmall-966x966.jpeg";
-import { FaLinkedin, FaGithubSquare, FaStackOverflow } from "react-icons/fa";
+// TODO: Move these to their own component eventually when breaking up body
+import hack from "../assets/images/stacks/hack-md.png";
+import lamp from "../assets/images/stacks/lamp-stack-sm.png";
+import mean from "../assets/images/stacks/meanstack.png";
+import mevn from "../assets/images/stacks/mevnstack.png";
+import python from "../assets/images/stacks/python-stack.png";
+import {
+  FaCaretRight,
+  FaLinkedin,
+  FaGithubSquare,
+  FaStackOverflow,
+} from "react-icons/fa";
 
 function MainContent() {
   return (
@@ -92,12 +103,8 @@ function MainContent() {
               <span role="img" aria-label="earth">
                 🌎
               </span>
-              .
-            </p>
-            <p>
-              I wish to be a part of meaningful projects with honest goals. In
-              my free time, I like to explore my backyard in Washington, lounge
-              around, or be aimlessly creative.
+              . I wish to be a part of meaningful projects with honest goals. In
+              my free time, I like to explore my backyard in Washington, learn about new things, or be aimlessly creative.
             </p>
           </Col>
         </Row>
@@ -109,33 +116,45 @@ function MainContent() {
               </span>{" "}
               Skills
             </h1>
+            <h4>Stacks & Languages</h4>
             <p>
-              Lorem ipsum <a href="https://duckduckgo.com">dolor sit amet</a>,
-              consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-              labore et dolore magna aliqua. Vestibulum rhoncus est pellentesque
-              elit ullamcorper. Maecenas ultricies mi eget mauris pharetra et
-              ultrices neque ornare. Ut sem nulla pharetra diam. Mauris augue
-              neque gravida in fermentum et. Nulla facilisi cras fermentum odio
-              eu feugiat pretium nibh. Mauris cursus mattis molestie a iaculis
-              at erat pellentesque. Nulla pellentesque dignissim enim sit amet
-              venenatis urna. Cursus vitae congue mauris rhoncus aenean vel
-              elit. Imperdiet sed euismod nisi porta. Orci nulla pellentesque
-              dignissim enim sit amet venenatis urna cursus. Quisque non tellus
-              orci ac auctor augue mauris augue neque. Tincidunt lobortis
-              feugiat vivamus at augue eget arcu dictum. Sit amet porttitor eget
-              dolor. Purus ut faucibus pulvinar elementum integer enim neque
-              volutpat.
+              MEVN/MERN/MEAN (Node, Express, Mongo, Vue/React/Angular), LAMP
+              (PHP/Hacklang, XHP/React/Flow), Python (Django, Flask).
             </p>
+            <h4>Front-end</h4>
             <p>
-              Sed libero enim sed faucibus turpis in eu mi bibendum. Posuere
-              urna nec tincidunt praesent semper feugiat nibh. Eget mauris
-              pharetra et ultrices neque ornare. Maecenas ultricies mi eget
-              mauris pharetra. Et molestie ac feugiat sed lectus vestibulum.
-              Risus ultricies tristique nulla aliquet enim. Velit euismod in
-              pellentesque massa placerat duis ultricies lacus. Netus et
-              malesuada fames ac turpis egestas. Tincidunt eget nullam non nisi.
-              Eget duis at tellus at urna condimentum mattis pellentesque.
+              Vue.js, React.js, AngularJS, HTML, CSS, SCSS, JavaScript, JSX,
+              Typescript, jQuery, npm, Yarn, Bootstrap, AJAX.
             </p>
+            <h4>Back-end</h4>
+            <p>
+              RESTful APIs, JavaScript, PHP, Hacklang, Python, Node.js,
+              Express.js, Flask, Django, Socket.io, CodeIgniter, MongoDB,
+              Mongoose, MySQL, Apache, Nginx, Gunicorn.
+            </p>
+            <h4>Addt'l Skills, Tools and Technologies</h4>
+            <p>
+              Amazon Web Services, OOP, Mercurial, Git, pip, virtualenv, Linux,
+              bash, MVC, DRY, SEO, DNS, cPanel, WordPress, Adobe Creative Cloud
+              Suite, gulp, sass.
+            </p>
+          </Col>
+        </Row>
+        <Row className="stacks">
+          <Col lg className="stack-image stack-image-adjust hack-image">
+            <Image src={hack} fluid />
+          </Col>
+          <Col lg className="stack-image stack-image-adjust">
+            <Image src={lamp} fluid />
+          </Col>
+          <Col lg className="stack-image">
+            <Image src={mean} fluid />
+          </Col>
+          <Col lg className="stack-image">
+            <Image src={mevn} fluid />
+          </Col>
+          <Col lg className="stack-image">
+            <Image src={python} fluid />
           </Col>
         </Row>
         <Row className="projects">
@@ -220,126 +239,46 @@ function MainContent() {
               </span>{" "}
               education history
             </h1>
+            <h4>Full Stack Web Development</h4>
+            <h5>Coding Dojo, 2017-2020</h5>
             <p>
-              Lorem ipsum <a href="https://duckduckgo.com">dolor sit amet</a>,
-              consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-              labore et dolore magna aliqua. Vestibulum rhoncus est pellentesque
-              elit ullamcorper. Maecenas ultricies mi eget mauris pharetra et
-              ultrices neque ornare. Ut sem nulla pharetra diam. Mauris augue
-              neque gravida in fermentum et. Nulla facilisi cras fermentum odio
-              eu feugiat pretium nibh. Mauris cursus mattis molestie a iaculis
-              at erat pellentesque. Nulla pellentesque dignissim enim sit amet
-              venenatis urna. Cursus vitae congue mauris rhoncus aenean vel
-              elit. Imperdiet sed euismod nisi porta. Orci nulla pellentesque
-              dignissim enim sit amet venenatis urna cursus. Quisque non tellus
-              orci ac auctor augue mauris augue neque. Tincidunt lobortis
-              feugiat vivamus at augue eget arcu dictum. Sit amet porttitor eget
-              dolor. Purus ut faucibus pulvinar elementum integer enim neque
-              volutpat.
+              Full stack web development, from wireframes to deployment at the{" "}
+              <a href="https://codingdojo.com" target="_new">Coding Dojo</a>.
+            </p>
+            <h4>Bachelors of Science: Environmental Science</h4>
+            <h5>The University of Iowa, 2008</h5>
+            <p>
+              Student involvement and study of natural sciences at{" "}
+              <a href="https://uiowa.edu" target="_new">The University of Iowa</a>.
             </p>
           </Col>
         </Row>
-        <Row>
+        <Row className="awards">
           <Col lg>
-            <Row>
-              <h1>Column 3</h1>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                Vestibulum rhoncus est pellentesque elit ullamcorper. Maecenas
-                ultricies mi eget mauris pharetra et ultrices neque ornare. Ut
-                sem nulla pharetra diam. Mauris augue neque gravida in fermentum
-                et. Nulla facilisi cras fermentum odio eu feugiat pretium nibh.
-                Mauris cursus mattis molestie a iaculis at erat pellentesque.
-                Nulla pellentesque dignissim enim sit amet venenatis urna.
-                Cursus vitae congue mauris rhoncus aenean vel elit. Imperdiet
-                sed euismod nisi porta. Orci nulla pellentesque dignissim enim
-                sit amet venenatis urna cursus. Quisque non tellus orci ac
-                auctor augue mauris augue neque. Tincidunt lobortis feugiat
-                vivamus at augue eget arcu dictum. Sit amet porttitor eget
-                dolor. Purus ut faucibus pulvinar elementum integer enim neque
-                volutpat.
-              </p>
-              <p>
-                Sed libero enim sed faucibus turpis in eu mi bibendum. Posuere
-                urna nec tincidunt praesent semper feugiat nibh. Eget mauris
-                pharetra et ultrices neque ornare. Maecenas ultricies mi eget
-                mauris pharetra. Et molestie ac feugiat sed lectus vestibulum.
-                Risus ultricies tristique nulla aliquet enim. Velit euismod in
-                pellentesque massa placerat duis ultricies lacus. Netus et
-                malesuada fames ac turpis egestas. Tincidunt eget nullam non
-                nisi. Eget duis at tellus at urna condimentum mattis
-                pellentesque.
-              </p>
-              <p>
-                Sagittis vitae et leo duis. In tellus integer feugiat
-                scelerisque varius morbi enim nunc faucibus. Velit aliquet
-                sagittis id consectetur. In ante metus dictum at tempor commodo
-                ullamcorper a lacus. Leo vel orci porta non pulvinar neque
-                laoreet. Quam elementum pulvinar etiam non quam lacus
-                suspendisse faucibus. Cursus metus aliquam eleifend mi in.
-                Lobortis scelerisque fermentum dui faucibus in ornare quam
-                viverra orci. Ullamcorper morbi tincidunt ornare massa eget
-                egestas. Tempus egestas sed sed risus pretium quam vulputate.
-                Viverra orci sagittis eu volutpat odio facilisis mauris sit
-                amet. Pellentesque habitant morbi tristique senectus et netus
-                et. Ut venenatis tellus in metus vulputate eu. Ac tortor
-                dignissim convallis aenean et tortor at risus.
-              </p>
-            </Row>
-          </Col>
-          <Col lg>
-            <Row>
-              <h1>Column 4</h1>
-              <h2>These are the</h2>
-              <h3>Smaller headings and how</h3>
-              <h4>They appear as they</h4>
-              <h5>scale from heading one</h5>
-              <h6>down to heading six</h6>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                Vestibulum rhoncus est pellentesque elit ullamcorper. Maecenas
-                ultricies mi eget mauris pharetra et ultrices neque ornare. Ut
-                sem nulla pharetra diam. Mauris augue neque gravida in fermentum
-                et. Nulla facilisi cras fermentum odio eu feugiat pretium nibh.
-                Mauris cursus mattis molestie a iaculis at erat pellentesque.
-                Nulla pellentesque dignissim enim sit amet venenatis urna.
-                Cursus vitae congue mauris rhoncus aenean vel elit. Imperdiet
-                sed euismod nisi porta. Orci nulla pellentesque dignissim enim
-                sit amet venenatis urna cursus. Quisque non tellus orci ac
-                auctor augue mauris augue neque. Tincidunt lobortis feugiat
-                vivamus at augue eget arcu dictum. Sit amet porttitor eget
-                dolor. Purus ut faucibus pulvinar elementum integer enim neque
-                volutpat.
-              </p>
-              <p>
-                Sed libero enim sed faucibus turpis in eu mi bibendum. Posuere
-                urna nec tincidunt praesent semper feugiat nibh. Eget mauris
-                pharetra et ultrices neque ornare. Maecenas ultricies mi eget
-                mauris pharetra. Et molestie ac feugiat sed lectus vestibulum.
-                Risus ultricies tristique nulla aliquet enim. Velit euismod in
-                pellentesque massa placerat duis ultricies lacus. Netus et
-                malesuada fames ac turpis egestas. Tincidunt eget nullam non
-                nisi. Eget duis at tellus at urna condimentum mattis
-                pellentesque.
-              </p>
-              <p>
-                Sagittis vitae et leo duis. In tellus integer feugiat
-                scelerisque varius morbi enim nunc faucibus. Velit aliquet
-                sagittis id consectetur. In ante metus dictum at tempor commodo
-                ullamcorper a lacus. Leo vel orci porta non pulvinar neque
-                laoreet. Quam elementum pulvinar etiam non quam lacus
-                suspendisse faucibus. Cursus metus aliquam eleifend mi in.
-                Lobortis scelerisque fermentum dui faucibus in ornare quam
-                viverra orci. Ullamcorper morbi tincidunt ornare massa eget
-                egestas. Tempus egestas sed sed risus pretium quam vulputate.
-                Viverra orci sagittis eu volutpat odio facilisis mauris sit
-                amet. Pellentesque habitant morbi tristique senectus et netus
-                et. Ut venenatis tellus in metus vulputate eu. Ac tortor
-                dignissim convallis aenean et tortor at risus.
-              </p>
-            </Row>
+            <h1>
+              <span role="img" aria-label="awards">
+                ⭐️
+              </span>{" "}
+              Awards
+            </h1>
+            <p>
+              <FaCaretRight size="1.2em" />
+              Student recycling work lead to University of Iowa receiving
+              $60,000 DNR grant and Iowa Recycling Association Best Practices
+              Award.
+            </p>
+            <p>
+              <FaCaretRight size="1.2em" />
+              Awarded student conservation{" "}
+              <a
+                href="https://www.continuetolearn.uiowa.edu/lakesidelab/university/scholarships/parker-gentry.html"
+                target="_new"
+              >
+                Parker Gentry Award
+              </a>{" "}
+              and $700 scholarship for my performance and group leadership
+              during field work.
+            </p>
           </Col>
         </Row>
       </Container>

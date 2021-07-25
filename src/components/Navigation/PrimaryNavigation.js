@@ -87,18 +87,20 @@ function PrimaryNavigation() {
                   </Row>
                 </Container>
               </NavDropdown>
-              {/* <NavDropdown title={navInterestsDropdownTitle} id="collasible-nav-dropdown-interests" className="theme-twk-custom-nav-dropdown">
+              {/* TODO: Add in interests to show more about who you are
+              <NavDropdown title={navInterestsDropdownTitle} id="collasible-nav-dropdown-interests" className="theme-twk-custom-nav-dropdown">
                 <NavDropdown.Item onClick={() => handleNavClick('nature')} active={activeItem === 'nature'}><FcLandscape className="primary-nav-icon"/>Nature</NavDropdown.Item>
                 <NavDropdown.Item onClick={() => handleNavClick('drawing')} active={activeItem === 'drawing'}><FcImageFile className="primary-nav-icon"/>Drawing</NavDropdown.Item>
               </NavDropdown> */}
             </Nav>
             <Nav fill>
+              {/*  TODO: Add blog link once complete
               <Nav.Link
                 onClick={() => handleNavClick("blog")}
                 active={activeItem === "blog"}
               >
                 Blog
-              </Nav.Link>
+              </Nav.Link> */}
               <Nav.Link
                 eventKey={2}
                 onClick={() => handleNavClick("contact")}

@@ -18,7 +18,7 @@ $themeBlue: #3d93b9;
 $themePurple: #813db4;
 $themeRed: #e63e3e;
 $themeVibrantYellowGreen: #f4fd5b;
-$themeVibrantYellowGreenLight: #f0f4c2;
+$themeVibrantYellowGreenLight: #f6ff98;
 $themeLightOrange: #ffe6a2;
 
 $navLightHover: #e6e6e6;
@@ -120,7 +120,7 @@ code {
   padding: 50px 25px !important;
 }
 .light-text-shadow,
-.light-text-shadow h1 {
+.light-text-shadow * {
   text-shadow: 2px 2px 4px white;
 }
 .row-slim-padding {
@@ -157,6 +157,17 @@ code {
 .timknab-logo {
   height: 50px;
   filter: drop-shadow(2px 2px 2px black) !important;
+}
+
+// Use font awesome for mobile navigation rather than default stroke effect
+.navbar-toggler-icon {
+  background-image: none !important;
+}
+.navbar-toggler-icon::before {
+  font-family: FontAwesome;
+  font-size: 1.5em;
+  color: #f4fd5b;
+  content: "\f0c9"; /* fa-bars, fa-navicon */
 }
 
 .nav-link {
@@ -291,8 +302,13 @@ navbar-nav .dropdown-menu {
 // *********************
 .professional-summary {
   background-color: $themeVibrantYellowGreen;
+  background-image: url("./assets/images/axiom-bg-pattern.png");
   color: $themeDarkBackground;
   border-top: 20px solid #d8e052;
+  border-bottom: 20px solid #c2c76b;
+  // border-bottom-right-radius: 20px;
+  // border-bottom-left-radius: 20px;
+  // z-index: 1000 !important;
 }
 .professional-summary-description {
   height: 100%;
@@ -343,10 +359,84 @@ navbar-nav .dropdown-menu {
 // *********************
 
 .about-me {
-  // TODO: figure out spacing issue before invoking these
-  border-top: 20px solid #c2c76b; // #05b3ff
-  border-bottom: 20px solid #fc4d45; // #fcb045
   background-color: #1d1d1d; // rgb(33, 33, 33)
+  background-image: url("./assets/images/dark-dot-bg-pattern.png");
+  padding-bottom: 65px !important;
+  margin-bottom: -15px;
+}
+
+// *********************
+// SKILLS
+// *********************
+
+.skills {
+  border-top: 20px solid #fc4d45; // #fcb045
+  border-bottom: 20px solid #c2c76b;
+  background-color: #a99b87; // #958a7a;// #2b2b2b
+  background-image: url("./assets/images/black-orchid-bg-pattern.png");
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
+}
+
+.skills h4 {
+  padding-bottom: 0;
+}
+
+.skills p {
+  padding-top: 0;
+  text-shadow: 2px 2px 4px black;
+}
+
+.stacks {
+  background-color: $themeVibrantYellowGreenLight;
+  border-bottom: 20px solid #c2c76b;
+  background-image: url("./assets/images/axiom-bg-pattern.png");
+}
+
+.stack-image {
+  margin-top: auto;
+  margin-bottom: auto;
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.stack-image-adjust {
+  bottom: 22px;
+}
+.hack-image {
+  margin-right: -50px;
+}
+
+@media (max-width: 991px) {
+  .stack-image-adjust {
+    bottom: 0px;
+  }
+  .hack-image {
+    margin-bottom: -35px;
+    margin-right: auto;
+  }
+}
+
+// *********************
+// PROJECTS
+// *********************
+.projects {
+  background-color: #1d1d1d; // rgb(33, 33, 33)
+  background-image: url("./assets/images/dark-dot-bg-pattern.png");
+  padding-bottom: 65px !important;
+  margin-bottom: -15px;
+}
+
+// *********************
+// EXPERIENCE
+// *********************
+
+.experience {
+  border-top: 20px solid #fc4d45;
+  background-color: #a279c1;
+  background-image: url("./assets/images/black-orchid-bg-pattern.png");
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
 }
 
 // *********************
@@ -355,7 +445,32 @@ navbar-nav .dropdown-menu {
 .education-history {
   background-color: $themeVibrantYellowGreen;
   color: $themeDarkBackground;
+  background-image: url("./assets/images/axiom-bg-pattern.png");
+  border-top: 20px solid #d2d740;
+  border-bottom: 20px solid #d2d740;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
 }
+
+.education-history h4 {
+  padding-bottom: 0;
+}
+
+.education-history h5 {
+  padding-bottom: 0;
+  padding-top: 0;
+  font-style: italic;
+}
+
+.education-history p {
+  padding-top: 0;
+}
+
+// *********************
+// AWARDS
+// *********************
+// .awards {
+// }
 
 // *********************
 // FOOTER
