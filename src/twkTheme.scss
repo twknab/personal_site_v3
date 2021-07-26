@@ -426,6 +426,31 @@ navbar-nav .dropdown-menu {
   padding-bottom: 65px !important;
   margin-bottom: -15px;
 }
+.projects h3 {
+  padding-bottom: 0;
+}
+
+.projects p {
+  padding-top: 0;
+  text-shadow: 2px 2px 4px black;
+}
+
+.project-col {
+  text-align: center;
+  margin-top: auto;
+  margin-bottom: auto
+}
+
+@media (max-width: 767px) {
+.project-col {
+  text-align: left;
+}
+}
+
+.project-icon {
+  width: 150px;
+  height: 150px;
+}
 
 // *********************
 // EXPERIENCE
@@ -437,6 +462,15 @@ navbar-nav .dropdown-menu {
   background-image: url("./assets/images/black-orchid-bg-pattern.png");
   border-top-right-radius: 20px;
   border-top-left-radius: 20px;
+}
+
+.experience h3 {
+  padding-bottom: 0;
+}
+
+.experience p {
+  padding-top: 0;
+  text-shadow: 2px 2px 4px black;
 }
 
 // *********************

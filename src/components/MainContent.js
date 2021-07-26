@@ -1,13 +1,13 @@
 import React from "react";
 import Container from "react-bootstrap/Container";
-import AboutMe from "./MainContent/AboutMe";
-import Awards from "./MainContent/Awards";
-import EducationHistory from "./MainContent/EducationHistory";
-import Experience from "./MainContent/Experience";
-import ProfessionalSummary from "./MainContent/ProfessionalSummary";
-import Projects from "./MainContent/Projects";
-import Skills from "./MainContent/Skills";
-import Stacks from "./MainContent/Stacks";
+import AboutMe from "./main/AboutMe";
+import Awards from "./main/Awards";
+import EducationHistory from "./main/EducationHistory";
+import Experience from "./main/Experience";
+import ProfessionalSummary from "./main/ProfessionalSummary";
+import Projects from "./main/Projects";
+import Skills from "./main/Skills";
+import Stacks from "./main/Stacks";
 
 function MainContent() {
   return (
