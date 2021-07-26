@@ -8,7 +8,7 @@ import gearListIco from "../../../assets/images/apps/gearlist-ico.png";
 function GearList() {
   return (
     <div>
-      <Row>
+      <Row className="project-row">
         <Col md="3" className="project-col">
           <a href="https://gearlist.rocks" target="_new">
             <Image src={gearListIco} className="project-icon" rounded fluid />

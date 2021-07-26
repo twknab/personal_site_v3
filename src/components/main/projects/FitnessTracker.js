@@ -8,7 +8,7 @@ import fitnessTrackerIco from "../../../assets/images/apps/fitnesstracker-ico.pn
 function FitnessTracker() {
   return (
     <div>
-      <Row>
+      <Row className="project-row">
         <Col md="3" className="project-col">
           <a href="https://github.com/twknab/workout_tracker" target="_new">
             <Image

@@ -8,7 +8,7 @@ import sockitIco from "../../../assets/images/apps/sockit-ico.png";
 function SockIt() {
   return (
     <div>
-      <Row>
+      <Row className="project-row">
         <Col md="3" className="project-col">
           <a href="https://github.com/twknab/sockets_chat" target="_new">
             <Image src={sockitIco} className="project-icon" rounded fluid />

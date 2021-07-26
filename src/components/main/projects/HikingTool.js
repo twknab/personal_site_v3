@@ -8,7 +8,7 @@ import hikingToolIco from "../../../assets/images/apps/hikingtool-ico.png";
 function HikingTool() {
   return (
     <div>
-      <Row>
+      <Row className="project-row">
         <Col md="3" className="project-col">
           <a href="https://hiking.tools" target="_new">
             <Image src={hikingToolIco} className="project-icon" rounded fluid />

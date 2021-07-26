@@ -435,16 +435,21 @@ navbar-nav .dropdown-menu {
   text-shadow: 2px 2px 4px black;
 }
 
+.project-row {
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+}
+
 .project-col {
   text-align: center;
   margin-top: auto;
-  margin-bottom: auto
+  margin-bottom: auto;
 }
 
 @media (max-width: 767px) {
-.project-col {
-  text-align: left;
-}
+  .project-col {
+    text-align: left;
+  }
 }
 
 .project-icon {
