@@ -63,8 +63,8 @@ function PrimaryNavigation() {
                   Experience
                 </NavDropdown.Item>
                 <NavDropdown.Item
-                  onClick={() => handleNavClick("education")}
-                  active={activeItem === "education"}
+                  onClick={() => handleNavClick("experience")}
+                  active={activeItem === "experience"}
                 >
                   Education History
                 </NavDropdown.Item>
@@ -74,7 +74,7 @@ function PrimaryNavigation() {
                       <NavDropdown.Item
                         fill
                         onClick={() => handleNavClick("downloadResume")}
-                        active={activeItem === "downloadResume"}
+                        active={activeItem === ""}
                         className="download-resume"
                       >
                         <FaFileDownload
