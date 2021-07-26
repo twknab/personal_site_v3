@@ -1,6 +1,5 @@
 import React from "react";
 import Col from "react-bootstrap/Col";
-// import Accordion from "react-bootstrap/Accordion";
 import Row from "react-bootstrap/Row";
 
 function Experience() {
