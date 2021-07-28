@@ -34,6 +34,7 @@ function PrimaryNavigation() {
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav fill className="mr-auto">
               <Nav.Link
+                href="/"
                 onClick={() => handleNavClick("home")}
                 active={activeItem === "home"}
               >
