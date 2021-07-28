@@ -1,10 +1,13 @@
 import React from "react";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
+import Scroll from "react-scroll";
+const Element = Scroll.Element;
 
 function EducationHistory() {
   return (
     <div>
+      <Element name="education"></Element>
       <Row className="education-history link-light-bg">
         <Col lg className="light-text-shadow">
           <h1>

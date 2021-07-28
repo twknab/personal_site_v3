@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import { FaFileDownload } from "react-icons/fa";
+import resumeFile from "../../assets/docs/timknab_resume_fullstack_engineer.docx";
 import timknabLogo from '../../assets/images/timknabdev-logo-light-lg.png';
+import Scroll from 'react-scroll';
+const scroller = Scroll.scroller;
 
 function PrimaryNavigation() {
   
@@ -9,6 +12,12 @@ function PrimaryNavigation() {
   const handleNavClick = (itemName) => {
     setActiveItem(itemName);
     // TODO: Navigate to item.
+    scroller.scrollTo(itemName, {
+      duration: 1300,
+      smooth: "easeOutQuart",
+      // offset: 50,
+      // containerId: itemName
+    });
   };
   const navAboutDropdownTitle = <span className="nav-dropdown-adjustment">About</span>;
   // const navInterestsDropdownTitle = <span><FcElectricity className="primary-nav-icon"/> Interests</span>;
@@ -58,22 +67,24 @@ function PrimaryNavigation() {
                   Projects
                 </NavDropdown.Item>
                 <NavDropdown.Item
-                  onClick={() => handleNavClick("education")}
-                  active={activeItem === "education"}
+                  onClick={() => handleNavClick("experience")}
+                  active={activeItem === "experience"}
                 >
                   Experience
                 </NavDropdown.Item>
                 <NavDropdown.Item
-                  onClick={() => handleNavClick("experience")}
-                  active={activeItem === "experience"}
+                  onClick={() => handleNavClick("education")}
+                  active={activeItem === "education"}
                 >
                   Education History
                 </NavDropdown.Item>
                 <Container fluid>
-                  <Row center className="resume-cta row-slim-padding">
+                  <Row center="true" className="resume-cta row-slim-padding">
                     <Col>
                       <NavDropdown.Item
-                        fill
+                        fill="true"
+                        href={resumeFile}
+                        download="tim_knab_full_stack_developer.docx"
                         onClick={() => handleNavClick("downloadResume")}
                         active={activeItem === ""}
                         className="download-resume"
@@ -104,6 +115,8 @@ function PrimaryNavigation() {
               </Nav.Link> */}
               <Nav.Link
                 eventKey={2}
+                href="https://linkedin.com/in/twknab"
+                target="_new"
                 onClick={() => handleNavClick("contact")}
                 active={activeItem === "contact"}
               >

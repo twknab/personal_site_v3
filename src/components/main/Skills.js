@@ -1,10 +1,13 @@
 import React from "react";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
+import Scroll from 'react-scroll';
+const Element = Scroll.Element;
 
 function Skills() {
   return (
     <div>
+      <Element name="skills"></Element>
       <Row className="skills">
         <Col lg>
           <h1>

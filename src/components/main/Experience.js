@@ -1,10 +1,13 @@
 import React from "react";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
+import Scroll from "react-scroll";
+const Element = Scroll.Element;
 
 function Experience() {
   return (
     <div>
+      <Element name="experience"></Element>
       <Row className="experience">
         <Col lg>
           <h1>
@@ -21,9 +24,10 @@ function Experience() {
               target="new"
             >
               Gateway 2000 P5-133
-            </a>{" "}'s
-            Telepath 28.8K modem. I love being creative and believe that being a
-            developer is a life-long learning journey full of challenges and growth.
+            </a>{" "}
+            's Telepath 28.8K modem. I love being creative and believe that
+            being a developer is a life-long learning journey full of challenges
+            and growth.
           </p>
           <h3>Technical Consultant</h3>
           <p>
