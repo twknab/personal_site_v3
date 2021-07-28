@@ -19,7 +19,7 @@ function PrimaryFooter() {
                 <Image src={washingtonStateOutline} />
               </span>
               <span className="crafted-with-care">
-                Crafted with{" "}
+                handcrafted with{" "}
                 <span role="img" aria-label="love" className="love-icon">
                   💚
                 </span>{" "}

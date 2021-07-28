@@ -168,15 +168,13 @@ code {
   filter: drop-shadow(2px 2px 2px black) !important;
 }
 
-// Use font awesome for mobile navigation rather than default stroke effect
-.navbar-toggler-icon {
-  background-image: none !important;
-}
-.navbar-toggler-icon::before {
-  font-family: FontAwesome;
+.custom-nav-toggle {
   font-size: 1.5em;
   color: #f4fd5b;
-  content: "\f0c9"; /* fa-bars, fa-navicon */
+}
+.custom-nav-toggle:active {
+  font-size: 1.5em;
+  color: #fff;
 }
 
 .nav-link {
@@ -188,11 +186,11 @@ code {
 
 // customize font awesome icon for nav
 // makes icon more centered and aligned with text
-.primary-nav-icon {
-  margin: 6px;
-  bottom: 3px;
-  position: relative;
-}
+// .primary-nav-icon {
+//   margin: 6px;
+//   bottom: 3px;
+//   position: relative;
+// }
 
 // add hover to font awesome icon on link hover
 // learn more: https://stackoverflow.com/questions/6966180/change-element-style-on-hover-another-element
@@ -217,6 +215,12 @@ code {
 .navbar-toggler:active {
   border: unset !important;
 }
+
+// Add drop shadow to nav "About" dropdown arrow
+.dropdown-toggle::after {
+  filter: drop-shadow(2px 2px 2px black) !important;
+}
+
 // Center adjust "About" drop down menu heading for mobile
 @media (max-width: 992px) {
   .navbar-collapse {
@@ -224,6 +228,10 @@ code {
   }
   .nav-dropdown-adjustment {
     margin-left: 31px;
+  }
+  #collasible-nav-dropdown-about {
+    position: relative;
+    right: 10px;
   }
 }
 
@@ -275,11 +283,9 @@ navbar-nav .dropdown-menu {
   line-height: 1.5em;
 }
 
-// Center align resume button
-.resume-cta {
+// Expand download resume button to full width
+.download-resume-row {
   width: 100%;
-  margin-left: auto !important;
-  margin-right: auto !important;
 }
 .download-resume {
   background-color: $themeLightOrange !important;
@@ -293,6 +299,12 @@ navbar-nav .dropdown-menu {
   background-color: $themePurple !important;
   color: white !important;
   text-shadow: 2px 2px 4px black;
+}
+// Adjust download resume text spacing
+.download-resume span {
+  position: relative;
+  top: 2px;
+  left: 5px;
 }
 
 // Set card margins and ensure last paragraph has no padding
