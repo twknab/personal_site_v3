@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Nav, Navbar, NavDropdown } from "react-bootstrap";
 import { FaBars, FaFileDownload } from "react-icons/fa";
 import resumeFile from "../../assets/docs/timknab_resume_fullstack_engineer.docx";
@@ -7,28 +7,29 @@ import Scroll from "react-scroll";
 const scroller = Scroll.scroller;
 
 function PrimaryNavigation() {
-  // const [navigationOffset, setNavigationOffset] = useState(0);
-
   // Set active navigation item and offset if mobile
+  const [navigationOffset, setNavigationOffset] = useState(0);
   const [activeItem, setActiveItem] = useState("home");
+
+  // set offset for mobile
+  useEffect(() => {
+    if (window.innerWidth <= 991) {
+      setNavigationOffset(324); // NOTE: This value I am unsure where it's coming from, however this seems to get it pretty close for small displays
+    }
+  }, []);
   const handleNavClick = (itemName) => {
     setActiveItem(itemName);
-    let offset = 0;
-      if (window.innerWidth <= 991) {
-        offset = 324;
-        // setNavigationOffset(324);
-      }
     scroller.scrollTo(itemName, {
       duration: 1300,
       smooth: "easeOutQuart",
-      offset: -offset,
-      // containerId: itemName
+      offset: -navigationOffset,
     });
   };
+  // Add title to nav drop down
   const navAboutDropdownTitle = (
     <span className="nav-dropdown-adjustment">About</span>
   );
-  // const navInterestsDropdownTitle = <span><FcElectricity /> Interests</span>;
+  // TODO: const navInterestsDropdownTitle = <span><FcElectricity /> Interests</span>;
 
   return (
     <div>
