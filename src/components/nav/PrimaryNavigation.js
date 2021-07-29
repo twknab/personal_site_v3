@@ -104,7 +104,7 @@ function PrimaryNavigation() {
                         className="download-resume"
                       >
                         <FaFileDownload size="1em" />
-                        <span>
+                        <span id="download-resume-wrapper">
                           <span id="download-word">Download</span> Resume
                         </span>
                       </NavDropdown.Item>
