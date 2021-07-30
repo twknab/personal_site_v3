@@ -43,7 +43,7 @@ function ProfessionalSummary() {
             <Col xs={4} s={4} md={4} lg={4} className="justify-content-end">
               <a
                 href="https://linkedin.com/in/twknab"
-                target="_new"
+                target="_blank" rel="noopener noreferrer"
                 className="social-linkedin"
               >
                 <FaLinkedin size="4em" className="icon-shadow-light-bg" />
@@ -52,7 +52,7 @@ function ProfessionalSummary() {
             <Col xs={4} s={4} md={4} lg={4}>
               <a
                 href="https://github.com/twknab"
-                target="_new"
+                target="_blank" rel="noopener noreferrer"
                 className="social-github"
               >
                 <FaGithubSquare size="4em" className="icon-shadow-light-bg" />
@@ -61,7 +61,7 @@ function ProfessionalSummary() {
             <Col xs={4} s={4} md={4} lg={4}>
               <a
                 href="https://stackoverflow.com/users/6685623/twknab?tab=profile"
-                target="_new"
+                target="_blank" rel="noopener noreferrer"
                 className="social-stackoverflow"
               >
                 <FaStackOverflow size="4em" className="icon-shadow-light-bg" />

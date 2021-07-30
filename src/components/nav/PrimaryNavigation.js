@@ -129,7 +129,7 @@ function PrimaryNavigation() {
               <Nav.Link
                 eventKey={2}
                 href="https://linkedin.com/in/twknab"
-                target="_new"
+                target="_blank" rel="noopener noreferrer"
                 onClick={() => handleNavClick("contact")}
                 active={activeItem === "contact"}
               >

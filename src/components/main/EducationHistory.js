@@ -20,7 +20,7 @@ function EducationHistory() {
           <h5>Coding Dojo, 2017-2020</h5>
           <p>
             Full stack web development, from wireframes to deployment at the{" "}
-            <a href="https://codingdojo.com" target="_new">
+            <a href="https://codingdojo.com" target="_blank" rel="noopener noreferrer">
               Coding Dojo
             </a>
             .
@@ -29,7 +29,7 @@ function EducationHistory() {
           <h5>The University of Iowa, 2008</h5>
           <p>
             Student involvement and study of natural sciences at{" "}
-            <a href="https://uiowa.edu" target="_new">
+            <a href="https://uiowa.edu" target="_blank" rel="noopener noreferrer">
               The University of Iowa
             </a>
             .

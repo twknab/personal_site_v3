@@ -10,17 +10,17 @@ function HikingTool() {
     <div>
       <Row className="project-row">
         <Col md="3" className="project-col">
-          <a href="https://hiking.tools" target="_new">
+          <a href="https://hiking.tools" target="_blank" rel="noopener noreferrer">
             <Image src={hikingToolIco} className="project-icon" rounded fluid />
           </a>
         </Col>
         <Col md="9">
           <h3>HikingTool</h3>
           <p>
-            <a href="https://hiking.tools" target="_new">
+            <a href="https://hiking.tools" target="_blank" rel="noopener noreferrer">
               <FaGlobe size="1.5em" />
             </a>{" "}
-            <a href="https://github.com/twknab/mean_hike" target="_new">
+            <a href="https://github.com/twknab/mean_hike" target="_blank" rel="noopener noreferrer">
               <FaGithubSquare size="1.5em" />
             </a>{" "}
             Hiking risk management tool to help increase trip safety, awareness
@@ -28,19 +28,19 @@ function HikingTool() {
             travel times, which was adopted into an algorithm from a backpacking
             book. Includes creation/edit and deltion of pre and post-trip
             experience reports. Powered by{" "}
-            <a href="https://angularjs.org/" target="_new">
+            <a href="https://angularjs.org/" target="_blank" rel="noopener noreferrer">
               AngularJS
             </a>{" "}
             on the front-end, and{" "}
-            <a href="https://nodejs.org/en/" target="_new">
+            <a href="https://nodejs.org/en/" target="_blank" rel="noopener noreferrer">
               Node
             </a>
             /
-            <a href="https://expressjs.com/" target="_new">
+            <a href="https://expressjs.com/" target="_blank" rel="noopener noreferrer">
               Express
             </a>
             /
-            <a href="https://www.mongodb.com/" target="_new">
+            <a href="https://www.mongodb.com/" target="_blank" rel="noopener noreferrer">
               Mongo
             </a>{" "}
             on the back-end. Developed concept, wireframes and built and

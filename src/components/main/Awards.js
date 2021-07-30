@@ -24,7 +24,7 @@ function Awards() {
             Awarded student conservation{" "}
             <a
               href="https://www.continuetolearn.uiowa.edu/lakesidelab/university/scholarships/parker-gentry.html"
-              target="_new"
+              target="_blank" rel="noopener noreferrer"
             >
               Parker Gentry Award
             </a>{" "}
