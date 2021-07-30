@@ -30,7 +30,7 @@ function FitnessTracker() {
             <a href="https://www.python.org/" target="_new">
               Python 3
             </a>{" "}
-            using <a href="https://www.djangoproject.com/">Django</a> with{" "}
+            using <a href="https://www.djangoproject.com/" target="_new">Django</a> with{" "}
             <a href="https://getbootstrap.com/" target="_new">
               Bootstrap 4
             </a>
