@@ -29,15 +29,33 @@ function Experience() {
             being a developer is a life-long learning journey full of challenges
             and growth.
           </p>
+          {/* <h3>Software Engineer</h3>
+          <p>
+            {" "}
+            <em>
+              <a
+                href="https://sanabenefits.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Sana Benefits
+              </a>
+            </em>
+            , Seattle, WA <b>2022 - Present</b>
+          </p> */}
           <h3>Technical Consultant</h3>
           <p>
             {" "}
             <em>
-              <a href="https://perficient.com" target="_blank" rel="noopener noreferrer">
+              <a
+                href="https://perficient.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 Perficient, Inc.
               </a>
             </em>
-            , Seattle, WA <b>2019 - Present</b>
+            , Seattle, WA <b>2019 - 2022</b>
           </p>
           <h3>Freelance Web Developer</h3>
           <p>
@@ -45,7 +63,8 @@ function Experience() {
               <b>
                 <a
                   href="http://web.archive.org/web/20190415114803/http://sasquatchcreative.com/"
-                  target="_blank" rel="noopener noreferrer"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   Sasquat.ch
                 </a>
@@ -56,7 +75,8 @@ function Experience() {
               <b>
                 <a
                   href="http://web.archive.org/web/20141221044330/http://smartguysdesign.com/"
-                  target="_blank" rel="noopener noreferrer"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   SmartGuys Design
                 </a>
@@ -67,7 +87,11 @@ function Experience() {
           <h3>Kayak Guide & Website Manager</h3>
           <p>
             <em>
-              <a href="https://kayakalki.com" target="_blank" rel="noopener noreferrer">
+              <a
+                href="https://kayakalki.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 Alki Kayak Tours
               </a>
             </em>
@@ -76,7 +100,11 @@ function Experience() {
           <h3>Web Producer</h3>
           <p>
             <em>
-              <a href="https://sesamecommunication.com" target="_blank" rel="noopener noreferrer">
+              <a
+                href="https://sesamecommunication.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 Sesame Communication
               </a>
             </em>
@@ -86,25 +114,41 @@ function Experience() {
           <p>
             <b>Ecommerce Product Manager</b> at{" "}
             <em>
-              <a href="https://m2soutfitters.com" target="_blank" rel="noopener noreferrer">
+              <a
+                href="https://m2soutfitters.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 Mountain to Sound Outfitters
               </a>
             </em>
             , <b>Kayak Guide</b> at{" "}
             <em>
-              <a href="https://outdoorodysseys.com" target="_blank" rel="noopener noreferrer">
+              <a
+                href="https://outdoorodysseys.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 Outdoor Odysseys
               </a>
             </em>
             , <b>Web Producer</b> at{" "}
             <em>
-              <a href="https://wyomingwildlife.org" target="_blank" rel="noopener noreferrer">
+              <a
+                href="https://wyomingwildlife.org"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 Wyoming Wildlife Federation
               </a>
             </em>
             , <b>Web Content Administrator</b> at{" "}
             <em>
-              <a href="https://nols.edu" target="_blank" rel="noopener noreferrer">
+              <a
+                href="https://nols.edu"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 National Outdoor Leadership School
               </a>
             </em>
@@ -112,14 +156,19 @@ function Experience() {
             <em>
               <a
                 href="https://www.linkedin.com/company/compleware-corporation"
-                target="_blank" rel="noopener noreferrer"
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 CompleWare
               </a>
             </em>
             , and <b>Help Desk Specialist</b> at{" "}
             <em>
-              <a href="https://uiowa.edu" target="_blank" rel="noopener noreferrer">
+              <a
+                href="https://uiowa.edu"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 The University of Iowa
               </a>
             </em>
