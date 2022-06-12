@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Nav, Navbar, NavDropdown } from "react-bootstrap";
 import { FaBars, FaFileDownload } from "react-icons/fa";
-import resumeFile from "../../assets/docs/timknab_resume_fullstack_engineer.docx";
 import timknabLogo from "../../assets/images/timknabdev-logo-light-lg.png";
 import Scroll from "react-scroll";
 const scroller = Scroll.scroller;
@@ -89,28 +88,6 @@ function PrimaryNavigation() {
                 >
                   Education History
                 </NavDropdown.Item>
-                <Container fluid>
-                  <Row
-                    center="true"
-                    className="download-resume-row row-slim-padding"
-                  >
-                    <Col>
-                      <NavDropdown.Item
-                        fill="true"
-                        href={resumeFile}
-                        download="tim_knab_full_stack_developer.docx"
-                        onClick={() => handleNavClick("downloadResume")}
-                        active={activeItem === ""}
-                        className="download-resume"
-                      >
-                        <FaFileDownload size="1em" />
-                        <span id="download-resume-wrapper">
-                          <span id="download-word">Download</span> Resume
-                        </span>
-                      </NavDropdown.Item>
-                    </Col>
-                  </Row>
-                </Container>
               </NavDropdown>
               {/* TODO: Add in interests to show more about who you are
               <NavDropdown title={navInterestsDropdownTitle} id="collasible-nav-dropdown-interests" className="theme-twk-custom-nav-dropdown">

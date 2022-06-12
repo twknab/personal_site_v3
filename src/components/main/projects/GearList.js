@@ -17,9 +17,6 @@ function GearList() {
         <Col md="9">
           <h3>GearList</h3>
           <p>
-            <a href="https://gearlist.rocks" target="_blank" rel="noopener noreferrer">
-              <FaGlobe size="1.5em" />
-            </a>{" "}
             <a href="https://github.com/twknab/gear_list_MEVN" target="_blank" rel="noopener noreferrer">
               <FaGithubSquare size="1.5em" />
             </a>{" "}

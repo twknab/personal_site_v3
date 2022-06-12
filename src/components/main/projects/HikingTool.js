@@ -17,9 +17,6 @@ function HikingTool() {
         <Col md="9">
           <h3>HikingTool</h3>
           <p>
-            <a href="https://hiking.tools" target="_blank" rel="noopener noreferrer">
-              <FaGlobe size="1.5em" />
-            </a>{" "}
             <a href="https://github.com/twknab/mean_hike" target="_blank" rel="noopener noreferrer">
               <FaGithubSquare size="1.5em" />
             </a>{" "}
