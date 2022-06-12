@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Container, Row, Col, Nav, Navbar, NavDropdown } from "react-bootstrap";
-import { FaBars, FaFileDownload } from "react-icons/fa";
+import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
+import { FaBars } from "react-icons/fa";
 import timknabLogo from "../../assets/images/timknabdev-logo-light-lg.png";
 import Scroll from "react-scroll";
 const scroller = Scroll.scroller;

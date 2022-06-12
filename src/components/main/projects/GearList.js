@@ -2,7 +2,7 @@ import React from "react";
 import Col from "react-bootstrap/Col";
 import Image from "react-bootstrap/Image";
 import Row from "react-bootstrap/Row";
-import { FaGithubSquare, FaGlobe } from "react-icons/fa";
+import { FaGithubSquare } from "react-icons/fa";
 import gearListIco from "../../../assets/images/apps/gearlist-ico.png";
 
 function GearList() {
