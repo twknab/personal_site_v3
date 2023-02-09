@@ -29,7 +29,7 @@ function Experience() {
             being a developer is a life-long learning journey full of challenges
             and growth.
           </p>
-          {/* <h3>Software Engineer</h3>
+          <h3>Software Engineer</h3>
           <p>
             {" "}
             <em>
@@ -41,8 +41,8 @@ function Experience() {
                 Sana Benefits
               </a>
             </em>
-            , Seattle, WA <b>2022 - Present</b>
-          </p> */}
+            , Seattle, WA <b>2022 - 2023</b>
+          </p>
           <h3>Technical Consultant</h3>
           <p>
             {" "}

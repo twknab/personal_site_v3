@@ -9,7 +9,7 @@ function FitnessTracker() {
   return (
     <div>
       <Row className="project-row">
-        <Col md="3" className="project-col">
+        <Col md="3" className="project-col tilt">
           <a href="https://github.com/twknab/workout_tracker" target="_blank" rel="noopener noreferrer">
             <Image
               src={fitnessTrackerIco}

@@ -9,7 +9,7 @@ function SockIt() {
   return (
     <div>
       <Row className="project-row">
-        <Col md="3" className="project-col">
+        <Col md="3" className="project-col tilt">
           <a href="https://github.com/twknab/sockets_chat" target="_blank" rel="noopener noreferrer">
             <Image src={sockitIco} className="project-icon" rounded fluid />
           </a>

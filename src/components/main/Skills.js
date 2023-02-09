@@ -18,7 +18,7 @@ function Skills() {
           </h1>
           <h4>Stacks & Languages</h4>
           <p>
-            MEVN/MERN/MEAN (Node, Express, Mongo, Vue/React/Angular), LAMP
+            Ruby on Rails (with React), MEVN/MERN/MEAN (Node, Express, Mongo, Vue/React/Angular), LAMP
             (PHP/Hacklang, XHP/React/Flow), Python (Django, Flask).
           </p>
           <h4>Front-end</h4>

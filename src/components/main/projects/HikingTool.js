@@ -9,8 +9,8 @@ function HikingTool() {
   return (
     <div>
       <Row className="project-row">
-        <Col md="3" className="project-col">
-          <a href="https://hiking.tools" target="_blank" rel="noopener noreferrer">
+        <Col md="3" className="project-col tilt">
+          <a href="https://github.com/twknab/mean_hike" target="_blank" rel="noopener noreferrer">
             <Image src={hikingToolIco} className="project-icon" rounded fluid />
           </a>
         </Col>
