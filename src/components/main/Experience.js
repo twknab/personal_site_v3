@@ -41,7 +41,7 @@ function Experience() {
                 Sana Benefits
               </a>
             </em>
-            , Seattle, WA <b>2022 - 2023</b>
+            , Austin, TX <b>2022 - 2023</b>
           </p>
           <h3>Technical Consultant</h3>
           <p>
