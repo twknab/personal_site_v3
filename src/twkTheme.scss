@@ -582,6 +582,17 @@ navbar-nav .dropdown-menu {
 .project-row {
   padding-left: 0px !important;
   padding-right: 0px !important;
+
+  .btn, .btn:visited {
+    margin: 1rem;
+    background-color: #382726;
+    border-color: #fc4d45;
+    border: 2px solid #fc4d45;
+    color: #ffffff !important;
+    &:hover {
+      background-color: #fc4d45;
+    }
+  }
 }
 
 .project-col {

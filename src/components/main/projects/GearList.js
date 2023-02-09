@@ -1,8 +1,8 @@
 import React from "react";
+import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Image from "react-bootstrap/Image";
 import Row from "react-bootstrap/Row";
-import { FaGithubSquare } from "react-icons/fa";
 import gearListIco from "../../../assets/images/apps/gearlist-ico.png";
 
 function GearList() {
@@ -21,13 +21,6 @@ function GearList() {
         <Col md="9">
           <h3>GearList</h3>
           <p>
-            <a
-              href="https://github.com/twknab/gear_list_MEVN"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <FaGithubSquare size="1.5em" />
-            </a>{" "}
             Gear management tool to help increase trip safety by allowing one to
             better prepare for adventures. Create gear lists, create gear items,
             add items to lists or lists to items. See gross list weights, and
@@ -73,6 +66,15 @@ function GearList() {
             </a>
             .
           </p>
+          <Button
+            variant="primary"
+            size="lg"
+            href="https://github.com/twknab/gear_list_MEVN"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            View on GitHub
+          </Button>
         </Col>
       </Row>
     </div>
