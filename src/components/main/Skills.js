@@ -18,25 +18,27 @@ function Skills() {
           </h1>
           <h4>Stacks & Languages</h4>
           <p>
-            Ruby on Rails (with React), MEVN/MERN/MEAN (Node, Express, Mongo, Vue/React/Angular), LAMP
-            (PHP/Hacklang, XHP/React/Flow), Python (Django, Flask).
+            Ruby on Rails, JavaScript: MEVN/MERN/MEAN (Node, Express, Mongo,
+            Vue/React/Angular), LAMP (PHP/Hacklang, XHP/React/Flow), Python
+            (Django & Flask) stacks
           </p>
           <h4>Front-end</h4>
           <p>
-            Vue.js, React.js, AngularJS, HTML, CSS, SCSS, JavaScript, JSX,
-            Typescript, jQuery, npm, Yarn, Bootstrap, AJAX.
+            React.js, Vue.js, AngularJS, Front-end testing, HTML, CSS, SCSS,
+            JavaScript, JSX, Typescript, jQuery, Bootstrap, AJAX
           </p>
           <h4>Back-end</h4>
           <p>
-            RESTful APIs, JavaScript, PHP, Hacklang, Python, Node.js,
-            Express.js, Flask, Django, Socket.io, CodeIgniter, MongoDB,
-            Mongoose, MySQL, Apache, Nginx, Gunicorn.
+            RESTful APIs, Back-end testing, JavaScript, Ruby, PHP, Hacklang,
+            Python, Node.js, Express.js, Socket.io, CodeIgniter, MongoDB,
+            Mongoose, MySQL, PostgreSQL, Apache, Nginx, Gunicorn
           </p>
-          <h4>Addt'l Skills, Tools and Technologies</h4>
+          <h4>Other Tools & Technologies</h4>
           <p>
-            Amazon Web Services, OOP, Mercurial, Git, pip, virtualenv, Linux,
-            bash, MVC, DRY, SEO, DNS, cPanel, WordPress, Adobe Creative Cloud
-            Suite, gulp, sass.
+            Amazon Web Services, Docker, agile/scrum, Jira, Formstack API,
+            DropboxSign API, OOP, MVC, DRY, Mercurial, Git, Github, npm, yarn,
+            pip, virtualenv, nvm, rvm, Linux, bash, SEO, DNS, cPanel, Adobe
+            Creative Cloud Suite, gulp, sass
           </p>
         </Col>
       </Row>
