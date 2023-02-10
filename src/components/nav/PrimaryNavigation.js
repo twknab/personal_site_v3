@@ -63,6 +63,7 @@ function PrimaryNavigation() {
                 title={navAboutDropdownTitle}
                 id="collasible-nav-dropdown-about"
                 className="theme-twk-custom-nav-dropdown"
+                data-testid="primary-nav-dropdown"
               >
                 <NavDropdown.Item
                   onClick={() => handleNavClick("skills")}
