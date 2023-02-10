@@ -5,8 +5,10 @@ import Row from "react-bootstrap/Row";
 
 import hack from "../../assets/images/stacks/hack-md.png";
 import lamp from "../../assets/images/stacks/lamp-stack-sm.png";
-import mean from "../../assets/images/stacks/meanstack.png";
-import mevn from "../../assets/images/stacks/mevnstack.png";
+// import mean from "../../assets/images/stacks/meanstack.png";
+// import mern from "../../assets/images/stacks/mernstack.png";
+// import mevn from "../../assets/images/stacks/mevnstack.png";
+import mervan from "../../assets/images/stacks/mervan-stacks.png";
 import python from "../../assets/images/stacks/python-stack.png";
 import ror from "../../assets/images/stacks/ruby-on-rails-stack.png";
 
@@ -29,6 +31,24 @@ function Stacks() {
             target="_blank"
             rel="noopener noreferrer"
           >
+            <Image src={mervan} fluid />
+          </a>
+        </Col>
+        {/* <Col lg className="stack-image tilt">
+          <a
+            href="https://www.mongodb.com/mean-stack"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Image src={mern} fluid />
+          </a>
+        </Col>
+        <Col lg className="stack-image tilt">
+          <a
+            href="https://www.mongodb.com/mean-stack"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <Image src={mean} fluid />
           </a>
         </Col>
@@ -40,7 +60,7 @@ function Stacks() {
           >
             <Image src={mevn} fluid />
           </a>
-        </Col>
+        </Col> */}
         <Col lg className="stack-image tilt">
           <a
             href="https://www.python.org/"

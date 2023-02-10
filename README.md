@@ -1,11 +1,14 @@
-# TODOS:
+# About
 
-1. add illustration to end of website for sense of completion (or illustrations in various places?)? -- M2
-2. ~~add resume file~~ -- M1
-3. ~~wire up navigation~~ -- M1
-4. ~~fix hamburger menu bug~~ -- M1
-5. add icons to experience (already made) -- M2
-6. add icons to education (CodingDojo and The University of Iowa) -- M2
-7. ~~add projects~~
-8. ~~add experience~~
-9. wire up blog -- M2
+This is a personal react static site built to serve as a personal portfolio. All of the colors, gradients, textures and images were handpicked/coded/created, to give a sense of coding artisnal quality. Hoping to continue to expand this site for more additions.
+
+## Future Work
+
+- Add blog articles about coding challenges / soft skills journey
+- Add "Current Reading List of 2023"
+- Add interactive widgets or little JS games
+- Add more JS bells and whistles for visual fun and creativity
+
+## Create Additions for the Future
+
+1. Add illustration to end of website for sense of completion? (or illustrations in various places)
