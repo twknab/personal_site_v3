@@ -223,6 +223,7 @@ code {
   -moz-animation: AnimationName 2s ease infinite;
   -o-animation: AnimationName 2s ease infinite;
   animation: AnimationName 2s ease infinite;
+  cursor: pointer;
 }
 
 @-webkit-keyframes AnimationName {

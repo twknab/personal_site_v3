@@ -29,7 +29,7 @@ function Skills() {
           </p>
           <h4>Back-end</h4>
           <p>
-            RESTful APIs, Back-end testing, JavaScript, Ruby, PHP, Hacklang,
+            RESTful APIs, Back-end testing, rspec, JavaScript, Ruby, PHP, Hacklang,
             Python, Node.js, Express.js, Socket.io, CodeIgniter, MongoDB,
             Mongoose, MySQL, PostgreSQL, Apache, Nginx, Gunicorn
           </p>

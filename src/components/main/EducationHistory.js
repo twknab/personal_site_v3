@@ -14,7 +14,7 @@ function EducationHistory() {
             <span role="img" aria-label="about">
               🎓
             </span>{" "}
-            education history
+            Education History
           </h1>
           <h4>Full Stack Web Development</h4>
           <h5>Coding Dojo, 2017-2020</h5>

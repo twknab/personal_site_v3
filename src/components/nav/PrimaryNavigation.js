@@ -32,7 +32,7 @@ function PrimaryNavigation() {
 
   return (
     <div>
-      <Container fluid className="pl-0 pr-0 h-100" id="twk-nav">
+      <Container fluid className="pl-0 pr-0 h-100" id="twk-nav" data-testid="primary-navigation">
         <Navbar
           sticky="top"
           collapseOnSelect
@@ -63,6 +63,7 @@ function PrimaryNavigation() {
                 title={navAboutDropdownTitle}
                 id="collasible-nav-dropdown-about"
                 className="theme-twk-custom-nav-dropdown"
+                data-testid="primary-nav-dropdown"
               >
                 <NavDropdown.Item
                   onClick={() => handleNavClick("skills")}
