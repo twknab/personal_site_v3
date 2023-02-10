@@ -11,6 +11,7 @@ function PrimaryFooter() {
       <Container
         fluid="true"
         className="pl-0 pr-0 h-100 container-fluid footer"
+        data-testid="primary-footer"
       >
         <Row className="tagline">
           <Col lg>

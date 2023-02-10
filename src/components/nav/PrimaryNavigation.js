@@ -32,7 +32,7 @@ function PrimaryNavigation() {
 
   return (
     <div>
-      <Container fluid className="pl-0 pr-0 h-100" id="twk-nav">
+      <Container fluid className="pl-0 pr-0 h-100" id="twk-nav" data-testid="primary-navigation">
         <Navbar
           sticky="top"
           collapseOnSelect
