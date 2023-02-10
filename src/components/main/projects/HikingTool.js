@@ -9,14 +9,14 @@ function HikingTool() {
   return (
     <div>
       <Row className="project-row">
-        <Col md="3" className="project-col tilt">
-          <a
-            href="https://github.com/twknab/mean_hike"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image src={hikingToolIco} className="project-icon" rounded fluid />
-          </a>
+        <Col
+          md="3"
+          className="project-col tilt"
+          onClick={() =>
+            window.open("https://github.com/twknab/mean_hike", "_blank")
+          }
+        >
+          <Image src={hikingToolIco} className="project-icon" rounded fluid />
         </Col>
         <Col md="9">
           <h3>HikingTool</h3>

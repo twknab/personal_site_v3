@@ -1,5 +1,5 @@
 import React from "react";
-import Button  from "react-bootstrap/Button";
+import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Image from "react-bootstrap/Image";
 import Row from "react-bootstrap/Row";
@@ -9,14 +9,14 @@ function SockIt() {
   return (
     <div>
       <Row className="project-row">
-        <Col md="3" className="project-col tilt">
-          <a
-            href="https://github.com/twknab/sockets_chat"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image src={sockitIco} className="project-icon" rounded fluid />
-          </a>
+        <Col
+          md="3"
+          className="project-col tilt"
+          onClick={() =>
+            window.open("https://github.com/twknab/sockets_chat", "_blank")
+          }
+        >
+          <Image src={sockitIco} className="project-icon" rounded fluid />
         </Col>
         <Col md="9">
           <h3>Sock It!</h3>
