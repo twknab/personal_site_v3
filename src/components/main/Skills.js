@@ -24,14 +24,15 @@ function Skills() {
           </p>
           <h4>Front-end</h4>
           <p>
-            React.js, Vue.js, AngularJS, Front-end testing, HTML, CSS, SCSS,
-            JavaScript, JSX, Typescript, jQuery, Bootstrap, AJAX
+            React.js, Vue.js, AngularJS, front-end testing: jest/react testing
+            library, HTML, CSS, SCSS, JavaScript, JSX, Typescript, Storybook,
+            jQuery, Bootstrap, AJAX
           </p>
           <h4>Back-end</h4>
           <p>
-            RESTful APIs, Back-end testing, rspec, JavaScript, Ruby, PHP, Hacklang,
-            Python, Node.js, Express.js, Socket.io, CodeIgniter, MongoDB,
-            Mongoose, MySQL, PostgreSQL, Apache, Nginx, Gunicorn
+            RESTful APIs, Back-end testing, rspec, JavaScript, Ruby, PHP,
+            Hacklang, Python, Node.js, Express.js, Socket.io, CodeIgniter,
+            MongoDB, Mongoose, MySQL, PostgreSQL, Apache, Nginx, Gunicorn
           </p>
           <h4>Other Tools & Technologies</h4>
           <p>
