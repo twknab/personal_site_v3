@@ -39,14 +39,14 @@ const experiences = [
     city: "Kansas City",
     stateAbbreviation: "MO",
   },
-  {
-    jobTitle: "🛠️ Web Developer",
-    startYear: 2011,
-    endYear: 2012,
-    companyName: "National Outdoor Leadership School",
-    city: "Lander",
-    stateAbbreviation: "WY",
-  },
+  // {
+  //   jobTitle: "🛠️ Web Developer",
+  //   startYear: 2011,
+  //   endYear: 2012,
+  //   companyName: "National Outdoor Leadership School",
+  //   city: "Lander",
+  //   stateAbbreviation: "WY",
+  // },
 ];
 
 export default experiences;
