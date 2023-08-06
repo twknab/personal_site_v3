@@ -3,11 +3,7 @@ import Col from "react-bootstrap/Col";
 import Image from "react-bootstrap/Image";
 import Row from "react-bootstrap/Row";
 import bioPhoto from "../../assets/images/twksmall-966x966.jpeg";
-import {
-  FaLinkedin,
-  FaGithubSquare,
-  FaStackOverflow,
-} from "react-icons/fa";
+import { FaLinkedin, FaGithubSquare, FaStackOverflow } from "react-icons/fa";
 
 function ProfessionalSummary() {
   return (
@@ -27,24 +23,34 @@ function ProfessionalSummary() {
             <span role="img" aria-label="welcome">
               👋
             </span>{" "}
-            Summary
+            Welcome!
           </h1>
           <p className="light-text-shadow">
-            <b className="highlighter">
-              Full stack web application developer/engineer
-            </b>
-            , experienced in a variety of languages and frameworks:{" "}
-            <b className="highlighter">JavaScript</b> MEVN/MERN/MEAN (Node,
-            Express, Mongo, Vue/React/Angular),{" "}
+            My name is Tim. I'm a{" "}
+            <b className="highlighter">Full Stack Software Engineer</b>,
+            specializing in: <b className="highlighter">Node.js/Express.js</b>,{" "}
+            <b className="highlighter">React.js</b>,{" "}
+            <b className="highlighter">Vue.js</b>,{" "}
+            <b className="highlighter">JavaScript</b>,{" "}
             <b className="highlighter">Ruby on Rails</b>,{" "}
-            <b className="highlighter">LAMP</b> (PHP/Hacklang, XHP/React/Flow),
-            <b className="highlighter">Python</b> (Django, Flask) stacks.
-            Skillful knowledge of <b className="highlighter">MySQL/NoSQL</b>{" "}
-            databases.{" "}
-            <b className="highlighter">Goal-oriented & strong work ethic.</b>
+            <b className="highlighter">MongoDB/MySQL/Postgres</b> databases. I'm
+            a <b className="highlighter">motivated</b>{" "}
+            <b className="highlighter">team-player</b>, comfortable with all
+            aspects of the{" "}
+            <b className="highlighter">software development life cycle</b>. I
+            continually seek to expand my technical expertise and stay on top of
+            current trends and the latest technologies. I care deeply about my
+            users and bringing{" "}
+            <b className="highlighter">strong value to my team</b>.
           </p>
           <Row className="socials">
-            <Col xs={4} s={4} md={4} lg={4} className="justify-content-end tilt">
+            <Col
+              xs={4}
+              s={4}
+              md={4}
+              lg={4}
+              className="justify-content-end tilt"
+            >
               <a
                 href="https://linkedin.com/in/twknab"
                 target="_blank"

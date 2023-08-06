@@ -14,7 +14,7 @@ function AboutMe() {
             About Me
           </h1>
           <p>
-            My background is in web technology{" "}
+            My background is in software engineering{" "}
             <span role="img" aria-label="technology">
               🧑‍💻
             </span>{" "}
@@ -24,7 +24,7 @@ function AboutMe() {
             </span>
             . I enjoy learning about complex systems and their connections. I
             believe our well-being depends on a healthy relationship with both
-            ecology and technology -- working together -- for us and for the
+            technology and ecology -- working together -- for us and for the
             planet{" "}
             <span role="img" aria-label="earth">
               🌎
