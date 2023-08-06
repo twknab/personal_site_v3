@@ -1,7 +1,7 @@
 import React from "react";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
-import Scroll from 'react-scroll';
+import Scroll from "react-scroll";
 const Element = Scroll.Element;
 
 function Skills() {
@@ -16,30 +16,19 @@ function Skills() {
             </span>{" "}
             Skills
           </h1>
-          <h4>Stacks & Languages</h4>
           <p>
-            Ruby on Rails, JavaScript: MEVN/MERN/MEAN (Node, Express, Mongo,
-            Vue/React/Angular), LAMP (PHP/Hacklang, XHP/React/Flow), Python
-            (Django & Flask) stacks
-          </p>
-          <h4>Front-end</h4>
-          <p>
-            React.js, Vue.js, AngularJS, front-end testing: jest/react testing
-            library, HTML, CSS, SCSS, JavaScript, JSX, Typescript, Storybook,
-            jQuery, Bootstrap, AJAX
-          </p>
-          <h4>Back-end</h4>
-          <p>
-            RESTful APIs, Back-end testing, rspec, JavaScript, Ruby, PHP,
-            Hacklang, Python, Node.js, Express.js, Socket.io, CodeIgniter,
-            MongoDB, Mongoose, MySQL, PostgreSQL, Apache, Nginx, Gunicorn
-          </p>
-          <h4>Other Tools & Technologies</h4>
-          <p>
-            Amazon Web Services, Docker, agile/scrum, Jira, Formstack API,
-            DropboxSign API, OOP, MVC, DRY, Mercurial, Git, Github, npm, yarn,
-            pip, virtualenv, nvm, rvm, Linux, bash, SEO, DNS, cPanel, Adobe
-            Creative Cloud Suite, gulp, sass
+            Agile Software Development, APIs, Asana Software, AWS, Browser
+            Compatibility Testing, Circle CI, Code Review, Coding,
+            Collaboration, Confluence, CSS3, Data Modeling, Detail Oriented,
+            Docker, End To End Testing, Estimation, Express.js, Figma, Git,
+            GitHub, GraphQL, Guru, HTML5, Integration Testing, JavaScript, Jest,
+            Jira, Material UI, MongoDB, MVC Architecture, MySQL, Node.js,
+            On-Call Rotation, Organization, Passionate, PHP, Pixel-Perfect
+            Components, Positive Attitude, Postgres, Problem Solving, Python,
+            React Testing Library, React.js, RSpec, Ruby, Ruby on Rails, Ruby
+            Version Manager, SCSS, Slack, Software Development Life Cycle, Team
+            Development, Team Player, Technical Documentation, Time Management,
+            Triaging, TypeScript, Unit Testing, Vue.js, Web Applications
           </p>
         </Col>
       </Row>
