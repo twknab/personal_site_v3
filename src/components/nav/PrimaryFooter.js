@@ -20,7 +20,7 @@ function PrimaryFooter() {
                 <Image src={washingtonStateOutline} />
               </span>
               <span className="crafted-with-care">
-                handcrafted with{" "}
+                built with{" "}
                 <span role="img" aria-label="love" className="love-icon">
                   💚
                 </span>{" "}
@@ -34,7 +34,8 @@ function PrimaryFooter() {
               <span role="img" aria-label="copyright">
                 ©
               </span>{" "}
-              {new Date().getFullYear()} <a href="https://timknab.dev">timknab.dev</a>
+              {new Date().getFullYear()}{" "}
+              <a href="https://timknab.dev">timknab.dev</a>
             </p>
           </Col>
         </Row>

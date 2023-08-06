@@ -12,7 +12,7 @@ $theme-colors: (
   "danger": teal,
 );
 
-$themeDarkBackground: #2a2a2a;
+$themeDarkBackground: #1d1d1d;
 $themeDarkText: #fff;
 
 $themeLightBackground: #efefef;
@@ -331,7 +331,7 @@ code {
 
 // Change hamburger menu background color
 .navbar-dark .navbar-toggler {
-  background-color: #ac6fe2;
+  background-color: $themeLavendarBlue;
   border: unset !important;
   padding: 10px;
 }
@@ -391,8 +391,7 @@ code {
   background: $themePurple;
   background: linear-gradient(90deg,
       $themePurple 0%,
-      $themeGreen 53%,
-      $themeOrange 89%);
+      $themeGreen 53%);
   color: #b6b6b6;
 }
 
@@ -403,7 +402,7 @@ code {
 .navbar-dark .navbar-nav .nav-link:hover,
 .navbar-dark .navbar-nav .nav-link:active,
 .navbar-dark .navbar-nav .nav-link:focus {
-  color: $turquoiseLink !important;
+  color: $themeVibrantYellowGreenLight !important;
 }
 
 // Set hover and active styles for nav dropdown
@@ -411,7 +410,7 @@ code {
 .dropdown-item.active,
 .dropdown-item:active,
 a.dropdown-item.active {
-  background: #813db4cf !important;
+  background: $themeLavendarBlue !important;
   color: white !important;
   text-shadow: 2px 2px 4px black;
 }
@@ -442,6 +441,8 @@ navbar-nav .dropdown-menu {
   color: $themeDarkBackground;
   border-top: 20px solid #d8e052;
   border-bottom: 20px solid #c2c76b;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
 }
 
 .professional-summary-description {
@@ -505,8 +506,6 @@ navbar-nav .dropdown-menu {
 // *********************
 
 .about-me {
-  background-color: #1d1d1d; // rgb(33, 33, 33)
-  background-image: url("./assets/images/dark-dot-bg-pattern.png");
   padding-bottom: 65px !important;
   margin-bottom: -15px;
 }
@@ -551,6 +550,8 @@ navbar-nav .dropdown-menu {
 .stacks {
   background-color: $themeVibrantYellowGreenLight;
   border-bottom: 20px solid #c2c76b;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
   background-image: url("./assets/images/axiom-bg-pattern.png");
 }
 
@@ -627,7 +628,6 @@ navbar-nav .dropdown-menu {
 // *********************
 .projects {
   background-color: #1d1d1d; // rgb(33, 33, 33)
-  background-image: url("./assets/images/dark-dot-bg-pattern.png");
   padding-bottom: 65px !important;
   margin-bottom: -15px;
 }
@@ -704,34 +704,16 @@ navbar-nav .dropdown-menu {
 }
 
 .experience-block {
-  border-left: 20px solid;
+  border-left: 20px solid $themeTurquoise;
   margin-left: 25px;
 }
 
-// Customize left border colors
 .experience-block:nth-child(1) {
-  border-left-color: $themeGreen;
+  border-top-left-radius: 15px;
 }
 
-.experience-block:nth-child(2) {
-  border-left-color: $themeLavendarBlue;
-}
-
-.experience-block:nth-child(3) {
-  border-left-color: $themeTurquoise;
-}
-
-.experience-block:nth-child(4) {
-  border-left-color: $themeVibrantYellowGreen;
-}
-
-.experience-block:nth-child(5) {
-  border-left-color: $themeOrange;
-}
-
-// Last experience block
 .experience-block:nth-child(6) {
-  border-left-color: $themeRed;
+  // border-left-color: $themeRed;
   border-bottom-left-radius: 15px;
   margin-bottom: 25px;
 }
@@ -787,15 +769,21 @@ navbar-nav .dropdown-menu {
 // *********************
 // AWARDS
 // *********************
-// .awards {
-// }
+.awards {
+  margin-bottom: 25px;
+}
 
 // *********************
 // FOOTER
 // *********************
 .footer {
-  background-color: $themeBlue;
   border-top: 20px solid #1e7398;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  background: $themeGreen;
+  background: linear-gradient(90deg,
+      $themeGreen 0%,
+      $themePurple 92%);
 }
 
 .handcrafted-tag {
@@ -807,7 +795,7 @@ navbar-nav .dropdown-menu {
 }
 
 .wa-state img {
-  max-height: 45px;
+  max-height: 65px;
   filter: drop-shadow(2px 2px 2px #000000) !important;
   margin-right: 10px;
 }
@@ -821,6 +809,9 @@ navbar-nav .dropdown-menu {
 .love-icon {
   margin-left: 4px;
   font-style: normal !important;
+  font-size: 35px;
+  position: relative;
+  top: 8px;
 }
 
 .tagline {
