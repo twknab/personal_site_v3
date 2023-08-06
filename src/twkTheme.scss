@@ -331,7 +331,7 @@ code {
 
 // Change hamburger menu background color
 .navbar-dark .navbar-toggler {
-  background-color: $themeLavendarBlue;
+  background-color: $themePurple;
   border: unset !important;
   padding: 10px;
 }
@@ -714,7 +714,7 @@ navbar-nav .dropdown-menu {
 
 .experience-block:last-child {
   border-bottom-left-radius: 15px;
-  margin-bottom: 25px;
+  margin-bottom: 35px;
 }
 
 .experience-year-heading {
@@ -730,11 +730,10 @@ navbar-nav .dropdown-menu {
 .experience-description {
   // margin-top: 50px;
   margin-right: 25px;
-  border-right: 20px solid $themeLightOrange;
+  border-right: 20px solid $themeVibrantYellowGreenLight;
   border-top-right-radius: 15px;
   border-bottom-right-radius: 15px;
   vertical-align: middle;
-  text-align: justify;
 }
 
 // *********************
@@ -776,7 +775,7 @@ navbar-nav .dropdown-menu {
 // FOOTER
 // *********************
 .footer {
-  border-top: 20px solid #1e7398;
+  border-top: 20px solid #7fddb9;
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
   background: $themeGreen;

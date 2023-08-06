@@ -7,8 +7,8 @@ const Element = Scroll.Element;
 
 function Skills() {
   const chunkedSkills = [];
-  for (let i = 0; i < skills.length; i += 15) {
-    chunkedSkills.push(skills.slice(i, i + 15));
+  for (let i = 0; i < skills.length; i += 16) {
+    chunkedSkills.push(skills.slice(i, i + 16));
   }
 
   return (
