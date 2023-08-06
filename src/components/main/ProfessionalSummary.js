@@ -33,11 +33,13 @@ function ProfessionalSummary() {
             <b className="highlighter">Vue.js</b>,{" "}
             <b className="highlighter">JavaScript</b>,{" "}
             <b className="highlighter">Ruby on Rails</b>,{" "}
-            <b className="highlighter">MongoDB/MySQL/Postgres</b> databases. I'm
-            a <b className="highlighter">motivated</b>{" "}
+            <b className="highlighter">MongoDB</b> /{" "}
+            <b className="highlighter">MySQL</b> /{" "}
+            <b className="highlighter">Postgres</b> databases. I'm a{" "}
+            <b className="highlighter">motivated</b>{" "}
             <b className="highlighter">team-player</b>, comfortable with all
             aspects of the{" "}
-            <b className="highlighter">software development life cycle</b>. I
+            <b className="highlighter">Software Development Life Cycle</b>. I
             continually seek to expand my technical expertise and stay on top of
             current trends and the latest technologies. I care deeply about my
             users and bringing{" "}
