@@ -1,8 +1,8 @@
 // TODO: Move non-theme color code into component specific SCSS
 // Strategy: search for each class (other than theme colors) and 
 // move the code over to a scss in the same dir as the component file.
-
 // TODO: Move colors into variable names for re-use and consistency.
+// TODO: Can better leverage scss nesting in various classes-- consider BEM methodology
 
 // *********************
 // THEME COLORS
@@ -442,9 +442,6 @@ navbar-nav .dropdown-menu {
   color: $themeDarkBackground;
   border-top: 20px solid #d8e052;
   border-bottom: 20px solid #c2c76b;
-  // border-bottom-right-radius: 20px;
-  // border-bottom-left-radius: 20px;
-  // z-index: 1000 !important;
 }
 
 .professional-summary-description {
@@ -527,13 +524,17 @@ navbar-nav .dropdown-menu {
   border-top-left-radius: 20px;
 }
 
+.skills-wrapper {
+  margin-bottom: 25px;
+}
+
 .skills h4 {
   padding-bottom: 0;
 }
 
 .skills ul {
   list-style-type: none;
-  // padding-left: 20px;
+  margin-bottom: 0px;
 }
 
 .skills li {
@@ -542,10 +543,8 @@ navbar-nav .dropdown-menu {
 }
 
 .skills li::before {
-  // content: "•";
+  content: "•";
   display: inline-block;
-  // margin-right: 10px;
-  // margin-left: 10px;
   text-shadow: 2px 2px 4px #000000;
 }
 
@@ -695,10 +694,6 @@ navbar-nav .dropdown-menu {
   border-top-left-radius: 20px;
 }
 
-.experience-content-wrapper {
-  margin-left: 25px;
-}
-
 .experience h3 {
   padding-bottom: 0;
 }
@@ -710,6 +705,7 @@ navbar-nav .dropdown-menu {
 
 .experience-block {
   border-left: 20px solid;
+  margin-left: 25px;
 }
 
 // Customize left border colors
@@ -733,14 +729,31 @@ navbar-nav .dropdown-menu {
   border-left-color: $themeOrange;
 }
 
+// Last experience block
 .experience-block:nth-child(6) {
   border-left-color: $themeRed;
   border-bottom-left-radius: 15px;
+  margin-bottom: 25px;
 }
 
 .experience-year-heading {
   font-size: 25px;
   vertical-align: middle;
+}
+
+.experience-description-wrapper {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.experience-description {
+  // margin-top: 50px;
+  margin-right: 25px;
+  border-right: 20px solid $themeLightOrange;
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
+  vertical-align: middle;
+  text-align: justify;
 }
 
 // *********************
