@@ -28,11 +28,15 @@ function PrimaryNavigation() {
   const navAboutDropdownTitle = (
     <span className="nav-dropdown-adjustment">About</span>
   );
-  // TODO: const navInterestsDropdownTitle = <span><FcElectricity /> Interests</span>;
 
   return (
     <div>
-      <Container fluid className="pl-0 pr-0 h-100" id="twk-nav" data-testid="primary-navigation">
+      <Container
+        fluid
+        className="pl-0 pr-0 h-100"
+        id="twk-nav"
+        data-testid="primary-navigation"
+      >
         <Navbar
           sticky="top"
           collapseOnSelect
@@ -90,29 +94,6 @@ function PrimaryNavigation() {
                   Education History
                 </NavDropdown.Item>
               </NavDropdown>
-              {/* TODO: Add in interests to show more about who you are
-              <NavDropdown title={navInterestsDropdownTitle} id="collasible-nav-dropdown-interests" className="theme-twk-custom-nav-dropdown">
-                <NavDropdown.Item onClick={() => handleNavClick('nature')} active={activeItem === 'nature'}><FcLandscape />Nature</NavDropdown.Item>
-                <NavDropdown.Item onClick={() => handleNavClick('drawing')} active={activeItem === 'drawing'}><FcImageFile />Drawing</NavDropdown.Item>
-              </NavDropdown> */}
-            </Nav>
-            <Nav fill>
-              {/*  TODO: Add blog link once complete
-              <Nav.Link
-                onClick={() => handleNavClick("blog")}
-                active={activeItem === "blog"}
-              >
-                Blog
-              </Nav.Link> */}
-              <Nav.Link
-                eventKey={2}
-                href="https://linkedin.com/in/twknab"
-                target="_blank" rel="noopener noreferrer"
-                onClick={() => handleNavClick("contact")}
-                active={activeItem === "contact"}
-              >
-                Contact
-              </Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Navbar>
