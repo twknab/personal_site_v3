@@ -18,15 +18,16 @@ $themeDarkText: #fff;
 $themeLightBackground: #efefef;
 $themeLightText: #151515;
 
-$themeOrange: #fcb045;
-$themeGreen: #32efa6;
 $themeBlue: #3d93b9;
+$themeGreen: #32efa6;
+$themeLavendarBlue: #40a9ff;
+$themeLightOrange: #ffe6a2;
+$themeOrange: #fcb045;
 $themePurple: #813db4;
 $themeRed: #e63e3e;
+$themeTurquoise: #00e6ff;
 $themeVibrantYellowGreen: #f4fd5b;
 $themeVibrantYellowGreenLight: #f6ff98;
-$themeLightOrange: #ffe6a2;
-$themeTurquoise: #00e6ff;
 
 $navLightHover: #e6e6e6;
 $turquoiseLink: #00e6ff;
@@ -530,8 +531,21 @@ navbar-nav .dropdown-menu {
   padding-bottom: 0;
 }
 
-.skills p {
-  padding-top: 0;
+.skills ul {
+  list-style-type: none;
+  // padding-left: 20px;
+}
+
+.skills li {
+  text-shadow: 2px 2px 4px #000000;
+  font-size: 22px;
+}
+
+.skills li::before {
+  // content: "•";
+  display: inline-block;
+  // margin-right: 10px;
+  // margin-left: 10px;
   text-shadow: 2px 2px 4px #000000;
 }
 
@@ -681,6 +695,10 @@ navbar-nav .dropdown-menu {
   border-top-left-radius: 20px;
 }
 
+.experience-content-wrapper {
+  margin-left: 25px;
+}
+
 .experience h3 {
   padding-bottom: 0;
 }
@@ -691,31 +709,38 @@ navbar-nav .dropdown-menu {
 }
 
 .experience-block {
-  border-left: 20px solid $themeRed;
-  border-radius: 10px;
-  margin-bottom: 50px;
-  // font-style: italic;
+  border-left: 20px solid;
 }
 
+// Customize left border colors
 .experience-block:nth-child(1) {
-  border-left-color: $themeRed;
-  // border-radius: 10px;
-  // margin-bottom: 50px;
-  // font-style: italic;
+  border-left-color: $themeGreen;
 }
 
 .experience-block:nth-child(2) {
-  border-left-color: $themeOrange;
-  // border-radius: 10px;
-  // margin-bottom: 50px;
-  // font-style: italic;
+  border-left-color: $themeLavendarBlue;
 }
 
 .experience-block:nth-child(3) {
+  border-left-color: $themeTurquoise;
+}
+
+.experience-block:nth-child(4) {
   border-left-color: $themeVibrantYellowGreen;
-  // border-radius: 10px;
-  // margin-bottom: 50px;
-  // font-style: italic;
+}
+
+.experience-block:nth-child(5) {
+  border-left-color: $themeOrange;
+}
+
+.experience-block:nth-child(6) {
+  border-left-color: $themeRed;
+  border-bottom-left-radius: 15px;
+}
+
+.experience-year-heading {
+  font-size: 25px;
+  vertical-align: middle;
 }
 
 // *********************

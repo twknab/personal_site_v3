@@ -2,9 +2,15 @@ import React from "react";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Scroll from "react-scroll";
+import skills from "./skills/skillsList";
 const Element = Scroll.Element;
 
 function Skills() {
+  const chunkedSkills = [];
+  for (let i = 0; i < skills.length; i += 15) {
+    chunkedSkills.push(skills.slice(i, i + 15));
+  }
+
   return (
     <div>
       <Element name="skills"></Element>
@@ -16,7 +22,27 @@ function Skills() {
             </span>{" "}
             Skills
           </h1>
-          <p>
+          <Row>
+            {chunkedSkills.map((chunk, idx) => (
+              <Col lg>
+                <ul key={idx}>
+                  {chunk.map((skill) => (
+                    <li key={skill}>{skill}</li>
+                  ))}
+                </ul>
+              </Col>
+            ))}
+            {/* <Col lg>
+              <ul>
+                {skills.map((skill) => (
+                  <li key={skill}>
+                    <p>{skill}</p>
+                  </li>
+                ))}
+              </ul>
+            </Col> */}
+          </Row>
+          {/* <p>
             Agile Software Development, APIs, Asana Software, AWS, Browser
             Compatibility Testing, Circle CI, Code Review, Coding,
             Collaboration, Confluence, CSS3, Data Modeling, Detail Oriented,
@@ -29,7 +55,7 @@ function Skills() {
             Version Manager, SCSS, Slack, Software Development Life Cycle, Team
             Development, Team Player, Technical Documentation, Time Management,
             Triaging, TypeScript, Unit Testing, Vue.js, Web Applications
-          </p>
+          </p> */}
         </Col>
       </Row>
     </div>

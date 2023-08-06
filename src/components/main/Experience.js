@@ -2,6 +2,7 @@ import React from "react";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Scroll from "react-scroll";
+import experiences from "./experience/experienceList";
 const Element = Scroll.Element;
 
 function Experience() {
@@ -29,66 +30,23 @@ function Experience() {
             being a developer is a life-long learning journey full of challenges
             and growth.
           </p>
-          <Row>
+          <Row class="experience-content-wrapper">
             <Col lg>
-              <div class="experience-block">
-                <h3>🧑‍💻 Software Engineer</h3>
-                <p>
-                  {" "}
-                  <em>
-                    <b>Sana Benefits</b>
-                  </em>
-                  , Austin, TX <b>2022 - 2023</b>
-                </p>
-              </div>
-              <div class="experience-block">
-                <h3>🧑‍💻 Software Engineer</h3>
-                <p>
-                  {" "}
-                  <em>
-                    <b>Perficient, Inc.</b>
-                  </em>
-                  , St. Louis, MO <b>2019 - 2022</b>
-                </p>
-              </div>
-              <div class="experience-block">
-                <h3>🧑‍💻 Software Engineer</h3>
-                <p>
-                  <em>
-                    <b>Sasquat.ch</b>
-                  </em>
-                  , Bothell, WA <b>2016 – 2019</b>
-                </p>
-              </div>
-            </Col>
-            <Col lg>
-              <div class="experience-block">
-                <h3>🛠️ Web Developer</h3>
-                <p>
-                  <em>
-                    <b>Sesame Communication</b>
-                  </em>
-                  , Seattle, WA, <b>2015 – 2016</b>
-                </p>
-              </div>
-              <div class="experience-block">
-                <h3>🛠️ Web Developer</h3>
-                <p>
-                  <em>
-                    <b>SmartGuys Design</b>
-                  </em>
-                  , Kansas City, MO <b>2011 – 2015</b>
-                </p>
-              </div>
-              <div class="experience-block">
-                <h3>⚙️ Web Content Administrator</h3>
-                <p>
-                  <em>
-                    <b>National Outdoor Leadership School</b>
-                  </em>
-                  , Lander, WY <b>2011 – 2012</b>
-                </p>
-              </div>
+              {experiences.map((experience) => (
+                <div class="experience-block">
+                  <h3>{experience.jobTitle}</h3>
+                  <p>
+                    <b>
+                      {experience.startYear}-{experience.endYear}
+                    </b>{" "}
+                    -{" "}
+                    <em>
+                      <b>{experience.companyName}</b>
+                    </em>
+                    , {experience.city}, {experience.stateAbbreviation}
+                  </p>
+                </div>
+              ))}
             </Col>
           </Row>
         </Col>
