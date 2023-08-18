@@ -42,7 +42,7 @@ function ProfessionalSummary() {
             <b className="highlighter">Software Development Life Cycle</b>. I
             continually seek to expand my technical expertise and stay on top of
             current trends and the latest technologies. I care deeply about my
-            users and bringing{" "}
+            <b className="highlighter">users</b> and bringing{" "}
             <b className="highlighter">strong value to my team</b>.
           </p>
           <Row className="socials">
