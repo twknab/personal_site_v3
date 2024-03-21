@@ -17,7 +17,7 @@ function ProfessionalSummary() {
           xs={12}
           s={12}
           md={12}
-          lg={8}
+          lg={9}
         >
           <h1>
             <span role="img" aria-label="welcome">
