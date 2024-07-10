@@ -8,10 +8,11 @@ const Element = Scroll.Element;
 function Experience() {
   const colorVars = [
     "--theme-vibrant-yellow-green",
-    "--theme-orange",
-    "--theme-green",
-    "--theme-red",
     "--theme-turquoise",
+    "--theme-green",
+    "--theme-orange",
+    "--theme-red",
+    "--theme-darkPurple",
   ];
 
   return (
