@@ -32,6 +32,15 @@ $themeVibrantYellowGreenLight: #f6ff98;
 $navLightHover: #e6e6e6;
 $turquoiseLink: #00e6ff;
 
+:root {
+  --theme-green: #{$themeGreen};
+  --theme-orange: #{$themeOrange};
+  --theme-purple: #{$themePurple};
+  --theme-red: #{$themeRed};
+  --theme-turquoise: #{$themeTurquoise};
+  --theme-vibrant-yellow-green: #{$themeVibrantYellowGreen};
+}
+
 // *********************
 // HTML & GENERAL STYLINGS
 // *********************
@@ -734,6 +743,10 @@ navbar-nav .dropdown-menu {
   border-top-right-radius: 15px;
   border-bottom-right-radius: 15px;
   vertical-align: middle;
+
+  em {
+    margin-left: 6px;
+  }
 }
 
 // *********************
