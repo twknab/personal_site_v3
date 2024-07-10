@@ -22,6 +22,7 @@ function Skills() {
             </span>{" "}
             Skills
           </h1>
+          {/* TODO: Add more rows, and break skills into categories to match current resume template */}
           <Row className="skills-wrapper">
             {chunkedSkills.map((chunk, idx) => (
               <Col lg>
