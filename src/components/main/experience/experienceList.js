@@ -1,19 +1,27 @@
 const experiences = [
   {
+    jobTitle: "🧑‍💻 Senior Software Engineer",
+    startYear: 2023,
+    endYear: 2024,
+    companyName: "Ridepanda",
+    city: "Seattle",
+    stateAbbreviation: "WA",
+  },
+  {
     jobTitle: "🧑‍💻 Software Engineer",
     startYear: 2022,
     endYear: 2023,
     companyName: "Sana Benefits",
-    city: "Austin",
-    stateAbbreviation: "TX",
+    city: "Seattle",
+    stateAbbreviation: "WA",
   },
   {
     jobTitle: "🧑‍💻 Software Engineer",
     startYear: 2019,
     endYear: 2022,
     companyName: "Perficient, Inc.",
-    city: "St. Louis",
-    stateAbbreviation: "MO",
+    city: "Seattle",
+    stateAbbreviation: "WA",
   },
   {
     jobTitle: "🧑‍💻 Software Engineer",
@@ -36,8 +44,8 @@ const experiences = [
     startYear: 2011,
     endYear: 2015,
     companyName: "SmartGuys Design",
-    city: "Kansas City",
-    stateAbbreviation: "MO",
+    city: "Seattle",
+    stateAbbreviation: "WA",
   },
   // {
   //   jobTitle: "🛠️ Web Developer",
