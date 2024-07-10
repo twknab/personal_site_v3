@@ -51,16 +51,16 @@ function Experience() {
           <p className="experience-description">
             💠{" "}
             <em>
-              I've been working with computers and building websites since
-              getting the internet hooked up to our{" "}
+              I've been building websites since our family's{" "}
               <a
                 href="https://duckduckgo.com/?t=ffab&q=Gateway+2000+P5-133&iax=images&ia=images"
                 target="new"
               >
                 Gateway 2000 P5-133
               </a>{" "}
-              's Telepath 28.8K modem. I love being creative and believe that
-              being a developer is a life-long learning journey full of
+              's Telepath 28.8K modem was connected to the web. I love
+              expressing creativity through digital experiences, and believe
+              that being a developer is a life-long learning journey full of
               challenges and growth.
             </em>
           </p>
