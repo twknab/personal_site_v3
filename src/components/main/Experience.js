@@ -9,8 +9,8 @@ function Experience() {
   const colorVars = [
     "--theme-vibrant-yellow-green",
     "--theme-orange",
-    "--theme-red",
     "--theme-green",
+    "--theme-red",
     "--theme-turquoise",
   ];
 
