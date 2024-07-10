@@ -6,6 +6,14 @@ import experiences from "./experience/experienceList";
 const Element = Scroll.Element;
 
 function Experience() {
+  const colorVars = [
+    "--theme-vibrant-yellow-green",
+    "--theme-orange",
+    "--theme-red",
+    "--theme-green",
+    "--theme-turquoise",
+  ];
+
   return (
     <div>
       <Element nameName="experience"></Element>
@@ -17,8 +25,14 @@ function Experience() {
           experience
         </h1>
         <Col lg>
-          {experiences.map((experience) => (
-            <div className="experience-block">
+          {experiences.map((experience, index) => (
+            <div
+              className="experience-block"
+              key={index}
+              style={{
+                borderLeftColor: `var(${colorVars[index % colorVars.length]})`,
+              }}
+            >
               <h3>{experience.jobTitle}</h3>
               <p>
                 <b>
