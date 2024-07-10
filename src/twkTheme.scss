@@ -13,6 +13,7 @@ $theme-colors: (
 );
 
 $themeDarkBackground: #1d1d1d;
+$themeDarkContainer: #252525;
 $themeDarkText: #fff;
 
 $themeLightBackground: #efefef;
@@ -31,6 +32,15 @@ $themeVibrantYellowGreenLight: #f6ff98;
 
 $navLightHover: #e6e6e6;
 $turquoiseLink: #00e6ff;
+
+:root {
+  --theme-green: #{$themeGreen};
+  --theme-orange: #{$themeOrange};
+  --theme-purple: #{$themePurple};
+  --theme-red: #{$themeRed};
+  --theme-turquoise: #{$themeTurquoise};
+  --theme-vibrant-yellow-green: #{$themeVibrantYellowGreen};
+}
 
 // *********************
 // HTML & GENERAL STYLINGS
@@ -730,10 +740,18 @@ navbar-nav .dropdown-menu {
 .experience-description {
   // margin-top: 50px;
   margin-right: 25px;
-  border-right: 20px solid $themeVibrantYellowGreenLight;
+  border-right: 20px solid $themeTurquoise;
   border-top-right-radius: 15px;
   border-bottom-right-radius: 15px;
   vertical-align: middle;
+  background-color: $themeDarkContainer;
+  padding: 35px !important;
+  border-radius: 25px;
+  box-shadow: -10px 10px 10px rgba($themeDarkBackground, 0.6);
+
+  em {
+    margin-left: 6px;
+  }
 }
 
 // *********************
@@ -805,7 +823,7 @@ navbar-nav .dropdown-menu {
 }
 
 .love-icon {
-  margin-left: 4px;
+  margin: 0px 4px;
   font-style: normal !important;
   font-size: 35px;
   position: relative;
@@ -847,6 +865,16 @@ navbar-nav .dropdown-menu {
   .handcrafted-tag {
     position: relative;
     right: 10px;
+  }
+
+  .crafted-with-care {
+    width: 100%;
+    display: block;
+  }
+
+  .experience-description {
+    margin-right: 0px;
+    margin: 20px 0px 20px;
   }
 }
 

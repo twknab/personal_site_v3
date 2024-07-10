@@ -20,6 +20,7 @@ function Projects() {
             </span>{" "}
             Projects
           </h1>
+          {/* TODO: Add AQI Viewer */}
           <GearList />
           <HikingTool />
           <FitnessTracker />
