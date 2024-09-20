@@ -13,6 +13,10 @@ This is a personal react static site built to serve as a personal portfolio. All
 - Jest
 - Netlify
 
+## Feature Next Up
+- Add currently reading / "this year's completed" book list
+- Frame out blog article -- "dev soft skills"
+
 ## Future Work
 
 - Add looading screen or cool intro graphic
