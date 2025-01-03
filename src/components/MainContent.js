@@ -12,7 +12,7 @@ import Stacks from "./main/Stacks";
 function MainContent() {
   return (
     <div>
-      <Container fluid="true" className="mainContent" data-testid="main-content">
+      <Container style={{height: "100vh"}} fluid="true" className="mainContent" data-testid="main-content">
         <h1>🔧</h1>
         {/* <ProfessionalSummary />
         <AboutMe />
