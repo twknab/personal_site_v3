@@ -12,6 +12,7 @@ import Stacks from "./main/Stacks";
 function MainContent() {
   return (
     <div>
+      {/* TODO: Delete the max container height when reverting to the original */}
       <Container style={{height: "100vh"}} fluid="true" className="mainContent" data-testid="main-content">
         <h1>🔧</h1>
         {/* <ProfessionalSummary />
