@@ -12,15 +12,17 @@ import Stacks from "./main/Stacks";
 function MainContent() {
   return (
     <div>
-      <Container fluid="true" className="mainContent" data-testid="main-content">
-        <ProfessionalSummary />
+      {/* TODO: Delete the max container height when reverting to the original */}
+      <Container style={{height: "100vh"}} fluid="true" className="mainContent" data-testid="main-content">
+        <h1>🔧</h1>
+        {/* <ProfessionalSummary />
         <AboutMe />
         <Skills />
         <Stacks />
         <Projects />
         <Experience />
         <EducationHistory />
-        <Awards />
+        <Awards /> */}
       </Container>
     </div>
   );
