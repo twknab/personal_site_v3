@@ -13,14 +13,15 @@ function MainContent() {
   return (
     <div>
       <Container fluid="true" className="mainContent" data-testid="main-content">
-        <ProfessionalSummary />
+        <h1>🔧</h1>
+        {/* <ProfessionalSummary />
         <AboutMe />
         <Skills />
         <Stacks />
         <Projects />
         <Experience />
         <EducationHistory />
-        <Awards />
+        <Awards /> */}
       </Container>
     </div>
   );
