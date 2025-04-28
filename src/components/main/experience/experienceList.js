@@ -1,6 +1,14 @@
 const experiences = [
   {
     jobTitle: "🧑‍💻 Senior Software Engineer",
+    startYear: 2024,
+    endYear: "Present",
+    companyName: "Undisclosed Major Education Provider",
+    city: "Seattle",
+    stateAbbreviation: "WA",
+  },
+  {
+    jobTitle: "🧑‍💻 Senior Software Engineer",
     startYear: 2023,
     endYear: 2024,
     companyName: "Ridepanda",
