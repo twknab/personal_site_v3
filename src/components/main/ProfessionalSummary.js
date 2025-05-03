@@ -32,7 +32,7 @@ function ProfessionalSummary() {
             <b className="highlighter">React.js</b>,{" "}
             <b className="highlighter">Vue.js</b>,{" "}
             <b className="highlighter">JavaScript</b>,{" "}
-            <b className="highlighter">Node.js/Express.js</b>,{" "}
+            <b className="highlighter">Node.js/Express.js/Deno.js</b>,{" "}
             <b className="highlighter">MongoDB</b> /{" "}
             <b className="highlighter">MySQL</b> /{" "}
             <b className="highlighter">PostgreSQL</b> databases. I'm a{" "}
