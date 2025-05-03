@@ -35,7 +35,9 @@ function ProfessionalSummary() {
             <b className="highlighter">Ruby on Rails</b>,{" "}
             <b className="highlighter">MongoDB</b> /{" "}
             <b className="highlighter">MySQL</b> /{" "}
-            <b className="highlighter">PostgreSQL</b> databases. I'm a{" "}
+            <b className="highlighter">PostgreSQL</b> databases.{" "}
+            <br />
+            I'm a {" "}
             <b className="highlighter">motivated</b>{" "}
             <b className="highlighter">team-player</b>, comfortable with all
             aspects of the{" "}
