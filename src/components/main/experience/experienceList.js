@@ -3,7 +3,7 @@ const experiences = [
     jobTitle: "📚 Senior Software Engineer",
     startYear: 2024,
     endYear: "Present",
-    companyName: "Undisclosed Major Education Provider",
+    companyName: "Major Education Provider",
     city: "Seattle",
     stateAbbreviation: "WA",
   },
