@@ -27,10 +27,9 @@ function ProfessionalSummary() {
           </h1>
           <p className="light-text-shadow">
             My name is Tim. I'm a{" "}
-            <b className="highlighter">Full Stack Software Engineer</b>,
+            <b className="highlighter">Senior Full Stack Software Engineer</b>,
             specializing in: <b className="highlighter">Ruby on Rails</b>,{" "}
             <b className="highlighter">React.js</b>,{" "}
-            <b className="highlighter">Vue.js</b>,{" "}
             <b className="highlighter">JavaScript</b>,{" "}
             <b className="highlighter">Node.js/Express.js/Deno.js</b>,{" "}
             <b className="highlighter">MongoDB</b> /{" "}
