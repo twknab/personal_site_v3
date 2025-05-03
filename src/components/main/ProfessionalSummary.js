@@ -45,7 +45,7 @@ function ProfessionalSummary() {
             <b className="highlighter">team-player</b>, comfortable with all
             aspects of the{" "}
             <b className="highlighter">Software Development Life Cycle</b>.{" "}
-            I prefer the ShapeUp Method and iterative delivery over Agile processes. I continually seek to expand my technical expertise and stay on top of
+            I continually seek to expand my technical expertise and stay on top of
             current trends and the latest technologies. I care deeply about my{" "}
             <b className="highlighter">users</b>, polished{" "}
             <b className="highlighter">digital experiences</b> and bringing{" "}
