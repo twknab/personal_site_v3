@@ -1,6 +1,6 @@
 const experiences = [
   {
-    jobTitle: "🧑‍💻 Senior Software Engineer",
+    jobTitle: "📚 Senior Software Engineer",
     startYear: 2024,
     endYear: "Present",
     companyName: "Undisclosed Major Education Provider",
@@ -8,7 +8,7 @@ const experiences = [
     stateAbbreviation: "WA",
   },
   {
-    jobTitle: "🧑‍💻 Senior Software Engineer",
+    jobTitle: "🚴‍♂️Senior Software Engineer",
     startYear: 2023,
     endYear: 2024,
     companyName: "Ridepanda",
@@ -16,7 +16,7 @@ const experiences = [
     stateAbbreviation: "WA",
   },
   {
-    jobTitle: "🧑‍💻 Software Engineer",
+    jobTitle: "🏥 Software Engineer",
     startYear: 2022,
     endYear: 2023,
     companyName: "Sana Benefits",
@@ -32,7 +32,7 @@ const experiences = [
     stateAbbreviation: "WA",
   },
   {
-    jobTitle: "🧑‍💻 Software Engineer",
+    jobTitle: "🌲 Software Engineer",
     startYear: 2016,
     endYear: 2019,
     companyName: "Sasquat.ch",
@@ -40,7 +40,7 @@ const experiences = [
     stateAbbreviation: "WA",
   },
   {
-    jobTitle: "🛠️ Web Developer",
+    jobTitle: "👨‍⚕️ Web Developer",
     startYear: 2015,
     endYear: 2016,
     companyName: "Sesame Communication",
@@ -48,7 +48,7 @@ const experiences = [
     stateAbbreviation: "WA",
   },
   {
-    jobTitle: "🛠️ Web Developer",
+    jobTitle: "⚛️ Web Developer",
     startYear: 2011,
     endYear: 2015,
     companyName: "SmartGuys Design",
