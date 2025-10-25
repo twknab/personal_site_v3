@@ -28,12 +28,13 @@ function ProfessionalSummary() {
           <p className="light-text-shadow">
             My name is Tim. I'm a{" "}
             <b className="highlighter">Senior Full Stack Software Engineer</b>,
-            specializing in: <b className="highlighter">Node.js</b> /{" "}
+            specializing in: <b className="highlighter">AI Applications.</b> I work commonly with: {" "}
+            <b className="highlighter">Python</b> ,{" "}
+            <b className="highlighter">Node.js</b> /{" "}
             <b className="highlighter">Express.js</b>,{" "}
             <b className="highlighter">TypeScript</b> /{" "}
             <b className="highlighter">JavaScript</b>,{" "}
             <b className="highlighter">React.js</b>,{" "}
-            <b className="highlighter">Python</b>,{" "}
             <b className="highlighter">Ruby on Rails</b>,{" "}
             <b className="highlighter">MongoDB</b> /{" "}
             <b className="highlighter">MySQL</b> /{" "}
