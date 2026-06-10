@@ -16,15 +16,6 @@ function Stacks() {
   return (
     <div>
       <Row className="stacks">
-        <Col lg className="stack-image ror-image tilt">
-          <a
-            href="https://rubyonrails.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image src={ror} fluid />
-          </a>
-        </Col>
         <Col lg className="stack-image tilt">
           <a
             href="https://www.mongodb.com/mean-stack"
@@ -32,6 +23,15 @@ function Stacks() {
             rel="noopener noreferrer"
           >
             <Image src={mervan} fluid />
+          </a>
+        </Col>
+        <Col lg className="stack-image ror-image tilt">
+          <a
+            href="https://rubyonrails.org/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Image src={ror} fluid />
           </a>
         </Col>
         {/* <Col lg className="stack-image tilt">
