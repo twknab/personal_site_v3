@@ -6,12 +6,13 @@ import EducationHistory from "./main/EducationHistory";
 import Experience from "./main/Experience";
 import ProfessionalSummary from "./main/ProfessionalSummary";
 import Projects from "./main/Projects";
+import Reading from "./main/Reading";
 import Skills from "./main/Skills";
 import Stacks from "./main/Stacks";
 import useScrollReveal from "../hooks/useScrollReveal";
 
 const REVEAL_SECTIONS =
-  ".professional-summary, .about-me, .skills, .stacks, .projects, .experience, .education-history, .awards";
+  ".professional-summary, .about-me, .skills, .stacks, .projects, .experience, .education-history, .awards, .reading";
 
 function MainContent() {
   useScrollReveal(REVEAL_SECTIONS);
@@ -28,6 +29,7 @@ function MainContent() {
         <Experience />
         <EducationHistory />
         <Awards />
+        <Reading />
       </Container>
     </div>
   );
