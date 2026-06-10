@@ -16,5 +16,9 @@ jobs:
     steps:
       - name: 'Checkout Repository'
         uses: actions/checkout@v3
+      # Dependency Review requires GitHub Advanced Security on private repos,
+      # which this repo doesn't have, so the API returns 403. Keep the scan as
+      # informational only and never fail CI on it.
       - name: 'Dependency Review'
         uses: actions/dependency-review-action@v2
+        continue-on-error: true
