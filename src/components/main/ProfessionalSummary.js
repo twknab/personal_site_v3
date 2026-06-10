@@ -4,13 +4,22 @@ import Image from "react-bootstrap/Image";
 import Row from "react-bootstrap/Row";
 import bioPhoto from "../../assets/images/twksmall-966x966.jpeg";
 import { FaLinkedin, FaGithubSquare, FaStackOverflow } from "react-icons/fa";
+import LottieFigure from "../fun/LottieFigure";
+import { heroAnimation } from "../../assets/lottie";
 
 function ProfessionalSummary() {
   return (
     <div>
       <Row className="professional-summary light-text-shadow">
         <Col xs={12} s={12} md={12} lg={4} className="tilt">
-          <Image src={bioPhoto} roundedCircle fluid className="bio-photo" />
+          <div className="bio-photo-ring">
+            <Image src={bioPhoto} roundedCircle fluid className="bio-photo" />
+          </div>
+          <LottieFigure
+            animationData={heroAnimation}
+            className="lottie-hero"
+            ariaLabel="Animated welcome illustration"
+          />
         </Col>
         <Col
           className="professional-summary-description"

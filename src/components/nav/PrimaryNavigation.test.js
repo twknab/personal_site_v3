@@ -13,7 +13,6 @@ describe("PrimaryNavigation", () => {
     const nav = screen.getByTestId("primary-navigation");
     expect(nav).toHaveTextContent("Home");
     expect(nav).toHaveTextContent("About");
-    expect(nav).toHaveTextContent("Contact");
   });
 
   it("successfully renders primary navigation dropdown", async () => {

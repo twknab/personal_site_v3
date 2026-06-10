@@ -45,6 +45,53 @@ $turquoiseLink: #00e6ff;
 }
 
 // *********************
+// MODERN ENHANCEMENTS (gradients, texture, depth)
+// *********************
+
+// Layered "mesh" gradient helper: stacks soft color blobs over a base color.
+@mixin mesh-gradient($base) {
+  background-color: $base;
+  background-image:
+    radial-gradient(at 12% 18%, rgba($themePurple, 0.35) 0px, transparent 55%),
+    radial-gradient(at 85% 12%, rgba($themeTurquoise, 0.28) 0px, transparent 50%),
+    radial-gradient(at 78% 88%, rgba($themeOrange, 0.30) 0px, transparent 52%),
+    radial-gradient(at 20% 92%, rgba($themeGreen, 0.30) 0px, transparent 55%);
+}
+
+// Subtle film-grain overlay (inline SVG feTurbulence, no extra assets/requests).
+$grain-svg: "data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E";
+
+// Soft, layered modern shadow.
+$shadow-soft: 0 10px 30px -12px rgba(0, 0, 0, 0.55), 0 4px 10px -6px rgba(0, 0, 0, 0.35);
+$shadow-lift: 0 22px 50px -18px rgba(0, 0, 0, 0.6), 0 6px 14px -8px rgba(0, 0, 0, 0.4);
+
+// Full-viewport fixed grain overlay for tactile, modern texture.
+.App {
+  position: relative;
+}
+
+.App::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  background-image: url("#{$grain-svg}");
+  background-size: 160px 160px;
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+}
+
+// Gradient-accent text utility used on key headings.
+.gradient-accent {
+  background: linear-gradient(100deg, $themePurple, $themeTurquoise 45%, $themeGreen);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: none;
+}
+
+// *********************
 // HTML & GENERAL STYLINGS
 // *********************
 body {
@@ -256,70 +303,53 @@ code {
 }
 
 .shimmer:hover {
-  background: linear-gradient(41deg, #813db4, #32efa6, #fcb045);
+  background: linear-gradient(41deg, $themePurple, $themeGreen, $themeOrange);
   background-size: 600% 600%;
   border-radius: 15px;
-  -webkit-animation: AnimationName 2s ease infinite;
-  -moz-animation: AnimationName 2s ease infinite;
-  -o-animation: AnimationName 2s ease infinite;
-  animation: AnimationName 2s ease infinite;
+  animation: shimmerShift 2s ease infinite;
   cursor: pointer;
 }
 
-@-webkit-keyframes AnimationName {
+@keyframes shimmerShift {
   0% {
-    background-position: 0% 96%
+    background-position: 0% 96%;
   }
 
   50% {
-    background-position: 100% 5%
+    background-position: 100% 5%;
   }
 
   100% {
-    background-position: 0% 96%
+    background-position: 0% 96%;
   }
 }
 
-@-moz-keyframes AnimationName {
+// Slow drifting gradient for nav + footer backgrounds.
+@keyframes gradientDrift {
   0% {
-    background-position: 0% 96%
+    background-position: 0% 50%;
   }
 
   50% {
-    background-position: 100% 5%
+    background-position: 100% 50%;
   }
 
   100% {
-    background-position: 0% 96%
+    background-position: 0% 50%;
   }
 }
 
-@-o-keyframes AnimationName {
-  0% {
-    background-position: 0% 96%
-  }
-
-  50% {
-    background-position: 100% 5%
-  }
-
-  100% {
-    background-position: 0% 96%
-  }
+// Gentle scroll-reveal: sections fade/rise into view via IntersectionObserver.
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+  will-change: opacity, transform;
 }
 
-@keyframes AnimationName {
-  0% {
-    background-position: 0% 96%
-  }
-
-  50% {
-    background-position: 100% 5%
-  }
-
-  100% {
-    background-position: 0% 96%
-  }
+.reveal.in-view {
+  opacity: 1;
+  transform: none;
 }
 
 // customize font awesome icon for nav
@@ -401,10 +431,20 @@ code {
 
 .navbar.navbar-expand-lg.navbar-dark.bg-primary {
   background: $themePurple;
-  background: linear-gradient(90deg,
-      $themePurple 0%,
-      $themeGreen 53%);
+  // Psychedelic flowing gradient: deep purple -> electric violet -> magenta ->
+  // indigo -> electric blue, looping back. Drifts to feel alive and trippy.
+  background: linear-gradient(115deg,
+      #59169c 0%,
+      #b026ff 22%,
+      #ff2d95 42%,
+      #6a00f4 62%,
+      #2d6cff 80%,
+      #b026ff 90%,
+      #59169c 100%);
+  background-size: 320% 320%;
+  animation: gradientDrift 12s ease infinite;
   color: #b6b6b6;
+  box-shadow: $shadow-soft;
 }
 
 .navbar-dark .navbar-nav .nav-link {
@@ -448,13 +488,18 @@ navbar-nav .dropdown-menu {
 // PROFESSIONAL SUMMARY
 // *********************
 .professional-summary {
-  background-color: $themeVibrantYellowGreen;
-  background-image: url("./assets/images/axiom-bg-pattern.png");
   color: $themeDarkBackground;
   border-top: 20px solid #d8e052;
   border-bottom: 20px solid #c2c76b;
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
+  // Layered mesh gradient blended over the artisanal pattern for depth.
+  background-color: $themeVibrantYellowGreen;
+  background-image:
+    radial-gradient(at 8% 12%, rgba($themeGreen, 0.55) 0px, transparent 45%),
+    radial-gradient(at 92% 18%, rgba($themeTurquoise, 0.40) 0px, transparent 45%),
+    radial-gradient(at 78% 95%, rgba($themeOrange, 0.45) 0px, transparent 48%),
+    url("./assets/images/axiom-bg-pattern.png");
 }
 
 .professional-summary-description {
@@ -463,12 +508,58 @@ navbar-nav .dropdown-menu {
   margin-bottom: auto;
 }
 
-.bio-photo {
+// Psychedelic spinning, color-cycling ring around the portrait.
+.bio-photo-ring {
+  position: relative;
+  display: block;
+  width: fit-content;
+  max-width: 100%;
   margin-left: auto;
   margin-right: auto;
+  border-radius: 50%;
+  isolation: isolate;
+}
+
+.bio-photo-ring::before {
+  content: "";
+  position: absolute;
+  inset: -13px;
+  z-index: 0;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg,
+      #ff2d95,
+      #b026ff,
+      #6a00f4,
+      #00d4ff,
+      #32efa6,
+      #f4fd5b,
+      #fc4d45,
+      #ff2d95);
+  box-shadow: 0 0 34px 6px rgba(176, 38, 255, 0.45);
+  animation: ringSpin 7s linear infinite, hueShift 10s linear infinite;
+}
+
+.bio-photo {
+  position: relative;
+  z-index: 1;
   display: block;
-  box-shadow: 10px 3px 14px 5px #989e21;
+  max-width: 100%;
+  height: auto;
   max-height: 500px;
+  border-radius: 50%;
+  transition: transform 0.4s ease;
+}
+
+@keyframes ringSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes hueShift {
+  to {
+    filter: hue-rotate(360deg);
+  }
 }
 
 .socials {
@@ -502,14 +593,52 @@ navbar-nav .dropdown-menu {
 }
 
 @media (max-width: 991px) {
-  .bio-photo {
-    box-shadow: 1px 12px 14px 5px #989e21;
+  .bio-photo-ring {
+    margin-bottom: 20px;
   }
 
   .professional-summary-description {
     h1 {
       margin-top: 20px !important;
     }
+  }
+}
+
+// *********************
+// LOTTIE FIGURES (placeholder mount points)
+// *********************
+.lottie-figure {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.lottie-hero {
+  max-width: 220px;
+  margin-top: 18px;
+}
+
+.lottie-footer {
+  max-width: 160px;
+  padding-top: 12px;
+}
+
+// *********************
+// CONFETTI OVERLAY (full-screen, plays on page load)
+// *********************
+.confetti-overlay {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 10000;
+  pointer-events: none;
+  overflow: hidden;
+
+  // Make the Lottie SVG fill the entire viewport so confetti rains edge-to-edge.
+  >div,
+  svg {
+    width: 100% !important;
+    height: 100% !important;
   }
 }
 
@@ -529,10 +658,16 @@ navbar-nav .dropdown-menu {
 .skills {
   border-top: 20px solid #fc4d45; // #fcb045
   border-bottom: 20px solid #c2c76b;
-  background-color: #a99b87; // #958a7a;// #2b2b2b
-  background-image: url("./assets/images/black-orchid-bg-pattern.png");
   border-top-right-radius: 20px;
   border-top-left-radius: 20px;
+  // Deep, modern gradient with the orchid texture layered on top.
+  background-color: #2b2440;
+  background-image:
+    radial-gradient(at 15% 20%, rgba($themePurple, 0.65) 0px, transparent 50%),
+    radial-gradient(at 88% 78%, rgba($themeTurquoise, 0.30) 0px, transparent 50%),
+    linear-gradient(150deg, #3a2c5c 0%, #221d33 60%, #1a1726 100%),
+    url("./assets/images/black-orchid-bg-pattern.png");
+  background-blend-mode: screen, screen, normal, overlay;
 }
 
 .skills-wrapper {
@@ -560,11 +695,14 @@ navbar-nav .dropdown-menu {
 }
 
 .stacks {
-  background-color: $themeVibrantYellowGreenLight;
   border-bottom: 20px solid #c2c76b;
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
-  background-image: url("./assets/images/axiom-bg-pattern.png");
+  background-color: $themeVibrantYellowGreenLight;
+  background-image:
+    radial-gradient(at 50% 0%, rgba($themeTurquoise, 0.30) 0px, transparent 55%),
+    radial-gradient(at 90% 100%, rgba($themeGreen, 0.40) 0px, transparent 55%),
+    url("./assets/images/axiom-bg-pattern.png");
 }
 
 .tilt {
@@ -639,9 +777,14 @@ navbar-nav .dropdown-menu {
 // PROJECTS
 // *********************
 .projects {
-  background-color: #1d1d1d; // rgb(33, 33, 33)
   padding-bottom: 65px !important;
   margin-bottom: -15px;
+  // Dark base with subtle color glows for a modern, lit-from-within feel.
+  background-color: #1d1d1d;
+  background-image:
+    radial-gradient(at 15% 10%, rgba($themePurple, 0.30) 0px, transparent 45%),
+    radial-gradient(at 85% 30%, rgba($themeTurquoise, 0.18) 0px, transparent 40%),
+    radial-gradient(at 70% 95%, rgba($themeOrange, 0.20) 0px, transparent 45%);
 }
 
 .projects h3 {
@@ -666,7 +809,8 @@ navbar-nav .dropdown-menu {
     color: #ffffff !important;
 
     &:hover {
-      background-color: #fc4d45;
+      // Original red hover, with a subtle gradient in the same color family.
+      background: linear-gradient(120deg, #fc4d45, #e63e3e);
     }
   }
 }
@@ -700,10 +844,15 @@ navbar-nav .dropdown-menu {
 
 .experience {
   border-top: 20px solid #fc4d45;
-  background-color: #a279c1;
-  background-image: url("./assets/images/black-orchid-bg-pattern.png");
   border-top-right-radius: 20px;
   border-top-left-radius: 20px;
+  background-color: #4a2f63;
+  background-image:
+    radial-gradient(at 12% 15%, rgba($themePurple, 0.75) 0px, transparent 50%),
+    radial-gradient(at 90% 85%, rgba($themeTurquoise, 0.28) 0px, transparent 50%),
+    linear-gradient(160deg, #6b3f93 0%, #3f2a5c 60%, #2c1f44 100%),
+    url("./assets/images/black-orchid-bg-pattern.png");
+  background-blend-mode: screen, screen, normal, overlay;
 }
 
 .experience h3 {
@@ -746,10 +895,21 @@ navbar-nav .dropdown-menu {
   border-top-right-radius: 15px;
   border-bottom-right-radius: 15px;
   vertical-align: middle;
-  background-color: $themeDarkContainer;
+  // Glassmorphism: translucent dark panel with a soft blur for modern depth.
+  background-color: rgba($themeDarkContainer, 0.72);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-right: 20px solid $themeTurquoise;
   padding: 35px !important;
   border-radius: 25px;
-  box-shadow: -10px 10px 10px rgba($themeDarkBackground, 0.6);
+  box-shadow: $shadow-lift;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: $shadow-lift, 0 0 22px -6px rgba($themeTurquoise, 0.5);
+  }
 
   em {
     margin-left: 6px;
@@ -760,14 +920,17 @@ navbar-nav .dropdown-menu {
 // EDUCATION HISTORY
 // *********************
 .education-history {
-  background-color: $themeVibrantYellowGreen;
   color: $themeDarkBackground;
-  background-image: url("./assets/images/axiom-bg-pattern.png");
   border-top: 20px solid #d2d740;
   border-bottom: 20px solid #d2d740;
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
-  box-shadow: 1px 22px 33px -16px #000000bf;
+  box-shadow: $shadow-soft;
+  background-color: $themeVibrantYellowGreen;
+  background-image:
+    radial-gradient(at 20% 10%, rgba($themeGreen, 0.45) 0px, transparent 50%),
+    radial-gradient(at 85% 90%, rgba($themeOrange, 0.40) 0px, transparent 50%),
+    url("./assets/images/axiom-bg-pattern.png");
 }
 
 .education-history h4 {
@@ -798,13 +961,20 @@ navbar-nav .dropdown-menu {
   border-top: 20px solid #7fddb9;
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
-  background: $themeGreen;
-  background: linear-gradient(90deg,
-      $themeGreen 0%,
-      $themePurple 92%);
+  background: $themePurple;
+  // Psychedelic counterpart to the nav: indigo -> magenta -> violet ->
+  // electric blue, looping for a flowing trippy feel.
+  background: linear-gradient(125deg,
+      #6a00f4 0%,
+      #ff2d95 25%,
+      #b026ff 45%,
+      #00d4ff 68%,
+      #6a00f4 100%);
+  background-size: 320% 320%;
+  animation: gradientDrift 13s ease infinite;
 }
 
-.handcrafted-tag {
+.crafted-tag {
   font-weight: bold;
   color: white;
   text-shadow: 2px 2px 4px #000000;
@@ -864,7 +1034,7 @@ navbar-nav .dropdown-menu {
     text-align: center;
   }
 
-  .handcrafted-tag {
+  .crafted-tag {
     position: relative;
     right: 10px;
   }
@@ -877,6 +1047,26 @@ navbar-nav .dropdown-menu {
   .experience-description {
     margin-right: 0px;
     margin: 20px 0px 20px;
+  }
+}
+
+// *********************
+// ACCESSIBILITY: REDUCED MOTION
+// *********************
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
   }
 }
 
