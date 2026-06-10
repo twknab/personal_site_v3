@@ -29,7 +29,7 @@ describe("Homepage", () => {
   it("successfully renders primary footer", () => {
     const { getByTestId } = screen;
     const footer = getByTestId("primary-footer");
-    expect(footer).toHaveTextContent("crafted with 💚");
+    expect(footer).toHaveTextContent("Crafted with 💚");
     expect(footer).toHaveTextContent(`${new Date().getFullYear()} timknab.dev`);
   });
 });

@@ -526,17 +526,18 @@ navbar-nav .dropdown-menu {
   inset: -13px;
   z-index: 0;
   border-radius: 50%;
+  // Golden shimmer that echoes the summary's warm lime/amber backdrop.
   background: conic-gradient(from 0deg,
-      #ff2d95,
-      #b026ff,
-      #6a00f4,
-      #00d4ff,
-      #32efa6,
-      #f4fd5b,
-      #fc4d45,
-      #ff2d95);
-  box-shadow: 0 0 34px 6px rgba(176, 38, 255, 0.45);
-  animation: ringSpin 7s linear infinite, hueShift 10s linear infinite;
+      #fff3b0,
+      #ffd86b,
+      $themeOrange,
+      $themeLightOrange,
+      $themeVibrantYellowGreen,
+      #d8a93a,
+      #ffcf5c,
+      #fff3b0);
+  box-shadow: 0 0 34px 6px rgba($themeOrange, 0.5);
+  animation: ringSpin 8s linear infinite;
 }
 
 .bio-photo {
@@ -553,12 +554,6 @@ navbar-nav .dropdown-menu {
 @keyframes ringSpin {
   to {
     transform: rotate(360deg);
-  }
-}
-
-@keyframes hueShift {
-  to {
-    filter: hue-rotate(360deg);
   }
 }
 
@@ -620,6 +615,16 @@ navbar-nav .dropdown-menu {
 .lottie-footer {
   max-width: 160px;
   padding-top: 12px;
+}
+
+// *********************
+// CURSOR TRAIL (desktop-only confetti/sparkle following the mouse)
+// *********************
+.cursor-trail {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  pointer-events: none;
 }
 
 // *********************
