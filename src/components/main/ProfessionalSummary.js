@@ -4,13 +4,22 @@ import Image from "react-bootstrap/Image";
 import Row from "react-bootstrap/Row";
 import bioPhoto from "../../assets/images/twksmall-966x966.jpeg";
 import { FaLinkedin, FaGithubSquare, FaStackOverflow } from "react-icons/fa";
+import LottieFigure from "../fun/LottieFigure";
+import { heroAnimation } from "../../assets/lottie";
 
 function ProfessionalSummary() {
   return (
     <div>
       <Row className="professional-summary light-text-shadow">
         <Col xs={12} s={12} md={12} lg={4} className="tilt">
-          <Image src={bioPhoto} roundedCircle fluid className="bio-photo" />
+          <div className="bio-photo-ring">
+            <Image src={bioPhoto} roundedCircle fluid className="bio-photo" />
+          </div>
+          <LottieFigure
+            animationData={heroAnimation}
+            className="lottie-hero"
+            ariaLabel="Animated welcome illustration"
+          />
         </Col>
         <Col
           className="professional-summary-description"
@@ -27,27 +36,36 @@ function ProfessionalSummary() {
           </h1>
           <p className="light-text-shadow">
             My name is Tim. I'm a{" "}
-            <b className="highlighter">Senior Full Stack Software Engineer</b>,
-            specializing in: <b className="highlighter">AI Applications.</b> I work commonly with: {" "}
-            <b className="highlighter">Python</b> ,{" "}
+            <b className="highlighter">Senior Full Stack Software Engineer</b>{" "}
+            specializing in <b className="highlighter">AI applications</b>,{" "}
+            <b className="highlighter">Python</b>,{" "}
             <b className="highlighter">Node.js</b> /{" "}
             <b className="highlighter">Express.js</b>,{" "}
             <b className="highlighter">TypeScript</b> /{" "}
             <b className="highlighter">JavaScript</b>,{" "}
             <b className="highlighter">React.js</b>,{" "}
-            <b className="highlighter">Ruby on Rails</b>,{" "}
+            <b className="highlighter">Ruby on Rails</b>, and{" "}
             <b className="highlighter">MongoDB</b> /{" "}
             <b className="highlighter">MySQL</b> /{" "}
-            <b className="highlighter">PostgreSQL</b> databases.{" "}
+            <b className="highlighter">PostgreSQL</b> databases, with cloud
+            infrastructure on{" "}
+            <b className="highlighter">Google Cloud Services</b>.{" "}
             <br />
             <br />
-            I'm a {" "}
-            <b className="highlighter">motivated</b>{" "}
-            <b className="highlighter">team-player</b>, comfortable with all
-            aspects of the{" "}
-            <b className="highlighter">Software Development Life Cycle</b>.{" "}
-            I continually seek to expand my technical expertise and stay on top of
-            current trends and the latest technologies. I care deeply about my{" "}
+            I've implemented{" "}
+            <b className="highlighter">cost-saving self-service solutions</b> for{" "}
+            <b className="highlighter">FAANG</b> and fast-paced{" "}
+            <b className="highlighter">startups</b>, and I'm skillful across all
+            stages of the{" "}
+            <b className="highlighter">Software Development Life Cycle</b> (
+            <b className="highlighter">SDLC</b> /{" "}
+            <b className="highlighter">AI-SDLC</b>) and{" "}
+            <b className="highlighter">scrum/agile</b> methodologies.{" "}
+            <br />
+            <br />
+            I'm a <b className="highlighter">proactive communicator</b> and{" "}
+            <b className="highlighter">strong team-player</b> who continually
+            expands my technical expertise. I care deeply about my{" "}
             <b className="highlighter">users</b>, polished{" "}
             <b className="highlighter">digital experiences</b> and bringing{" "}
             <b className="highlighter">strong value to my team</b>.

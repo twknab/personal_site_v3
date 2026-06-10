@@ -4,6 +4,7 @@ import Row from "react-bootstrap/Row";
 import FitnessTracker from "./projects/FitnessTracker";
 import GearList from "./projects/GearList";
 import HikingTool from "./projects/HikingTool";
+import RoamGuru from "./projects/RoamGuru";
 import SockIt from "./projects/SockIt";
 import Scroll from "react-scroll";
 const Element = Scroll.Element;
@@ -21,6 +22,7 @@ function Projects() {
             Projects
           </h1>
           {/* TODO: Add AQI Viewer */}
+          <RoamGuru />
           <GearList />
           <HikingTool />
           <FitnessTracker />

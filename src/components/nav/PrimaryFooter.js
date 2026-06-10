@@ -4,6 +4,8 @@ import Container from "react-bootstrap/Container";
 import Image from "react-bootstrap/Image";
 import Row from "react-bootstrap/Row";
 import washingtonStateOutline from "../../assets/images/washington-state-outline.png";
+import LottieFigure from "../fun/LottieFigure";
+import { footerAnimation } from "../../assets/lottie";
 
 function PrimaryFooter() {
   return (
@@ -13,14 +15,19 @@ function PrimaryFooter() {
         className="pl-0 pr-0 h-100 container-fluid footer"
         data-testid="primary-footer"
       >
+        <LottieFigure
+          animationData={footerAnimation}
+          className="lottie-footer"
+          ariaLabel="Animated footer illustration"
+        />
         <Row className="tagline">
           <Col lg>
-            <p className="handcrafted-tag">
+            <p className="crafted-tag">
               <span className="wa-state">
                 <Image src={washingtonStateOutline} />
               </span>
               <span className="crafted-with-care">
-                handcrafted with{" "}
+                Crafted with{" "}
                 <span role="img" aria-label="love" className="love-icon">
                   💚
                 </span>{" "}
