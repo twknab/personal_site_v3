@@ -1042,6 +1042,59 @@ navbar-nav .dropdown-menu {
   opacity: 0.82;
 }
 
+// Right-side controls for each year heading: copy-permalink button + chevron.
+.reading-group-actions {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+// "Copy link to this year" control. Sits beside the chevron in the year
+// heading, stays subtle until hover/focus, and flashes green on copy.
+.reading-link-btn {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 50%;
+  color: $themeVibrantYellowGreenLight;
+  background-color: rgba(255, 255, 255, 0.06);
+  opacity: 0.55;
+  cursor: pointer;
+  transition: transform 0.18s ease, opacity 0.18s ease,
+    background-color 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+
+  &:hover {
+    opacity: 1;
+    transform: translateY(-1px);
+    color: $themeOrange;
+    border-color: rgba($themeOrange, 0.6);
+    background-color: rgba($themeOrange, 0.16);
+  }
+
+  &:focus-visible {
+    opacity: 1;
+    outline: 2px solid rgba($themeOrange, 0.7);
+    outline-offset: 3px;
+  }
+
+  &.is-copied {
+    opacity: 1;
+    color: #1f3d2a;
+    border-color: $themeVibrantYellowGreenLight;
+    background-color: $themeVibrantYellowGreenLight;
+  }
+}
+
+.reading-group-header:hover .reading-link-btn {
+  opacity: 0.85;
+}
+
 // ---- Collapsible group (plain heading + count chip + chevron) ----
 // Each group (Currently Reading + each year) is centered with a max width so
 // the header and its columns line up and sit symmetrically on the page.

@@ -3,7 +3,7 @@ import Collapse from "react-bootstrap/Collapse";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import { Element } from "react-scroll";
-import { FaChevronDown } from "react-icons/fa";
+import { FaChevronDown, FaCheck, FaLink } from "react-icons/fa";
 import { currentlyReading, readingByYear } from "./reading/readingList";
 import placeholderCover from "../../assets/images/book-cover-placeholder.svg";
 
@@ -17,6 +17,40 @@ function BookCover({ cover, title }) {
       loading="lazy"
       onError={() => setSrc(placeholderCover)}
     />
+  );
+}
+
+function CopyLinkButton({ anchorId, label }) {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = async (e) => {
+    e.stopPropagation();
+    const { origin, pathname } = window.location;
+    const link = `${origin}${pathname}#${anchorId}`;
+    try {
+      await navigator.clipboard.writeText(link);
+    } catch {
+      const temp = document.createElement("textarea");
+      temp.value = link;
+      document.body.appendChild(temp);
+      temp.select();
+      document.execCommand("copy");
+      document.body.removeChild(temp);
+    }
+    setCopied(true);
+    setTimeout(() => setCopied(false), 1600);
+  };
+
+  return (
+    <button
+      type="button"
+      className={`reading-link-btn ${copied ? "is-copied" : ""}`}
+      onClick={handleCopy}
+      aria-label={`Copy link to ${label}`}
+      title={copied ? "Link copied!" : `Copy link to ${label}`}
+    >
+      {copied ? <FaCheck aria-hidden="true" /> : <FaLink aria-hidden="true" />}
+    </button>
   );
 }
 
@@ -34,17 +68,18 @@ function BookEntry({ book }) {
   );
 }
 
-function ReadingGroup({ id, title, books }) {
+function ReadingGroup({ id, title, books, withLink = false }) {
   const [open, setOpen] = useState(true);
+  const panelId = `${id}-panel`;
 
   return (
-    <div className="reading-group">
+    <div className="reading-group" id={id}>
       <div
         className="reading-group-header"
         role="button"
         tabIndex={0}
         aria-expanded={open}
-        aria-controls={id}
+        aria-controls={panelId}
         onClick={() => setOpen((prev) => !prev)}
         onKeyDown={(e) => {
           if (e.key === "Enter" || e.key === " ") {
@@ -57,13 +92,16 @@ function ReadingGroup({ id, title, books }) {
           {title}
           <span className="reading-count">{books.length}</span>
         </h3>
-        <FaChevronDown
-          className={`reading-chevron ${open ? "is-open" : ""}`}
-          aria-hidden="true"
-        />
+        <div className="reading-group-actions">
+          {withLink && <CopyLinkButton anchorId={id} label={title} />}
+          <FaChevronDown
+            className={`reading-chevron ${open ? "is-open" : ""}`}
+            aria-hidden="true"
+          />
+        </div>
       </div>
       <Collapse in={open}>
-        <div id={id}>
+        <div id={panelId}>
           <ul className="reading-list reading-list--cols">
             {books.map((book) => (
               <BookEntry key={`${book.title}-${book.author}`} book={book} />
@@ -93,6 +131,7 @@ function Reading() {
               id="reading-current"
               title="Currently Reading"
               books={currentlyReading}
+              withLink
             />
           )}
 
@@ -102,6 +141,7 @@ function Reading() {
               id={`reading-year-${entry.year}`}
               title={`${entry.year} Completed`}
               books={entry.books}
+              withLink
             />
           ))}
         </Col>
