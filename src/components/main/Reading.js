@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Collapse from "react-bootstrap/Collapse";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
+import { Element } from "react-scroll";
 import { FaChevronDown } from "react-icons/fa";
 import { currentlyReading, readingByYear } from "./reading/readingList";
 import placeholderCover from "../../assets/images/book-cover-placeholder.svg";
@@ -77,6 +78,7 @@ function ReadingGroup({ id, title, books }) {
 function Reading() {
   return (
     <div>
+      <Element name="reading"></Element>
       <Row className="reading">
         <Col lg>
           <h1>

@@ -8,6 +8,7 @@ import simpleSqlCover from "../../../assets/images/book-covers/simple-sql.png";
 import startingAStartupCover from "../../../assets/images/book-covers/starting-a-startup.png";
 import chakrasBeyondBeginnersCover from "../../../assets/images/book-covers/chakras-beyond-beginners.png";
 import qigongForBeginnersCover from "../../../assets/images/book-covers/qigong-for-beginners.png";
+import soulDnaCover from "../../../assets/images/book-covers/soul-dna.png";
 
 // Most cover images are sourced from the Open Library Covers API; a few are
 // bundled locally (above). Books without a match fall back to a generic
@@ -73,7 +74,7 @@ export const readingByYear = [
         title: "Soul DNA",
         publisher: "Self Published",
         year: 2012,
-        cover: null,
+        cover: soulDnaCover,
       },
       {
         author: "Song, Chen",

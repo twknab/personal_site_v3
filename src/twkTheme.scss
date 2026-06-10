@@ -987,10 +987,10 @@ navbar-nav .dropdown-menu {
 // list reads as a tidy, standardized grid of spines.
 .reading-cover {
   flex-shrink: 0;
-  width: 46px;
-  height: 69px;
+  width: 58px;
+  height: 87px;
   object-fit: cover;
-  border-radius: 4px;
+  border-radius: 5px;
   background-color: rgba(0, 0, 0, 0.35);
   box-shadow: 0 4px 10px -3px rgba(0, 0, 0, 0.7),
     0 0 0 1px rgba(255, 255, 255, 0.08);
@@ -1017,9 +1017,9 @@ navbar-nav .dropdown-menu {
 .reading-book {
   display: flex;
   align-items: center;
-  gap: 14px;
-  padding: 9px 10px 9px 0;
-  line-height: 1.4;
+  gap: 18px;
+  padding: 11px 12px 11px 0;
+  line-height: 1.45;
   break-inside: avoid;
 }
 
@@ -1031,13 +1031,14 @@ navbar-nav .dropdown-menu {
 }
 
 .reading-title {
+  font-size: 17px;
   font-style: italic;
   font-weight: 600;
   color: $themeVibrantYellowGreenLight;
 }
 
 .reading-meta {
-  font-size: 13px;
+  font-size: 14px;
   opacity: 0.82;
 }
 
@@ -1045,8 +1046,14 @@ navbar-nav .dropdown-menu {
 // Each group (Currently Reading + each year) is centered with a max width so
 // the header and its columns line up and sit symmetrically on the page.
 .reading-group {
-  max-width: 1040px;
   margin: 26px auto 0;
+
+  // Roughly three-quarters of the screen so the columns breathe and the
+  // section reads as a rich, generous block (never edge-to-edge, never cramped).
+  @media (min-width: 992px) {
+    width: 75%;
+    max-width: 1600px;
+  }
 
   &:last-child {
     margin-bottom: 30px;
@@ -1078,7 +1085,7 @@ navbar-nav .dropdown-menu {
     display: flex;
     align-items: center;
     margin: 0;
-    font-size: 22px;
+    font-size: 25px;
     font-weight: 700;
     text-shadow: 2px 2px 4px #000000;
   }

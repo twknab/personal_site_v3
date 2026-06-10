@@ -94,6 +94,12 @@ function PrimaryNavigation() {
                   Education History
                 </NavDropdown.Item>
               </NavDropdown>
+              <Nav.Link
+                onClick={() => handleNavClick("reading")}
+                active={activeItem === "reading"}
+              >
+                Reading
+              </Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Navbar>
