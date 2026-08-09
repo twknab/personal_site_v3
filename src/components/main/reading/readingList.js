@@ -15,10 +15,32 @@ import soulDnaCover from "../../../assets/images/book-covers/soul-dna.png";
 // placeholder cover in the UI (see BookCover).
 const cover = (id) => `https://covers.openlibrary.org/b/id/${id}-M.jpg`;
 
+// Same API, keyed by ISBN, for books where we don't have an Open Library cover
+// id. `default=false` makes a miss return 404 instead of a blank stand-in
+// image, so BookCover's onError can swap in our own placeholder.
+const isbnCover = (isbn) =>
+  `https://covers.openlibrary.org/b/isbn/${isbn}-M.jpg?default=false`;
+
 // Books currently in progress (shown pinned at the top of the Reading section).
-// Empty is fine — the "Currently Reading" group hides itself when nothing is
-// in progress (see Reading.js).
-export const currentlyReading = [];
+// An empty array is fine: the group hides itself when nothing is in progress
+// (see Reading.js).
+export const currentlyReading = [
+  {
+    author: "Martin, Robert C.",
+    title: "Clean Craftsmanship: Disciplines, Standards, and Ethics",
+    publisher: "Addison-Wesley Professional",
+    year: 2021,
+    cover: isbnCover("9780136915713"),
+  },
+  {
+    author: "Pardy, Michael, JF Marleau, Andrew Woodford and Piper Harris",
+    title:
+      "Navigation, Sea State and Weather: A Paddler's Manual (Freedom of the Seas, Volume 1)",
+    publisher: "SKILS",
+    year: "2020 (2nd ed.)",
+    cover: isbnCover("9780986561313"),
+  },
+];
 
 // Completed reading grouped by year, newest first. Each year renders as a
 // collapsible accordion that is expanded by default.
@@ -33,6 +55,14 @@ export const readingByYear = [
         publisher: "CreateSpace Independent Publishing Platform",
         year: "2011 (orig. 1909)",
         cover: maxaldingCover,
+      },
+      {
+        author: "Wynn-Williams, Sarah",
+        title:
+          "Careless People: A Cautionary Tale of Power, Greed, and Lost Idealism",
+        publisher: "Flatiron Books",
+        year: 2025,
+        cover: isbnCover("9781250391230"),
       },
     ],
   },
