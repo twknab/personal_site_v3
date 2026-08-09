@@ -22,16 +22,7 @@ function SquirrelStudio() {
             A desktop studio for building generative music and visuals together,
             in sync. A piece is a single &ldquo;Scene&rdquo; &mdash; one
             validated document describing the audio (tempo, key, layered synths,
-            effects) and the picture (pattern family, palette, motion) &mdash;
-            which{" "}
-            <a
-              href="https://www.anthropic.com/claude"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Claude
-            </a>{" "}
-            can write from a prompt or mutate from wherever you already are. Both
+            effects) and the picture (pattern family, palette, motion). Both
             halves share one clock and the visuals run off a live frequency
             analysis of the audio actually playing, so the picture breathes with
             the sound. Built with{" "}
@@ -74,7 +65,7 @@ function SquirrelStudio() {
             >
               Tone.js
             </a>{" "}
-            for synthesis, and a{" "}
+            for synthesis. Behind it sits a{" "}
             <a
               href="https://nestjs.com/"
               target="_blank"
@@ -82,7 +73,24 @@ function SquirrelStudio() {
             >
               NestJS
             </a>{" "}
-            service brokering the AI. In private development.
+            API, and the Scene document itself is a{" "}
+            <a
+              href="https://zod.dev/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Zod
+            </a>{" "}
+            schema shared across the{" "}
+            <a
+              href="https://www.typescriptlang.org/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              TypeScript
+            </a>{" "}
+            monorepo, so the desktop app and the API agree on it by
+            construction. In private development.
           </p>
         </Col>
       </Row>

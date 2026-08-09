@@ -1168,9 +1168,25 @@ navbar-nav .dropdown-menu {
     min-width: 0;
     flex-wrap: wrap;
     margin: 0;
-    font-size: 25px;
     font-weight: 700;
     text-shadow: 2px 2px 4px #000000;
+    // Size comes from the global heading rule (`h3 { font-size: 2.2em
+    // !important }`), which any plain declaration here loses to — hence the
+    // !important on the phone override below.
+
+    // On a phone the row is narrow enough that "Currently Reading" broke onto
+    // a second line, which reads as an accident rather than a heading. Two
+    // things buy the space back: the global rule pads every h3 by 1rem a side,
+    // which costs more of this row than the words do (the header supplies its
+    // own padding), and the type eases down with the viewport. The clamp
+    // bottoms out at the size that keeps the longest title on one line at
+    // 320px and reaches full size right as the breakpoint ends, so there is no
+    // jump.
+    @media (max-width: 575.98px) {
+      padding-left: 0;
+      padding-right: 0;
+      font-size: clamp(18px, 5.2vw, 2.2em) !important;
+    }
   }
 }
 
