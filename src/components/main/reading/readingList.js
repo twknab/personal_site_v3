@@ -13,13 +13,23 @@ import soulDnaCover from "../../../assets/images/book-covers/soul-dna.png";
 // Most cover images are sourced from the Open Library Covers API; a few are
 // bundled locally (above). Books without a match fall back to a generic
 // placeholder cover in the UI (see BookCover).
+//
+// A book's `cover` may also be an ordered list of candidates — each one that
+// fails falls through to the next, and the placeholder is always last. That is
+// what the `default=false` query below buys us: without it Open Library answers
+// a miss with a blank stand-in image and a 200, which never triggers onError.
 const cover = (id) => `https://covers.openlibrary.org/b/id/${id}-M.jpg`;
 
-// Same API, keyed by ISBN, for books where we don't have an Open Library cover
-// id. `default=false` makes a miss return 404 instead of a blank stand-in
-// image, so BookCover's onError can swap in our own placeholder.
+// Open Library, keyed by edition OLID or by ISBN, for books where we don't have
+// a numeric cover id to hand.
+const olidCover = (olid) =>
+  `https://covers.openlibrary.org/b/olid/${olid}-M.jpg?default=false`;
 const isbnCover = (isbn) =>
   `https://covers.openlibrary.org/b/isbn/${isbn}-M.jpg?default=false`;
+
+// Internet Archive item thumbnail — the fallback for small-press titles that
+// Open Library doesn't carry but the Archive has scanned.
+const archiveCover = (item) => `https://archive.org/services/img/${item}`;
 
 // Books currently in progress (shown pinned at the top of the Reading section).
 // An empty array is fine: the group hides itself when nothing is in progress
@@ -30,7 +40,8 @@ export const currentlyReading = [
     title: "Clean Craftsmanship: Disciplines, Standards, and Ethics",
     publisher: "Addison-Wesley Professional",
     year: 2021,
-    cover: isbnCover("9780136915713"),
+    // OL34733095M is the 2021 Addison-Wesley softcover on Open Library.
+    cover: [olidCover("OL34733095M"), isbnCover("9780136915713")],
   },
   {
     author: "Pardy, Michael, JF Marleau, Andrew Woodford and Piper Harris",
@@ -38,7 +49,12 @@ export const currentlyReading = [
       "Navigation, Sea State and Weather: A Paddler's Manual (Freedom of the Seas, Volume 1)",
     publisher: "SKILS",
     year: "2020 (2nd ed.)",
-    cover: isbnCover("9780986561313"),
+    // Small press: Open Library may not carry it, so fall through to the
+    // Internet Archive's scan of the first edition.
+    cover: [
+      isbnCover("9780986561313"),
+      archiveCover("navigationseasta0000unse"),
+    ],
   },
 ];
 

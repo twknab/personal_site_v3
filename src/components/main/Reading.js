@@ -8,14 +8,21 @@ import { currentlyReading, readingByYear } from "./reading/readingList";
 import placeholderCover from "../../assets/images/book-cover-placeholder.svg";
 
 function BookCover({ cover, title }) {
-  const [src, setSrc] = useState(cover || placeholderCover);
+  // `cover` is either a single image (a local import or a URL) or an ordered
+  // list of candidates to try. Each one that fails to load falls through to the
+  // next, and the local placeholder always brings up the rear.
+  const sources = (Array.isArray(cover) ? cover : [cover])
+    .filter(Boolean)
+    .concat(placeholderCover);
+  const [index, setIndex] = useState(0);
+
   return (
     <img
       className="reading-cover"
-      src={src}
+      src={sources[index]}
       alt={`${title} cover`}
       loading="lazy"
-      onError={() => setSrc(placeholderCover)}
+      onError={() => setIndex((i) => Math.min(i + 1, sources.length - 1))}
     />
   );
 }
