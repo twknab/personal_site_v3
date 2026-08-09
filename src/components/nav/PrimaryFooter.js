@@ -11,8 +11,8 @@ function PrimaryFooter() {
   return (
     <div>
       <Container
-        fluid="true"
-        className="pl-0 pr-0 h-100 container-fluid footer"
+        fluid
+        className="pl-0 pr-0 h-100 footer"
         data-testid="primary-footer"
       >
         <LottieFigure

@@ -26,6 +26,14 @@ describe("Homepage", () => {
     expect(contentSections).toHaveTextContent("Awards");
   });
 
+  // Guards the horizontal-scroll regression: a string `fluid` prop renders
+  // `container-true` (not a real Bootstrap class), which drops the container
+  // padding that offsets the negative row gutters inside it.
+  it("renders the main content as a real fluid container", () => {
+    const { getByTestId } = screen;
+    expect(getByTestId("main-content")).toHaveClass("container-fluid");
+  });
+
   it("successfully renders primary footer", () => {
     const { getByTestId } = screen;
     const footer = getByTestId("primary-footer");

@@ -16,20 +16,26 @@ import soulDnaCover from "../../../assets/images/book-covers/soul-dna.png";
 const cover = (id) => `https://covers.openlibrary.org/b/id/${id}-M.jpg`;
 
 // Books currently in progress (shown pinned at the top of the Reading section).
-export const currentlyReading = [
-  {
-    author: "Saldo, Monte",
-    title: "Maxalding",
-    publisher: "CreateSpace Independent Publishing Platform",
-    year: "2011 (orig. 1909)",
-    cover: maxaldingCover,
-  },
-];
+// Empty is fine — the "Currently Reading" group hides itself when nothing is
+// in progress (see Reading.js).
+export const currentlyReading = [];
 
 // Completed reading grouped by year, newest first. Each year renders as a
 // collapsible accordion that is expanded by default.
 // To add a new year, drop a new object at the top of this array.
 export const readingByYear = [
+  {
+    year: 2026,
+    books: [
+      {
+        author: "Saldo, Monte",
+        title: "Maxalding",
+        publisher: "CreateSpace Independent Publishing Platform",
+        year: "2011 (orig. 1909)",
+        cover: maxaldingCover,
+      },
+    ],
+  },
   {
     year: 2025,
     books: [

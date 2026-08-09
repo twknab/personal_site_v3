@@ -20,7 +20,7 @@ function MainContent() {
   return (
     <div>
       {/* TODO: add max container height if going into maintainence mode style={{height: "100vh"}}  */}
-      <Container fluid="true" className="mainContent" data-testid="main-content">
+      <Container fluid className="mainContent" data-testid="main-content">
         <ProfessionalSummary />
         <AboutMe />
         <Skills />

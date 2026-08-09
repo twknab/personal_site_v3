@@ -14,4 +14,8 @@ describe("PrimaryFooter", () => {
       `${new Date().getFullYear()} timknab.dev`
     );
   });
+
+  it("renders as a real fluid container", () => {
+    expect(screen.getByTestId("primary-footer")).toHaveClass("container-fluid");
+  });
 });

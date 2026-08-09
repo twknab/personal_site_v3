@@ -1190,6 +1190,15 @@ navbar-nav .dropdown-menu {
       #6a00f4 100%);
   background-size: 320% 320%;
   animation: gradientDrift 13s ease infinite;
+
+  // The footer is deliberately full-bleed (`pl-0 pr-0`), so there is no
+  // container padding left to absorb Bootstrap's negative row gutters.
+  // Without this, every row hangs 15px past the right edge and the whole
+  // page picks up a horizontal scrollbar.
+  >.row {
+    margin-left: 0;
+    margin-right: 0;
+  }
 }
 
 .crafted-tag {
