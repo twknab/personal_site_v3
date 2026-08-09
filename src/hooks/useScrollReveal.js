@@ -33,7 +33,16 @@ function useScrollReveal(selector) {
           }
         });
       },
-      { threshold: 0.12, rootMargin: "0px 0px -8% 0px" }
+      // The threshold MUST stay 0. A section can only ever reach an
+      // intersection ratio of (viewport height / its own height), so any
+      // fraction here is a height limit in disguise: at 0.12 a section taller
+      // than ~8x the viewport can never trigger, never gets `.in-view`, and
+      // sits at opacity 0 forever. That is exactly what happened to Projects
+      // on a phone once it grew past 7000px — the whole section rendered
+      // invisible. Timing is the rootMargin's job, not the threshold's: the
+      // -8% bottom inset is what holds the fade until the section's leading
+      // edge is properly on screen, and it behaves the same at any height.
+      { threshold: 0, rootMargin: "0px 0px -8% 0px" }
     );
 
     targets.forEach((el) => observer.observe(el));
