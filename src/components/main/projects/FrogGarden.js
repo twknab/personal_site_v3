@@ -1,0 +1,88 @@
+import React from "react";
+import Button from "react-bootstrap/Button";
+import Col from "react-bootstrap/Col";
+import Image from "react-bootstrap/Image";
+import Row from "react-bootstrap/Row";
+import frogGardenIco from "../../../assets/images/apps/froggarden-ico.png";
+
+const REPO = "https://github.com/twknab/zen-frog-todo";
+
+function FrogGarden() {
+  return (
+    <div>
+      <Row className="project-row">
+        <Col
+          md="3"
+          className="project-col tilt"
+          onClick={() => window.open(REPO, "_blank")}
+        >
+          <Image src={frogGardenIco} className="project-icon" rounded fluid />
+        </Col>
+        <Col md="9">
+          <h3>Frog Garden</h3>
+          <p>
+            A calm, Zen-influenced to-do app that turns getting things done into
+            tending a small garden. Swallow your frog &mdash; the one task you
+            most dread &mdash; before the rest of the list unlocks, then watch a
+            bonsai grow through the day as frog friends gather at its base.
+            Progress is rewarded organically rather than with scoreboards or
+            streaks, alongside a focus timer, a raked-sand canvas to fidget
+            with, and an end-of-day reflection. Everything stays on your device
+            &mdash; no account, no backend, no tracking. Built with{" "}
+            <a
+              href="https://nextjs.org/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Next.js
+            </a>
+            ,{" "}
+            <a
+              href="https://react.dev/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              React
+            </a>
+            , and{" "}
+            <a
+              href="https://www.typescriptlang.org/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              TypeScript
+            </a>
+            , with{" "}
+            <a
+              href="https://mui.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Material UI
+            </a>{" "}
+            re-themed into a muted, nature-inspired palette and{" "}
+            <a
+              href="https://www.framer.com/motion/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Framer Motion
+            </a>{" "}
+            for restrained, organic movement.
+          </p>
+          <Button
+            variant="primary"
+            size="lg"
+            href={REPO}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            View on GitHub
+          </Button>
+        </Col>
+      </Row>
+    </div>
+  );
+}
+
+export default FrogGarden;
