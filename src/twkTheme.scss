@@ -520,14 +520,30 @@ navbar-nav .dropdown-menu {
   isolation: isolate;
 }
 
+// The ring spins by sweeping the conic gradient's start angle, NOT by
+// rotating the element. The element is a *square* box that only looks round
+// thanks to border-radius, and a rotating square's bounding box grows by up to
+// 41% at 45deg. Those corners are transparent, so nothing was visible out
+// there — but they were real scrollable overflow, and on a phone (where the
+// portrait is nearly viewport-wide) they swung past the edge and gave the whole
+// page a horizontal scrollbar that came and went on a 2-second cycle.
+@property --ring-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
 .bio-photo-ring::before {
   content: "";
   position: absolute;
   inset: -13px;
   z-index: 0;
   border-radius: 50%;
+  // Also declared plainly so browsers without @property still paint a ring —
+  // a still one, rather than dropping the gradient as an invalid value.
+  --ring-angle: 0deg;
   // Golden shimmer that echoes the summary's warm lime/amber backdrop.
-  background: conic-gradient(from 0deg,
+  background: conic-gradient(from var(--ring-angle),
       #fff3b0,
       #ffd86b,
       $themeOrange,
@@ -553,7 +569,7 @@ navbar-nav .dropdown-menu {
 
 @keyframes ringSpin {
   to {
-    transform: rotate(360deg);
+    --ring-angle: 360deg;
   }
 }
 
@@ -970,6 +986,14 @@ navbar-nav .dropdown-menu {
   // bottom edge so Reading reads as the final stacked card.
   margin-bottom: 0;
   padding: 28px 48px 100px;
+
+  // 48px a side is generous on a laptop and crushing on a small phone — at
+  // 320px it leaves only 224px for the content and forces the group headers
+  // wider than the screen.
+  @media (max-width: 575.98px) {
+    padding: 24px 18px 80px;
+  }
+
   border-top: 20px solid $themeOrange;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
@@ -1137,6 +1161,12 @@ navbar-nav .dropdown-menu {
   h3 {
     display: flex;
     align-items: center;
+    // The global heading rule gives every h3 `width: 100%`, and a flex item
+    // won't shrink below its min-content width unless told to. Without this
+    // the title holds the row open and pushes the chevron off the right edge
+    // on a narrow phone, which the page then scrolls sideways to reach.
+    min-width: 0;
+    flex-wrap: wrap;
     margin: 0;
     font-size: 25px;
     font-weight: 700;

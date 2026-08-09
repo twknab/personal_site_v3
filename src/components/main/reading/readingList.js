@@ -73,6 +73,21 @@ export const readingByYear = [
         cover: maxaldingCover,
       },
       {
+        author: "Sept, J. Duane",
+        title:
+          "The Beachcomber's Guide to Seashore Life in the Pacific Northwest",
+        publisher: "Harbour Publishing",
+        year: "2019 (rev. ed.)",
+        // Three Harbour editions are in circulation; try each, then the
+        // Internet Archive's scan.
+        cover: [
+          isbnCover("9781550178371"),
+          isbnCover("9781550174533"),
+          isbnCover("9781550172041"),
+          archiveCover("beachcombersguid0000sept"),
+        ],
+      },
+      {
         author: "Wynn-Williams, Sarah",
         title:
           "Careless People: A Cautionary Tale of Power, Greed, and Lost Idealism",
