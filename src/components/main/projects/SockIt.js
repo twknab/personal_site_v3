@@ -16,7 +16,7 @@ function SockIt() {
             window.open("https://github.com/twknab/sockets_chat", "_blank")
           }
         >
-          <Image src={sockitIco} className="project-icon" rounded fluid />
+          <Image src={sockitIco.src} className="project-icon" rounded fluid />
         </Col>
         <Col md="9">
           <h3>Sock It!</h3>

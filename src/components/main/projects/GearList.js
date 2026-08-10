@@ -16,7 +16,7 @@ function GearList() {
             window.open("https://github.com/twknab/gear_list_MEVN", "_blank")
           }
         >
-          <Image src={gearListIco} className="project-icon" rounded fluid />
+          <Image src={gearListIco.src} className="project-icon" rounded fluid />
         </Col>
         <Col md="9">
           <h3>GearList</h3>

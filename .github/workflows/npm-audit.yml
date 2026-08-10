@@ -5,11 +5,11 @@
 # Advanced Security. It reads package-lock.json and checks it against the
 # npm advisory database (no full install required).
 #
-# NOTE: This step is currently informational (continue-on-error) because this
-# Create React App project ships build-time tooling (webpack, etc.) as
-# production dependencies, which npm audit flags even though they aren't
-# exploitable at runtime. After a dependency / CRA modernization, drop the
-# continue-on-error to turn this into a hard gate.
+# NOTE: This step is currently informational (continue-on-error) because the
+# Next.js 14 pin carries upstream advisories that only affect self-hosting
+# features this site doesn't use (image optimizer remote patterns, rewrites).
+# After the Next 15/16 + React 19 bump (#80), drop the continue-on-error to
+# turn this into a hard gate.
 name: 'npm audit'
 
 on:
@@ -33,7 +33,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
 
       - name: Run npm audit (high+ severity)
         continue-on-error: true

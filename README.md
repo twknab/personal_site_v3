@@ -12,7 +12,7 @@ Continuously deployed from `main` via Netlify, with deploy previews on every pul
 
 | Area | Tools |
 | --- | --- |
-| Framework | [React](https://react.dev/) 16 (functional components + hooks) |
+| Framework | [Next.js](https://nextjs.org/) 14 (App Router) + [React](https://react.dev/) 18 (functional components + hooks) |
 | UI | [React-Bootstrap](https://react-bootstrap.netlify.app/) / [Bootstrap](https://getbootstrap.com/) 4 |
 | Styling | [SASS](https://sass-lang.com/) (custom theme, gradients, glassmorphism, keyframe animations) |
 | Animation | [lottie-react](https://www.npmjs.com/package/lottie-react), canvas particle effects, CSS animations |
@@ -49,6 +49,10 @@ The single-page experience flows through the following sections (see `src/compon
 ## Project Structure
 
 ```
+app/
+├── layout.js              # Root layout: metadata, global styles (Bootstrap + theme)
+└── page.js                # Single route, renders the App shell
+
 src/
 ├── App.js                 # App shell: nav, confetti, cursor trail, content, footer
 ├── twkTheme.scss          # Central theme: variables, gradients, animations
@@ -67,34 +71,45 @@ src/
 
 ```bash
 npm install      # install dependencies
-npm start        # run the dev server at http://localhost:3000
+npm run dev      # run the dev server at http://localhost:3000
 npm test         # run the Jest test suite
-npm run build    # production build into /build
+npm run build    # production build into /.next
+npm run start    # serve the production build locally
+npm run lint     # ESLint (next/core-web-vitals)
 ```
 
 ## Continuous Integration
 
-Every pull request runs:
+**Pre-merge — every pull request:**
 
-- **Netlify deploy preview** — a live preview URL for the branch.
-- **Codacy Security Scan** — static analysis (reports to the Codacy dashboard).
-- **npm audit** — dependency vulnerability scan, private-repo friendly.
-- **Dependency Review** — GitHub supply-chain check.
+- **App CI** *(blocking)* — ESLint (`next/core-web-vitals`), the Jest test suite, and a production `next build`. A failure in any step blocks the merge.
+- **Netlify deploy preview** — a live preview URL for the branch (the visual check).
+- **Codacy Security Scan**, **npm audit**, **Dependency Review** — security scans, informational.
 
-> ℹ️ The security scans currently run as **informational** (non-blocking). The Codacy/Dependency Review SARIF uploads require GitHub Advanced Security (unavailable on a private repo), and `npm audit` is non-blocking because this Create React App project ships build-time tooling as production dependencies. These can be turned into hard gates after a dependency/CRA modernization.
+**Post-merge — every push to `main`:**
+
+- **App CI** re-runs on the merged tree, catching bad merges or direct pushes even though Netlify deploys them.
+- **Lighthouse** audits the live https://timknab.dev after the Netlify deploy settles (3 runs, artifacts + shareable report links) — performance, accessibility, best practices, SEO. Also runs monthly on a schedule to catch drift between merges.
+
+> ℹ️ The security scans run as **informational** (non-blocking). The Codacy/Dependency Review SARIF uploads require GitHub Advanced Security (unavailable on a private repo), and `npm audit` remains advisory while the Next.js 14 pin carries upstream advisories that only affect unused self-hosting features; it becomes a hard gate after the Next 15/16 bump ([#80](https://github.com/twknab/personal_site_v3/issues/80)).
 
 ## Roadmap & Ideas
 
-**Next up**
-- [ ] "Book a call" — a toggleable [Calendly](https://calendly.com/) scheduling widget that can be switched on/off.
-- [ ] Tie in creative projects — feature the **Adventures with TK** YouTube channel (latest videos / embed).
+**Next up** (in planned order — see the linked issues for full specs)
+- [x] Migrate to Next.js 14 + React 18 ([#76](https://github.com/twknab/personal_site_v3/issues/76)) — the foundation for everything below.
+- [ ] **Recently shipped** — a live GitHub activity strip, server-fetched with ISR caching ([#78](https://github.com/twknab/personal_site_v3/issues/78)).
+- [ ] **Reading list upgrade** — per-book takeaways, topic filter chips, and a stats line ([#79](https://github.com/twknab/personal_site_v3/issues/79)).
+- [ ] **Ask Tim** — an AI chat agent grounded exclusively in this site's content, powered by Vertex AI (Gemini) behind a server route ([#77](https://github.com/twknab/personal_site_v3/issues/77)).
+- [ ] Bump Next.js 14 → 15/16 and React 19 once `lottie-react` / `react-scroll` peer ranges allow, clearing the remaining npm audit advisories ([#80](https://github.com/twknab/personal_site_v3/issues/80)).
 
 **Future work**
+- [ ] **Adventure map** — an interactive Washington trail map (Leaflet/MapLibre) of hikes and paddles, merging the engineering + environmental-science identities.
+- [ ] "Book a call" — a toggleable [Calendly](https://calendly.com/) scheduling widget that can be switched on/off.
+- [ ] Tie in creative projects — feature the **Adventures with TK** YouTube channel (latest videos / embed).
 - [ ] Blog section — articles on coding challenges and the dev soft-skills journey.
 - [ ] Animated intro / loading screen.
 - [ ] Interactive widgets or small JS games.
 - [ ] Hand-drawn illustrations as section accents and an end-of-page flourish.
-- [ ] Modernize the build (e.g. CRA → Vite) to enable blocking security gates.
 
 ---
 

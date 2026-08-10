@@ -56,7 +56,7 @@ function Experience() {
             <em>
               I've been building websites since our family's{" "}
               <a
-                href={gateway2000Image}
+                href={gateway2000Image.src}
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -64,7 +64,7 @@ function Experience() {
               </a>{" "}
               's{" "}
               <a
-                href={telepathModemImage}
+                href={telepathModemImage.src}
                 target="_blank"
                 rel="noopener noreferrer"
               >

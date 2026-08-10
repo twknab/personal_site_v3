@@ -16,7 +16,7 @@ function HikingTool() {
             window.open("https://github.com/twknab/mean_hike", "_blank")
           }
         >
-          <Image src={hikingToolIco} className="project-icon" rounded fluid />
+          <Image src={hikingToolIco.src} className="project-icon" rounded fluid />
         </Col>
         <Col md="9">
           <h3>HikingTool</h3>

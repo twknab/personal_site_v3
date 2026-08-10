@@ -1,9 +1,10 @@
-import React, { Suspense } from "react";
+import React from "react";
+import dynamic from "next/dynamic";
 
-// Lazy-loaded so the (browser-only) lottie-web engine is never imported until
-// an animation is actually rendered. This keeps it out of the jsdom test
-// environment and trims it from the initial bundle.
-const Lottie = React.lazy(() => import("lottie-react"));
+// Loaded client-side only so the (browser-only) lottie-web engine is never
+// imported until an animation is actually rendered. This keeps it out of
+// server rendering, the jsdom test environment, and the initial bundle.
+const Lottie = dynamic(() => import("lottie-react"), { ssr: false });
 
 /**
  * Thin wrapper around lottie-react that renders a Lottie animation, or nothing
@@ -35,9 +36,7 @@ function LottieFigure({
       role="img"
       aria-label={ariaLabel}
     >
-      <Suspense fallback={null}>
-        <Lottie animationData={animationData} loop={loop} autoplay={autoplay} />
-      </Suspense>
+      <Lottie animationData={animationData} loop={loop} autoplay={autoplay} />
     </div>
   );
 }

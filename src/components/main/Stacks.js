@@ -22,7 +22,7 @@ function Stacks() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Image src={mervan} fluid />
+            <Image src={mervan.src} fluid />
           </a>
         </Col>
         <Col lg className="stack-image ror-image tilt">
@@ -31,7 +31,7 @@ function Stacks() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Image src={ror} fluid />
+            <Image src={ror.src} fluid />
           </a>
         </Col>
         {/* <Col lg className="stack-image tilt">
@@ -40,7 +40,7 @@ function Stacks() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Image src={mern} fluid />
+            <Image src={mern.src} fluid />
           </a>
         </Col>
         <Col lg className="stack-image tilt">
@@ -49,7 +49,7 @@ function Stacks() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Image src={mean} fluid />
+            <Image src={mean.src} fluid />
           </a>
         </Col>
         <Col lg className="stack-image tilt">
@@ -58,7 +58,7 @@ function Stacks() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Image src={mevn} fluid />
+            <Image src={mevn.src} fluid />
           </a>
         </Col> */}
         <Col lg className="stack-image tilt">
@@ -67,7 +67,7 @@ function Stacks() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Image src={python} fluid />
+            <Image src={python.src} fluid />
           </a>
         </Col>
         <Col lg className="stack-image tilt lamp-image">
@@ -76,7 +76,7 @@ function Stacks() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Image src={lamp} fluid />
+            <Image src={lamp.src} fluid />
           </a>
         </Col>
         <Col lg className="stack-image tilt hack-adjust hack-image">
@@ -85,7 +85,7 @@ function Stacks() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Image src={hack} fluid />
+            <Image src={hack.src} fluid />
           </a>
         </Col>
       </Row>

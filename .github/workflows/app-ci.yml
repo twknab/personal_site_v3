@@ -1,0 +1,48 @@
+# App CI
+#
+# The primary quality gate. Runs on every pull request (pre-merge) and again
+# on main after merge (post-merge verification, so a bad merge or a direct
+# push to main is caught even though Netlify deploys it).
+#
+# Unlike the security scans (Codacy, npm audit, Dependency Review), every
+# step here is BLOCKING — a lint error, failing test, or broken production
+# build fails the check.
+name: App CI
+
+on:
+  pull_request:
+  push:
+    branches: [ "main" ]
+
+concurrency:
+  group: app-ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    name: Lint, test, build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint (next/core-web-vitals)
+        run: npm run lint
+
+      - name: Test (Jest + React Testing Library)
+        run: npx jest --ci
+
+      - name: Production build (next build)
+        run: npm run build
