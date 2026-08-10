@@ -65,4 +65,12 @@ describe("RecentlyShipped", () => {
     render(<RecentlyShipped items={[ITEMS[1]]} />);
     expect(document.querySelector(".shipped-detail")).toBeNull();
   });
+
+  it("exposes a mobile swipe hint for the horizontal strip", () => {
+    render(<RecentlyShipped items={ITEMS} />);
+    expect(document.querySelector(".shipped-strip-wrap")).toBeInTheDocument();
+    expect(document.querySelector(".shipped-swipe-hint")).toHaveTextContent(
+      /swipe/i
+    );
+  });
 });

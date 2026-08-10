@@ -16,6 +16,12 @@ function Awards() {
           </h1>
           <p>
             <FaCaretRight size="1.2em" />
+            Received the{" "}
+            <strong>Fearless Trailblazer</strong> award from a Major Educational
+            Company in 2025.
+          </p>
+          <p>
+            <FaCaretRight size="1.2em" />
             Student recycling work lead to University of Iowa receiving $60,000
             DNR grant and Iowa Recycling Association Best Practices Award.
           </p>

@@ -113,14 +113,14 @@ describe("buildActivityItems", () => {
     expect(items[1].url).toContain("/releases/tag/v1.2.0");
   });
 
-  it("caps the strip at five items", () => {
+  it("caps the strip at six items", () => {
     const events = Array.from({ length: 10 }, (_, i) =>
       pushEvent({
         id: `p${i}`,
         repo: { name: `twknab/repo-${i}` },
       })
     );
-    expect(buildActivityItems(events, NOW)).toHaveLength(5);
+    expect(buildActivityItems(events, NOW)).toHaveLength(6);
   });
 
   it("returns [] for junk input", () => {
