@@ -118,7 +118,12 @@ function PrimaryFooter({ techStack }) {
                   );
                 })}
                 <li>
-                  <span className="tech-badge">
+                  <a
+                    className="tech-badge"
+                    href="https://nodejs.org"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     <span className="tech-badge-name">
                       <SiNodedotjs
                         aria-hidden="true"
@@ -132,7 +137,7 @@ function PrimaryFooter({ techStack }) {
                     >
                       {techStack.nodeMajor}
                     </span>
-                  </span>
+                  </a>
                 </li>
               </ul>
             </Col>

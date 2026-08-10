@@ -8,7 +8,7 @@ const experiences = [
     stateAbbreviation: "WA",
   },
   {
-    jobTitle: "🚴‍♂️Senior Software Engineer",
+    jobTitle: "🚴‍♂️ Senior Software Engineer",
     startYear: 2023,
     endYear: 2024,
     companyName: "Ridepanda",
