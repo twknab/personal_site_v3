@@ -931,22 +931,120 @@ navbar-nav .dropdown-menu {
   }
 }
 
-// Even card grid: 2×3 on mobile, 3×2 from tablet up — six items always land
-// in complete rows with no leftover single card.
+// Responsive shipped strip:
+// - mobile: single-row horizontal swipe with a fade + "Swipe" hint
+// - tablet+: 3×2 grid (two even rows)
+// - full width: all six in one row
+.shipped-strip-wrap {
+  position: relative;
+}
+
 .shipped-strip {
   list-style: none;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 22px;
+  display: flex;
+  gap: 16px;
   margin: 6px 0 0;
-  padding: 16px 8px 26px;
+  padding: 16px 8px 10px;
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: rgba($themeTurquoise, 0.55) rgba(255, 255, 255, 0.06);
+
+  &::-webkit-scrollbar {
+    height: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 999px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba($themeTurquoise, 0.55);
+    border-radius: 999px;
+  }
 
   @media (min-width: 768px) {
+    display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px;
+    padding: 16px 8px 26px;
+    overflow: visible;
+    scroll-snap-type: none;
+  }
+
+  @media (min-width: 1200px) {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 14px;
+  }
+}
+
+// Right-edge fade + swipe cue — mobile swipe mode only.
+.shipped-swipe-hint {
+  display: none;
+}
+
+@media (max-width: 767.98px) {
+  .shipped-strip-wrap::after {
+    content: "";
+    position: absolute;
+    top: 16px;
+    right: 0;
+    bottom: 42px;
+    width: 56px;
+    pointer-events: none;
+    background: linear-gradient(
+      to right,
+      rgba(16, 22, 31, 0),
+      rgba(16, 22, 31, 0.92)
+    );
+  }
+
+  .shipped-swipe-hint {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 6px;
+    width: 100%;
+    margin: 0;
+    padding: 0 10px 8px;
+    font-family: "Roboto Mono", monospace;
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba($themeTurquoise, 0.9);
+    text-shadow: none;
+  }
+
+  .shipped-swipe-hint-chevrons {
+    display: inline-block;
+    animation: shippedSwipeNudge 1.6s ease-in-out infinite;
+  }
+}
+
+@keyframes shippedSwipeNudge {
+  0%,
+  100% {
+    transform: translateX(0);
+    opacity: 0.55;
+  }
+
+  50% {
+    transform: translateX(6px);
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shipped-swipe-hint-chevrons {
+    animation: none;
   }
 }
 
 .shipped-card {
+  flex: 0 0 260px;
+  scroll-snap-align: start;
   min-width: 0;
   border-radius: 18px;
   border: 1px solid rgba(255, 255, 255, 0.09);
@@ -957,6 +1055,10 @@ navbar-nav .dropdown-menu {
   -webkit-backdrop-filter: blur(10px);
   box-shadow: $shadow-soft;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  @media (min-width: 768px) {
+    flex: unset;
+  }
 
   &:hover,
   &:focus-within {
@@ -978,6 +1080,13 @@ navbar-nav .dropdown-menu {
   color: $themeDarkText;
   font-weight: 400 !important;
   text-decoration: none;
+
+  // Six-across needs a tighter, stacked card so repo names still fit.
+  @media (min-width: 1200px) {
+    flex-direction: column;
+    gap: 10px;
+    padding: 14px 12px;
+  }
 }
 
 .shipped-icon {
@@ -992,6 +1101,12 @@ navbar-nav .dropdown-menu {
   color: var(--shipped-accent);
   background-color: rgba(255, 255, 255, 0.06);
   box-shadow: inset 0 0 0 1px var(--shipped-accent);
+
+  @media (min-width: 1200px) {
+    width: 36px;
+    height: 36px;
+    font-size: 18px;
+  }
 }
 
 .shipped-body {
@@ -1008,6 +1123,10 @@ navbar-nav .dropdown-menu {
   font-weight: 700;
   color: $themeVibrantYellowGreenLight;
   overflow-wrap: anywhere;
+
+  @media (min-width: 1200px) {
+    font-size: 13px;
+  }
 }
 
 .shipped-action {
@@ -1015,6 +1134,10 @@ navbar-nav .dropdown-menu {
   letter-spacing: 0.4px;
   text-transform: uppercase;
   color: var(--shipped-accent);
+
+  @media (min-width: 1200px) {
+    font-size: 11px;
+  }
 }
 
 .shipped-detail {
@@ -1026,6 +1149,10 @@ navbar-nav .dropdown-menu {
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+
+  @media (min-width: 1200px) {
+    font-size: 12px;
+  }
 }
 
 .shipped-time {
