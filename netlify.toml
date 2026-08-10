@@ -2,5 +2,10 @@
   command = "npm run build"
   publish = ".next"
 
+  # Next 14 requires Node >= 18.17. This overrides any stale Node pin left in
+  # the Netlify UI from the Create React App era (also mirrored in .nvmrc).
+  [build.environment]
+    NODE_VERSION = "22"
+
 [[plugins]]
   package = "@netlify/plugin-nextjs"
