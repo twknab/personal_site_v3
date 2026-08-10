@@ -54,12 +54,39 @@ jobs:
           # This will handover control about PR rejection to the GitHub side
           max-allowed-issues: 2147483647
 
-      # Upload the SARIF file generated in the previous step.
-      # Uploading to GitHub code scanning requires GitHub Advanced Security on
-      # private repos (not enabled here), so this step is best-effort only and
-      # must not fail the workflow. Codacy still reports to its own dashboard.
+      # Codacy emits one SARIF *run* per underlying tool (semgrep, trivy, ...)
+      # in a single file. Code scanning stopped accepting multiple runs that
+      # share a category in July 2025, so uploading results.sarif as-is fails
+      # with "does not support uploading multiple SARIF runs with the same
+      # category". Collapse them into one run before uploading.
+      #
+      # ruleIndex is dropped because it points into each run's own rules array
+      # and would be wrong after merging; GitHub resolves rules by ruleId.
+      - name: Merge Codacy SARIF runs into one
+        run: |
+          if [ ! -s results.sarif ]; then
+            echo "No results.sarif produced by the Codacy CLI." >&2
+            exit 1
+          fi
+          jq '{
+            version: .version,
+            "$schema": .["$schema"],
+            runs: [{
+              tool: { driver: {
+                name: "Codacy",
+                rules: ([.runs[].tool.driver.rules // []] | add | unique_by(.id))
+              }},
+              results: ([.runs[].results // []] | add | map(del(.ruleIndex)))
+            }]
+          }' results.sarif > codacy.sarif
+          echo "runs: $(jq '.runs | length' codacy.sarif), results: $(jq '.runs[0].results | length' codacy.sarif)"
+
+      # Upload to code scanning. This needs GitHub Advanced Security, which is
+      # free on public repos — the repo is public now, so findings land in the
+      # Security tab and annotate the PR instead of only reaching Codacy's
+      # dashboard. Blocking: a failed upload means findings silently vanish.
       - name: Upload SARIF results file
-        continue-on-error: true
         uses: github/codeql-action/upload-sarif@v3
         with:
-          sarif_file: results.sarif
+          sarif_file: codacy.sarif
+          category: codacy
