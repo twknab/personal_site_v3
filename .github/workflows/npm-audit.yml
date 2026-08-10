@@ -5,11 +5,10 @@
 # Advanced Security. It reads package-lock.json and checks it against the
 # npm advisory database (no full install required).
 #
-# NOTE: This step is currently informational (continue-on-error) because the
-# Next.js 14 pin carries upstream advisories that only affect self-hosting
-# features this site doesn't use (image optimizer remote patterns, rewrites).
-# After the Next 15/16 + React 19 bump (#80), drop the continue-on-error to
-# turn this into a hard gate.
+# This is a BLOCKING gate. It was informational while the Next 14 pin carried
+# unfixable postcss/sharp advisories; #95 (Next 16 + React 19) cleared them, so
+# `npm audit --audit-level=high` now reports 0 and a regression should fail the
+# build rather than be quietly tolerated.
 name: 'npm audit'
 
 on:
@@ -36,5 +35,4 @@ jobs:
           node-version: 22
 
       - name: Run npm audit (high+ severity)
-        continue-on-error: true
         run: npm audit --audit-level=high

@@ -84,14 +84,16 @@ npm run lint     # ESLint (next/core-web-vitals)
 
 - **App CI** *(blocking)* — ESLint (`next/core-web-vitals`), the Jest test suite, and a production `next build`. A failure in any step blocks the merge.
 - **Netlify deploy preview** — a live preview URL for the branch (the visual check).
-- **Codacy Security Scan**, **npm audit**, **Dependency Review** — security scans, informational.
+- **npm audit** *(blocking)* — fails on any high-severity advisory in the dependency tree.
+- **Dependency Review** *(blocking)* — fails a PR that introduces a known-vulnerable dependency.
+- **Codacy Security Scan** *(blocking)* — static security analysis; findings upload to the GitHub Security tab and annotate the PR.
 
 **Post-merge — every push to `main`:**
 
 - **App CI** re-runs on the merged tree, catching bad merges or direct pushes even though Netlify deploys them.
 - **Lighthouse** audits the live https://timknab.dev after the Netlify deploy settles (3 runs, artifacts + shareable report links) — performance, accessibility, best practices, SEO. Also runs monthly on a schedule to catch drift between merges.
 
-> ℹ️ The security scans run as **informational** (non-blocking). The Codacy/Dependency Review SARIF uploads require GitHub Advanced Security (unavailable on a private repo), and `npm audit` remains advisory while the Next.js 14 pin carries upstream advisories that only affect unused self-hosting features; it becomes a hard gate after the Next 15/16 bump ([#80](https://github.com/twknab/personal_site_v3/issues/80)).
+> ℹ️ These were all informational until the repo went public and the Next 16 + React 19 upgrade ([#95](https://github.com/twknab/personal_site_v3/pull/95)) cleared the last unfixable advisories. GitHub Advanced Security is free on public repos, so SARIF upload and Dependency Review now work, and `npm audit` reports 0 — a permanently-green check hides regressions, so all three fail the build now.
 
 ## Agent Skills (Claude Code + Cursor)
 
