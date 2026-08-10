@@ -1,6 +1,7 @@
 import React from "react";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
+import AqiViewer from "./projects/AqiViewer";
 import FitnessTracker from "./projects/FitnessTracker";
 import FrogGarden from "./projects/FrogGarden";
 import GearList from "./projects/GearList";
@@ -23,7 +24,7 @@ function Projects() {
             </span>{" "}
             Projects
           </h1>
-          {/* TODO: Add AQI Viewer */}
+          {/* Newest work first; the older experiments bring up the rear. */}
           <SquirrelStudio />
           <FrogGarden />
           <RoamGuru />
@@ -31,6 +32,7 @@ function Projects() {
           <HikingTool />
           <FitnessTracker />
           <SockIt />
+          <AqiViewer />
         </Col>
       </Row>
     </div>

@@ -29,6 +29,10 @@ describe("Projects", () => {
     );
   });
 
+  it("parks AQI Viewer at the bottom, where an old two-day build belongs", () => {
+    expect(titles().at(-1)).toBe("AQI Viewer");
+  });
+
   it("links Frog Garden to its repository", () => {
     const link = document.querySelector(
       'a[href="https://github.com/twknab/zen-frog-todo"]'
