@@ -10,10 +10,11 @@ import Reading from "./main/Reading";
 import RecentlyShipped from "./main/RecentlyShipped";
 import Skills from "./main/Skills";
 import Stacks from "./main/Stacks";
+import Toolkit from "./main/Toolkit";
 import useScrollReveal from "../hooks/useScrollReveal";
 
 const REVEAL_SECTIONS =
-  ".professional-summary, .about-me, .skills, .stacks, .projects, .recently-shipped, .experience, .education-history, .awards, .reading";
+  ".professional-summary, .about-me, .skills, .stacks, .projects, .recently-shipped, .toolkit, .experience, .education-history, .awards, .reading";
 
 function MainContent({ recentActivity }) {
   useScrollReveal(REVEAL_SECTIONS);
@@ -28,6 +29,7 @@ function MainContent({ recentActivity }) {
         <Stacks />
         <Projects />
         <RecentlyShipped items={recentActivity} />
+        <Toolkit />
         <Experience />
         <EducationHistory />
         <Awards />

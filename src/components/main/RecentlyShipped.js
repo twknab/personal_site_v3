@@ -37,39 +37,45 @@ function RecentlyShipped({ items }) {
             Commits, merges, and releases — straight from my public GitHub
             activity.
           </p>
-          <ul className="shipped-strip">
-            {items.map((item) => {
-              const { accent, Icon } = KIND_STYLES[item.kind] || KIND_STYLES.push;
-              return (
-                <li
-                  key={item.id}
-                  className="shipped-card"
-                  style={{ "--shipped-accent": accent }}
-                >
-                  <a
-                    className="shipped-link"
-                    href={item.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
+          <div className="shipped-strip-wrap">
+            <ul className="shipped-strip">
+              {items.map((item) => {
+                const { accent, Icon } = KIND_STYLES[item.kind] || KIND_STYLES.push;
+                return (
+                  <li
+                    key={item.id}
+                    className="shipped-card"
+                    style={{ "--shipped-accent": accent }}
                   >
-                    <span className="shipped-icon" aria-hidden="true">
-                      <Icon />
-                    </span>
-                    <span className="shipped-body">
-                      <span className="shipped-repo">{item.repoName}</span>
-                      <span className="shipped-action">{item.label}</span>
-                      {item.detail && (
-                        <span className="shipped-detail">{item.detail}</span>
-                      )}
-                      <time className="shipped-time" dateTime={item.isoTime}>
-                        {item.timeAgo}
-                      </time>
-                    </span>
-                  </a>
-                </li>
-              );
-            })}
-          </ul>
+                    <a
+                      className="shipped-link"
+                      href={item.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <span className="shipped-icon" aria-hidden="true">
+                        <Icon />
+                      </span>
+                      <span className="shipped-body">
+                        <span className="shipped-repo">{item.repoName}</span>
+                        <span className="shipped-action">{item.label}</span>
+                        {item.detail && (
+                          <span className="shipped-detail">{item.detail}</span>
+                        )}
+                        <time className="shipped-time" dateTime={item.isoTime}>
+                          {item.timeAgo}
+                        </time>
+                      </span>
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
+            <p className="shipped-swipe-hint" aria-hidden="true">
+              <span className="shipped-swipe-hint-label">Swipe</span>
+              <span className="shipped-swipe-hint-chevrons">››</span>
+            </p>
+          </div>
         </Col>
       </Row>
     </div>

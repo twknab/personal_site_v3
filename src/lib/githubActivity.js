@@ -7,12 +7,12 @@
 
 const GITHUB_USER = "twknab";
 const API_ROOT = "https://api.github.com";
-const MAX_ITEMS = 5;
+const MAX_ITEMS = 6;
 export const REVALIDATE_SECONDS = 3600;
 
 // The public events API ships slim payloads: pushes carry no commit list and
 // merged PRs no title, so the top items get one enrichment lookup each
-// (head-commit message / PR title). Budget stays ≤ 6 requests per window.
+// (head-commit message / PR title). Budget stays ≤ 7 requests per window.
 const KIND_LABELS = {
   push: "pushed to",
   merge: "merged a PR in",

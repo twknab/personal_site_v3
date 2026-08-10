@@ -931,14 +931,20 @@ navbar-nav .dropdown-menu {
   }
 }
 
-// Horizontal card strip: swipes on mobile, breathes on desktop. Cards keep a
-// fixed basis so five items line up as a tidy filmstrip.
+// Responsive shipped strip:
+// - mobile: single-row horizontal swipe with a fade + "Swipe" hint
+// - tablet+: 3×2 grid (two even rows)
+// - full width: all six in one row
+.shipped-strip-wrap {
+  position: relative;
+}
+
 .shipped-strip {
   list-style: none;
   display: flex;
-  gap: 22px;
+  gap: 16px;
   margin: 6px 0 0;
-  padding: 16px 8px 26px;
+  padding: 16px 8px 10px;
   overflow-x: auto;
   scroll-snap-type: x proximity;
   -webkit-overflow-scrolling: touch;
@@ -958,11 +964,88 @@ navbar-nav .dropdown-menu {
     background: rgba($themeTurquoise, 0.55);
     border-radius: 999px;
   }
+
+  @media (min-width: 768px) {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px;
+    padding: 16px 8px 26px;
+    overflow: visible;
+    scroll-snap-type: none;
+  }
+
+  @media (min-width: 1200px) {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 14px;
+  }
+}
+
+// Right-edge fade + swipe cue — mobile swipe mode only.
+.shipped-swipe-hint {
+  display: none;
+}
+
+@media (max-width: 767.98px) {
+  .shipped-strip-wrap::after {
+    content: "";
+    position: absolute;
+    top: 16px;
+    right: 0;
+    bottom: 42px;
+    width: 56px;
+    pointer-events: none;
+    background: linear-gradient(
+      to right,
+      rgba(16, 22, 31, 0),
+      rgba(16, 22, 31, 0.92)
+    );
+  }
+
+  .shipped-swipe-hint {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 6px;
+    width: 100%;
+    margin: 0;
+    padding: 0 10px 8px;
+    font-family: "Roboto Mono", monospace;
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba($themeTurquoise, 0.9);
+    text-shadow: none;
+  }
+
+  .shipped-swipe-hint-chevrons {
+    display: inline-block;
+    animation: shippedSwipeNudge 1.6s ease-in-out infinite;
+  }
+}
+
+@keyframes shippedSwipeNudge {
+  0%,
+  100% {
+    transform: translateX(0);
+    opacity: 0.55;
+  }
+
+  50% {
+    transform: translateX(6px);
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shipped-swipe-hint-chevrons {
+    animation: none;
+  }
 }
 
 .shipped-card {
-  flex: 0 0 300px;
+  flex: 0 0 260px;
   scroll-snap-align: start;
+  min-width: 0;
   border-radius: 18px;
   border: 1px solid rgba(255, 255, 255, 0.09);
   border-top: 4px solid var(--shipped-accent);
@@ -972,6 +1055,10 @@ navbar-nav .dropdown-menu {
   -webkit-backdrop-filter: blur(10px);
   box-shadow: $shadow-soft;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  @media (min-width: 768px) {
+    flex: unset;
+  }
 
   &:hover,
   &:focus-within {
@@ -993,6 +1080,13 @@ navbar-nav .dropdown-menu {
   color: $themeDarkText;
   font-weight: 400 !important;
   text-decoration: none;
+
+  // Six-across needs a tighter, stacked card so repo names still fit.
+  @media (min-width: 1200px) {
+    flex-direction: column;
+    gap: 10px;
+    padding: 14px 12px;
+  }
 }
 
 .shipped-icon {
@@ -1007,6 +1101,12 @@ navbar-nav .dropdown-menu {
   color: var(--shipped-accent);
   background-color: rgba(255, 255, 255, 0.06);
   box-shadow: inset 0 0 0 1px var(--shipped-accent);
+
+  @media (min-width: 1200px) {
+    width: 36px;
+    height: 36px;
+    font-size: 18px;
+  }
 }
 
 .shipped-body {
@@ -1023,6 +1123,10 @@ navbar-nav .dropdown-menu {
   font-weight: 700;
   color: $themeVibrantYellowGreenLight;
   overflow-wrap: anywhere;
+
+  @media (min-width: 1200px) {
+    font-size: 13px;
+  }
 }
 
 .shipped-action {
@@ -1030,6 +1134,10 @@ navbar-nav .dropdown-menu {
   letter-spacing: 0.4px;
   text-transform: uppercase;
   color: var(--shipped-accent);
+
+  @media (min-width: 1200px) {
+    font-size: 11px;
+  }
 }
 
 .shipped-detail {
@@ -1041,6 +1149,10 @@ navbar-nav .dropdown-menu {
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+
+  @media (min-width: 1200px) {
+    font-size: 12px;
+  }
 }
 
 .shipped-time {
@@ -1050,11 +1162,397 @@ navbar-nav .dropdown-menu {
   opacity: 0.7;
 }
 
-@media (max-width: 575.98px) {
-  .shipped-card {
-    flex-basis: 260px;
+// *********************
+// TOOLKIT
+// *********************
+// Sits between Projects and Experience in the stacked-card rhythm: deep teal
+// base so it reads as its own surface without breaking the purple/orange run.
+.toolkit {
+  position: relative;
+  z-index: 0;
+  color: $themeDarkText;
+  // Small screens fall through to the global `.row` padding (50px 5px), the
+  // same as every other section — no mobile override needed here.
+  padding: 28px 48px 80px;
+  border-top: 20px solid $themeTurquoise;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  box-shadow: $shadow-soft;
+  background-color: #12242b;
+  background-image:
+    radial-gradient(at 12% 12%, rgba($themeTurquoise, 0.28) 0px, transparent 48%),
+    radial-gradient(at 88% 20%, rgba($themeGreen, 0.16) 0px, transparent 45%),
+    radial-gradient(at 60% 95%, rgba($themePurple, 0.30) 0px, transparent 50%),
+    linear-gradient(160deg, #17323c 0%, #14252e 60%, #101c22 100%);
+  background-blend-mode: screen, screen, screen, normal;
+}
+
+.toolkit-intro {
+  max-width: 62ch;
+  margin-bottom: 30px;
+  text-shadow: 2px 2px 4px #000000;
+}
+
+// ---- Shared card shell ----
+.toolkit-card {
+  margin-bottom: 34px;
+  padding: 26px 28px 22px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: rgba(6, 18, 23, 0.55);
+  box-shadow: $shadow-soft;
+
+  @media (max-width: 575.98px) {
+    padding: 20px 16px 18px;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
   }
 }
+
+.toolkit-card-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 14px;
+  margin-bottom: 10px;
+
+  h3 {
+    padding-bottom: 0;
+    margin-bottom: 0;
+  }
+}
+
+.toolkit-tag {
+  padding: 3px 11px;
+  border-radius: 999px;
+  border: 1px solid rgba($themeTurquoise, 0.45);
+  background-color: rgba($themeTurquoise, 0.1);
+  color: $themeTurquoise;
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.toolkit-card-blurb {
+  max-width: 70ch;
+  margin-bottom: 22px;
+  text-shadow: 2px 2px 4px #000000;
+}
+
+// ---- Calculator ----
+.toolkit-calc {
+  align-items: stretch;
+}
+
+.toolkit-calc-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.toolkit-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 0;
+}
+
+.toolkit-field-label {
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  opacity: 0.82;
+}
+
+.toolkit-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  input {
+    width: 100%;
+    padding: 12px 46px 12px 14px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    background-color: rgba(0, 0, 0, 0.4);
+    color: $themeDarkText;
+    font-size: 1.35rem;
+    font-variant-numeric: tabular-nums;
+
+    &:focus {
+      outline: none;
+      border-color: $themeTurquoise;
+      box-shadow: 0 0 0 3px rgba($themeTurquoise, 0.25);
+    }
+  }
+}
+
+.toolkit-unit {
+  position: absolute;
+  right: 14px;
+  pointer-events: none;
+  opacity: 0.65;
+  font-size: 0.95rem;
+}
+
+.toolkit-presets {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.toolkit-presets-label {
+  width: 100%;
+  font-size: 0.78rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  opacity: 0.6;
+}
+
+.toolkit-preset {
+  padding: 5px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background-color: rgba(255, 255, 255, 0.05);
+  color: $themeDarkText;
+  font-size: 0.82rem;
+
+  &:hover {
+    border-color: $themeGreen;
+    color: $themeGreen;
+  }
+}
+
+.toolkit-calc-output {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  @media (max-width: 767.98px) {
+    margin-top: 26px;
+  }
+}
+
+.toolkit-result {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-bottom: 14px;
+}
+
+.toolkit-result-label {
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
+.toolkit-result-value {
+  font-size: 2.9rem;
+  font-weight: 700;
+  line-height: 1.05;
+  font-variant-numeric: tabular-nums;
+  background: linear-gradient(100deg, $themeTurquoise, $themeGreen 60%, $themeVibrantYellowGreen);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  @media (max-width: 575.98px) {
+    font-size: 2.3rem;
+  }
+}
+
+.toolkit-bar {
+  display: flex;
+  height: 12px;
+  border-radius: 999px;
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.45);
+}
+
+.toolkit-bar-seg {
+  height: 100%;
+  transition: width 220ms ease-out;
+
+  &--flat {
+    background-color: $themeTurquoise;
+  }
+  &--climb {
+    background-color: $themeOrange;
+  }
+  &--rest {
+    background-color: $themePurple;
+  }
+}
+
+.toolkit-breakdown {
+  list-style: none;
+  padding-left: 0;
+  margin: 14px 0 0;
+
+  li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 5px 0;
+  }
+}
+
+.toolkit-dot {
+  width: 10px;
+  height: 10px;
+  flex-shrink: 0;
+  border-radius: 50%;
+
+  &--flat {
+    background-color: $themeTurquoise;
+  }
+  &--climb {
+    background-color: $themeOrange;
+  }
+  &--rest {
+    background-color: $themePurple;
+  }
+}
+
+.toolkit-breakdown-label {
+  flex: 1;
+  opacity: 0.85;
+}
+
+.toolkit-breakdown-value {
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+
+// ---- Tuning disclosure ----
+.toolkit-tuning {
+  margin-top: 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 16px;
+}
+
+.toolkit-disclosure {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: $turquoiseLink;
+  font-size: 0.95rem;
+
+  &:hover {
+    color: $themeGreen;
+  }
+}
+
+.toolkit-chevron {
+  transition: transform 180ms ease-out;
+
+  &.is-open {
+    transform: rotate(180deg);
+  }
+}
+
+.toolkit-tuned-flag {
+  padding: 2px 8px;
+  border-radius: 999px;
+  background-color: rgba($themeVibrantYellowGreen, 0.16);
+  color: $themeVibrantYellowGreen;
+  font-size: 0.68rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.toolkit-tuning-body {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  max-width: 460px;
+}
+
+.toolkit-tuning-note {
+  margin-bottom: 0;
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+.toolkit-slider {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 0;
+
+  input[type="range"] {
+    width: 100%;
+    accent-color: $themeTurquoise;
+  }
+}
+
+.toolkit-slider-label {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 0.88rem;
+  opacity: 0.85;
+
+  strong {
+    font-variant-numeric: tabular-nums;
+    color: $themeVibrantYellowGreen;
+  }
+}
+
+.toolkit-reset {
+  align-self: flex-start;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background-color: transparent;
+  color: $themeDarkText;
+  font-size: 0.85rem;
+
+  &:hover:not(:disabled) {
+    border-color: $themeRed;
+    color: $themeRed;
+  }
+
+  &:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+  }
+}
+
+.toolkit-formula {
+  margin: 20px 0 8px;
+  overflow-x: auto;
+
+  code {
+    display: inline-block;
+    padding: 9px 14px;
+    border-radius: 8px;
+    background-color: rgba(0, 0, 0, 0.45);
+    color: $themeVibrantYellowGreenLight;
+    font-size: 0.86rem;
+    white-space: nowrap;
+  }
+}
+
+.toolkit-provenance {
+  margin-bottom: 0;
+  font-size: 0.88rem;
+  opacity: 0.75;
+}
+
+// *********************
 
 // *********************
 // EXPERIENCE
