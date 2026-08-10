@@ -93,6 +93,22 @@ npm run lint     # ESLint (next/core-web-vitals)
 
 > ℹ️ The security scans run as **informational** (non-blocking). The Codacy/Dependency Review SARIF uploads require GitHub Advanced Security (unavailable on a private repo), and `npm audit` remains advisory while the Next.js 14 pin carries upstream advisories that only affect unused self-hosting features; it becomes a hard gate after the Next 15/16 bump ([#80](https://github.com/twknab/personal_site_v3/issues/80)).
 
+## Agent Skills (Claude Code + Cursor)
+
+This repo is worked from both **Claude Code** and **Cursor**, which don't share a skills format. Rather than making one tool authoritative, the repo keeps a **mirrored pair** so either assistant behaves identically:
+
+```
+.claude/skills/<name>/SKILL.md    # Claude Code
+.cursor/skills/<name>/SKILL.md    # Cursor
+```
+
+| Skill | What it does |
+| --- | --- |
+| `dependency-pr-triage` | Decide which dependency-bump PRs are still real, clear the backlog, and keep it from rebuilding. |
+| `skills-sync` | Keeps the two skill directories mirrored; run whenever a skill is added, edited, or removed. |
+
+**The rule:** any change to a skill updates *both* copies in the same commit. Only the `> Mirrors …` pointer line differs between them. The parity check lives in the `skills-sync` skill.
+
 ## Roadmap & Ideas
 
 **Next up** (in planned order — see the linked issues for full specs)
