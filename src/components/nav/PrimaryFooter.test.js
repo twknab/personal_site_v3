@@ -61,6 +61,17 @@ describe("PrimaryFooter tech-stack badges", () => {
     ]);
   });
 
+  it("gives the site badge the tk favicon and dependency badges a brand mark", () => {
+    render(<PrimaryFooter techStack={techStack} />);
+    const logo = document.querySelector("img.tech-badge-logo");
+    expect(logo).toBeInTheDocument();
+    expect(logo.getAttribute("src")).toBe("/img/timknabdev-favico.png");
+    // Next.js + React brand icons render as inline SVGs in the name segment.
+    expect(
+      document.querySelectorAll(".tech-badge-name svg").length
+    ).toBeGreaterThanOrEqual(2);
+  });
+
   it("links dependency badges to their docs", () => {
     render(<PrimaryFooter techStack={techStack} />);
     expect(

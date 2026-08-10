@@ -1536,9 +1536,23 @@ a.tech-badge {
 }
 
 .tech-badge-name {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
   padding: 6px 8px;
   background-color: rgba(20, 20, 20, 0.85);
   color: #ffffff;
+
+  svg {
+    font-size: 13px;
+  }
+}
+
+// Tiny brand mark inside a badge's name segment (site favicon).
+.tech-badge-logo {
+  width: 13px;
+  height: 13px;
+  border-radius: 3px;
 }
 
 .tech-badge-version {
