@@ -5,17 +5,29 @@ import Image from "react-bootstrap/Image";
 import Row from "react-bootstrap/Row";
 import { FaGithub } from "react-icons/fa";
 import gearListIco from "../../../assets/images/apps/gearlist-ico.png";
+import dashboard from "../../../assets/images/projects/gearlist/dashboard.png";
+import home from "../../../assets/images/projects/gearlist/home.png";
+import newList from "../../../assets/images/projects/gearlist/new-list.png";
+import viewList from "../../../assets/images/projects/gearlist/view-list.png";
+import ProjectGallery from "./ProjectGallery";
+
+const REPO = "https://github.com/twknab/gear_list_MEVN";
+
+const SHOTS = [
+  { src: dashboard, alt: "Gear dashboard with pack weight" },
+  { src: viewList, alt: "Viewing a gear list" },
+  { src: newList, alt: "Creating a new gear list" },
+  { src: home, alt: "Home navigation" },
+];
 
 function GearList() {
   return (
-    <div>
+    <div className="project-block">
       <Row className="project-row">
         <Col
           md="3"
           className="project-col tilt"
-          onClick={() =>
-            window.open("https://github.com/twknab/gear_list_MEVN", "_blank")
-          }
+          onClick={() => window.open(REPO, "_blank")}
         >
           <Image src={gearListIco.src} className="project-icon" rounded fluid />
         </Col>
@@ -70,7 +82,7 @@ function GearList() {
           <Button
             variant="primary"
             size="lg"
-            href="https://github.com/twknab/gear_list_MEVN"
+            href={REPO}
             target="_blank"
             rel="noopener noreferrer"
             className="project-btn"
@@ -80,6 +92,7 @@ function GearList() {
           </Button>
         </Col>
       </Row>
+      <ProjectGallery images={SHOTS} projectName="GearList" />
     </div>
   );
 }

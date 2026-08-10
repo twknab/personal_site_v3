@@ -5,18 +5,29 @@ import Image from "react-bootstrap/Image";
 import Row from "react-bootstrap/Row";
 import { FaGithub } from "react-icons/fa";
 import fitnessTrackerIco from "../../../assets/images/apps/fitnesstracker-ico.png";
-// import mevn from "src/assets/images/stacks/mevnstack.png";
+import addWorkout from "../../../assets/images/projects/fitnesstracker/add-workout.png";
+import dashboard from "../../../assets/images/projects/fitnesstracker/dashboard.png";
+import summary from "../../../assets/images/projects/fitnesstracker/summary.png";
+import workout from "../../../assets/images/projects/fitnesstracker/workout.png";
+import ProjectGallery from "./ProjectGallery";
+
+const REPO = "https://github.com/twknab/workout_tracker";
+
+const SHOTS = [
+  { src: dashboard, alt: "Fitness dashboard" },
+  { src: workout, alt: "Active workout with exercises" },
+  { src: addWorkout, alt: "Add a workout" },
+  { src: summary, alt: "End-of-workout summary" },
+];
 
 function FitnessTracker() {
   return (
-    <div>
+    <div className="project-block">
       <Row className="project-row">
         <Col
           md="3"
           className="project-col tilt"
-          onClick={() =>
-            window.open("https://github.com/twknab/workout_tracker", "_blank")
-          }
+          onClick={() => window.open(REPO, "_blank")}
         >
           <Image
             src={fitnessTrackerIco.src}
@@ -58,7 +69,7 @@ function FitnessTracker() {
           <Button
             variant="primary"
             size="lg"
-            href="https://github.com/twknab/workout_tracker"
+            href={REPO}
             target="_blank"
             rel="noopener noreferrer"
             className="project-btn"
@@ -68,6 +79,7 @@ function FitnessTracker() {
           </Button>
         </Col>
       </Row>
+      <ProjectGallery images={SHOTS} projectName="Fitness Tracker" />
     </div>
   );
 }

@@ -3,10 +3,16 @@ import Col from "react-bootstrap/Col";
 import Image from "react-bootstrap/Image";
 import Row from "react-bootstrap/Row";
 import roamGuruIco from "../../../assets/images/apps/roamguru-ico.png";
+import awardsPreview from "../../../assets/images/projects/roamguru/awards-earned-preview.png";
+import ProjectGallery from "./ProjectGallery";
+
+const SHOTS = [
+  { src: awardsPreview, alt: "Awards earned screen on mobile" },
+];
 
 function RoamGuru() {
   return (
-    <div>
+    <div className="project-block">
       <Row className="project-row">
         <Col md="3" className="project-col tilt">
           <Image src={roamGuruIco.src} className="project-icon" rounded fluid />
@@ -62,6 +68,7 @@ function RoamGuru() {
           </p>
         </Col>
       </Row>
+      <ProjectGallery images={SHOTS} projectName="RoamGuru" />
     </div>
   );
 }

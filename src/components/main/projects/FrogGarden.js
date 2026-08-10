@@ -5,13 +5,23 @@ import Image from "react-bootstrap/Image";
 import Row from "react-bootstrap/Row";
 import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
 import frogGardenIco from "../../../assets/images/apps/froggarden-ico.png";
+import flowDark from "../../../assets/images/projects/froggarden/flow-dark.png";
+import flowLight from "../../../assets/images/projects/froggarden/flow-light.png";
+import focusMode from "../../../assets/images/projects/froggarden/focus-mode.png";
+import ProjectGallery from "./ProjectGallery";
 
 const REPO = "https://github.com/twknab/zen-frog-todo";
 const LIVE = "https://zenfrog.netlify.app";
 
+const SHOTS = [
+  { src: focusMode, alt: "Focus Mode with bonsai and frog friends" },
+  { src: flowDark, alt: "Dashboard in dark theme" },
+  { src: flowLight, alt: "Dashboard in light theme" },
+];
+
 function FrogGarden() {
   return (
-    <div>
+    <div className="project-block">
       <Row className="project-row">
         <Col
           md="3"
@@ -96,6 +106,7 @@ function FrogGarden() {
           </Button>
         </Col>
       </Row>
+      <ProjectGallery images={SHOTS} projectName="Frog Garden" />
     </div>
   );
 }

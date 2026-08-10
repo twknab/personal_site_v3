@@ -6,7 +6,7 @@ import squirrelStudioIco from "../../../assets/images/apps/squirrelstudio-ico.pn
 
 function SquirrelStudio() {
   return (
-    <div>
+    <div className="project-block">
       <Row className="project-row">
         <Col md="3" className="project-col tilt">
           <Image

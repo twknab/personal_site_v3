@@ -1256,6 +1256,212 @@ navbar-nav .dropdown-menu {
 .project-icon {
   width: 150px;
   height: 150px;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.project-block {
+  margin-bottom: 2.25rem;
+  padding: 1.25rem 1rem 1.5rem;
+  border-radius: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.02);
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease,
+    border-color 0.35s ease,
+    background-color 0.35s ease;
+
+  &:hover,
+  &:focus-within {
+    transform: translateY(-4px);
+    border-color: rgba($themeTurquoise, 0.35);
+    background: rgba(255, 255, 255, 0.04);
+    box-shadow: 0 18px 40px -24px rgba(0, 0, 0, 0.85),
+      0 0 0 1px rgba($themeTurquoise, 0.12);
+
+    .project-icon {
+      transform: scale(1.04) rotate(-1.5deg);
+      box-shadow: 0 12px 28px -14px rgba($themeTurquoise, 0.55);
+    }
+  }
+}
+
+// Screenshot strip under each project — gallery cards, not a dense grid dump.
+.project-gallery {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 14px;
+  margin: 0.35rem 0 0;
+  padding: 0.35rem 0.35rem 0;
+}
+
+.project-gallery-card {
+  min-width: 0;
+}
+
+.project-gallery-frame {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  background: #0b0f15;
+  cursor: zoom-in;
+  text-align: left;
+  box-shadow: $shadow-soft;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+
+  img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    object-position: top center;
+    transition: transform 0.45s ease;
+  }
+
+  &:hover,
+  &:focus-visible {
+    transform: translateY(-6px);
+    border-color: rgba($themeVibrantYellowGreenLight, 0.55);
+    box-shadow: $shadow-lift, 0 0 28px -12px rgba($themeTurquoise, 0.55);
+    outline: none;
+
+    img {
+      transform: scale(1.06);
+    }
+
+    .project-gallery-caption {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+.project-gallery-caption {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: 0;
+  padding: 28px 12px 10px;
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+  color: #fff;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.82) 0%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  opacity: 0.82;
+  transform: translateY(4px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none;
+}
+
+.project-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(6, 8, 12, 0.82);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.project-lightbox-panel {
+  width: min(960px, 100%);
+  max-height: calc(100vh - 48px);
+  overflow: auto;
+  padding: 18px;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: #121820;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.55);
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+  }
+}
+
+.project-lightbox-title {
+  margin: 0 0 12px;
+  font-size: 0.95rem;
+  color: $themeVibrantYellowGreenLight;
+}
+
+.project-lightbox-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.project-lightbox-nav,
+.project-lightbox-close {
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+  font-size: 0.85rem;
+
+  &:hover,
+  &:focus-visible {
+    border-color: rgba($themeTurquoise, 0.7);
+    background: rgba($themeTurquoise, 0.16);
+    outline: none;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .project-gallery {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+    padding-bottom: 8px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .project-gallery-card {
+    flex: 0 0 78%;
+    scroll-snap-align: start;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-block,
+  .project-block .project-icon,
+  .project-gallery-frame,
+  .project-gallery-frame img,
+  .project-gallery-caption {
+    transition: none;
+  }
+
+  .project-block:hover,
+  .project-block:focus-within,
+  .project-gallery-frame:hover,
+  .project-gallery-frame:focus-visible {
+    transform: none;
+  }
+
+  .project-gallery-frame:hover img,
+  .project-gallery-frame:focus-visible img {
+    transform: none;
+  }
 }
 
 // *********************
