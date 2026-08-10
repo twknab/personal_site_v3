@@ -64,7 +64,7 @@ function PrimaryFooter({ techStack }) {
           <Row className="tech-stack">
             <Col lg className="tech-stack-col">
               <span className="tech-stack-label" id="tech-stack-label">
-                this site runs on
+                powered by
               </span>
               <ul className="tech-stack-list" aria-labelledby="tech-stack-label">
                 <li>
