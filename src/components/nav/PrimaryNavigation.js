@@ -1,23 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
 import { FaBars } from "react-icons/fa";
 import timknabLogo from "../../assets/images/timknabdev-logo-light-lg.png";
 import Scroll from "react-scroll";
 const scroller = Scroll.scroller;
 
+// NOTE: This value I am unsure where it's coming from, however this seems to
+// get it pretty close for small displays.
+const MOBILE_SCROLL_OFFSET = 324;
+
 function PrimaryNavigation() {
-  // Set active navigation item and offset if mobile
-  const [navigationOffset, setNavigationOffset] = useState(0);
   const [activeItem, setActiveItem] = useState("home");
 
-  // set offset for mobile
-  useEffect(() => {
-    if (window.innerWidth <= 991) {
-      setNavigationOffset(324); // NOTE: This value I am unsure where it's coming from, however this seems to get it pretty close for small displays
-    }
-  }, []);
   const handleNavClick = (itemName) => {
     setActiveItem(itemName);
+    // Read the width at click time rather than once on mount, so the offset
+    // stays correct after a resize or orientation change.
+    const navigationOffset =
+      window.innerWidth <= 991 ? MOBILE_SCROLL_OFFSET : 0;
     scroller.scrollTo(itemName, {
       duration: 1300,
       smooth: "easeOutQuart",
