@@ -77,10 +77,10 @@ function HikingTimeCalculator() {
       <p className="toolkit-card-blurb">
         Distance alone is a bad predictor of how long a hike takes — 9 miles
         with 4,000 ft of gain is a completely different day than 9 flat miles.
-        This is &ldquo;Book Time,&rdquo; adapted from Rick Curtis&rsquo;{" "}
-        <em>The Backpacker&rsquo;s Handbook</em>, and it is the same estimate
-        that powers trip planning in HikingTool. It runs entirely in your
-        browser.
+        Adapted from Rick Curtis&rsquo;{" "}
+        <em>The Backpacker&rsquo;s Handbook</em>, with about 15 minutes of rest
+        baked in for every hour of moving time. Same estimate that powers trip
+        planning in HikingTool. It runs entirely in your browser.
       </p>
 
       <Row className="toolkit-calc">
@@ -228,7 +228,7 @@ function HikingTimeCalculator() {
               onClick={() => setTuning(BOOK_TIME_DEFAULTS)}
               disabled={!isTuned}
             >
-              <FaUndo aria-hidden="true" /> Reset to the book
+              <FaUndo aria-hidden="true" /> Reset defaults
             </button>
           </div>
         )}

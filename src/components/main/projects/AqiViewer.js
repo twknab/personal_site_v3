@@ -37,19 +37,31 @@ function AqiViewer() {
             </a>{" "}
             app built during a wildfire smoke season: you save your city and the
             air quality number you personally care about, and the dashboard
-            tells you whether today is over that line. Authentication is
-            hand-rolled rather than{" "}
+            tells you whether today is over that line. Stacked with{" "}
             <a
-              href="https://github.com/heartcombo/devise"
+              href="https://turbo.hotwired.dev/"
               target="_blank"
               rel="noopener noreferrer"
             >
-              Devise
-            </a>{" "}
-            — the point of the exercise was to understand sessions and password
-            digests instead of delegating them. Two days of work in 2023, never
-            deployed, and included here because the idea was mine rather than an
-            assignment&rsquo;s.
+              Hotwire
+            </a>
+            ,{" "}
+            <a
+              href="https://github.com/bcrypt-ruby/bcrypt-ruby"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              bcrypt
+            </a>
+            , and{" "}
+            <a
+              href="https://www.postgresql.org/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              PostgreSQL
+            </a>
+            . Took 2 days to build by hand with custom stylings.
           </p>
           <Button
             variant="primary"

@@ -3,12 +3,11 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import { Element } from "react-scroll";
 import HikingTimeCalculator from "./toolkit/HikingTimeCalculator";
-import RoamGuruErd from "./toolkit/RoamGuruErd";
 
 // The Toolkit is for the reusable pieces *behind* the projects — an algorithm,
-// a schema, a diagram — shown working rather than described. Entry rule: it has
-// to answer "what decision does this show?" Anything that is only a file to
-// download belongs somewhere else.
+// a diagram — shown working rather than described. Entry rule: it has to answer
+// "what decision does this show?" Anything that is only a file to download
+// belongs somewhere else.
 function Toolkit() {
   return (
     <div>
@@ -23,11 +22,10 @@ function Toolkit() {
           </h1>
           <p className="toolkit-intro">
             Working pieces pulled out of the projects — an estimator you can
-            actually run, a schema you can actually read. Less polished than a
-            product, more honest than a screenshot.
+            actually run. Less polished than a product, more honest than a
+            screenshot.
           </p>
           <HikingTimeCalculator />
-          <RoamGuruErd />
         </Col>
       </Row>
     </div>

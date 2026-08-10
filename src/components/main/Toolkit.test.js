@@ -13,20 +13,20 @@ const setInput = (id, value) =>
   fireEvent.change(document.getElementById(id), { target: { value } });
 
 describe("Toolkit", () => {
-  it("renders both toolkit entries", () => {
+  it("renders the hiking estimator", () => {
     expect(document.querySelector('[data-testid="hiking-time-calculator"]')).toBeTruthy();
-    expect(document.querySelector('[data-testid="roam-guru-erd"]')).toBeTruthy();
   });
 
-  it("shows the book's worked example on first paint", () => {
-    // Defaults are 8 mi / 500 ft, the original 2017 test case.
-    expect(total()).toBe("4 h 53 m");
+  it("shows the default worked example on first paint", () => {
+    // Defaults are 8 mi / 500 ft with 15 min rest per moving hour.
+    // 4h flat + 0.5h climb + 4.5×15min rest = 5.625h → 5 h 38 m
+    expect(total()).toBe("5 h 38 m");
   });
 
   it("recalculates as the hiker changes distance", () => {
-    // 16 mi = 8 h walking, +0.5 h for 500 ft, +5 min per moving hour.
+    // 16 mi = 8 h walking, +0.5 h for 500 ft, +15 min per moving hour.
     setInput("hike-miles", "16");
-    expect(total()).toBe("9 h 13 m");
+    expect(total()).toBe("10 h 38 m");
   });
 
   it("charges more time for elevation than for flat miles", () => {
@@ -65,16 +65,5 @@ describe("Toolkit", () => {
     setInput("tune-paceMph", "4");
     expect(total()).not.toBe(bookTime);
     expect(document.querySelector(".toolkit-tuned-flag")).toBeTruthy();
-  });
-
-  it("gives the ERD a descriptive alt text rather than a filename", () => {
-    const img = document.querySelector(".toolkit-erd-frame img");
-    expect(img.getAttribute("alt")).toMatch(/entity relationship diagram/i);
-  });
-
-  it("says out loud what the old schema got wrong", () => {
-    const bad = document.querySelector(".toolkit-annotation-title.is-bad");
-    expect(bad.textContent).toMatch(/would change/i);
-    expect(document.body.textContent).toMatch(/PCI/);
   });
 });

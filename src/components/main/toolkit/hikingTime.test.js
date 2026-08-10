@@ -5,11 +5,11 @@ import {
 } from "./hikingTime";
 
 describe("estimateHikingTime", () => {
-  it("matches the original 2017 worked example (8 mi, 500 ft)", () => {
-    // 8/2 = 4h flat, 500/1000 = 0.5h climbing, 4.5h * 5min = 0.375h resting.
+  it("matches the default worked example (8 mi, 500 ft)", () => {
+    // 8/2 = 4h flat, 500/1000 = 0.5h climbing, 4.5h * 15min = 1.125h resting.
     const { totalHours } = estimateHikingTime(8, 500);
-    expect(totalHours).toBeCloseTo(4.875, 5);
-    expect(formatDuration(totalHours)).toBe("4 h 53 m");
+    expect(totalHours).toBeCloseTo(5.625, 5);
+    expect(formatDuration(totalHours)).toBe("5 h 38 m");
   });
 
   it("breaks the estimate into flat, climbing, and rest time", () => {
@@ -17,7 +17,7 @@ describe("estimateHikingTime", () => {
     expect(result.flatHours).toBeCloseTo(6, 5);
     expect(result.climbHours).toBeCloseTo(5.699, 5);
     expect(result.movingHours).toBeCloseTo(11.699, 5);
-    expect(result.restHours).toBeCloseTo(11.699 * (5 / 60), 5);
+    expect(result.restHours).toBeCloseTo(11.699 * (15 / 60), 5);
   });
 
   it("lets a stronger hiker override the book's constants", () => {

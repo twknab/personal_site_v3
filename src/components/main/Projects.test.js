@@ -29,7 +29,7 @@ describe("Projects", () => {
     );
   });
 
-  it("parks AQI Viewer at the bottom, where an old two-day build belongs", () => {
+  it("parks AQI Viewer at the bottom of the list", () => {
     expect(titles().at(-1)).toBe("AQI Viewer");
   });
 

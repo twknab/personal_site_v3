@@ -1,4 +1,4 @@
-// "Book Time" — a hiking travel-time estimate adapted from Rick Curtis,
+// Hiking travel-time estimate adapted from Rick Curtis,
 // The Backpacker's Handbook (2005).
 //
 //   travel time = (miles / pace)
@@ -9,15 +9,16 @@
 // travel-time estimate on HikingTool. Two things changed on the way here:
 // the constants are now parameters (the book itself says they "may need to be
 // adjusted depending upon the individual, group or trip needs"), and the
-// minute rounding no longer blows up on whole-hour results.
+// minute rounding no longer blows up on whole-hour results. Rest defaults to
+// 15 minutes per moving hour — what we usually budget on trail.
 
 export const BOOK_TIME_DEFAULTS = Object.freeze({
   // An average hiker on flat terrain covers 2 miles per hour.
   paceMph: 2,
   // Every 1,000 ft of gain costs roughly one extra hour.
   feetPerExtraHour: 1000,
-  // Each hour of movement needs about 5 minutes of stopped rest.
-  restMinutesPerHour: 5,
+  // On our trips, each hour of movement usually gets ~15 minutes of rest.
+  restMinutesPerHour: 15,
 });
 
 const positive = (value, fallback) => {
