@@ -2,10 +2,12 @@ import React from "react";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import FitnessTracker from "./projects/FitnessTracker";
+import FrogGarden from "./projects/FrogGarden";
 import GearList from "./projects/GearList";
 import HikingTool from "./projects/HikingTool";
 import RoamGuru from "./projects/RoamGuru";
 import SockIt from "./projects/SockIt";
+import SquirrelStudio from "./projects/SquirrelStudio";
 import Scroll from "react-scroll";
 const Element = Scroll.Element;
 
@@ -22,6 +24,8 @@ function Projects() {
             Projects
           </h1>
           {/* TODO: Add AQI Viewer */}
+          <SquirrelStudio />
+          <FrogGarden />
           <RoamGuru />
           <GearList />
           <HikingTool />
