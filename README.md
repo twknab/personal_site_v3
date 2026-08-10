@@ -12,7 +12,7 @@ Continuously deployed from `main` via Netlify, with deploy previews on every pul
 
 | Area | Tools |
 | --- | --- |
-| Framework | [React](https://react.dev/) 16 (functional components + hooks) |
+| Framework | [Next.js](https://nextjs.org/) 14 (App Router) + [React](https://react.dev/) 18 (functional components + hooks) |
 | UI | [React-Bootstrap](https://react-bootstrap.netlify.app/) / [Bootstrap](https://getbootstrap.com/) 4 |
 | Styling | [SASS](https://sass-lang.com/) (custom theme, gradients, glassmorphism, keyframe animations) |
 | Animation | [lottie-react](https://www.npmjs.com/package/lottie-react), canvas particle effects, CSS animations |
@@ -49,6 +49,10 @@ The single-page experience flows through the following sections (see `src/compon
 ## Project Structure
 
 ```
+app/
+├── layout.js              # Root layout: metadata, global styles (Bootstrap + theme)
+└── page.js                # Single route, renders the App shell
+
 src/
 ├── App.js                 # App shell: nav, confetti, cursor trail, content, footer
 ├── twkTheme.scss          # Central theme: variables, gradients, animations
@@ -67,9 +71,11 @@ src/
 
 ```bash
 npm install      # install dependencies
-npm start        # run the dev server at http://localhost:3000
+npm run dev      # run the dev server at http://localhost:3000
 npm test         # run the Jest test suite
-npm run build    # production build into /build
+npm run build    # production build into /.next
+npm run start    # serve the production build locally
+npm run lint     # ESLint (next/core-web-vitals)
 ```
 
 ## Continuous Integration
@@ -81,7 +87,7 @@ Every pull request runs:
 - **npm audit** — dependency vulnerability scan, private-repo friendly.
 - **Dependency Review** — GitHub supply-chain check.
 
-> ℹ️ The security scans currently run as **informational** (non-blocking). The Codacy/Dependency Review SARIF uploads require GitHub Advanced Security (unavailable on a private repo), and `npm audit` is non-blocking because this Create React App project ships build-time tooling as production dependencies. These can be turned into hard gates after a dependency/CRA modernization.
+> ℹ️ The security scans currently run as **informational** (non-blocking). The Codacy/Dependency Review SARIF uploads require GitHub Advanced Security (unavailable on a private repo), and `npm audit` remains advisory while the Next.js 14 pin carries upstream advisories that only affect unused self-hosting features; revisit as hard gates after the Next 15/16 bump.
 
 ## Roadmap & Ideas
 
@@ -94,7 +100,7 @@ Every pull request runs:
 - [ ] Animated intro / loading screen.
 - [ ] Interactive widgets or small JS games.
 - [ ] Hand-drawn illustrations as section accents and an end-of-page flourish.
-- [ ] Modernize the build (e.g. CRA → Vite) to enable blocking security gates.
+- [ ] Bump Next.js 14 → 15/16 (and React 19) once `lottie-react` / `react-scroll` peer ranges allow, clearing the remaining npm audit advisories.
 
 ---
 
