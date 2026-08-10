@@ -3,12 +3,12 @@ import Homepage from './views/Homepage';
 import ConfettiOverlay from './components/fun/ConfettiOverlay';
 import CursorTrail from './components/fun/CursorTrail';
 
-function App() {
+function App({ recentActivity, techStack }) {
   return (
     <div className="App">
       <ConfettiOverlay />
       <CursorTrail />
-      <Homepage />
+      <Homepage recentActivity={recentActivity} techStack={techStack} />
     </div>
   );
 }

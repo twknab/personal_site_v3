@@ -860,6 +860,203 @@ navbar-nav .dropdown-menu {
 }
 
 // *********************
+// RECENTLY SHIPPED (live GitHub activity strip, #78)
+// *********************
+.recently-shipped {
+  border-top: 20px solid $themeTurquoise;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  box-shadow: $shadow-soft;
+  padding-bottom: 60px !important;
+  // Deep "terminal" navy with soft glows so the strip reads as its own
+  // stacked card between the Projects band and the Experience card.
+  background-color: #10161f;
+  background-image:
+    radial-gradient(at 8% 10%, rgba($themeTurquoise, 0.16) 0px, transparent 45%),
+    radial-gradient(at 92% 18%, rgba($themePurple, 0.24) 0px, transparent 45%),
+    radial-gradient(at 50% 100%, rgba($themeGreen, 0.12) 0px, transparent 55%),
+    linear-gradient(160deg, #17202e 0%, #10161f 55%, #0b0f15 100%);
+
+  h1 {
+    padding-bottom: 0;
+  }
+}
+
+.shipped-intro {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px;
+  padding-top: 0;
+  text-shadow: 2px 2px 4px #000000;
+}
+
+// "live" pill with a pulsing dot — a quiet nod that the data is real-time-ish.
+.shipped-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 3px 14px;
+  border-radius: 999px;
+  font-family: "Roboto Mono", monospace;
+  font-size: 13px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: $themeGreen;
+  background-color: rgba($themeGreen, 0.1);
+  box-shadow: inset 0 0 0 1px rgba($themeGreen, 0.55);
+  text-shadow: none;
+}
+
+.shipped-live-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background-color: $themeGreen;
+  box-shadow: 0 0 10px $themeGreen;
+  animation: shippedPulse 1.8s ease-in-out infinite;
+}
+
+@keyframes shippedPulse {
+
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.35;
+    transform: scale(0.7);
+  }
+}
+
+// Horizontal card strip: swipes on mobile, breathes on desktop. Cards keep a
+// fixed basis so five items line up as a tidy filmstrip.
+.shipped-strip {
+  list-style: none;
+  display: flex;
+  gap: 22px;
+  margin: 6px 0 0;
+  padding: 16px 8px 26px;
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: rgba($themeTurquoise, 0.55) rgba(255, 255, 255, 0.06);
+
+  &::-webkit-scrollbar {
+    height: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 999px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba($themeTurquoise, 0.55);
+    border-radius: 999px;
+  }
+}
+
+.shipped-card {
+  flex: 0 0 300px;
+  scroll-snap-align: start;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-top: 4px solid var(--shipped-accent);
+  // Glassmorphism panel matching the Experience card language.
+  background-color: rgba($themeDarkContainer, 0.78);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: $shadow-soft;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover,
+  &:focus-within {
+    transform: translateY(-6px);
+    box-shadow: $shadow-lift, 0 0 24px -8px var(--shipped-accent);
+  }
+}
+
+// The whole card is one link; neutralize the global row-link styling so the
+// inner spans control their own color and weight.
+.mainContent .row a.shipped-link,
+.mainContent .row a.shipped-link:visited,
+.mainContent .row a.shipped-link:hover,
+.mainContent .row a.shipped-link:active {
+  display: flex;
+  gap: 14px;
+  height: 100%;
+  padding: 20px 18px;
+  color: $themeDarkText;
+  font-weight: 400 !important;
+  text-decoration: none;
+}
+
+.shipped-icon {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  font-size: 22px;
+  color: var(--shipped-accent);
+  background-color: rgba(255, 255, 255, 0.06);
+  box-shadow: inset 0 0 0 1px var(--shipped-accent);
+}
+
+.shipped-body {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+  text-shadow: 1px 1px 3px #000000;
+}
+
+.shipped-repo {
+  font-family: "Roboto Mono", monospace;
+  font-size: 16px;
+  font-weight: 700;
+  color: $themeVibrantYellowGreenLight;
+  overflow-wrap: anywhere;
+}
+
+.shipped-action {
+  font-size: 14px;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  color: var(--shipped-accent);
+}
+
+.shipped-detail {
+  font-size: 15px;
+  line-height: 1.4;
+  opacity: 0.92;
+  // Long commit subjects stay tidy: clamp to two lines.
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.shipped-time {
+  margin-top: 4px;
+  font-size: 13px;
+  font-style: italic;
+  opacity: 0.7;
+}
+
+@media (max-width: 575.98px) {
+  .shipped-card {
+    flex-basis: 260px;
+  }
+}
+
+// *********************
 // EXPERIENCE
 // *********************
 
@@ -1277,6 +1474,78 @@ navbar-nav .dropdown-menu {
 
 .tagline {
   padding-bottom: 0px !important;
+}
+
+// Tech-stack badges: shields-style two-tone pills generated from
+// package.json, so the footer always states the real, current stack.
+.tech-stack {
+  padding: 4px 15px 0;
+}
+
+.tech-stack-col {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  column-gap: 10px;
+  row-gap: 8px;
+}
+
+.tech-stack-label {
+  font-family: "Roboto Mono", monospace;
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.85);
+  text-shadow: 1px 1px 3px #000000;
+}
+
+.tech-stack-list {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+}
+
+.tech-badge {
+  display: inline-flex;
+  align-items: stretch;
+  overflow: hidden;
+  border-radius: 6px;
+  font-family: "Roboto Mono", monospace;
+  font-size: 12px;
+  line-height: 1;
+  box-shadow: 0 2px 6px -2px rgba(0, 0, 0, 0.6);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+a.tech-badge {
+  text-decoration: none;
+  font-weight: 400 !important;
+
+  &:hover,
+  &:focus-visible {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px -4px rgba(0, 0, 0, 0.7);
+    text-decoration: none;
+  }
+}
+
+.tech-badge-name {
+  padding: 6px 8px;
+  background-color: rgba(20, 20, 20, 0.85);
+  color: #ffffff;
+}
+
+.tech-badge-version {
+  padding: 6px 8px;
+  background-color: var(--badge-accent, #{$themeTurquoise});
+  color: #151515;
+  font-weight: 700;
 }
 
 // Quiet "site source / open an issue" meta-line above the copyright,

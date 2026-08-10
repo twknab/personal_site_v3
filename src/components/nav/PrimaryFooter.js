@@ -8,7 +8,15 @@ import washingtonStateOutline from "../../assets/images/washington-state-outline
 import LottieFigure from "../fun/LottieFigure";
 import { footerAnimation } from "../../assets/lottie";
 
-function PrimaryFooter() {
+// Version-segment tints cycled across the dependency badges.
+const BADGE_ACCENTS = [
+  "var(--theme-turquoise)",
+  "var(--theme-vibrant-yellow-green)",
+  "var(--theme-orange)",
+  "var(--theme-green)",
+];
+
+function PrimaryFooter({ techStack }) {
   return (
     <div>
       <Container
@@ -37,6 +45,59 @@ function PrimaryFooter() {
             </p>
           </Col>
         </Row>
+        {techStack && (
+          <Row className="tech-stack">
+            <Col lg className="tech-stack-col">
+              <span className="tech-stack-label" id="tech-stack-label">
+                this site runs on
+              </span>
+              <ul className="tech-stack-list" aria-labelledby="tech-stack-label">
+                <li>
+                  <span className="tech-badge">
+                    <span className="tech-badge-name">timknab.dev</span>
+                    <span
+                      className="tech-badge-version"
+                      style={{ "--badge-accent": "var(--theme-vibrant-yellow-green)" }}
+                    >
+                      v{techStack.siteVersion}
+                    </span>
+                  </span>
+                </li>
+                {techStack.badges.map((badge, index) => (
+                  <li key={badge.name}>
+                    <a
+                      className="tech-badge"
+                      href={badge.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <span className="tech-badge-name">{badge.name}</span>
+                      <span
+                        className="tech-badge-version"
+                        style={{
+                          "--badge-accent": BADGE_ACCENTS[index % BADGE_ACCENTS.length],
+                        }}
+                      >
+                        {badge.version}
+                      </span>
+                    </a>
+                  </li>
+                ))}
+                <li>
+                  <span className="tech-badge">
+                    <span className="tech-badge-name">Node</span>
+                    <span
+                      className="tech-badge-version"
+                      style={{ "--badge-accent": "var(--theme-green)" }}
+                    >
+                      {techStack.nodeMajor}
+                    </span>
+                  </span>
+                </li>
+              </ul>
+            </Col>
+          </Row>
+        )}
         <Row className="site-source">
           <Col lg className="site-source-col">
             <a
