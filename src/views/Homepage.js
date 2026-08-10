@@ -3,13 +3,13 @@ import PrimaryNavigation from '../components/nav/PrimaryNavigation';
 import PrimaryFooter from '../components/nav/PrimaryFooter';
 import MainContent from '../components/MainContent';
 
-function Homepage() {
+function Homepage({ recentActivity, techStack }) {
 
   return (
     <div>
       <PrimaryNavigation />
-      <MainContent />
-      <PrimaryFooter />
+      <MainContent recentActivity={recentActivity} />
+      <PrimaryFooter techStack={techStack} />
     </div>
   );
 }

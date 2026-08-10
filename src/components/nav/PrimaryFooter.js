@@ -4,11 +4,34 @@ import Container from "react-bootstrap/Container";
 import Image from "react-bootstrap/Image";
 import Row from "react-bootstrap/Row";
 import { FaGithub, FaRegLightbulb } from "react-icons/fa";
+import {
+  SiBootstrap,
+  SiNextdotjs,
+  SiNodedotjs,
+  SiReact,
+  SiSass,
+} from "react-icons/si";
 import washingtonStateOutline from "../../assets/images/washington-state-outline.png";
 import LottieFigure from "../fun/LottieFigure";
 import { footerAnimation } from "../../assets/lottie";
 
-function PrimaryFooter() {
+// Version-segment tints cycled across the dependency badges.
+const BADGE_ACCENTS = [
+  "var(--theme-turquoise)",
+  "var(--theme-vibrant-yellow-green)",
+  "var(--theme-orange)",
+  "var(--theme-green)",
+];
+
+// Brand mark (and its official color) shown inside each badge's name segment.
+const BADGE_ICONS = {
+  "Next.js": { Icon: SiNextdotjs, color: "#ffffff" },
+  React: { Icon: SiReact, color: "#61dafb" },
+  Bootstrap: { Icon: SiBootstrap, color: "#a97bff" },
+  Sass: { Icon: SiSass, color: "#cc6699" },
+};
+
+function PrimaryFooter({ techStack }) {
   return (
     <div>
       <Container
@@ -37,6 +60,84 @@ function PrimaryFooter() {
             </p>
           </Col>
         </Row>
+        {techStack && (
+          <Row className="tech-stack">
+            <Col lg className="tech-stack-col">
+              <span className="tech-stack-label" id="tech-stack-label">
+                powered by
+              </span>
+              <ul className="tech-stack-list" aria-labelledby="tech-stack-label">
+                <li>
+                  <span className="tech-badge">
+                    <span className="tech-badge-name">
+                      <img
+                        className="tech-badge-logo"
+                        src="/img/timknabdev-favico.png"
+                        alt=""
+                        aria-hidden="true"
+                      />
+                      timknab.dev
+                    </span>
+                    <span
+                      className="tech-badge-version"
+                      style={{ "--badge-accent": "var(--theme-vibrant-yellow-green)" }}
+                    >
+                      v{techStack.siteVersion}
+                    </span>
+                  </span>
+                </li>
+                {techStack.badges.map((badge, index) => {
+                  const brand = BADGE_ICONS[badge.name];
+                  return (
+                  <li key={badge.name}>
+                    <a
+                      className="tech-badge"
+                      href={badge.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <span className="tech-badge-name">
+                        {brand && (
+                          <brand.Icon
+                            aria-hidden="true"
+                            style={{ color: brand.color }}
+                          />
+                        )}
+                        {badge.name}
+                      </span>
+                      <span
+                        className="tech-badge-version"
+                        style={{
+                          "--badge-accent": BADGE_ACCENTS[index % BADGE_ACCENTS.length],
+                        }}
+                      >
+                        {badge.version}
+                      </span>
+                    </a>
+                  </li>
+                  );
+                })}
+                <li>
+                  <span className="tech-badge">
+                    <span className="tech-badge-name">
+                      <SiNodedotjs
+                        aria-hidden="true"
+                        style={{ color: "#5fa04e" }}
+                      />
+                      Node
+                    </span>
+                    <span
+                      className="tech-badge-version"
+                      style={{ "--badge-accent": "var(--theme-green)" }}
+                    >
+                      {techStack.nodeMajor}
+                    </span>
+                  </span>
+                </li>
+              </ul>
+            </Col>
+          </Row>
+        )}
         <Row className="site-source">
           <Col lg className="site-source-col">
             <a
