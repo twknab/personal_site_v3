@@ -24,7 +24,7 @@ function PrimaryFooter() {
           <Col lg>
             <p className="crafted-tag">
               <span className="wa-state">
-                <Image src={washingtonStateOutline} />
+                <Image src={washingtonStateOutline.src} />
               </span>
               <span className="crafted-with-care">
                 Crafted with{" "}

@@ -1,9 +1,11 @@
-import React, { Suspense, useState } from "react";
+import React, { useState } from "react";
+import dynamic from "next/dynamic";
 import confettiAnimation from "../../assets/lottie/confetti.json";
 
-// Lazy-loaded so the browser-only lottie-web engine stays out of the initial
-// bundle (and out of the jsdom test environment).
-const Lottie = React.lazy(() => import("lottie-react"));
+// Loaded client-side only: the lottie-web engine is browser-only, so it must
+// stay out of server rendering, the initial bundle, and the jsdom test
+// environment.
+const Lottie = dynamic(() => import("lottie-react"), { ssr: false });
 
 /**
  * Full-screen confetti that "rains down" once on page load, then unmounts so it
@@ -25,16 +27,14 @@ function ConfettiOverlay() {
 
   return (
     <div className="confetti-overlay" aria-hidden="true">
-      <Suspense fallback={null}>
-        <Lottie
-          animationData={confettiAnimation}
-          loop={false}
-          autoplay
-          onComplete={() => setFinished(true)}
-          rendererSettings={{ preserveAspectRatio: "xMidYMid slice" }}
-          style={{ width: "100%", height: "100%" }}
-        />
-      </Suspense>
+      <Lottie
+        animationData={confettiAnimation}
+        loop={false}
+        autoplay
+        onComplete={() => setFinished(true)}
+        rendererSettings={{ preserveAspectRatio: "xMidYMid slice" }}
+        style={{ width: "100%", height: "100%" }}
+      />
     </div>
   );
 }

@@ -46,7 +46,7 @@ function PrimaryNavigation() {
         >
           <Navbar.Brand href="/">
             <img
-              src={timknabLogo}
+              src={timknabLogo.src}
               className="d-inline-block align-top timknab-logo"
               alt="Full Stack Developer TimKnab.dev"
             />

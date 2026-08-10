@@ -16,8 +16,8 @@ describe("PrimaryNavigation", () => {
   });
 
   it("successfully renders primary navigation dropdown", async () => {
-    const about = screen.getByText("About");
-    userEvent.click(about);
+    const user = userEvent.setup();
+    await user.click(screen.getByText("About"));
     expect(screen.getByText("Skills")).toBeInTheDocument();
     expect(screen.getByText("Experience")).toBeInTheDocument();
     expect(screen.getByText("Education History")).toBeInTheDocument();

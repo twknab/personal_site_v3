@@ -18,7 +18,7 @@ function FitnessTracker() {
           }
         >
           <Image
-            src={fitnessTrackerIco}
+            src={fitnessTrackerIco.src}
             className="project-icon"
             rounded
             fluid

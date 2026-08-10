@@ -13,7 +13,7 @@ function BookCover({ cover, title }) {
   // next, and the local placeholder always brings up the rear.
   const sources = (Array.isArray(cover) ? cover : [cover])
     .filter(Boolean)
-    .concat(placeholderCover);
+    .concat(placeholderCover.src);
   const [index, setIndex] = useState(0);
 
   return (

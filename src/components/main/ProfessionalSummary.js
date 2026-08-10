@@ -13,7 +13,7 @@ function ProfessionalSummary() {
       <Row className="professional-summary light-text-shadow">
         <Col xs={12} s={12} md={12} lg={4} className="tilt">
           <div className="bio-photo-ring">
-            <Image src={bioPhoto} roundedCircle fluid className="bio-photo" />
+            <Image src={bioPhoto.src} roundedCircle fluid className="bio-photo" />
           </div>
           <LottieFigure
             animationData={heroAnimation}
