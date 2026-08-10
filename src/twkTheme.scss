@@ -1163,6 +1163,478 @@ navbar-nav .dropdown-menu {
 }
 
 // *********************
+// TOOLKIT
+// *********************
+// Sits between Projects and Experience in the stacked-card rhythm: deep teal
+// base so it reads as its own surface without breaking the purple/orange run.
+.toolkit {
+  position: relative;
+  z-index: 0;
+  color: $themeDarkText;
+  // Small screens fall through to the global `.row` padding (50px 5px), the
+  // same as every other section — no mobile override needed here.
+  padding: 28px 48px 80px;
+  border-top: 20px solid $themeTurquoise;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  box-shadow: $shadow-soft;
+  background-color: #12242b;
+  background-image:
+    radial-gradient(at 12% 12%, rgba($themeTurquoise, 0.28) 0px, transparent 48%),
+    radial-gradient(at 88% 20%, rgba($themeGreen, 0.16) 0px, transparent 45%),
+    radial-gradient(at 60% 95%, rgba($themePurple, 0.30) 0px, transparent 50%),
+    linear-gradient(160deg, #17323c 0%, #14252e 60%, #101c22 100%);
+  background-blend-mode: screen, screen, screen, normal;
+}
+
+.toolkit-intro {
+  max-width: 62ch;
+  margin-bottom: 30px;
+  text-shadow: 2px 2px 4px #000000;
+}
+
+// ---- Shared card shell ----
+.toolkit-card {
+  margin-bottom: 34px;
+  padding: 26px 28px 22px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: rgba(6, 18, 23, 0.55);
+  box-shadow: $shadow-soft;
+
+  @media (max-width: 575.98px) {
+    padding: 20px 16px 18px;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.toolkit-card-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 14px;
+  margin-bottom: 10px;
+
+  h3 {
+    padding-bottom: 0;
+    margin-bottom: 0;
+  }
+}
+
+.toolkit-tag {
+  padding: 3px 11px;
+  border-radius: 999px;
+  border: 1px solid rgba($themeTurquoise, 0.45);
+  background-color: rgba($themeTurquoise, 0.1);
+  color: $themeTurquoise;
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.toolkit-card-blurb {
+  max-width: 70ch;
+  margin-bottom: 22px;
+  text-shadow: 2px 2px 4px #000000;
+}
+
+// ---- Calculator ----
+.toolkit-calc {
+  align-items: stretch;
+}
+
+.toolkit-calc-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.toolkit-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 0;
+}
+
+.toolkit-field-label {
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  opacity: 0.82;
+}
+
+.toolkit-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  input {
+    width: 100%;
+    padding: 12px 46px 12px 14px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    background-color: rgba(0, 0, 0, 0.4);
+    color: $themeDarkText;
+    font-size: 1.35rem;
+    font-variant-numeric: tabular-nums;
+
+    &:focus {
+      outline: none;
+      border-color: $themeTurquoise;
+      box-shadow: 0 0 0 3px rgba($themeTurquoise, 0.25);
+    }
+  }
+}
+
+.toolkit-unit {
+  position: absolute;
+  right: 14px;
+  pointer-events: none;
+  opacity: 0.65;
+  font-size: 0.95rem;
+}
+
+.toolkit-presets {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.toolkit-presets-label {
+  width: 100%;
+  font-size: 0.78rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  opacity: 0.6;
+}
+
+.toolkit-preset {
+  padding: 5px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background-color: rgba(255, 255, 255, 0.05);
+  color: $themeDarkText;
+  font-size: 0.82rem;
+
+  &:hover {
+    border-color: $themeGreen;
+    color: $themeGreen;
+  }
+}
+
+.toolkit-calc-output {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  @media (max-width: 767.98px) {
+    margin-top: 26px;
+  }
+}
+
+.toolkit-result {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-bottom: 14px;
+}
+
+.toolkit-result-label {
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
+.toolkit-result-value {
+  font-size: 2.9rem;
+  font-weight: 700;
+  line-height: 1.05;
+  font-variant-numeric: tabular-nums;
+  background: linear-gradient(100deg, $themeTurquoise, $themeGreen 60%, $themeVibrantYellowGreen);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  @media (max-width: 575.98px) {
+    font-size: 2.3rem;
+  }
+}
+
+.toolkit-bar {
+  display: flex;
+  height: 12px;
+  border-radius: 999px;
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.45);
+}
+
+.toolkit-bar-seg {
+  height: 100%;
+  transition: width 220ms ease-out;
+
+  &--flat {
+    background-color: $themeTurquoise;
+  }
+  &--climb {
+    background-color: $themeOrange;
+  }
+  &--rest {
+    background-color: $themePurple;
+  }
+}
+
+.toolkit-breakdown {
+  list-style: none;
+  padding-left: 0;
+  margin: 14px 0 0;
+
+  li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 5px 0;
+  }
+}
+
+.toolkit-dot {
+  width: 10px;
+  height: 10px;
+  flex-shrink: 0;
+  border-radius: 50%;
+
+  &--flat {
+    background-color: $themeTurquoise;
+  }
+  &--climb {
+    background-color: $themeOrange;
+  }
+  &--rest {
+    background-color: $themePurple;
+  }
+}
+
+.toolkit-breakdown-label {
+  flex: 1;
+  opacity: 0.85;
+}
+
+.toolkit-breakdown-value {
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+
+// ---- Tuning disclosure ----
+.toolkit-tuning {
+  margin-top: 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 16px;
+}
+
+.toolkit-disclosure {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: $turquoiseLink;
+  font-size: 0.95rem;
+
+  &:hover {
+    color: $themeGreen;
+  }
+}
+
+.toolkit-chevron {
+  transition: transform 180ms ease-out;
+
+  &.is-open {
+    transform: rotate(180deg);
+  }
+}
+
+.toolkit-tuned-flag {
+  padding: 2px 8px;
+  border-radius: 999px;
+  background-color: rgba($themeVibrantYellowGreen, 0.16);
+  color: $themeVibrantYellowGreen;
+  font-size: 0.68rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.toolkit-tuning-body {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  max-width: 460px;
+}
+
+.toolkit-tuning-note {
+  margin-bottom: 0;
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+.toolkit-slider {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 0;
+
+  input[type="range"] {
+    width: 100%;
+    accent-color: $themeTurquoise;
+  }
+}
+
+.toolkit-slider-label {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 0.88rem;
+  opacity: 0.85;
+
+  strong {
+    font-variant-numeric: tabular-nums;
+    color: $themeVibrantYellowGreen;
+  }
+}
+
+.toolkit-reset {
+  align-self: flex-start;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background-color: transparent;
+  color: $themeDarkText;
+  font-size: 0.85rem;
+
+  &:hover:not(:disabled) {
+    border-color: $themeRed;
+    color: $themeRed;
+  }
+
+  &:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+  }
+}
+
+.toolkit-formula {
+  margin: 20px 0 8px;
+  overflow-x: auto;
+
+  code {
+    display: inline-block;
+    padding: 9px 14px;
+    border-radius: 8px;
+    background-color: rgba(0, 0, 0, 0.45);
+    color: $themeVibrantYellowGreenLight;
+    font-size: 0.86rem;
+    white-space: nowrap;
+  }
+}
+
+.toolkit-provenance {
+  margin-bottom: 0;
+  font-size: 0.88rem;
+  opacity: 0.75;
+}
+
+// ---- ERD ----
+.toolkit-erd-frame {
+  position: relative;
+  display: block;
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: #ffffff;
+  box-shadow: $shadow-soft;
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  &:hover .toolkit-erd-open {
+    opacity: 1;
+  }
+}
+
+.toolkit-erd-open {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 14px;
+  border-radius: 999px;
+  background-color: rgba(0, 0, 0, 0.78);
+  color: #ffffff;
+  font-size: 0.82rem;
+  opacity: 0.72;
+  transition: opacity 160ms ease-out;
+}
+
+.toolkit-annotations {
+  display: grid;
+  gap: 24px;
+  margin-top: 24px;
+
+  @media (min-width: 992px) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  ul {
+    padding-left: 20px;
+    margin-bottom: 0;
+  }
+
+  li {
+    padding: 5px 0;
+    font-size: 0.92rem;
+    line-height: 1.5;
+  }
+
+  code {
+    padding: 1px 5px;
+    border-radius: 4px;
+    background-color: rgba(0, 0, 0, 0.4);
+    color: $themeVibrantYellowGreenLight;
+    font-size: 0.86em;
+  }
+}
+
+.toolkit-annotation-title {
+  margin-bottom: 8px;
+  font-size: 0.8rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+
+  &.is-good {
+    color: $themeGreen;
+  }
+
+  &.is-bad {
+    color: $themeOrange;
+  }
+}
+
+// *********************
+
+// *********************
 // EXPERIENCE
 // *********************
 
