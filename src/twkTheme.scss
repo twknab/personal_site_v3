@@ -1279,6 +1279,68 @@ navbar-nav .dropdown-menu {
   padding-bottom: 0px !important;
 }
 
+// Quiet "site source / open an issue" meta-line above the copyright,
+// styled to match the copyright text so the footer keeps its original feel.
+.site-source {
+  padding: 6px 15px 0;
+}
+
+.site-source-col {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  column-gap: 8px;
+  row-gap: 2px;
+  font-size: 13px;
+  color: white;
+}
+
+.site-source-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  // Modest padding keeps the tap area comfortable without pill chrome.
+  padding: 6px 2px;
+  color: white;
+  font-weight: 400;
+
+  svg {
+    flex-shrink: 0;
+  }
+
+  &:hover,
+  &:focus-visible {
+    color: $themeVibrantYellowGreen;
+    font-weight: bold;
+    text-decoration: none;
+  }
+
+  &:visited {
+    color: white;
+  }
+
+  &:visited:hover {
+    color: $themeVibrantYellowGreen;
+  }
+}
+
+.site-source-divider {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+@media (max-width: 575px) {
+  // Stack the two links on small phones; hide the dot between them.
+  .site-source-divider {
+    display: none;
+  }
+
+  .site-source-link {
+    flex-basis: 100%;
+    justify-content: center;
+  }
+}
+
 .copyright {
   padding: 0px 15px !important;
 }

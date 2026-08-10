@@ -3,6 +3,7 @@ import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Image from "react-bootstrap/Image";
 import Row from "react-bootstrap/Row";
+import { FaGithub, FaRegLightbulb } from "react-icons/fa";
 import washingtonStateOutline from "../../assets/images/washington-state-outline.png";
 import LottieFigure from "../fun/LottieFigure";
 import { footerAnimation } from "../../assets/lottie";
@@ -34,6 +35,29 @@ function PrimaryFooter() {
                 from Washington
               </span>
             </p>
+          </Col>
+        </Row>
+        <Row className="site-source">
+          <Col lg className="site-source-col">
+            <a
+              className="site-source-link"
+              href="https://github.com/twknab/personal_site_v3"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FaGithub aria-hidden="true" /> site source
+            </a>
+            <span className="site-source-divider" aria-hidden="true">
+              &middot;
+            </span>
+            <a
+              className="site-source-link"
+              href="https://github.com/twknab/personal_site_v3/issues/new"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FaRegLightbulb aria-hidden="true" /> spot a bug? open an issue
+            </a>
           </Col>
         </Row>
         <Row className="copyright">

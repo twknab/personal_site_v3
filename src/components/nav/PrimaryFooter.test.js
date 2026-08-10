@@ -18,4 +18,18 @@ describe("PrimaryFooter", () => {
   it("renders as a real fluid container", () => {
     expect(screen.getByTestId("primary-footer")).toHaveClass("container-fluid");
   });
+
+  it("links to the site's GitHub repo and new-issue page", () => {
+    const footer = screen.getByTestId("primary-footer");
+    expect(
+      footer.querySelector(
+        'a[href="https://github.com/twknab/personal_site_v3"]'
+      )
+    ).toBeInTheDocument();
+    expect(
+      footer.querySelector(
+        'a[href="https://github.com/twknab/personal_site_v3/issues/new"]'
+      )
+    ).toBeInTheDocument();
+  });
 });

@@ -1,6 +1,6 @@
 {
   "name": "tk_version3_website",
-  "version": "0.1.0",
+  "version": "5.0.0",
   "private": true,
   "dependencies": {
     "bootstrap": "^4.6.0",
