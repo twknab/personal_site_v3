@@ -1,0 +1,80 @@
+# Dependabot configuration
+#
+# Before this file existed, Dependabot ran with default security-only behavior
+# and opened one PR per advisory against the Create React App tree. Fifteen of
+# them piled up, then the Next.js migration deleted that tree (and yarn.lock)
+# out from under every one — all fifteen became unmergeable at once.
+#
+# Two lessons are encoded below: group related updates so review stays cheap,
+# and keep the volume low enough that PRs get handled instead of accumulating.
+version: 2
+
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    # Enough headroom for a grouped batch, low enough that a stale pile can't
+    # rebuild silently.
+    open-pull-requests-limit: 5
+    labels:
+      - dependencies
+      - chore
+    commit-message:
+      prefix: chore
+      include: scope
+    groups:
+      # Next/React move together — a Next major generally requires the matching
+      # React major, so splitting them produces PRs that can never merge alone.
+      next-react:
+        patterns:
+          - next
+          - eslint-config-next
+          - react
+          - react-dom
+          - '@types/react'
+          - '@types/react-dom'
+      # Test tooling: dev-only, safe to batch, no runtime surface.
+      test-tooling:
+        patterns:
+          - jest
+          - jest-environment-jsdom
+          - '@testing-library/*'
+      # Everything else that is dev-only.
+      dev-tooling:
+        dependency-type: development
+        exclude-patterns:
+          - jest
+          - jest-environment-jsdom
+          - '@testing-library/*'
+          - eslint-config-next
+      # Remaining runtime deps in one batch.
+      production:
+        dependency-type: production
+        exclude-patterns:
+          - next
+          - react
+          - react-dom
+    ignore:
+      # Bootstrap 4 -> 5 is a breaking visual migration tracked in #85, not a
+      # bump. Dependabot should stop offering it until that lands.
+      - dependency-name: bootstrap
+        update-types:
+          - version-update:semver-major
+
+  # Keep workflow actions current; they were several majors behind before the
+  # CI overhaul and nothing was watching them.
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+    labels:
+      - dependencies
+      - chore
+    commit-message:
+      prefix: ci
+    groups:
+      actions:
+        patterns:
+          - '*'
