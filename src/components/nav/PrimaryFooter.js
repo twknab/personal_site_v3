@@ -40,22 +40,23 @@ function PrimaryFooter() {
         <Row className="site-source">
           <Col lg className="site-source-col">
             <a
-              className="site-source-pill"
+              className="site-source-link"
               href="https://github.com/twknab/personal_site_v3"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <FaGithub aria-hidden="true" />
-              <span>This site on GitHub</span>
+              <FaGithub aria-hidden="true" /> site source
             </a>
+            <span className="site-source-divider" aria-hidden="true">
+              &middot;
+            </span>
             <a
-              className="site-source-pill"
+              className="site-source-link"
               href="https://github.com/twknab/personal_site_v3/issues/new"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <FaRegLightbulb aria-hidden="true" />
-              <span>Spot a bug or have an idea? Open an issue</span>
+              <FaRegLightbulb aria-hidden="true" /> spot a bug? open an issue
             </a>
           </Col>
         </Row>

@@ -1,6 +1,6 @@
 # Tim Knab — Personal Site
 
-A handcrafted React portfolio for **Tim Knab**, full-stack software engineer. Every color, gradient, texture, animation, and illustration was hand-picked, coded, or created to give the site an artisanal, expressive feel while showcasing skills, projects, experience, and personal interests.
+A custom portfolio site for **Tim Knab**, full-stack software engineer — built with an artisanal, expressive feel while showcasing skills, projects, experience, and personal interests.
 
 ## Live Deployment
 
@@ -39,7 +39,7 @@ The single-page experience flows through the following sections (see `src/compon
 
 - **Confetti overlay** — full-page confetti rains down on initial load (`components/fun/ConfettiOverlay.js`).
 - **Cursor trail** — playful desktop-only particle trail that follows the mouse (`components/fun/CursorTrail.js`).
-- **Psychedelic & golden gradients** — animated, flowing gradients across the nav, footer, photo ring, and section backgrounds.
+- **Flowing golden gradients** — animated gradients across the nav, footer, photo ring, and section backgrounds.
 - **Glassmorphism** — frosted, layered surfaces throughout the theme.
 - **Scroll-reveal animations** — sections fade/slide in on scroll via an `IntersectionObserver` hook (`hooks/useScrollReveal.js`).
 - **Lottie animations** — lazy-loaded vector animations that stay test-safe in `jsdom` (`components/fun/LottieFigure.js`).

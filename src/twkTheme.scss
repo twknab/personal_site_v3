@@ -1279,49 +1279,41 @@ navbar-nav .dropdown-menu {
   padding-bottom: 0px !important;
 }
 
-// Frosted "view source / open an issue" pills sitting on the footer's
-// animated gradient, between the tagline and the copyright line.
+// Quiet "site source / open an issue" meta-line above the copyright,
+// styled to match the copyright text so the footer keeps its original feel.
 .site-source {
-  padding: 14px 15px 4px;
+  padding: 6px 15px 0;
 }
 
 .site-source-col {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 10px;
+  align-items: center;
+  column-gap: 8px;
+  row-gap: 2px;
+  font-size: 13px;
+  color: white;
 }
 
-.site-source-pill {
+.site-source-link {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  // Comfortable thumb target on touch screens (>=44px tall).
-  min-height: 44px;
-  padding: 8px 18px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.12);
-  border: 1px solid rgba(255, 255, 255, 0.28);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
+  gap: 5px;
+  // Modest padding keeps the tap area comfortable without pill chrome.
+  padding: 6px 2px;
   color: white;
-  font-size: 14px;
-  font-weight: bold;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.55);
-  transition: transform 0.18s ease, background 0.18s ease, color 0.18s ease;
+  font-weight: 400;
 
   svg {
     flex-shrink: 0;
-    font-size: 18px;
-    filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.45));
   }
 
   &:hover,
   &:focus-visible {
     color: $themeVibrantYellowGreen;
-    background: rgba(255, 255, 255, 0.2);
+    font-weight: bold;
     text-decoration: none;
-    transform: translateY(-2px);
   }
 
   &:visited {
@@ -1333,13 +1325,19 @@ navbar-nav .dropdown-menu {
   }
 }
 
+.site-source-divider {
+  color: rgba(255, 255, 255, 0.7);
+}
+
 @media (max-width: 575px) {
-  .site-source-pill {
-    // Let the long "open an issue" pill breathe on small phones instead of
-    // overflowing: full-width pills stack as tidy rows.
-    width: 100%;
+  // Stack the two links on small phones; hide the dot between them.
+  .site-source-divider {
+    display: none;
+  }
+
+  .site-source-link {
+    flex-basis: 100%;
     justify-content: center;
-    text-align: center;
   }
 }
 
