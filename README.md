@@ -91,16 +91,21 @@ Every pull request runs:
 
 ## Roadmap & Ideas
 
-**Next up**
-- [ ] "Book a call" — a toggleable [Calendly](https://calendly.com/) scheduling widget that can be switched on/off.
-- [ ] Tie in creative projects — feature the **Adventures with TK** YouTube channel (latest videos / embed).
+**Next up** (in planned order — see the linked issues for full specs)
+- [x] Migrate to Next.js 14 + React 18 ([#76](https://github.com/twknab/personal_site_v3/issues/76)) — the foundation for everything below.
+- [ ] **Recently shipped** — a live GitHub activity strip, server-fetched with ISR caching ([#78](https://github.com/twknab/personal_site_v3/issues/78)).
+- [ ] **Reading list upgrade** — per-book takeaways, topic filter chips, and a stats line ([#79](https://github.com/twknab/personal_site_v3/issues/79)).
+- [ ] **Ask Tim** — an AI chat agent grounded exclusively in this site's content, powered by Vertex AI (Gemini) behind a server route ([#77](https://github.com/twknab/personal_site_v3/issues/77)).
+- [ ] Bump Next.js 14 → 15/16 and React 19 once `lottie-react` / `react-scroll` peer ranges allow, clearing the remaining npm audit advisories ([#80](https://github.com/twknab/personal_site_v3/issues/80)).
 
 **Future work**
+- [ ] **Adventure map** — an interactive Washington trail map (Leaflet/MapLibre) of hikes and paddles, merging the engineering + environmental-science identities.
+- [ ] "Book a call" — a toggleable [Calendly](https://calendly.com/) scheduling widget that can be switched on/off.
+- [ ] Tie in creative projects — feature the **Adventures with TK** YouTube channel (latest videos / embed).
 - [ ] Blog section — articles on coding challenges and the dev soft-skills journey.
 - [ ] Animated intro / loading screen.
 - [ ] Interactive widgets or small JS games.
 - [ ] Hand-drawn illustrations as section accents and an end-of-page flourish.
-- [ ] Bump Next.js 14 → 15/16 (and React 19) once `lottie-react` / `react-scroll` peer ranges allow, clearing the remaining npm audit advisories.
 
 ---
 
