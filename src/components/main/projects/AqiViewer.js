@@ -5,7 +5,7 @@ import Image from "react-bootstrap/Image";
 import Row from "react-bootstrap/Row";
 import aqiViewerIco from "../../../assets/images/apps/aqiviewer-ico.svg";
 
-const REPO = "https://github.com/twknab/playing_with_devise";
+const REPO = "https://github.com/twknab/aqi-viewer";
 
 function AqiViewer() {
   return (
