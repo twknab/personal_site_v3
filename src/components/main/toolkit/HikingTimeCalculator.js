@@ -243,8 +243,7 @@ function HikingTimeCalculator() {
 
       <p className="toolkit-provenance">
         Minutes round up on purpose — on a trail, over-estimating is the safe
-        direction. Porting it here also fixed a latent bug in the original:
-        whole-hour results crashed the formatter.{" "}
+        direction.{" "}
         <a
           href="https://github.com/twknab/mean_hiking_algorithm"
           target="_blank"
