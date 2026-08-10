@@ -7,14 +7,15 @@ import Experience from "./main/Experience";
 import ProfessionalSummary from "./main/ProfessionalSummary";
 import Projects from "./main/Projects";
 import Reading from "./main/Reading";
+import RecentlyShipped from "./main/RecentlyShipped";
 import Skills from "./main/Skills";
 import Stacks from "./main/Stacks";
 import useScrollReveal from "../hooks/useScrollReveal";
 
 const REVEAL_SECTIONS =
-  ".professional-summary, .about-me, .skills, .stacks, .projects, .experience, .education-history, .awards, .reading";
+  ".professional-summary, .about-me, .skills, .stacks, .projects, .recently-shipped, .experience, .education-history, .awards, .reading";
 
-function MainContent() {
+function MainContent({ recentActivity }) {
   useScrollReveal(REVEAL_SECTIONS);
 
   return (
@@ -26,6 +27,7 @@ function MainContent() {
         <Skills />
         <Stacks />
         <Projects />
+        <RecentlyShipped items={recentActivity} />
         <Experience />
         <EducationHistory />
         <Awards />
