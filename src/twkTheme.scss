@@ -1279,6 +1279,70 @@ navbar-nav .dropdown-menu {
   padding-bottom: 0px !important;
 }
 
+// Frosted "view source / open an issue" pills sitting on the footer's
+// animated gradient, between the tagline and the copyright line.
+.site-source {
+  padding: 14px 15px 4px;
+}
+
+.site-source-col {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.site-source-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  // Comfortable thumb target on touch screens (>=44px tall).
+  min-height: 44px;
+  padding: 8px 18px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.55);
+  transition: transform 0.18s ease, background 0.18s ease, color 0.18s ease;
+
+  svg {
+    flex-shrink: 0;
+    font-size: 18px;
+    filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.45));
+  }
+
+  &:hover,
+  &:focus-visible {
+    color: $themeVibrantYellowGreen;
+    background: rgba(255, 255, 255, 0.2);
+    text-decoration: none;
+    transform: translateY(-2px);
+  }
+
+  &:visited {
+    color: white;
+  }
+
+  &:visited:hover {
+    color: $themeVibrantYellowGreen;
+  }
+}
+
+@media (max-width: 575px) {
+  .site-source-pill {
+    // Let the long "open an issue" pill breathe on small phones instead of
+    // overflowing: full-width pills stack as tidy rows.
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+}
+
 .copyright {
   padding: 0px 15px !important;
 }
