@@ -80,5 +80,8 @@ describe("PrimaryFooter tech-stack badges", () => {
     expect(
       document.querySelector('a.tech-badge[href="https://react.dev"]')
     ).toBeInTheDocument();
+    expect(
+      document.querySelector('a.tech-badge[href="https://nodejs.org"]')
+    ).toBeInTheDocument();
   });
 });
