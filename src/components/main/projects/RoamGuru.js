@@ -3,11 +3,17 @@ import Col from "react-bootstrap/Col";
 import Image from "react-bootstrap/Image";
 import Row from "react-bootstrap/Row";
 import roamGuruIco from "../../../assets/images/apps/roamguru-ico.png";
-import awardsPreview from "../../../assets/images/projects/roamguru/awards-earned-preview.png";
+import awards from "../../../assets/images/projects/roamguru/awards.png";
+import mapOverview from "../../../assets/images/projects/roamguru/map-overview.png";
+import readyCheck from "../../../assets/images/projects/roamguru/ready-check.png";
+import tripDetail from "../../../assets/images/projects/roamguru/trip-detail.png";
 import ProjectGallery from "./ProjectGallery";
 
 const SHOTS = [
-  { src: awardsPreview, alt: "Awards earned screen on mobile" },
+  { src: tripDetail, alt: "Trip detail on mobile" },
+  { src: awards, alt: "Awards earned" },
+  { src: mapOverview, alt: "Trip map overview" },
+  { src: readyCheck, alt: "Ready-to-roll checklist" },
 ];
 
 function RoamGuru() {

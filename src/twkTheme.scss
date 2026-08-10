@@ -1290,20 +1290,23 @@ navbar-nav .dropdown-menu {
 .project-gallery {
   list-style: none;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 14px;
-  margin: 0.35rem 0 0;
+  grid-template-columns: repeat(auto-fill, minmax(132px, 132px));
+  gap: 12px;
+  margin: 0.5rem 0 0;
   padding: 0.35rem 0.35rem 0;
+  justify-content: start;
 }
 
 .project-gallery-card {
-  min-width: 0;
+  width: 132px;
+  min-width: 132px;
 }
 
 .project-gallery-frame {
   position: relative;
   display: block;
-  width: 100%;
+  width: 132px;
+  height: 132px;
   padding: 0;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -1320,9 +1323,10 @@ navbar-nav .dropdown-menu {
   img {
     display: block;
     width: 100%;
-    aspect-ratio: 16 / 10;
+    height: 100%;
+    aspect-ratio: 1 / 1;
     object-fit: cover;
-    object-position: top center;
+    object-position: center top;
     transition: transform 0.45s ease;
   }
 
@@ -1334,7 +1338,7 @@ navbar-nav .dropdown-menu {
     outline: none;
 
     img {
-      transform: scale(1.06);
+      transform: scale(1.08);
     }
 
     .project-gallery-caption {
@@ -1429,7 +1433,7 @@ navbar-nav .dropdown-menu {
 @media (max-width: 575.98px) {
   .project-gallery {
     display: flex;
-    gap: 12px;
+    gap: 10px;
     overflow-x: auto;
     scroll-snap-type: x proximity;
     padding-bottom: 8px;
@@ -1437,7 +1441,8 @@ navbar-nav .dropdown-menu {
   }
 
   .project-gallery-card {
-    flex: 0 0 78%;
+    flex: 0 0 132px;
+    width: 132px;
     scroll-snap-align: start;
   }
 }

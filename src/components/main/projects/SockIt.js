@@ -5,12 +5,8 @@ import Image from "react-bootstrap/Image";
 import Row from "react-bootstrap/Row";
 import { FaGithub } from "react-icons/fa";
 import sockitIco from "../../../assets/images/apps/sockit-ico.png";
-import chat from "../../../assets/images/projects/sockit/chat.png";
-import ProjectGallery from "./ProjectGallery";
 
 const REPO = "https://github.com/twknab/sockets_chat";
-
-const SHOTS = [{ src: chat, alt: "Live chat with timezone-aware timestamps" }];
 
 function SockIt() {
   return (
@@ -58,7 +54,6 @@ function SockIt() {
           </Button>
         </Col>
       </Row>
-      <ProjectGallery images={SHOTS} projectName="Sock It!" />
     </div>
   );
 }

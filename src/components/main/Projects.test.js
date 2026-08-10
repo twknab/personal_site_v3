@@ -49,8 +49,8 @@ describe("Projects", () => {
 
   it("attaches screenshot galleries to projects that have them", () => {
     const galleries = document.querySelectorAll('[data-testid="project-gallery"]');
-    // SquirrelStudio is still private / screenshot-light; the rest ship galleries.
-    expect(galleries.length).toBe(titles().length - 1);
+    // SquirrelStudio (private) and Sock It! (no shots) skip galleries.
+    expect(galleries.length).toBe(titles().length - 2);
     galleries.forEach((gallery) => {
       expect(gallery.querySelectorAll("img").length).toBeGreaterThan(0);
     });
