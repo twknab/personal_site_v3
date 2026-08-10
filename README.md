@@ -106,6 +106,9 @@ This repo is worked from both **Claude Code** and **Cursor**, which don't share 
 | --- | --- |
 | `dependency-pr-triage` | Decide which dependency-bump PRs are still real, clear the backlog, and keep it from rebuilding. |
 | `skills-sync` | Keeps the two skill directories mirrored; run whenever a skill is added, edited, or removed. |
+| `parallel-sessions` | One git worktree per agent session, so concurrent Claude/Cursor sessions don't overwrite each other. |
+
+**Running more than one session at once:** this repo is often worked from several agent threads plus Cursor, against a checkout that lives in iCloud Drive. A single shared working directory cannot support that — sessions stage each other's files and stash each other's work. Give every session its own `git worktree` outside iCloud (`~/Development/tkv3-worktrees/<branch>`); see the `parallel-sessions` skill.
 
 **The rule:** any change to a skill updates *both* copies in the same commit. Only the `> Mirrors …` pointer line differs between them. The parity check lives in the `skills-sync` skill.
 
