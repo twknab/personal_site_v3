@@ -80,14 +80,18 @@ npm run lint     # ESLint (next/core-web-vitals)
 
 ## Continuous Integration
 
-Every pull request runs:
+**Pre-merge — every pull request:**
 
-- **Netlify deploy preview** — a live preview URL for the branch.
-- **Codacy Security Scan** — static analysis (reports to the Codacy dashboard).
-- **npm audit** — dependency vulnerability scan, private-repo friendly.
-- **Dependency Review** — GitHub supply-chain check.
+- **App CI** *(blocking)* — ESLint (`next/core-web-vitals`), the Jest test suite, and a production `next build`. A failure in any step blocks the merge.
+- **Netlify deploy preview** — a live preview URL for the branch (the visual check).
+- **Codacy Security Scan**, **npm audit**, **Dependency Review** — security scans, informational.
 
-> ℹ️ The security scans currently run as **informational** (non-blocking). The Codacy/Dependency Review SARIF uploads require GitHub Advanced Security (unavailable on a private repo), and `npm audit` remains advisory while the Next.js 14 pin carries upstream advisories that only affect unused self-hosting features; revisit as hard gates after the Next 15/16 bump.
+**Post-merge — every push to `main`:**
+
+- **App CI** re-runs on the merged tree, catching bad merges or direct pushes even though Netlify deploys them.
+- **Lighthouse** audits the live https://timknab.dev after the Netlify deploy settles (3 runs, artifacts + shareable report links) — performance, accessibility, best practices, SEO. Also runs monthly on a schedule to catch drift between merges.
+
+> ℹ️ The security scans run as **informational** (non-blocking). The Codacy/Dependency Review SARIF uploads require GitHub Advanced Security (unavailable on a private repo), and `npm audit` remains advisory while the Next.js 14 pin carries upstream advisories that only affect unused self-hosting features; it becomes a hard gate after the Next 15/16 bump ([#80](https://github.com/twknab/personal_site_v3/issues/80)).
 
 ## Roadmap & Ideas
 
