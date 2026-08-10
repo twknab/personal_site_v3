@@ -1,0 +1,22 @@
+---
+# Codacy CLI configuration.
+#
+# The workflow runs Codacy for *security* analysis. JavaScript style/quality is
+# already a blocking gate in app-ci.yml (ESLint via eslint.config.mjs), so
+# Codacy's bundled linters are redundant here — and its ESLint walks into
+# subdirectories that have no config of their own, erroring with
+# "No ESLint configuration found in /src/src/...".
+engines:
+  eslint:
+    enabled: false
+  stylelint:
+    enabled: false
+
+exclude_paths:
+  - "node_modules/**"
+  - ".next/**"
+  - "out/**"
+  - "coverage/**"
+  - "public/**"
+  - "package-lock.json"
+  - "**/*.test.js"
