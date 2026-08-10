@@ -10,7 +10,7 @@ function SquirrelStudio() {
       <Row className="project-row">
         <Col md="3" className="project-col tilt">
           <Image
-            src={squirrelStudioIco}
+            src={squirrelStudioIco.src}
             className="project-icon"
             rounded
             fluid

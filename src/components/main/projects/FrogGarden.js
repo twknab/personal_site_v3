@@ -16,7 +16,7 @@ function FrogGarden() {
           className="project-col tilt"
           onClick={() => window.open(REPO, "_blank")}
         >
-          <Image src={frogGardenIco} className="project-icon" rounded fluid />
+          <Image src={frogGardenIco.src} className="project-icon" rounded fluid />
         </Col>
         <Col md="9">
           <h3>Frog Garden</h3>
