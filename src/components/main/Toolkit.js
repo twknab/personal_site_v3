@@ -2,7 +2,7 @@ import React from "react";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import { Element } from "react-scroll";
-import HikingTimeCalculator from "./toolkit/HikingTimeCalculator";
+import TripTimeCalculator from "./toolkit/TripTimeCalculator";
 
 // The Toolkit is for the reusable pieces *behind* the projects — an algorithm,
 // a diagram — shown working rather than described. Entry rule: it has to answer
@@ -25,7 +25,7 @@ function Toolkit() {
             actually run. Less polished than a product, more honest than a
             screenshot.
           </p>
-          <HikingTimeCalculator />
+          <TripTimeCalculator />
         </Col>
       </Row>
     </div>

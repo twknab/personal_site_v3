@@ -67,3 +67,71 @@ describe("Toolkit", () => {
     expect(document.querySelector(".toolkit-tuned-flag")).toBeTruthy();
   });
 });
+
+describe("Toolkit kayaking mode", () => {
+  const switchToKayak = () => {
+    const btn = Array.from(
+      document.querySelectorAll(".toolkit-mode-btn")
+    ).find((b) => b.textContent.includes("Kayaking"));
+    fireEvent.click(btn);
+  };
+
+  it("starts in hiking mode and switches on the toggle", () => {
+    expect(
+      document.querySelector('[data-testid="hiking-time-calculator"]')
+    ).toBeTruthy();
+    expect(
+      document.querySelector('[data-testid="kayak-time-calculator"]')
+    ).toBeNull();
+    switchToKayak();
+    expect(
+      document.querySelector('[data-testid="kayak-time-calculator"]')
+    ).toBeTruthy();
+    expect(
+      document.querySelector('[data-testid="hiking-time-calculator"]')
+    ).toBeNull();
+  });
+
+  it("works in nautical miles and knots, reporting speed made good", () => {
+    switchToKayak();
+    // Defaults: 6 nm, 1 kn slack current, 8 kn headwind.
+    // Effective = 3 − 8/7 ≈ 1.857 kn → visible in the speed chip.
+    expect(document.querySelector(".toolkit-speed").textContent).toContain(
+      "1.9 kn"
+    );
+  });
+
+  it("credits current direction into the estimate", () => {
+    switchToKayak();
+    setInput("kayak-wind", "0");
+    const slack = document.querySelector(".toolkit-speed").textContent;
+    const withBtn = Array.from(
+      document.querySelectorAll(".toolkit-seg-btn")
+    ).find((b) => b.textContent === "With");
+    fireEvent.click(withBtn);
+    // 3 kn paddle + 1 kn following current = 4.0 kn.
+    expect(document.querySelector(".toolkit-speed").textContent).toContain(
+      "4.0 kn"
+    );
+    expect(slack).toContain("3.0 kn");
+  });
+
+  it("warns instead of inventing a time when the water outruns the paddler", () => {
+    switchToKayak();
+    setInput("kayak-current", "4");
+    const againstBtn = Array.from(
+      document.querySelectorAll(".toolkit-seg-btn")
+    ).find((b) => b.textContent === "Against");
+    fireEvent.click(againstBtn);
+    expect(document.querySelector(".toolkit-warning")).toBeTruthy();
+    expect(document.querySelector('[data-testid="hiking-total"]')).toBeNull();
+  });
+
+  it("always shows the education-only disclaimer, in both modes", () => {
+    const hikingNote = document.querySelector(".toolkit-disclaimer");
+    expect(hikingNote.textContent).toMatch(/education/i);
+    switchToKayak();
+    const kayakNote = document.querySelector(".toolkit-disclaimer");
+    expect(kayakNote.textContent).toMatch(/not navigation or safety advice/i);
+  });
+});
