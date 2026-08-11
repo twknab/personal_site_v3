@@ -5,24 +5,25 @@ import Row from "react-bootstrap/Row";
 import { Element } from "react-scroll";
 import { FaChevronDown, FaCheck, FaLink } from "react-icons/fa";
 import { currentlyReading, readingByYear } from "./reading/readingList";
+import localCovers from "./reading/localCovers";
 import placeholderCover from "../../assets/images/book-cover-placeholder.svg";
 
-function BookCover({ cover, title }) {
-  // `cover` is either a single image (a local import or a URL) or an ordered
-  // list of candidates to try. Each one that fails to load falls through to the
-  // next, and the local placeholder always brings up the rear.
-  const sources = (Array.isArray(cover) ? cover : [cover])
-    .filter(Boolean)
-    .concat(placeholderCover.src);
-  const [index, setIndex] = useState(0);
+function BookCover({ slug, title }) {
+  // Covers resolve strictly from the repo: the generated localCovers map
+  // (one entry per committed file), else the bundled placeholder. No remote
+  // hosts, so nothing here can be slow or disappear. onError is a last-resort
+  // guard against a corrupt asset.
+  const local = localCovers[slug];
+  const [failed, setFailed] = useState(false);
+  const src = !failed && local ? local.src : placeholderCover.src;
 
   return (
     <img
       className="reading-cover"
-      src={sources[index]}
+      src={src}
       alt={`${title} cover`}
       loading="lazy"
-      onError={() => setIndex((i) => Math.min(i + 1, sources.length - 1))}
+      onError={() => setFailed(true)}
     />
   );
 }
@@ -64,7 +65,7 @@ function CopyLinkButton({ anchorId, label }) {
 function BookEntry({ book }) {
   return (
     <li className="reading-book">
-      <BookCover cover={book.cover} title={book.title} />
+      <BookCover slug={book.slug} title={book.title} />
       <span className="reading-citation">
         <span className="reading-title">&ldquo;{book.title}&rdquo;</span>
         <span className="reading-meta">

@@ -1,0 +1,39 @@
+# Downloads any missing book-cover images and commits them to the branch the
+# workflow is run on, together with the regenerated localCovers.js.
+#
+# Why a workflow and not just `npm run covers:fetch`: the cover hosts
+# (covers.openlibrary.org, archive.org) aren't reachable from every dev
+# environment, but GitHub runners can always reach them. Run this from the
+# Actions tab against your working branch, then pull.
+name: Fetch book covers
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Download missing covers
+        run: node scripts/fetch-covers.mjs
+
+      - name: Commit any new covers
+        run: |
+          if [ -z "$(git status --porcelain)" ]; then
+            echo "No new covers to commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/assets/images/book-covers src/components/main/reading/localCovers.js
+          git commit -m "chore: fetch book covers into the repo"
+          git push
