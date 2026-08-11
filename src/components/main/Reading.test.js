@@ -26,4 +26,30 @@ describe("Reading", () => {
     expect(covers.length).toBeGreaterThan(0);
     covers.forEach((img) => expect(img.getAttribute("src")).toBeTruthy());
   });
+
+  // The regression this section shipped with: covers hotlinked to
+  // covers.openlibrary.org and archive.org, which were slow enough to watch.
+  // Every cover must now resolve from the bundle (or the placeholder) — no
+  // remote hosts, ever.
+  it("never hotlinks a cover from a remote host", () => {
+    document.querySelectorAll("img.reading-cover").forEach((img) => {
+      expect(img.getAttribute("src")).not.toMatch(/^https?:\/\//);
+    });
+  });
+});
+
+describe("reading list data", () => {
+  const { currentlyReading, readingByYear } = jest.requireActual(
+    "./reading/readingList"
+  );
+  const allBooks = [
+    ...currentlyReading,
+    ...readingByYear.flatMap((year) => year.books),
+  ];
+
+  it("gives every book a unique slug for cover lookup", () => {
+    const slugs = allBooks.map((book) => book.slug);
+    expect(slugs.every(Boolean)).toBe(true);
+    expect(new Set(slugs).size).toBe(slugs.length);
+  });
 });

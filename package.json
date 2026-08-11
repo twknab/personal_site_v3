@@ -28,6 +28,7 @@
     "start": "next start",
     "lint": "eslint .",
     "test": "jest",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "covers:fetch": "node scripts/fetch-covers.mjs"
   }
 }
