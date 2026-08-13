@@ -3,6 +3,7 @@ import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Image from "react-bootstrap/Image";
 import Row from "react-bootstrap/Row";
+import { FaGithub } from "react-icons/fa";
 import sockitIco from "../../../assets/images/apps/sockit-ico.png";
 
 function SockIt() {
@@ -46,7 +47,9 @@ function SockIt() {
             href="https://github.com/twknab/sockets_chat"
             target="_blank"
             rel="noopener noreferrer"
+            className="project-btn"
           >
+            <FaGithub aria-hidden="true" />
             View on GitHub
           </Button>
         </Col>
