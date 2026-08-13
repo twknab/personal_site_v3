@@ -8,7 +8,9 @@ import {
   SiNestjs,
   SiNextdotjs,
   SiGooglecloud,
+  SiFirebase,
 } from "react-icons/si";
+import { FaDatabase } from "react-icons/fa";
 
 import hack from "../../assets/images/stacks/hack-md.png";
 import lamp from "../../assets/images/stacks/lamp-stack-sm.png";
@@ -53,6 +55,21 @@ const MODERN_STACK = [
     Icon: SiGooglecloud,
     color: "#1a73e8",
     href: "https://cloud.google.com/",
+  },
+  {
+    name: "Firebase",
+    Icon: SiFirebase,
+    color: "#dd8b0b",
+    href: "https://firebase.google.com/",
+  },
+  {
+    // react-icons carries no Firestore mark, and reusing the Firebase flame
+    // would make two different chips look identical. A database glyph in
+    // Firestore's amber reads correctly and stays visually distinct.
+    name: "Firestore",
+    Icon: FaDatabase,
+    color: "#f5820b",
+    href: "https://firebase.google.com/docs/firestore",
   },
 ];
 

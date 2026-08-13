@@ -877,6 +877,14 @@ navbar-nav .dropdown-menu {
   border-bottom: none;
 }
 
+// `.row` applies `padding: 50px 25px !important` everywhere, so the artwork
+// row carried 50px of dead space beneath the logos before the chip row even
+// began. Trimming it here is what actually closes the gap; the chip row's own
+// top padding is only half the story.
+.stacks:not(.stacks-modern) {
+  padding-bottom: 8px !important;
+}
+
 .tilt {
   -webkit-transition: all 0.3s ease;
   -moz-transition: all 0.3s ease;
@@ -931,7 +939,7 @@ navbar-nav .dropdown-menu {
   // floating a long way below the stack artwork they belong to. !important is
   // the only way past that here, and matches how the rest of this file already
   // overrides it.
-  padding-top: 14px !important;
+  padding-top: 0 !important;
   padding-bottom: 22px !important;
 }
 
