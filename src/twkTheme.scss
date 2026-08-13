@@ -978,11 +978,24 @@ navbar-nav .dropdown-menu {
 }
 
 .stacks-modern-label {
+  display: inline-flex;
+  align-items: center;
+  // The label's 1.5px letter-spacing would otherwise push the emoji away from
+  // the first word; a real gap keeps the spacing even.
+  gap: 7px;
   font-family: var(--font-mono), ui-monospace, monospace;
   font-size: 13px;
   letter-spacing: 1.5px;
   text-transform: uppercase;
   color: rgba(0, 0, 0, 0.62);
+}
+
+.stacks-modern-emoji {
+  // Slightly larger than the uppercase label so it reads as a mark, not a
+  // character, and letter-spacing does not apply to it.
+  font-size: 15px;
+  letter-spacing: 0;
+  line-height: 1;
 }
 
 .stacks-modern-list {

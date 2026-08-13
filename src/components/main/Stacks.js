@@ -161,6 +161,14 @@ function Stacks() {
       <Row className="stacks stacks-modern">
         <Col lg className="stacks-modern-col">
           <span className="stacks-modern-label" id="stacks-modern-label">
+            {/*
+              aria-hidden so the list's accessible name stays "my favorites"
+              rather than "party my favorites" — it's decoration, and every
+              other section heading on the site leads with an emoji the same way.
+            */}
+            <span className="stacks-modern-emoji" aria-hidden="true">
+              🎉
+            </span>
             my favorites
           </span>
           <ul className="stacks-modern-list" aria-labelledby="stacks-modern-label">
