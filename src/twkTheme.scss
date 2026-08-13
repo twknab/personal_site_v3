@@ -195,14 +195,22 @@ code {
   // stops meaning anything. Same brand color, same phrases, but the weight
   // drops to texture. (Contrast was never the issue: dark text on the fill
   // measured 11.8:1.)
+  //
+  // Second pass: the first swipe was too timid. It starts higher up the line
+  // box now (45% rather than 58%) so it covers most of the x-height, runs at
+  // full opacity instead of 0.9, and carries a slight vertical shade so it
+  // reads as ink laid down rather than a flat band. Still a swipe and not a
+  // block — the tops of the letterforms stay clear, which is what keeps 25 of
+  // these from turning back into wallpaper.
   background-image: linear-gradient(
     180deg,
-    transparent 58%,
-    rgba(216, 224, 82, 0.9) 58%
+    transparent 45%,
+    #dbe45c 45%,
+    #c8d13f 100%
   );
   background-repeat: no-repeat;
-  padding: 0 2px;
-  border-radius: 0;
+  padding: 0 3px 1px;
+  border-radius: 0.12em;
   // Keeps a swipe from breaking oddly across a line wrap.
   box-decoration-break: clone;
   -webkit-box-decoration-break: clone;
