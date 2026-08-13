@@ -103,28 +103,37 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+// Fluid heading scale.
+//
+// Each clamp() interpolates between the size this heading used at 360px and the
+// size it used at 1280px, so headings now grow smoothly with the viewport
+// instead of snapping at three breakpoints. The endpoints are the previous
+// values, so nothing changes at those two widths — only the jumps in between.
+//
+// rem rather than em: em compounded against whatever container a heading landed
+// in, which is why the same h3 rendered at different sizes in different sections.
 h1 {
-  font-size: 4.1em !important;
+  font-size: clamp(2.2rem, 1.456rem + 3.3vw, 4.1rem) !important;
 }
 
 h2 {
-  font-size: 3.1em !important;
+  font-size: clamp(2rem, 1.57rem + 1.91vw, 3.1rem) !important;
 }
 
 h3 {
-  font-size: 2.2em !important;
+  font-size: clamp(1.9rem, 1.783rem + 0.52vw, 2.2rem) !important;
 }
 
 h4 {
-  font-size: 1.7em !important;
+  font-size: 1.7rem !important;
 }
 
 h5 {
-  font-size: 1.2em !important;
+  font-size: 1.2rem !important;
 }
 
 h6 {
-  font-size: 1.1em !important;
+  font-size: 1.1rem !important;
 }
 
 h1,
@@ -135,13 +144,13 @@ h5,
 h6 {
   padding: 1rem;
   margin-top: 0.5rem !important;
-  font-family: "Bungee", cursive;
+  font-family: var(--font-display), system-ui, sans-serif;
   width: 100%;
   text-shadow: 2px 2px 4px black;
 }
 
 p {
-  font-family: "Raleway", sans-serif;
+  font-family: var(--font-body), system-ui, sans-serif;
   padding: 1rem;
   margin-bottom: 0rem !important;
   font-size: 22px;
@@ -149,7 +158,7 @@ p {
 }
 
 code {
-  font-family: "Roboto Mono", monospace;
+  font-family: var(--font-mono), ui-monospace, monospace;
 }
 
 .mainContent {
@@ -179,9 +188,24 @@ code {
 }
 
 .highlighter {
-  background-color: #d8e052;
-  padding: 1px 5px 1px 5px;
-  border-radius: 0.25em;
+  // A marker swipe under the text instead of a solid block behind it.
+  //
+  // The hero uses this 25 times across three paragraphs — and nowhere else on
+  // the site — so as a solid fill it reads as 25 competing blocks and emphasis
+  // stops meaning anything. Same brand color, same phrases, but the weight
+  // drops to texture. (Contrast was never the issue: dark text on the fill
+  // measured 11.8:1.)
+  background-image: linear-gradient(
+    180deg,
+    transparent 58%,
+    rgba(216, 224, 82, 0.9) 58%
+  );
+  background-repeat: no-repeat;
+  padding: 0 2px;
+  border-radius: 0;
+  // Keeps a swipe from breaking oddly across a line wrap.
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
 }
 
 // make links inside a row bold
@@ -222,51 +246,9 @@ code {
   filter: drop-shadow(2px 2px 2px #828900) !important;
 }
 
-@media (max-width: 536px) {
-  h1 {
-    font-size: 3em !important;
-  }
-
-  h2 {
-    font-size: 2.4em !important;
-  }
-
-  h3 {
-    font-size: 1.9em !important;
-  }
-
-  h4 {
-    font-size: 1.7em !important;
-  }
-
-  h5 {
-    font-size: 1.2em !important;
-  }
-
-  h6 {
-    font-size: 1.1em !important;
-  }
-}
-
-@media (max-width: 450px) {
-  h1 {
-    font-size: 2.46em !important;
-  }
-
-  h2 {
-    font-size: 2.2em !important;
-  }
-}
-
-@media (max-width: 360px) {
-  h1 {
-    font-size: 2.2em !important;
-  }
-
-  h2 {
-    font-size: 2em !important;
-  }
-}
+// The 536px / 450px / 360px heading overrides that used to live here are gone:
+// the clamp() scale above covers that whole range continuously, and h4/h5/h6
+// were being re-declared at identical values.
 
 // *********************
 // NAVIGATION AND NAVIGATION DROP DOWN MENUS
@@ -290,7 +272,7 @@ code {
   font-size: 2rem;
   font-weight: bolder;
   text-shadow: 2px 2px 4px black;
-  font-family: "Bungee", cursive;
+  font-family: var(--font-display), system-ui, sans-serif;
 }
 
 .navbar-brand {
@@ -408,7 +390,7 @@ code {
 }
 
 .dropdown-item {
-  font-family: "Raleway", cursive;
+  font-family: var(--font-body), system-ui, sans-serif;
   font-size: 1.5em;
   text-align: center !important;
   padding: 10px 10px !important;
@@ -935,7 +917,7 @@ navbar-nav .dropdown-menu {
   gap: 8px;
   padding: 3px 14px;
   border-radius: 999px;
-  font-family: "Roboto Mono", monospace;
+  font-family: var(--font-mono), ui-monospace, monospace;
   font-size: 13px;
   letter-spacing: 2px;
   text-transform: uppercase;
@@ -1046,7 +1028,7 @@ navbar-nav .dropdown-menu {
     width: 100%;
     margin: 0;
     padding: 0 10px 8px;
-    font-family: "Roboto Mono", monospace;
+    font-family: var(--font-mono), ui-monospace, monospace;
     font-size: 12px;
     letter-spacing: 1.5px;
     text-transform: uppercase;
@@ -1155,7 +1137,7 @@ navbar-nav .dropdown-menu {
 }
 
 .shipped-repo {
-  font-family: "Roboto Mono", monospace;
+  font-family: var(--font-mono), ui-monospace, monospace;
   font-size: 16px;
   font-weight: 700;
   color: $themeVibrantYellowGreenLight;
@@ -2138,7 +2120,7 @@ navbar-nav .dropdown-menu {
 }
 
 .tech-stack-label {
-  font-family: "Roboto Mono", monospace;
+  font-family: var(--font-mono), ui-monospace, monospace;
   font-size: 12px;
   letter-spacing: 1.5px;
   text-transform: uppercase;
@@ -2162,7 +2144,7 @@ navbar-nav .dropdown-menu {
   align-items: stretch;
   overflow: hidden;
   border-radius: 6px;
-  font-family: "Roboto Mono", monospace;
+  font-family: var(--font-mono), ui-monospace, monospace;
   font-size: 12px;
   line-height: 1;
   box-shadow: 0 2px 6px -2px rgba(0, 0, 0, 0.6);
