@@ -1010,7 +1010,14 @@ navbar-nav .dropdown-menu {
   // Extra left padding leaves room for the accent bar below.
   padding: 8px 18px 8px 22px;
   border-radius: 10px;
-  background: linear-gradient(155deg, #ffffff 0%, #f4f7ea 100%);
+  // Two layers: a near-opaque white veil over the technology's own brand
+  // gradient. The veil is what keeps the dark label legible — the brand
+  // colours read as a tint rather than a background you have to fight. On
+  // hover the veil thins and the brand colours come forward.
+  background-image:
+    linear-gradient(150deg, rgba(255, 255, 255, 0.87) 0%, rgba(255, 255, 255, 0.7) 100%),
+    linear-gradient(150deg, var(--chip-from, #ffffff) 0%, var(--chip-to, #f4f7ea) 100%);
+  transition-property: transform, box-shadow, border-color, background-image;
   border: 1px solid rgba(0, 0, 0, 0.14);
   box-shadow: 0 3px 8px -2px rgba(0, 0, 0, 0.45);
   font-family: var(--font-mono), ui-monospace, monospace;
@@ -1053,6 +1060,9 @@ navbar-nav .dropdown-menu {
     text-decoration: none;
     transform: translateY(-3px);
     border-color: var(--chip-accent, rgba(0, 0, 0, 0.3));
+    background-image:
+      linear-gradient(150deg, rgba(255, 255, 255, 0.78) 0%, rgba(255, 255, 255, 0.56) 100%),
+      linear-gradient(150deg, var(--chip-from, #ffffff) 0%, var(--chip-to, #f4f7ea) 100%);
     // Lift plus a glow tinted to the chip's own brand colour.
     box-shadow: 0 10px 20px -8px rgba(0, 0, 0, 0.55),
       0 0 14px -4px var(--chip-accent, transparent);
