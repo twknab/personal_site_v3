@@ -859,6 +859,14 @@ navbar-nav .dropdown-menu {
 // restarted at the chip row's top-centre, leaving a hard band across the seam.
 // Painting once on the wrapper lets the mesh flow through the whole section.
 .stacks-section {
+  // Only the header and footer are ever full-bleed. Every content section is
+  // capped and centred — `.row` does that via max-width + auto margins, and
+  // this wrapper replaced two `.row`s, so it has to carry the same cap or the
+  // section bleeds past its neighbours on wide displays (185px each side at
+  // 2400px before this was added).
+  max-width: 2000px;
+  margin-left: auto;
+  margin-right: auto;
   border-bottom: 20px solid #c2c76b;
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
@@ -940,7 +948,8 @@ navbar-nav .dropdown-menu {
   // the only way past that here, and matches how the rest of this file already
   // overrides it.
   padding-top: 0 !important;
-  padding-bottom: 22px !important;
+  // A bit more air under the chips so they don't crowd the section's edge.
+  padding-bottom: 34px !important;
 }
 
 .stacks-modern-col {
@@ -975,10 +984,13 @@ navbar-nav .dropdown-menu {
   gap: 10px;
   position: relative;
   overflow: hidden;
-  // Comfortable thumb target on touch screens.
-  min-height: 52px;
+  // 44px is the floor here, not a preference: below that these get fiddly to
+  // hit on a phone. The chip was 52px only because min-height said so — its
+  // content needs 46px (22px icon + padding + borders) — so this trims 8px of
+  // pure slack while the 15px label and 22px glyphs stay exactly as they were.
+  min-height: 44px;
   // Extra left padding leaves room for the accent bar below.
-  padding: 11px 20px 11px 24px;
+  padding: 8px 18px 8px 22px;
   border-radius: 10px;
   background: linear-gradient(155deg, #ffffff 0%, #f4f7ea 100%);
   border: 1px solid rgba(0, 0, 0, 0.14);

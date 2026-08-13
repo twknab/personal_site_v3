@@ -112,7 +112,17 @@ This repo is worked from both **Claude Code** and **Cursor**, which don't share 
 
 **Running more than one session at once:** this repo is often worked from several agent threads plus Cursor, against a checkout that lives in iCloud Drive. A single shared working directory cannot support that — sessions stage each other's files and stash each other's work. Give every session its own `git worktree` outside iCloud (`~/Development/tkv3-worktrees/<branch>`); see the `parallel-sessions` skill.
 
-**The rule:** any change to a skill updates *both* copies in the same commit. Only the `> Mirrors …` pointer line differs between them. The parity check lives in the `skills-sync` skill.
+Standing constraints live alongside them as **rules**, mirrored the same way:
+
+```
+.claude/rules/<name>.md    /    .cursor/rules/<name>.mdc
+```
+
+| Rule | Constraint |
+| --- | --- |
+| `full-bleed-layout` | Only the header and footer run full width; every content section is capped at 2000px and centred. |
+
+**The convention:** any change to a skill or rule updates *both* copies in the same commit. Only the wrapper differs — a `> Mirrors …` blockquote on the Claude side, YAML frontmatter on the Cursor side. Parity checks for both live in the `skills-sync` skill.
 
 ## Roadmap & Ideas
 
