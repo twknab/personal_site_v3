@@ -19,7 +19,7 @@ function Experience() {
 
   return (
     <div>
-      <Element nameName="experience"></Element>
+      <Element name="experience"></Element>
       <Row className="experience">
         <h1>
           <span role="img" aria-label="about">
