@@ -2705,3 +2705,221 @@ a.tech-badge {
 // Google Fonts are loaded via <link> in app/layout.js, not here: CSS requires
 // @import to precede all other rules, and these sat at the bottom of the file.
 @import "bootstrap/scss/bootstrap.scss";
+
+// *********************
+// HOW I BUILD
+// *********************
+//
+// No wrapper div: this section is a `.row`, which inherits the 2000px cap and
+// auto margins from the global rule. A wrapper would silently drop that and
+// bleed past its neighbours above 2000px — invisible at desktop widths, which
+// is exactly how it shipped once before (see .claude/rules/full-bleed-layout.md).
+.how-i-build {
+  border-bottom: 20px solid #2b2440;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  background-color: #1f1b2e;
+  background-image:
+    radial-gradient(at 12% 0%, rgba($themeTurquoise, 0.22) 0px, transparent 52%),
+    radial-gradient(at 88% 100%, rgba($themePurple, 0.42) 0px, transparent 55%),
+    url("./assets/images/dark-dot-bg-pattern.png");
+}
+
+.hib-intro {
+  max-width: 68ch;
+  opacity: 0.92;
+}
+
+.hib-stages {
+  list-style: none;
+  margin: 1rem 0 0;
+  padding: 0;
+}
+
+.hib-stage {
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+
+  &:last-child {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+  }
+}
+
+.hib-stage-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  width: 100%;
+  // Comfortable thumb target; the row is taller than this in practice.
+  min-height: 44px;
+  padding: 16px 4px;
+  background: none;
+  border: 0;
+  text-align: left;
+  color: inherit;
+  cursor: pointer;
+  transition: background 0.2s ease;
+
+  &:hover,
+  &:focus-visible {
+    background: rgba(255, 255, 255, 0.05);
+  }
+}
+
+.hib-stage-index {
+  flex-shrink: 0;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 13px;
+  padding-top: 4px;
+  color: $themeVibrantYellowGreen;
+}
+
+.hib-stage-heading {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1 1 auto;
+  // Without this a long summary can force the flex row wider than its column.
+  min-width: 0;
+}
+
+.hib-stage-name {
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-size: 1.05rem;
+  line-height: 1.3;
+}
+
+.hib-stage-summary {
+  font-size: 0.95rem;
+  line-height: 1.45;
+  opacity: 0.82;
+}
+
+.hib-chevron {
+  flex-shrink: 0;
+  margin-top: 6px;
+  transition: transform 0.25s ease;
+
+  &.is-open {
+    transform: rotate(180deg);
+  }
+}
+
+.hib-stage-detail {
+  padding: 0 4px 20px 46px;
+
+  p {
+    max-width: 68ch;
+    padding: 0 0 0.85rem;
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+}
+
+.hib-tools {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0 0 0.9rem;
+  padding: 0;
+}
+
+.hib-tool-chip {
+  padding: 6px 12px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.hib-evidence {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 14px;
+  padding: 0 !important;
+  font-size: 0.9rem;
+}
+
+.hib-evidence-label {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  opacity: 0.7;
+}
+
+.hib-evidence-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  color: $themeVibrantYellowGreen !important;
+
+  svg {
+    flex-shrink: 0;
+    font-size: 0.8em;
+  }
+
+  &:hover,
+  &:focus-visible {
+    text-decoration: underline;
+  }
+}
+
+.hib-cases-heading {
+  margin-top: 2rem !important;
+}
+
+.hib-cases {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+}
+
+.hib-case {
+  padding: 18px 20px;
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.28);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.hib-case-title {
+  font-size: 1rem !important;
+  padding: 0 !important;
+  margin: 0 0 0.6rem !important;
+  width: auto !important;
+  line-height: 1.35;
+}
+
+.hib-case-body {
+  padding: 0 0 0.7rem !important;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  opacity: 0.9;
+}
+
+.hib-revised {
+  padding: 1.4rem 0 0 !important;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 12px;
+  opacity: 0.65;
+}
+
+// The chevron and the collapse are decoration; drop the motion on request.
+@media (prefers-reduced-motion: reduce) {
+  .hib-chevron,
+  .hib-stage-header {
+    transition: none;
+  }
+
+  .how-i-build .collapse,
+  .how-i-build .collapsing {
+    transition: none !important;
+  }
+}
