@@ -124,7 +124,7 @@ function Stacks() {
       <Row className="stacks stacks-modern">
         <Col lg className="stacks-modern-col">
           <span className="stacks-modern-label" id="stacks-modern-label">
-            also building with
+            my favorites:
           </span>
           <ul className="stacks-modern-list" aria-labelledby="stacks-modern-label">
             {MODERN_STACK.map(({ name, Icon, color, href }) => (
