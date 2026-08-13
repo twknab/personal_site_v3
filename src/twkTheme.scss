@@ -871,9 +871,15 @@ navbar-nav .dropdown-menu {
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
   background-color: $themeVibrantYellowGreenLight;
+  // Warmed toward the soft yellow base rather than the green it had drifted
+  // to: the green glow that used to sit bottom-right is replaced by golden
+  // amber, a second pale-butter glow lifts the lower left, and the turquoise
+  // at the top is dialled right back so it only cools the edge instead of
+  // tinting the whole field.
   background-image:
-    radial-gradient(at 50% 0%, rgba($themeTurquoise, 0.30) 0px, transparent 55%),
-    radial-gradient(at 72% 100%, rgba($themeGreen, 0.40) 0px, transparent 58%),
+    radial-gradient(at 50% 0%, rgba($themeTurquoise, 0.13) 0px, transparent 50%),
+    radial-gradient(at 74% 100%, rgba(#ffd86b, 0.45) 0px, transparent 60%),
+    radial-gradient(at 14% 86%, rgba(#fff3b0, 0.40) 0px, transparent 55%),
     url("./assets/images/axiom-bg-pattern.png");
   // Keeps the pattern and the glows inside the rounded bottom corners.
   overflow: hidden;
