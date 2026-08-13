@@ -794,6 +794,80 @@ navbar-nav .dropdown-menu {
   padding-bottom: 10px;
 }
 
+// Vector chips for the current frameworks, sharing the footer badge language
+// (mono label, small radius, lifted on hover) but inverted for the stacks
+// section's light background: pale card, dark text, brand-coloured glyph.
+// The chip row becomes the section's bottom edge, and the artwork row above
+// hands its border and radius over, so the two render as one continuous card
+// rather than two stacked ones with a seam between them.
+.stacks:not(.stacks-modern) {
+  border-bottom: none;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.stacks-modern {
+  padding-bottom: 18px;
+}
+
+.stacks-modern-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.stacks-modern-label {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: rgba(0, 0, 0, 0.62);
+}
+
+.stacks-modern-list {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+}
+
+.stack-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  // Comfortable thumb target on touch screens.
+  min-height: 44px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  box-shadow: 0 2px 6px -2px rgba(0, 0, 0, 0.45);
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 13px;
+  line-height: 1;
+  color: #1d1d1d !important;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+
+  &:hover,
+  &:focus-visible {
+    background: #ffffff;
+    text-decoration: none;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px -4px rgba(0, 0, 0, 0.5);
+  }
+}
+
+.stack-chip-icon {
+  flex-shrink: 0;
+  font-size: 18px;
+}
+
 .ror-image {
   bottom: 19px;
 }
