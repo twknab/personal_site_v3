@@ -24,42 +24,49 @@ import ror from "../../assets/images/stacks/ruby-on-rails-stack.png";
 // The stack artwork above is composite PNGs of long-standing stacks. These are
 // the frameworks in current use that never got artwork — drawn as vector icons
 // from react-icons rather than as new image assets, so they stay crisp and add
-// no weight. Brand colours are the official marks.
+// no weight. `color` is the official mark, used for the spine and glyph;
+// `gradient` is the two-stop brand pair washed under the chip surface.
 const MODERN_STACK = [
   {
     name: "Next.js",
     Icon: SiNextdotjs,
     color: "#111111",
+    gradient: ["#111111", "#5a5a5a"],
     href: "https://nextjs.org/",
   },
   {
     name: "NestJS",
     Icon: SiNestjs,
     color: "#e0234e",
+    gradient: ["#e0234e", "#ff6f91"],
     href: "https://nestjs.com/",
   },
   {
     name: "Expo",
     Icon: SiExpo,
     color: "#111111",
+    gradient: ["#111111", "#4630eb"],
     href: "https://expo.dev/",
   },
   {
     name: "Electron",
     Icon: SiElectron,
     color: "#2f6b78",
+    gradient: ["#2f6b78", "#6fc3d6"],
     href: "https://www.electronjs.org/",
   },
   {
     name: "Google Cloud",
     Icon: SiGooglecloud,
     color: "#1a73e8",
+    gradient: ["#1a73e8", "#34a853"],
     href: "https://cloud.google.com/",
   },
   {
     name: "Firebase",
     Icon: SiFirebase,
     color: "#dd8b0b",
+    gradient: ["#dd8b0b", "#ffca28"],
     href: "https://firebase.google.com/",
   },
   {
@@ -69,6 +76,7 @@ const MODERN_STACK = [
     name: "Firestore",
     Icon: FaDatabase,
     color: "#f5820b",
+    gradient: ["#f5820b", "#ffca28"],
     href: "https://firebase.google.com/docs/firestore",
   },
 ];
@@ -153,20 +161,32 @@ function Stacks() {
       <Row className="stacks stacks-modern">
         <Col lg className="stacks-modern-col">
           <span className="stacks-modern-label" id="stacks-modern-label">
+            {/*
+              aria-hidden so the list's accessible name stays "my favorites"
+              rather than "party my favorites" — it's decoration, and every
+              other section heading on the site leads with an emoji the same way.
+            */}
+            <span className="stacks-modern-emoji" aria-hidden="true">
+              🎉
+            </span>
             my favorites
           </span>
           <ul className="stacks-modern-list" aria-labelledby="stacks-modern-label">
-            {MODERN_STACK.map(({ name, Icon, color, href }) => (
+            {MODERN_STACK.map(({ name, Icon, color, gradient, href }) => (
               <li key={name}>
                 <a
                   className="stack-chip tilt"
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  // Each chip carries its own brand colour as a custom
-                  // property, so the accent bar, border and hover glow all
-                  // pick it up from one place.
-                  style={{ "--chip-accent": color }}
+                  // Each chip carries its brand colours as custom properties:
+                  // one accent for the spine, icon, border and glow, and a
+                  // two-stop gradient washed under the surface.
+                  style={{
+                    "--chip-accent": color,
+                    "--chip-from": gradient[0],
+                    "--chip-to": gradient[1],
+                  }}
                 >
                   <Icon className="stack-chip-icon" aria-hidden="true" />
                   <span>{name}</span>
