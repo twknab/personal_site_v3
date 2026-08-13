@@ -2,7 +2,13 @@ import React from "react";
 import Col from "react-bootstrap/Col";
 import Image from "react-bootstrap/Image";
 import Row from "react-bootstrap/Row";
-import { SiExpo, SiElectron, SiNestjs, SiNextdotjs } from "react-icons/si";
+import {
+  SiExpo,
+  SiElectron,
+  SiNestjs,
+  SiNextdotjs,
+  SiGooglecloud,
+} from "react-icons/si";
 
 import hack from "../../assets/images/stacks/hack-md.png";
 import lamp from "../../assets/images/stacks/lamp-stack-sm.png";
@@ -41,6 +47,12 @@ const MODERN_STACK = [
     Icon: SiElectron,
     color: "#2f6b78",
     href: "https://www.electronjs.org/",
+  },
+  {
+    name: "Google Cloud",
+    Icon: SiGooglecloud,
+    color: "#1a73e8",
+    href: "https://cloud.google.com/",
   },
 ];
 
@@ -124,7 +136,7 @@ function Stacks() {
       <Row className="stacks stacks-modern">
         <Col lg className="stacks-modern-col">
           <span className="stacks-modern-label" id="stacks-modern-label">
-            my favorites:
+            my favorites
           </span>
           <ul className="stacks-modern-list" aria-labelledby="stacks-modern-label">
             {MODERN_STACK.map(({ name, Icon, color, href }) => (
@@ -134,12 +146,12 @@ function Stacks() {
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
+                  // Each chip carries its own brand colour as a custom
+                  // property, so the accent bar, border and hover glow all
+                  // pick it up from one place.
+                  style={{ "--chip-accent": color }}
                 >
-                  <Icon
-                    className="stack-chip-icon"
-                    style={{ color }}
-                    aria-hidden="true"
-                  />
+                  <Icon className="stack-chip-icon" aria-hidden="true" />
                   <span>{name}</span>
                 </a>
               </li>

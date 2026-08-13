@@ -827,7 +827,12 @@ navbar-nav .dropdown-menu {
 // (The earlier .stacks:not(.stacks-modern) border reset is gone — with the
 // surface on the wrapper there is no per-row border left to cancel.)
 .stacks-modern {
-  padding-bottom: 18px;
+  // `.row` sets `padding: 50px 25px !important` globally, which left the chips
+  // floating a long way below the stack artwork they belong to. !important is
+  // the only way past that here, and matches how the rest of this file already
+  // overrides it.
+  padding-top: 14px !important;
+  padding-bottom: 22px !important;
 }
 
 .stacks-modern-col {
@@ -860,32 +865,95 @@ navbar-nav .dropdown-menu {
   display: inline-flex;
   align-items: center;
   gap: 10px;
+  position: relative;
+  overflow: hidden;
   // Comfortable thumb target on touch screens.
   min-height: 52px;
-  padding: 11px 20px;
+  // Extra left padding leaves room for the accent bar below.
+  padding: 11px 20px 11px 24px;
   border-radius: 10px;
-  background: rgba(255, 255, 255, 0.86);
-  border: 1px solid rgba(0, 0, 0, 0.12);
+  background: linear-gradient(155deg, #ffffff 0%, #f4f7ea 100%);
+  border: 1px solid rgba(0, 0, 0, 0.14);
   box-shadow: 0 3px 8px -2px rgba(0, 0, 0, 0.45);
   font-family: var(--font-mono), ui-monospace, monospace;
   font-size: 15px;
   line-height: 1;
   color: #1d1d1d !important;
   text-decoration: none;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.22s ease, border-color 0.22s ease;
+
+  // Brand-coloured spine down the left edge, so each chip is identifiable
+  // before you read it and the row isn't four identical white pills.
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 4px;
+    background: var(--chip-accent, #777);
+    transition: width 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  // A sheen that sweeps across on hover.
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(
+      115deg,
+      transparent 35%,
+      rgba(255, 255, 255, 0.85) 50%,
+      transparent 65%
+    );
+    transform: translateX(-120%);
+    transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+  }
 
   &:hover,
   &:focus-visible {
-    background: #ffffff;
     text-decoration: none;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 14px -4px rgba(0, 0, 0, 0.5);
+    transform: translateY(-3px);
+    border-color: var(--chip-accent, rgba(0, 0, 0, 0.3));
+    // Lift plus a glow tinted to the chip's own brand colour.
+    box-shadow: 0 10px 20px -8px rgba(0, 0, 0, 0.55),
+      0 0 14px -4px var(--chip-accent, transparent);
+
+    &::before {
+      width: 7px;
+    }
+
+    &::after {
+      transform: translateX(120%);
+    }
+
+    .stack-chip-icon {
+      transform: scale(1.12) rotate(-4deg);
+    }
   }
 }
 
 .stack-chip-icon {
   flex-shrink: 0;
   font-size: 22px;
+  // Inherits each chip's brand colour from the custom property.
+  color: var(--chip-accent, #1d1d1d);
+  transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+// The sheen sweep and the icon nudge are decoration only.
+@media (prefers-reduced-motion: reduce) {
+  .stack-chip,
+  .stack-chip::before,
+  .stack-chip::after,
+  .stack-chip-icon {
+    transition: none;
+  }
+
+  .stack-chip:hover::after,
+  .stack-chip:focus-visible::after {
+    transform: translateX(-120%);
+  }
 }
 
 .ror-image {
