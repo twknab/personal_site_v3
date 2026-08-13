@@ -508,6 +508,18 @@ navbar-nav .dropdown-menu {
 }
 
 // Psychedelic spinning, color-cycling ring around the portrait.
+// The portrait column stretches to the full row height (flex default), but its
+// contents sat at the top, so the medallion rode high against the taller text
+// column. Centring the column's own contents keeps it on the row's midline at
+// any text length, and align-items keeps it horizontally centred once the
+// columns stack on mobile — which is the behaviour that was already correct.
+.bio-photo-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .bio-photo-ring {
   position: relative;
   display: block;

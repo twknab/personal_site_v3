@@ -11,7 +11,7 @@ function ProfessionalSummary() {
   return (
     <div>
       <Row className="professional-summary light-text-shadow">
-        <Col xs={12} s={12} md={12} lg={4} className="tilt">
+        <Col xs={12} s={12} md={12} lg={4} className="tilt bio-photo-col">
           <div className="bio-photo-ring">
             <Image src={bioPhoto.src} roundedCircle fluid className="bio-photo" />
           </div>
