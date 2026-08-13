@@ -2229,9 +2229,59 @@ a.tech-badge {
   padding: 6px 2px;
   color: white;
   font-weight: 400;
+  // Anchors the sparkle layers below.
+  position: relative;
+  isolation: isolate;
 
   svg {
     flex-shrink: 0;
+  }
+
+  // Sparkler, in two layers.
+  //
+  // Each layer is one pseudo-element painting several tiny radial-gradient
+  // dots at fixed positions across the link. Running the two on the same
+  // animation with different delays makes the dots twinkle out of step
+  // instead of pulsing together as a single block — that stagger is the
+  // whole effect. Both layers are pointer-events: none so the link stays
+  // clickable, and sit behind the text via z-index.
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    inset: -5px -8px;
+    // Above the label, not behind it. The footer gradient runs from deep
+    // purple to bright cyan, and sparks sitting behind the text were being
+    // lost against the light end of it. pointer-events: none keeps the link
+    // fully clickable through them.
+    z-index: 2;
+    opacity: 0;
+    pointer-events: none;
+    background-repeat: no-repeat;
+  }
+
+  &::before {
+    background-image:
+      radial-gradient(circle, #ffffff 0 2.2px, transparent 3px),
+      radial-gradient(circle, $themeVibrantYellowGreen 0 2.4px, transparent 3.2px),
+      radial-gradient(circle, #ffffff 0 1.8px, transparent 2.6px),
+      radial-gradient(circle, #fff3b0 0 2.3px, transparent 3.1px),
+      radial-gradient(circle, #ffffff 0 1.6px, transparent 2.4px);
+    background-position: 6% 18%, 34% 78%, 58% 12%, 84% 62%, 46% 52%;
+    filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.95))
+      drop-shadow(0 1px 1px rgba(0, 0, 0, 0.55));
+  }
+
+  &::after {
+    background-image:
+      radial-gradient(circle, #fff3b0 0 2.1px, transparent 2.9px),
+      radial-gradient(circle, #ffffff 0 2.4px, transparent 3.2px),
+      radial-gradient(circle, $themeTurquoise 0 2.1px, transparent 2.9px),
+      radial-gradient(circle, #ffffff 0 1.9px, transparent 2.7px),
+      radial-gradient(circle, $themeVibrantYellowGreen 0 1.7px, transparent 2.5px);
+    background-position: 18% 72%, 48% 24%, 72% 84%, 94% 28%, 62% 58%;
+    filter: drop-shadow(0 0 3px rgba(216, 224, 82, 0.9))
+      drop-shadow(0 1px 1px rgba(0, 0, 0, 0.55));
   }
 
   &:hover,
@@ -2239,6 +2289,20 @@ a.tech-badge {
     color: $themeVibrantYellowGreen;
     font-weight: bold;
     text-decoration: none;
+    // A touch of glow so the label itself lifts with the sparks.
+    text-shadow: 0 0 8px rgba($themeVibrantYellowGreen, 0.55),
+      1px 1px 3px rgba(0, 0, 0, 0.6);
+  }
+
+  &:hover::before,
+  &:focus-visible::before {
+    animation: sparkleTwinkle 1100ms ease-in-out infinite;
+  }
+
+  &:hover::after,
+  &:focus-visible::after {
+    animation: sparkleTwinkle 1100ms ease-in-out infinite;
+    animation-delay: 550ms;
   }
 
   &:visited {
@@ -2247,6 +2311,34 @@ a.tech-badge {
 
   &:visited:hover {
     color: $themeVibrantYellowGreen;
+  }
+}
+
+@keyframes sparkleTwinkle {
+  0% {
+    opacity: 0;
+    transform: scale(0.8) rotate(-6deg);
+  }
+
+  40% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(1.18) rotate(6deg);
+  }
+}
+
+// The sparkle is decoration, not information — drop the motion entirely for
+// anyone who asked for less of it, keeping the colour and glow on hover.
+@media (prefers-reduced-motion: reduce) {
+  .site-source-link:hover::before,
+  .site-source-link:focus-visible::before,
+  .site-source-link:hover::after,
+  .site-source-link:focus-visible::after {
+    animation: none;
   }
 }
 
