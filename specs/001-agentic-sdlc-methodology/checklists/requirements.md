@@ -45,3 +45,13 @@ Two decisions were resolved as documented assumptions rather than raised as clar
 - **The section lives on the existing single page**, consistent with every other section, rather than on a new route.
 
 No [NEEDS CLARIFICATION] markers were needed: the feature description supplied audience, framing, and scope boundaries explicitly.
+
+## Clarify session — 2026-08-13
+
+Three Partial categories from the ambiguity scan were resolved. All 16 checklist items remained passing before and after (16/16 → 16/16); no regressions.
+
+- **Interaction & UX Flow** (was Partial) → Resolved. Disclosure model decided: stage titles and one-line summaries always visible, detail on demand. Added FR-013 and SC-008, and the unbounded-growth edge case now points at the requirement that answers it.
+- **Constraints & Tradeoffs** (was Partial) → Resolved. Reader-facing content may name specific tools, but only inside a dedicated per-stage field, never woven into prose. Added FR-014 and SC-009. This keeps the spec itself tool-agnostic while letting the shipped content be concrete, and makes a tool swap a one-field edit.
+- **Domain & Data Model** (was Partial) → Resolved. The Stage entity now carries a one-line summary and an optional tools list.
+
+Checked specifically that the additions did not introduce implementation detail: FR-013 and FR-014 describe reader-facing behaviour and content structure, and name no framework, library, or product.

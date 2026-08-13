@@ -16,6 +16,14 @@ This feature adds a section that explains that methodology stage by stage, in pl
 
 The methodology is expected to change substantially over the coming months and years. The section is therefore specified as a **living document**: its content is data, editable without touching presentation, and it tells the reader when it was last revised.
 
+## Clarifications
+
+### Session 2026-08-13
+
+- Q: How much of the methodology is visible at once? → A: Option B — every stage's title and one-line summary always visible, full detail expands per stage on demand.
+- Q: Does reader-facing content name specific tools (agent, editor, model, spec framework), or stay tool-agnostic? → A: Name them, but confine names to a dedicated per-stage field rather than weaving them through the prose.
+- Q: Where does the section sit in the page order? → A: After Projects and before the existing activity strip.
+
 ## User Scenarios & Testing *(mandatory)*
 
 ### User Story 1 - A hiring manager verifies a claim (Priority: P1)
@@ -70,7 +78,7 @@ Six months later the workflow has changed: a stage is obsolete, a new one matter
 - **A stage has no public evidence yet.** Not every claim will have a linked artifact. The section must accommodate a stage that stands on description alone, without implying evidence exists.
 - **The reader has no context for a term.** Terms like "specification-first" or "review gate" mean nothing to a non-practitioner. Each must be explained in place rather than assumed.
 - **The methodology contradicts itself over time.** An older linked example may show a workflow that has since changed. The revision date and framing must make clear the section describes current practice, and examples are historical.
-- **Content grows unbounded.** Stages and examples accumulate. The section must remain scannable rather than becoming a wall of text.
+- **Content grows unbounded.** Stages and examples accumulate. Resolved by FR-013: because only a title and one-line summary show by default, each added stage costs one line rather than a screenful.
 
 ## Requirements *(mandatory)*
 
@@ -85,13 +93,15 @@ Six months later the workflow has changed: a stage is obsolete, a new one matter
 - **FR-007**: All reader-facing content MUST live in a content source separate from presentation, so stages and examples can be added, reworded, reordered, or removed without changing presentation code.
 - **FR-008**: The section MUST display when the methodology was last revised.
 - **FR-009**: The section MUST remain readable and free of horizontal overflow from small phones through to very wide displays.
-- **FR-010**: The section MUST be reachable from the site's existing navigation, consistent with how other sections are reached.
+- **FR-010**: The section MUST sit after the projects section and before the existing activity strip, and be reachable from the site's existing navigation consistent with how other sections are reached.
 - **FR-011**: The section MUST degrade gracefully if a linked artifact becomes unavailable — the surrounding explanation MUST remain coherent without it.
 - **FR-012**: The section MUST accommodate a stage that has no linked evidence without implying that evidence exists.
+- **FR-013**: Every stage's name and a one-line summary MUST be visible without interaction, with the stage's full detail revealed on demand. Adding a stage MUST therefore cost one line in the default view rather than a further screenful.
+- **FR-014**: Where a stage names specific tools, those names MUST live in a dedicated field of that stage's content, not embedded in its explanatory prose. The prose MUST remain meaningful if the named tools are replaced.
 
 ### Key Entities
 
-- **Stage**: One step of the methodology. Has a name, a plain-language explanation of what it is and the problem it solves, an optional note on its cost or tradeoff, and zero or more links to evidence.
+- **Stage**: One step of the methodology. Has a name, a one-line summary shown without interaction, a plain-language explanation of what it is and the problem it solves, an optional note on its cost or tradeoff, an optional list of the tools currently used for it, and zero or more links to evidence.
 - **Example**: A piece of real, merged work supporting the methodology. Has a short title, a description of the problem and what the process caught, and a link to the public artifact.
 - **Revision marker**: The date the methodology content was last meaningfully revised, shown to the reader.
 
@@ -105,6 +115,8 @@ Six months later the workflow has changed: a stage is obsolete, a new one matter
 - **SC-004**: The author can add, reword, reorder, or remove a stage by editing content only, with zero changes to presentation code.
 - **SC-005**: The reader can determine when the methodology was last revised without leaving the section.
 - **SC-006**: The section renders without horizontal overflow, and with all text legible, at every viewport from the smallest supported phone to the widest supported desktop.
+- **SC-008**: A reader can see every stage of the methodology, in order, without interacting with the page.
+- **SC-009**: Replacing a named tool requires editing one field of one stage, leaving that stage's explanation unchanged.
 - **SC-007**: At least two supporting examples link to real merged work, and at least one describes a defect the process caught.
 
 ## Assumptions
