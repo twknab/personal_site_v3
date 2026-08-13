@@ -853,6 +853,20 @@ navbar-nav .dropdown-menu {
       background: linear-gradient(120deg, #fc4d45, #e63e3e);
     }
   }
+
+  // Buttons that carry a leading icon. inline-flex keeps the glyph optically
+  // centred against the cap height instead of sitting on the text baseline,
+  // and the margin above already spaces multiple buttons on one row.
+  .btn.project-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+
+    svg {
+      flex-shrink: 0;
+      font-size: 0.9em;
+    }
+  }
 }
 
 .project-col {

@@ -3,9 +3,11 @@ import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Image from "react-bootstrap/Image";
 import Row from "react-bootstrap/Row";
+import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
 import frogGardenIco from "../../../assets/images/apps/froggarden-ico.png";
 
 const REPO = "https://github.com/twknab/zen-frog-todo";
+const LIVE = "https://zenfrog.netlify.app";
 
 function FrogGarden() {
   return (
@@ -73,10 +75,23 @@ function FrogGarden() {
           <Button
             variant="primary"
             size="lg"
+            href={LIVE}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="project-btn"
+          >
+            <FaExternalLinkAlt aria-hidden="true" />
+            See it Live
+          </Button>
+          <Button
+            variant="primary"
+            size="lg"
             href={REPO}
             target="_blank"
             rel="noopener noreferrer"
+            className="project-btn"
           >
+            <FaGithub aria-hidden="true" />
             View on GitHub
           </Button>
         </Col>
