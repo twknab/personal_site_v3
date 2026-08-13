@@ -572,6 +572,106 @@ navbar-nav .dropdown-menu {
   }
 }
 
+// *********************
+// MEDALLION HOVER
+// *********************
+//
+// Hovering the portrait does three things at once: the golden ring drops from
+// an 8s idle rotation to a 1.4s sprint, the photo turns a full circle and
+// swells slightly at the halfway point, and a ring of coloured sparks flies
+// outward and fades.
+//
+// The spark ring is a single 10px element at the centre carrying eight
+// coloured box-shadows placed around a circle; scaling and rotating that one
+// element throws all eight outward together, which is far cheaper than eight
+// animated nodes. It sits above the photo and is pointer-events: none, so it
+// never interrupts the hover it is reacting to.
+.bio-photo-ring::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 10px;
+  height: 10px;
+  margin: -5px 0 0 -5px;
+  border-radius: 50%;
+  z-index: 2;
+  opacity: 0;
+  pointer-events: none;
+  box-shadow:
+    0 -168px 0 0px #ff2d95,
+    119px -119px 0 -1px #00d4ff,
+    168px 0 0 0px $themeVibrantYellowGreen,
+    119px 119px 0 -2px #ffd86b,
+    0 168px 0 0px #b026ff,
+    -119px 119px 0 -1px #32efa6,
+    -168px 0 0 0px $themeOrange,
+    -119px -119px 0 -2px #fff3b0;
+}
+
+.bio-photo-ring:hover {
+  &::before {
+    // Same rotation, roughly six times the pace.
+    animation-duration: 1.4s;
+  }
+
+  &::after {
+    animation: medallionBurst 900ms ease-out;
+  }
+
+  .bio-photo {
+    // An animation rather than a transition, so it lands back on 0deg instead
+    // of unwinding backwards when the pointer leaves.
+    animation: medallionSpin 900ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+}
+
+@keyframes medallionSpin {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+
+  50% {
+    transform: rotate(180deg) scale(1.06);
+  }
+
+  100% {
+    transform: rotate(360deg) scale(1);
+  }
+}
+
+@keyframes medallionBurst {
+  0% {
+    opacity: 0;
+    transform: scale(0.28) rotate(0deg);
+  }
+
+  18% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    // Ends well clear of the portrait's rim, so the sparks read as flying
+    // outward rather than just sitting on the edge of it.
+    transform: scale(2) rotate(80deg);
+  }
+}
+
+// All three are pure spectacle — leave the portrait still for anyone who
+// asked for less motion, including the idle ring rotation.
+@media (prefers-reduced-motion: reduce) {
+  .bio-photo-ring::before,
+  .bio-photo-ring:hover::before {
+    animation: none;
+  }
+
+  .bio-photo-ring:hover::after,
+  .bio-photo-ring:hover .bio-photo {
+    animation: none;
+  }
+}
+
 .socials {
   text-align: center;
   max-width: 800px;
