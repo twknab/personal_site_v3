@@ -3,6 +3,7 @@ import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Image from "react-bootstrap/Image";
 import Row from "react-bootstrap/Row";
+import { FaGithub } from "react-icons/fa";
 import gearListIco from "../../../assets/images/apps/gearlist-ico.png";
 
 function GearList() {
@@ -72,7 +73,9 @@ function GearList() {
             href="https://github.com/twknab/gear_list_MEVN"
             target="_blank"
             rel="noopener noreferrer"
+            className="project-btn"
           >
+            <FaGithub aria-hidden="true" />
             View on GitHub
           </Button>
         </Col>

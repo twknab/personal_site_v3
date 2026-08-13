@@ -53,6 +53,37 @@ done
 
 Run this before finishing any task that touched a skill.
 
+## Rules mirror the same way
+
+Alongside skills, this repo carries **rules** — standing design and engineering
+constraints rather than procedures — under the same mirrored-pair convention:
+
+```
+.claude/rules/<name>.md      # Claude Code: a leading `> Mirrors ...` blockquote
+.cursor/rules/<name>.mdc     # Cursor: YAML frontmatter (description, alwaysApply)
+```
+
+The body must be identical; only the wrapper differs. Generate the Cursor copy
+from the Claude one rather than hand-writing it twice.
+
+Current rules:
+
+- `full-bleed-layout` — only the header and footer run full width.
+
+Check rule parity by diffing the bodies with the wrappers stripped:
+
+```bash
+for f in .claude/rules/*.md; do
+  n=$(basename "$f" .md)
+  if diff -q <(tail -n +2 "$f" | sed '/^$/d') \
+             <(tail -n +5 ".cursor/rules/$n.mdc" | sed '/^$/d') >/dev/null; then
+    echo "in sync:  $n"
+  else
+    echo "DRIFTED:  $n"
+  fi
+done
+```
+
 ## Writing a good skill
 
 A skill is a procedure someone will follow months from now without today's context:

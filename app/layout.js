@@ -1,5 +1,36 @@
+import { Bungee, Raleway, Roboto_Mono } from "next/font/google";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../src/App.scss";
+
+// Self-hosted at build time by next/font: no request to fonts.googleapis.com,
+// no render-blocking third-party connection, and no dependence on where an
+// @import lands in the emitted CSS (which silently killed every font once).
+// next/font also generates a size-adjusted local fallback, so swapping in the
+// real face doesn't shift layout.
+//
+// Only these three are declared because only these three are used. The site
+// was also downloading Montserrat (6 variants) and proportional Roboto (4),
+// neither of which appears in a single font-family rule.
+const display = Bungee({
+  weight: "400",
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-display",
+});
+
+const body = Raleway({
+  weight: ["300", "400", "700"],
+  style: ["normal", "italic"],
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-body",
+});
+
+const mono = Roboto_Mono({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-mono",
+});
 
 export const metadata = {
   title: "Tim | Software Engineer 👋 💻",
@@ -18,33 +49,10 @@ export const viewport = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <head>
-        {/*
-          Fonts load here rather than via `@import url(...)` in twkTheme.scss.
-          Those imports sat at the bottom of the stylesheet, and CSS requires
-          @import to precede all other rules — Turbopack's stricter output made
-          browsers drop them, so every family silently fell back (Bungee -> cursive).
-        */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Bungee&family=Roboto+Mono:ital@0;1&family=Roboto:ital,wght@0,400;0,900;1,400;1,900&display=swap"
-        />
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,800;1,400;1,500&display=swap"
-        />
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap"
-        />
-      </head>
+    <html
+      lang="en"
+      className={`${display.variable} ${body.variable} ${mono.variable}`}
+    >
       <body>{children}</body>
     </html>
   );
