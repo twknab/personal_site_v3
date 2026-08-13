@@ -46,7 +46,7 @@ const MODERN_STACK = [
 
 function Stacks() {
   return (
-    <div>
+    <div className="stacks-section">
       <Row className="stacks">
         <Col lg className="stack-image tilt">
           <a

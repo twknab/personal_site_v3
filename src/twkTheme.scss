@@ -751,15 +751,30 @@ navbar-nav .dropdown-menu {
   text-shadow: 2px 2px 4px #000000;
 }
 
-.stacks {
+// The section's surface lives on the wrapper, not on the rows.
+//
+// Both the artwork row and the chip row carry .stacks, so while the gradients
+// sat on .stacks each row painted its own copy relative to its own box: the
+// green glow landed at the artwork row's bottom-right and the turquoise glow
+// restarted at the chip row's top-centre, leaving a hard band across the seam.
+// Painting once on the wrapper lets the mesh flow through the whole section.
+.stacks-section {
   border-bottom: 20px solid #c2c76b;
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
   background-color: $themeVibrantYellowGreenLight;
   background-image:
     radial-gradient(at 50% 0%, rgba($themeTurquoise, 0.30) 0px, transparent 55%),
-    radial-gradient(at 90% 100%, rgba($themeGreen, 0.40) 0px, transparent 55%),
+    radial-gradient(at 72% 100%, rgba($themeGreen, 0.40) 0px, transparent 58%),
     url("./assets/images/axiom-bg-pattern.png");
+  // Keeps the pattern and the glows inside the rounded bottom corners.
+  overflow: hidden;
+}
+
+// The rows are layout only now — the wrapper owns the surface.
+.stacks {
+  background: none;
+  border-bottom: none;
 }
 
 .tilt {
@@ -809,12 +824,8 @@ navbar-nav .dropdown-menu {
 // The chip row becomes the section's bottom edge, and the artwork row above
 // hands its border and radius over, so the two render as one continuous card
 // rather than two stacked ones with a seam between them.
-.stacks:not(.stacks-modern) {
-  border-bottom: none;
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-}
-
+// (The earlier .stacks:not(.stacks-modern) border reset is gone — with the
+// surface on the wrapper there is no per-row border left to cancel.)
 .stacks-modern {
   padding-bottom: 18px;
 }
