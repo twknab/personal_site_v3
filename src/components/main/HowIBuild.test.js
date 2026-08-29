@@ -18,11 +18,7 @@ jest.mock("react-scroll", () => ({
     />
   ),
 }));
-import {
-  caseStudies,
-  lastRevised,
-  stages,
-} from "./how-i-build/methodology";
+import { flow, lastRevised, stages } from "./how-i-build/methodology";
 
 describe("HowIBuild", () => {
   it("shows every stage name and summary without any interaction", () => {
@@ -67,30 +63,47 @@ describe("HowIBuild", () => {
     expect(controls[0]).toHaveAttribute("aria-expanded", "false");
   });
 
-  it("renders no empty containers for a stage without tools or evidence", () => {
-    // FR-012: at least one stage deliberately cites nothing. It must not leave
-    // an orphaned "Evidence:" label or an empty chip row behind.
-    const bare = stages.find((s) => !s.evidence || s.evidence.length === 0);
-    expect(bare).toBeDefined();
-
+  it("renders every pipeline step in the diagram", () => {
     const { container } = render(<HowIBuild />);
-    const panel = container.querySelector(`#hib-panel-${bare.id}`);
+    const steps = container.querySelectorAll(".hib-flow-step");
 
-    expect(within(panel).queryByText("Evidence:")).not.toBeInTheDocument();
+    expect(steps).toHaveLength(flow.length);
+    flow.forEach(({ label }) => {
+      expect(within(container.querySelector(".hib-flow")).getByText(label))
+        .toBeInTheDocument();
+    });
   });
 
-  it("renders the case studies and their links", () => {
+  it("hides the diagram from assistive tech, since the stages carry the same content", () => {
+    // The diagram restates the stage list visually. Exposing both would make a
+    // screen reader read the whole pipeline twice.
     const { container } = render(<HowIBuild />);
-    // Scoped to the case list: some PRs are legitimately cited both as stage
-    // evidence and as a case study, so a document-wide query is ambiguous.
-    const cases = container.querySelector(".hib-cases");
+    expect(container.querySelector(".hib-flow")).toHaveAttribute(
+      "aria-hidden",
+      "true"
+    );
+  });
 
-    caseStudies.forEach((study) => {
-      const item = within(cases).getByText(study.title).closest(".hib-case");
-      const link = within(item).getByRole("link");
-      expect(link).toHaveAttribute("href", study.link.href);
-      expect(link).toHaveTextContent(study.link.label);
+  it("gives every stage an icon", () => {
+    const { container } = render(<HowIBuild />);
+    expect(container.querySelectorAll(".hib-stage-icon svg")).toHaveLength(
+      stages.length
+    );
+  });
+
+  it("keeps tool names out of the explanatory prose", () => {
+    // Tool names live in `tools` so an explanation stays true when the tool
+    // under it is swapped. A name leaking into `detail` defeats that.
+    const names = [...new Set(stages.flatMap((s) => s.tools || []))];
+    const leaks = [];
+    stages.forEach((stage) => {
+      stage.detail.forEach((para) => {
+        names.forEach((n) => {
+          if (para.includes(n)) leaks.push(`${stage.id}: "${n}"`);
+        });
+      });
     });
+    expect(leaks).toEqual([]);
   });
 
   it("states when the methodology was last revised", () => {

@@ -3,34 +3,50 @@ import Col from "react-bootstrap/Col";
 import Collapse from "react-bootstrap/Collapse";
 import Row from "react-bootstrap/Row";
 import { Element } from "react-scroll";
-import { FaChevronDown, FaExternalLinkAlt } from "react-icons/fa";
+import { FaChevronDown } from "react-icons/fa";
 import {
-  caseStudies,
+  architectNote,
+  flow,
   intro,
   lastRevised,
+  loopLabel,
   stages,
 } from "./how-i-build/methodology";
 
-function EvidenceLinks({ links }) {
-  // Optional field: render nothing at all rather than an empty label (FR-012).
-  if (!links || links.length === 0) return null;
-
+/**
+ * The pipeline, drawn rather than described.
+ *
+ * Built from flex/CSS rather than a fixed SVG so it reflows: a horizontal
+ * run of steps on a wide screen, a vertical stack on a phone, with the
+ * connector arrows rotating to match. An SVG at this size would either
+ * shrink its labels to nothing on mobile or need a second drawing.
+ *
+ * It is decorative in the sense that the stages below carry the same
+ * information in prose — so it is aria-hidden, and the list underneath is
+ * the accessible source of truth.
+ */
+function FlowDiagram() {
   return (
-    <p className="hib-evidence">
-      <span className="hib-evidence-label">Evidence:</span>
-      {links.map((link) => (
-        <a
-          key={link.href}
-          className="hib-evidence-link"
-          href={link.href}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <FaExternalLinkAlt aria-hidden="true" />
-          {link.label}
-        </a>
-      ))}
-    </p>
+    <div className="hib-flow-wrap">
+      <ol className="hib-flow" aria-hidden="true">
+        {flow.map(({ id, Icon, label, caption, loop }) => (
+          <li
+            key={id}
+            className={`hib-flow-step ${loop ? "is-loop-target" : ""}`}
+          >
+            <span className="hib-flow-icon">
+              <Icon />
+            </span>
+            <span className="hib-flow-label">{label}</span>
+            <span className="hib-flow-caption">{caption}</span>
+          </li>
+        ))}
+      </ol>
+      <p className="hib-flow-loop" aria-hidden="true">
+        <span className="hib-flow-loop-arrow" />
+        {loopLabel}
+      </p>
+    </div>
   );
 }
 
@@ -51,13 +67,14 @@ function ToolChips({ tools }) {
 function Stage({ stage, index }) {
   const [open, setOpen] = useState(false);
   const panelId = `hib-panel-${stage.id}`;
+  const { Icon } = stage;
 
   return (
     <li className="hib-stage">
       {/*
-        A real <button> rather than the role="button" div the Reading section
-        uses: Enter/Space and focus semantics come for free instead of being
-        reimplemented, and screen readers announce it correctly.
+        A real <button>, not the role="button" div the Reading section uses:
+        Enter/Space and focus semantics come free rather than being
+        reimplemented, and it is announced correctly.
       */}
       <button
         type="button"
@@ -66,6 +83,9 @@ function Stage({ stage, index }) {
         aria-controls={panelId}
         onClick={() => setOpen((prev) => !prev)}
       >
+        <span className="hib-stage-icon" aria-hidden="true">
+          <Icon />
+        </span>
         <span className="hib-stage-index" aria-hidden="true">
           {String(index + 1).padStart(2, "0")}
         </span>
@@ -86,7 +106,6 @@ function Stage({ stage, index }) {
               <p key={paragraph.slice(0, 40)}>{paragraph}</p>
             ))}
             <ToolChips tools={stage.tools} />
-            <EvidenceLinks links={stage.evidence} />
           </div>
         </div>
       </Collapse>
@@ -95,6 +114,8 @@ function Stage({ stage, index }) {
 }
 
 function HowIBuild() {
+  const { Icon: ArchitectIcon, text: architectText } = architectNote;
+
   return (
     <div>
       <Element name="how-i-build"></Element>
@@ -109,34 +130,22 @@ function HowIBuild() {
 
           <p className="hib-intro">{intro}</p>
 
+          <FlowDiagram />
+
+          <p className="hib-architect">
+            <span className="hib-architect-icon" aria-hidden="true">
+              <ArchitectIcon />
+            </span>
+            {architectText}
+          </p>
+
           <ol className="hib-stages">
             {stages.map((stage, index) => (
               <Stage key={stage.id} stage={stage} index={index} />
             ))}
           </ol>
 
-          <h3 className="hib-cases-heading">What it caught</h3>
-          <ul className="hib-cases">
-            {caseStudies.map((study) => (
-              <li key={study.id} className="hib-case">
-                <h4 className="hib-case-title">{study.title}</h4>
-                <p className="hib-case-body">{study.body}</p>
-                <a
-                  className="hib-evidence-link"
-                  href={study.link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <FaExternalLinkAlt aria-hidden="true" />
-                  {study.link.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-
-          <p className="hib-revised">
-            Methodology last revised {lastRevised}.
-          </p>
+          <p className="hib-revised">Methodology last revised {lastRevised}.</p>
         </Col>
       </Row>
     </div>

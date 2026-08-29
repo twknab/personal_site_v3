@@ -1,160 +1,205 @@
 // *********************************************************************
 // HOW I BUILD — methodology content
 // *********************************************************************
-// This file is the only editing surface for the "How I build" section.
-// Everything the reader sees lives here; nothing here is presentational.
+// The only editing surface for the "How I build" section. Everything the
+// reader sees lives here; nothing here is presentational.
 //
 // HOW TO REVISE:
-//   - Add, reorder, reword or delete entries in `stages` / `caseStudies`.
-//     The component renders them in array order and needs no changes.
-//   - Keep `detail` prose free of tool names. Names belong in `tools`, so
-//     an explanation stays true when the tool underneath it is replaced —
-//     which is the whole point, given how fast this moves.
-//   - Every claim about the process should carry `evidence`, or be phrased
-//     so it plainly isn't citing anything.
-//   - Update `lastRevised` by hand when the methodology actually changes.
-//     It is deliberately not derived from git: a computed date would move
-//     on unrelated edits and overstate how current this is.
+//   - Add, reorder, reword or delete entries in `flow` / `stages`. The
+//     component renders them in array order and needs no changes.
+//   - Keep `detail` prose free of tool names. Names belong in `tools`, so an
+//     explanation stays true when the tool under it is replaced.
+//   - Update `lastRevised` by hand when the methodology actually changes. It
+//     is deliberately not derived from git: a computed date would move on
+//     unrelated edits and overstate how current this is.
 // *********************************************************************
 
-const REPO = "https://github.com/twknab/personal_site_v3";
+import {
+  FaBookOpen,
+  FaClipboardList,
+  FaCloudUploadAlt,
+  FaCodeBranch,
+  FaDraftingCompass,
+  FaLayerGroup,
+  FaMobileAlt,
+  FaPlug,
+  FaRobot,
+  FaShieldAlt,
+  FaSlidersH,
+  FaSyncAlt,
+} from "react-icons/fa";
 
 export const lastRevised = "August 2026";
 
 export const intro =
-  "I direct AI agents through most of my engineering work now — at my job, and on " +
-  "personal projects. Everyone's résumé says something like that, so here is the " +
-  "actual process, stage by stage. This site is one place it is visible, and a small " +
-  "one: it is a nearly-static portfolio, so the parts of the practice that handle " +
-  "coordination, scheduling and work I start from a trailhead do not show up in its " +
-  "commit history. Where something is public I have linked it. Where it is work I " +
-  "cannot publish, I have said so plainly rather than dressed it up. It is all " +
-  "changing quickly, and some of it will look naive in a year.";
+  "I spend less time writing code than designing the harness that produces it. " +
+  "Specifications, planning passes, rule sets and custom skills all constrain what " +
+  "the agents are allowed to do; the agents then write and deliver the work, in " +
+  "parallel, while automated gates and pipelines decide whether it ships. My job has " +
+  "shifted toward architecture and review — shaping the constraints, reading what " +
+  "comes back, and sharpening the harness whenever it lets something through.";
+
+// The pipeline diagram. `loop: true` marks where the feedback arc points back to.
+export const flow = [
+  {
+    id: "flow-spec",
+    Icon: FaClipboardList,
+    label: "Specify",
+    caption: "Spec and plan before code",
+  },
+  {
+    id: "flow-harness",
+    Icon: FaSlidersH,
+    label: "Harness",
+    caption: "Rules, skills, constraints",
+    loop: true,
+  },
+  {
+    id: "flow-agents",
+    Icon: FaRobot,
+    label: "Agents build",
+    caption: "Several, in parallel",
+  },
+  {
+    id: "flow-gates",
+    Icon: FaShieldAlt,
+    label: "Gates",
+    caption: "Tests, review, security",
+  },
+  {
+    id: "flow-ship",
+    Icon: FaCloudUploadAlt,
+    label: "Ship",
+    caption: "Automated to the cloud",
+  },
+];
+
+export const loopLabel = "What the gates catch sharpens the harness";
+
+export const architectNote = {
+  Icon: FaDraftingCompass,
+  text:
+    "The shape of the job changes. Most of my time goes on architecture, constraints and review — deciding what should exist and what must never happen — while the writing and delivery are carried out by several agents collaborating under those rules.",
+};
 
 export const stages = [
   {
     id: "specify-first",
-    name: "Write the spec first",
+    Icon: FaClipboardList,
+    name: "Specify, then plan, then build",
     summary:
-      "Anything non-trivial starts as a written specification, not a prompt.",
+      "Work starts as a written spec and a planning pass — never straight into code.",
     detail: [
-      "Before any code is written, the work is described in a document: who it is for, what has to be true when it is finished, and what is explicitly not being built. Ambiguity gets resolved there, in prose, where changing my mind costs a sentence instead of a rewrite.",
-      "The cost is real. It front-loads an hour of thinking onto work that an agent could start guessing at immediately, and for a one-line fix that would be absurd — so small changes skip it entirely. What it buys on larger work is that the agent and I disagree on paper rather than discovering it three files deep.",
+      "Anything non-trivial begins as a specification: who it is for, what must be true when it is done, what is deliberately excluded. That is followed by a separate planning pass that turns the specification into an ordered set of tasks before a line is written. Both are documents I can argue with cheaply.",
+      "The cost is an hour of thinking before anything visible happens, which would be absurd for a one-line fix — so small changes skip it. What it buys on real work is that the disagreement happens on paper instead of three files deep.",
     ],
-    tools: ["Spec Kit"],
-    evidence: [
-      {
-        label: "the spec behind this very section",
-        href: `${REPO}/tree/main/specs`,
-      },
+    tools: ["Spec Kit", "Plan mode"],
+  },
+  {
+    id: "the-harness",
+    Icon: FaSlidersH,
+    name: "Build the harness, not just the feature",
+    summary:
+      "Rule sets and custom skills constrain the agents; correcting them is the real work.",
+    detail: [
+      "The leverage is not in any single prompt. It is in the standing constraints: rule sets encoding what a project will and will not tolerate, and custom skills that capture a whole procedure so it runs the same way every time instead of being re-improvised.",
+      "When output comes back wrong, the fix is rarely to re-prompt. It is to work out which constraint was missing and add it, so that class of mistake cannot recur. The harness gets sharper every time something slips through — which is what makes the failures worth having.",
     ],
+    tools: ["Rule sets", "Custom skills"],
   },
   {
     id: "rules-in-repo",
+    Icon: FaBookOpen,
     name: "Keep the rules in the repository",
     summary:
-      "Standing conventions are committed as files, not re-explained each session.",
+      "Constraints are committed files — versioned, reviewed and diffed like code.",
     detail: [
-      "The conventions an agent needs — how this project lays out its sections, what may never run full width, how to stage a commit without trampling someone else's work — live in the repository next to the code. They are versioned, reviewed and diffed like anything else, and they apply to me as much as to an agent.",
-      "This exists because of a specific failure. A rule I had only ever said out loud got broken, shipped, and was invisible at the screen size I happened to be testing on. It is now a file that carries the reason it exists and the exact measurement that catches it, so the next session cannot repeat the mistake by not having been told.",
+      "The rules live next to the code rather than in my head or in a chat history. They are versioned, reviewed and diffed like anything else, and they bind me as much as they bind an agent.",
+      "This exists because of a specific failure: a rule I had only ever said out loud got broken, shipped, and was invisible at the screen size I happened to be testing on. It is now a file carrying both the reason it exists and the exact measurement that catches it.",
     ],
-    tools: ["Markdown"],
-    evidence: [
-      { label: "the rules, in this repo", href: `${REPO}/tree/main/.claude` },
-    ],
+    tools: ["Markdown", "Git"],
   },
   {
     id: "two-tools",
+    Icon: FaLayerGroup,
     name: "Two tools, one process",
     summary:
-      "I move between Claude Code and Cursor; mirrored instructions keep them interchangeable.",
+      "I move between agents; mirrored instructions keep them interchangeable.",
     detail: [
-      "I do not use one assistant. I move between two depending on what the work needs and where I am, which only functions because both read the same instructions from mirrored directories — one per tool, kept byte-identical in substance. Switching tools mid-feature changes the interface, not the output.",
-      "The mirroring is deliberate maintenance, not a happy accident. Editing guidance in one place and not the other is the obvious failure mode, so keeping the pair in step is itself a documented step with a check that compares them.",
+      "I do not rely on a single assistant. I move between them depending on the work and where I am, which only holds together because each reads the same instructions from mirrored directories. Switching tools mid-feature changes the interface, not the output.",
+      "Keeping that pair in step is deliberate maintenance with its own check — editing guidance in one place and forgetting the other is the obvious way it would rot.",
     ],
     tools: ["Claude Code", "Cursor"],
-    evidence: [{ label: "PR #87", href: `${REPO}/pull/87` }],
-  },
-  {
-    id: "model-choice",
-    name: "Pick the model like any other tradeoff",
-    summary:
-      "Heavier reasoning where the problem is genuinely hard; cheaper and faster everywhere else.",
-    detail: [
-      "Model choice is a cost decision, not a loyalty one. Work that involves holding a lot of context at once, or reasoning carefully about a subtle failure, gets the most capable model available. Mechanical work — renaming, wiring, applying a pattern that already exists in the codebase — does not, because paying for deep reasoning on a rename is waste.",
-      "I have no clean measurements to offer here, which is why this stage links to nothing. It is judgement, applied per task, and it is the part of this process most likely to look different in six months.",
-    ],
-    tools: ["Opus", "Sonnet"],
   },
   {
     id: "connected-tools",
+    Icon: FaPlug,
     name: "Connect agents to the systems, not to me",
     summary:
-      "Agents read the board and the tickets directly instead of waiting for me to paste context in.",
+      "Agents read boards, tickets and review feedback directly, rather than through me.",
     detail: [
-      "An agent that cannot see the tracker is working from whatever I remembered to tell it. Connecting them directly to where work actually lives means an agent can read a ticket's acceptance criteria, see a board's current state, and pick up review comments on a merge request without me acting as a copy-paste layer between the two.",
-      "The value is less about speed than about drift: the context an agent works from is the same context the team is working from, rather than my summary of it, aging by the minute.",
+      "An agent that cannot see the tracker works from whatever I remembered to tell it. Connected directly, it reads a ticket's acceptance criteria, sees the board's real state and picks up review comments without me acting as a copy-paste layer.",
+      "The gain is less about speed than drift: the agent works from the same context the team has, rather than my summary of it, ageing by the minute.",
     ],
     tools: ["MCP", "GitHub"],
   },
   {
+    id: "parallel-sessions",
+    Icon: FaCodeBranch,
+    name: "Several agents, working at once",
+    summary:
+      "Multiple sessions collaborate in isolated checkouts so they cannot collide.",
+    detail: [
+      "More than one piece of work is usually moving. Each session gets its own isolated copy of the repository, so two agents editing simultaneously cannot stage each other's half-finished files or pull a branch out from under one another.",
+      "I learned that boundary the hard way: two sessions shared one folder, one swept the other's in-progress feature into an unrelated commit, then stashed the files while they were still being edited. Nothing errored — the work simply vanished mid-task.",
+    ],
+    tools: ["git worktree"],
+  },
+  {
     id: "away-from-desk",
+    Icon: FaMobileAlt,
     name: "Start work without being at a desk",
     summary:
-      "Some runs are scheduled; others I kick off from my phone, from a trailhead.",
+      "Some runs are scheduled; others I start from a phone, out in the field.",
     detail: [
-      "Two different things, same underlying idea: the work does not need me sitting in front of it. Routines run on a schedule to handle the coordination layer of a job — triaging inbound mail and messages, keeping tickets moving, pulling the current state of design boards — so that the repetitive parts are already done rather than waiting.",
-      "The other half is mobile. I start sessions from a phone and let cloud agents build a feature while I am out in the field, then review what came back when I am home. It is genuinely useful and it is also the part I trust least without gates, which is exactly why the gates below are not optional.",
-      "None of this is visible here. It is work I cannot publish, so this stage cites nothing — take it as a description, not a demonstration.",
+      "Two forms of one idea: the work does not need me sitting in front of it. Routines run on a schedule to handle the coordination layer of a job — triaging inbound mail and messages, keeping tickets moving, pulling the current state of design boards — so the repetitive parts are already done rather than queued.",
+      "The other half is mobile. I start sessions from a phone and let cloud agents build a feature while I am out on a trail, then review what came back later. It is genuinely useful, and it is also the part I would trust least without the gates — which is exactly why they are not optional.",
     ],
-    tools: ["Scheduled routines", "Claude mobile", "Cursor mobile", "Cloud agents"],
+    tools: ["Scheduled routines", "Claude mobile", "Cursor mobile"],
   },
   {
     id: "review-gates",
+    Icon: FaShieldAlt,
     name: "Make the gates real",
     summary:
-      "Every change clears the same automated checks before it can merge — no exceptions for work I wrote myself.",
+      "Automated review and security scanning block a merge — no exemption for agent-written code.",
     detail: [
-      "Linting, the full test suite, a production build, a dependency vulnerability scan and static security analysis all run on every proposed change, and all of them can block a merge. An agent's work faces exactly the same gate mine does, which is the only reason I am comfortable letting one write this much of the site.",
-      "The important word is blocking. These checks used to run in a mode where they reported success no matter what they found — which looks identical to safety on the dashboard and provides none. Turning that off was uncomfortable and immediately worthwhile.",
+      "Linting, the full test suite, a production build, dependency vulnerability scanning and static security analysis all run on every proposed change, and any of them can stop a merge. Agent-written work faces exactly the gate mine does, which is the only reason I am comfortable letting agents write this much.",
+      "The load-bearing word is blocking. These checks previously ran in a mode that reported success regardless of findings — indistinguishable from safety on a dashboard, and worth nothing. Turning that off was uncomfortable and immediately justified.",
     ],
-    tools: ["GitHub Actions", "CodeQL", "Codacy", "Dependabot"],
-    evidence: [{ label: "PR #98", href: `${REPO}/pull/98` }],
+    tools: ["Code review", "Security scanning", "Dependency scanning"],
   },
   {
-    id: "parallel-sessions",
-    name: "Run sessions in parallel, in separate rooms",
+    id: "automated-delivery",
+    Icon: FaCloudUploadAlt,
+    name: "Automate the delivery, not just the writing",
     summary:
-      "Several agents work at once, each in its own checkout, so they cannot overwrite each other.",
+      "Once it passes, pipelines build and deploy to the cloud without me.",
     detail: [
-      "More than one piece of work is usually in flight. Each session gets its own isolated copy of the repository, so two sessions editing at the same time cannot stage each other's half-finished files or pull the branch out from under one another.",
-      "I learned this the direct way: two sessions shared one folder, one of them swept the other's in-progress feature into an unrelated commit, and then stashed the files while that work was still being edited. Nothing errored. The files simply vanished mid-task.",
+      "Getting an agent to write code is the easy half. The pipeline that takes a merged change, builds it, provisions what it needs and puts it in front of users is what actually closes the loop — otherwise a human is still the bottleneck at the last step.",
+      "Infrastructure is described as code too, so environments are reproducible rather than hand-assembled, and a deployment is a reviewable change like any other.",
     ],
-    tools: ["git worktree"],
-    evidence: [{ label: "PR #89", href: `${REPO}/pull/89` }],
-  },
-];
-
-export const caseStudies = [
-  {
-    id: "silent-font-failure",
-    title: "A green build with every font quietly broken",
-    body:
-      "Upgrading the framework changed how stylesheets are assembled, and the rule that loaded the site's fonts stopped being honoured. Nothing failed: the build passed, the tests passed, and the page rendered — in fallback typefaces, with the display font silently replaced by a script face. No diff review would have caught it, because no line of the diff was wrong. It was caught by opening the running site and looking at it, which is now a required step rather than an optional one.",
-    link: { label: "PR #95", href: `${REPO}/pull/95` },
+    tools: ["CI/CD", "Google Cloud", "Terraform"],
   },
   {
-    id: "security-theatre",
-    title: "A security check that passed for months without ever running",
-    body:
-      "Static analysis was configured to never fail the build. Turning it into a real gate revealed that its upload step had been broken since a platform change the previous year — every run had reported success while delivering nothing. The first genuinely working scan immediately flagged a supply-chain weakness in a workflow file I had added myself a few hours earlier.",
-    link: { label: "PR #98", href: `${REPO}/pull/98` },
-  },
-  {
-    id: "dependency-triage",
-    title: "Fifteen dependency updates, none of them mergeable",
-    body:
-      "A backlog of automated dependency pull requests had built up. Rather than merging or closing them in bulk, each was checked against what the project actually installs today. Nine referenced packages that no longer exist in the project at all; five had already been superseded; one was a genuine upgrade that needed to be a planned migration rather than a bump. Each was closed with the specific reason, so the decision is auditable later.",
-    link: { label: "PR #86", href: `${REPO}/pull/86` },
+    id: "iterate",
+    Icon: FaSyncAlt,
+    name: "Then sharpen the harness",
+    summary: "Every escape becomes a new rule, a new skill, or a new gate.",
+    detail: [
+      "The loop closes here. Anything that reaches production wrong is treated as a gap in the harness rather than a one-off mistake — the response is a new rule, a sharper skill, or a check that would have caught it, so that class of error cannot return.",
+      "This is the part that compounds. The agents do not get better on their own; the constraints around them do, and that is increasingly where my time goes.",
+    ],
+    tools: ["Rule sets", "Custom skills"],
   },
 ];

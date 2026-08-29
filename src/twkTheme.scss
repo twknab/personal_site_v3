@@ -2834,74 +2834,136 @@ a.tech-badge {
   line-height: 1.4;
 }
 
-.hib-evidence {
+// --- Pipeline diagram -------------------------------------------------
+// Flex rather than a fixed SVG so it reflows: a horizontal run on wide
+// screens, a vertical stack on phones, with the connectors rotating to
+// match. aria-hidden — the stage list below carries the same content.
+.hib-flow-wrap {
+  margin: 1.6rem 0 1.4rem;
+}
+
+.hib-flow {
+  list-style: none;
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
-  gap: 6px 14px;
-  padding: 0 !important;
-  font-size: 0.9rem;
-}
-
-.hib-evidence-label {
-  font-family: var(--font-mono), ui-monospace, monospace;
-  font-size: 12px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  opacity: 0.7;
-}
-
-.hib-evidence-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  min-height: 44px;
-  color: $themeVibrantYellowGreen !important;
-
-  svg {
-    flex-shrink: 0;
-    font-size: 0.8em;
-  }
-
-  &:hover,
-  &:focus-visible {
-    text-decoration: underline;
-  }
-}
-
-.hib-cases-heading {
-  margin-top: 2rem !important;
-}
-
-.hib-cases {
-  list-style: none;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
-  gap: 16px;
+  align-items: stretch;
+  gap: 10px;
   margin: 0;
   padding: 0;
 }
 
-.hib-case {
-  padding: 18px 20px;
+.hib-flow-step {
+  position: relative;
+  flex: 1 1 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 6px;
+  padding: 16px 12px;
   border-radius: 12px;
-  background: rgba(0, 0, 0, 0.28);
-  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+
+  // Connector between steps.
+  &:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: -12px;
+    width: 12px;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.3);
+  }
+
+  // The step the feedback loop returns to.
+  &.is-loop-target {
+    border-color: rgba($themeVibrantYellowGreen, 0.55);
+    background: rgba($themeVibrantYellowGreen, 0.08);
+  }
 }
 
-.hib-case-title {
-  font-size: 1rem !important;
-  padding: 0 !important;
-  margin: 0 0 0.6rem !important;
-  width: auto !important;
-  line-height: 1.35;
+.hib-flow-icon {
+  display: inline-flex;
+  font-size: 26px;
+  color: $themeVibrantYellowGreen;
 }
 
-.hib-case-body {
-  padding: 0 0 0.7rem !important;
+.hib-flow-label {
+  font-family: var(--font-display), system-ui, sans-serif;
   font-size: 0.95rem;
+  line-height: 1.2;
+}
+
+.hib-flow-caption {
+  font-size: 0.78rem;
+  line-height: 1.35;
+  opacity: 0.75;
+}
+
+.hib-flow-loop {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0.85rem 0 0 !important;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+.hib-flow-loop-arrow {
+  flex: 0 0 auto;
+  width: 46px;
+  height: 10px;
+  border-left: 2px solid rgba($themeVibrantYellowGreen, 0.7);
+  border-bottom: 2px solid rgba($themeVibrantYellowGreen, 0.7);
+  border-bottom-left-radius: 8px;
+}
+
+@media (max-width: 767px) {
+  .hib-flow {
+    flex-direction: column;
+  }
+
+  // Connector turns to point downward when the steps stack.
+  .hib-flow-step:not(:last-child)::after {
+    top: auto;
+    right: auto;
+    left: 50%;
+    bottom: -12px;
+    width: 2px;
+    height: 12px;
+  }
+}
+
+// --- The architect note ----------------------------------------------
+.hib-architect {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  max-width: 72ch;
+  padding: 14px 16px !important;
+  border-left: 3px solid $themeVibrantYellowGreen;
+  border-radius: 0 8px 8px 0;
+  background: rgba(255, 255, 255, 0.05);
+  font-size: 0.98rem;
   line-height: 1.55;
-  opacity: 0.9;
+}
+
+.hib-architect-icon {
+  flex-shrink: 0;
+  font-size: 20px;
+  margin-top: 2px;
+  color: $themeVibrantYellowGreen;
+}
+
+// --- Per-stage icon ---------------------------------------------------
+.hib-stage-icon {
+  flex-shrink: 0;
+  display: inline-flex;
+  font-size: 18px;
+  margin-top: 3px;
+  color: $themeVibrantYellowGreen;
 }
 
 .hib-revised {
