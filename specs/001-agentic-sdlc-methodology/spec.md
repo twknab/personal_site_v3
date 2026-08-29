@@ -6,13 +6,17 @@
 
 **Status**: Draft
 
-**Input**: Issue #103 — a methodology section for timknab.dev documenting the agentic software development lifecycle actually used to build the site.
+**Input**: Issue #103 — a methodology section for timknab.dev documenting the author's agentic software development practice. **Scope revised 2026-08-29**: the section describes the practice as a whole, across professional and personal work, rather than only what was used to build this site.
 
 ## Overview
 
 The site currently asserts "AI applications" and "AI-SDLC" in a skills grid. Those are claims, and every résumé now carries similar ones, so they carry no weight on their own. Meanwhile the evidence of how the site is genuinely built — written specifications, the reasoning recorded in commits, the review gates every change passes, the merged pull requests — sits unused in the repository's own history.
 
-This feature adds a section that explains that methodology stage by stage, in plain language, with links to publicly verifiable artifacts. The methodology is the subject; real pull requests appear beneath it as supporting evidence.
+This feature adds a section that explains that methodology stage by stage, in plain language. The methodology is the subject; real pull requests appear beneath it as supporting evidence.
+
+**Scope revision (2026-08-29).** The first draft described only how this site is built. That undersold the point: this portfolio is a nearly-static site, and the practice it demonstrates is much smaller than the practice the author actually runs. The section now documents the whole practice — scheduled routines that handle work coordination, sessions started from a phone in the field, agents reaching ticketing and review systems directly — with this repository as one visible instance rather than the whole subject. The purpose is career visibility.
+
+This creates a two-tier evidence situation that the section must handle honestly: work done in this public repository can be linked; professional practice cannot. See FR-003.
 
 The methodology is expected to change substantially over the coming months and years. The section is therefore specified as a **living document**: its content is data, editable without touching presentation, and it tells the reader when it was last revised.
 
@@ -85,8 +89,9 @@ Six months later the workflow has changed: a stage is obsolete, a new one matter
 ### Functional Requirements
 
 - **FR-001**: The section MUST present the methodology as an ordered sequence of stages, each explaining what it is, what problem it solves, and why it is worth its cost.
-- **FR-002**: The section MUST cover, at minimum: writing a specification before implementation; agents working from a shared instruction set so different tools behave consistently; selecting a model per task as a capability-versus-cost tradeoff; automated review gates every change must pass before merge; and running multiple agent sessions in parallel without collision.
-- **FR-003**: Every factual claim about the process MUST link to a publicly verifiable artifact, or be stated in a way that makes clear no artifact is being cited.
+- **FR-002**: The section MUST cover, at minimum: writing a specification before implementation; standing rules committed alongside the code; two different agent tools kept behaviourally identical; selecting a model per task as a capability-versus-cost tradeoff; agents connected directly to the systems where work is tracked and reviewed; work initiated while away from a desk, both on a schedule and from a phone; running multiple agent sessions in parallel without collision; and automated review gates every change must pass before merge.
+- **FR-015**: The section MUST make clear that the practice described spans work beyond this repository, so a reader does not mistake a nearly-static portfolio for the whole of it.
+- **FR-003**: Every factual claim about the process MUST link to a publicly verifiable artifact, or be stated in a way that makes clear no artifact is being cited. Claims about professional work (which cannot be published) MUST fall in the second category and MUST NOT be dressed to imply evidence exists.
 - **FR-004**: The section MUST include supporting examples drawn from real, merged work, presented beneath the methodology rather than as its primary structure.
 - **FR-005**: At least one supporting example MUST describe a defect the process caught that a manual review would plausibly have missed.
 - **FR-006**: The section MUST be understandable by a reader who has never used an AI coding agent; any term of art MUST be explained where it is first used.

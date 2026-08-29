@@ -22,10 +22,14 @@ const REPO = "https://github.com/twknab/personal_site_v3";
 export const lastRevised = "August 2026";
 
 export const intro =
-  "Most of this site is now built by AI agents working under my direction. " +
-  "That sentence has become cheap — everyone's résumé says something like it — " +
-  "so here is the actual process, stage by stage, with links to the work it produced. " +
-  "It is changing quickly, and some of it will look naive in a year.";
+  "I direct AI agents through most of my engineering work now — at my job, and on " +
+  "personal projects. Everyone's résumé says something like that, so here is the " +
+  "actual process, stage by stage. This site is one place it is visible, and a small " +
+  "one: it is a nearly-static portfolio, so the parts of the practice that handle " +
+  "coordination, scheduling and work I start from a trailhead do not show up in its " +
+  "commit history. Where something is public I have linked it. Where it is work I " +
+  "cannot publish, I have said so plainly rather than dressed it up. It is all " +
+  "changing quickly, and some of it will look naive in a year.";
 
 export const stages = [
   {
@@ -46,22 +50,30 @@ export const stages = [
     ],
   },
   {
-    id: "shared-instructions",
-    name: "Give every agent the same brain",
+    id: "rules-in-repo",
+    name: "Keep the rules in the repository",
     summary:
-      "Standing rules live in the repo, mirrored so different tools behave identically.",
+      "Standing conventions are committed as files, not re-explained each session.",
     detail: [
-      "The conventions an agent needs — how this project lays out sections, what may never be full width, how to stage a commit safely — are committed to the repository rather than re-explained each session. Two different assistants read the same guidance from two mirrored directories, so switching between them does not change how the work comes out.",
-      "This exists because of a real failure: a rule I had only ever said out loud got broken, shipped, and was invisible at the screen size I happened to be testing. Now that rule is a file, and it carries the reason it exists and the exact check that catches it.",
+      "The conventions an agent needs — how this project lays out its sections, what may never run full width, how to stage a commit without trampling someone else's work — live in the repository next to the code. They are versioned, reviewed and diffed like anything else, and they apply to me as much as to an agent.",
+      "This exists because of a specific failure. A rule I had only ever said out loud got broken, shipped, and was invisible at the screen size I happened to be testing on. It is now a file that carries the reason it exists and the exact measurement that catches it, so the next session cannot repeat the mistake by not having been told.",
+    ],
+    tools: ["Markdown"],
+    evidence: [
+      { label: "the rules, in this repo", href: `${REPO}/tree/main/.claude` },
+    ],
+  },
+  {
+    id: "two-tools",
+    name: "Two tools, one process",
+    summary:
+      "I move between Claude Code and Cursor; mirrored instructions keep them interchangeable.",
+    detail: [
+      "I do not use one assistant. I move between two depending on what the work needs and where I am, which only functions because both read the same instructions from mirrored directories — one per tool, kept byte-identical in substance. Switching tools mid-feature changes the interface, not the output.",
+      "The mirroring is deliberate maintenance, not a happy accident. Editing guidance in one place and not the other is the obvious failure mode, so keeping the pair in step is itself a documented step with a check that compares them.",
     ],
     tools: ["Claude Code", "Cursor"],
-    evidence: [
-      {
-        label: "the mirrored skills and rules",
-        href: `${REPO}/tree/main/.claude`,
-      },
-      { label: "PR #87", href: `${REPO}/pull/87` },
-    ],
+    evidence: [{ label: "PR #87", href: `${REPO}/pull/87` }],
   },
   {
     id: "model-choice",
@@ -73,6 +85,29 @@ export const stages = [
       "I have no clean measurements to offer here, which is why this stage links to nothing. It is judgement, applied per task, and it is the part of this process most likely to look different in six months.",
     ],
     tools: ["Opus", "Sonnet"],
+  },
+  {
+    id: "connected-tools",
+    name: "Connect agents to the systems, not to me",
+    summary:
+      "Agents read the board and the tickets directly instead of waiting for me to paste context in.",
+    detail: [
+      "An agent that cannot see the tracker is working from whatever I remembered to tell it. Connecting them directly to where work actually lives means an agent can read a ticket's acceptance criteria, see a board's current state, and pick up review comments on a merge request without me acting as a copy-paste layer between the two.",
+      "The value is less about speed than about drift: the context an agent works from is the same context the team is working from, rather than my summary of it, aging by the minute.",
+    ],
+    tools: ["MCP", "GitHub"],
+  },
+  {
+    id: "away-from-desk",
+    name: "Start work without being at a desk",
+    summary:
+      "Some runs are scheduled; others I kick off from my phone, from a trailhead.",
+    detail: [
+      "Two different things, same underlying idea: the work does not need me sitting in front of it. Routines run on a schedule to handle the coordination layer of a job — triaging inbound mail and messages, keeping tickets moving, pulling the current state of design boards — so that the repetitive parts are already done rather than waiting.",
+      "The other half is mobile. I start sessions from a phone and let cloud agents build a feature while I am out in the field, then review what came back when I am home. It is genuinely useful and it is also the part I trust least without gates, which is exactly why the gates below are not optional.",
+      "None of this is visible here. It is work I cannot publish, so this stage cites nothing — take it as a description, not a demonstration.",
+    ],
+    tools: ["Scheduled routines", "Claude mobile", "Cursor mobile", "Cloud agents"],
   },
   {
     id: "review-gates",
