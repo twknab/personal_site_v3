@@ -51,7 +51,14 @@ export const headingIcons = {
   },
   toolkit: { Icon: FaToolbox, stops: ["#32efa6", "#d8e052", "#00d4ff"] },
   experience: { Icon: FaDumbbell, stops: ["#fcb045", "#ff2d95", "#b026ff"] },
-  education: { Icon: FaGraduationCap, stops: ["#00d4ff", "#32efa6", "#d8e052"] },
+  // The mortarboard is wide and shallow, so at the shared size it reads
+  // noticeably smaller than the rest. `scale` corrects a single glyph's
+  // optical weight without moving everything else.
+  education: {
+    Icon: FaGraduationCap,
+    stops: ["#00d4ff", "#32efa6", "#d8e052"],
+    scale: 1.18,
+  },
   awards: { Icon: FaAward, stops: ["#ffd86b", "#fcb045", "#ff2d95"] },
   reading: { Icon: FaBookOpen, stops: ["#b026ff", "#00d4ff", "#32efa6"] },
 };

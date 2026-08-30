@@ -63,7 +63,11 @@ function SectionHeading({ id, label, children }) {
   return (
     <h1 id={id} className="section-heading">
       {glyph && (
-        <span className="section-heading-icon" aria-hidden="true">
+        <span
+          className="section-heading-icon"
+          aria-hidden="true"
+          style={glyph.scale ? { fontSize: `${glyph.scale}em` } : undefined}
+        >
           {/*
             fill points at a gradient painted once by <HeadingIconDefs />.
             react-icons sets fill="currentColor" on the svg, so this has to
