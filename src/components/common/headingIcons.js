@@ -20,7 +20,7 @@ import {
   FaDraftingCompass,
   FaDumbbell,
   FaGraduationCap,
-  FaHandSparkles,
+  FaCampground,
   FaPalette,
   FaRocket,
   FaSeedling,
@@ -29,7 +29,9 @@ import {
 } from "react-icons/fa";
 
 export const headingIcons = {
-  welcome: { Icon: FaHandSparkles, from: "#ffd86b", to: "#ff2d95" },
+  // A campfire rather than a raised hand: FaHandSparkles read as "stop", and
+  // the hero photo right beside it is a fire on a beach at night.
+  welcome: { Icon: FaCampground, from: "#ffd86b", to: "#ff2d95" },
   "about-me": { Icon: FaSeedling, from: "#32efa6", to: "#00d4ff" },
   skills: { Icon: FaTools, from: "#d8e052", to: "#fcb045" },
   projects: { Icon: FaPalette, from: "#b026ff", to: "#ff2d95" },
