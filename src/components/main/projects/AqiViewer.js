@@ -5,6 +5,7 @@ import Image from "react-bootstrap/Image";
 import Row from "react-bootstrap/Row";
 import { FaGithub } from "react-icons/fa";
 import aqiViewerIco from "../../../assets/images/apps/aqiviewer-ico.svg";
+import firstRun from "../../../assets/images/projects/aqiviewer/first-run.png";
 import dashboard from "../../../assets/images/projects/aqiviewer/dashboard.png";
 import overThreshold from "../../../assets/images/projects/aqiviewer/over-threshold.png";
 import login from "../../../assets/images/projects/aqiviewer/login.png";
@@ -24,6 +25,7 @@ const SHOTS = [
     src: overThreshold,
     alt: "The same reading over a threshold of 5, flagged red",
   },
+  { src: firstRun, alt: "A new account, before a city is set" },
   { src: login, alt: "Signing in" },
   { src: register, alt: "Creating an account" },
 ];

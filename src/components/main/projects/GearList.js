@@ -5,19 +5,23 @@ import Image from "react-bootstrap/Image";
 import Row from "react-bootstrap/Row";
 import { FaGithub } from "react-icons/fa";
 import gearListIco from "../../../assets/images/apps/gearlist-ico.png";
+import about from "../../../assets/images/projects/gearlist/about.png";
+import addItem from "../../../assets/images/projects/gearlist/add-item.png";
 import dashboard from "../../../assets/images/projects/gearlist/dashboard.png";
-import home from "../../../assets/images/projects/gearlist/home.png";
-import newList from "../../../assets/images/projects/gearlist/new-list.png";
-import viewList from "../../../assets/images/projects/gearlist/view-list.png";
+import gearListShot from "../../../assets/images/projects/gearlist/gear-list.png";
+import login from "../../../assets/images/projects/gearlist/login.png";
 import ProjectGallery from "./ProjectGallery";
 
 const REPO = "https://github.com/twknab/gear_list_MEVN";
 
+// Captured from the running app against a seeded database, so the weights
+// and totals on screen are the app's own arithmetic rather than mock text.
 const SHOTS = [
-  { src: dashboard, alt: "Gear dashboard with pack weight" },
-  { src: viewList, alt: "Viewing a gear list" },
-  { src: newList, alt: "Creating a new gear list" },
-  { src: home, alt: "Home navigation" },
+  { src: dashboard, alt: "Gear lists with their total weights" },
+  { src: gearListShot, alt: "Inside a list, item by item" },
+  { src: addItem, alt: "Adding a piece of gear" },
+  { src: about, alt: "What the app is for" },
+  { src: login, alt: "Signing in" },
 ];
 
 function GearList() {
