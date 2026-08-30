@@ -50,13 +50,46 @@ function FlowDiagram() {
   );
 }
 
+/**
+ * A cloud of every tool named anywhere in the methodology, deduped, each
+ * pointing at the first stage that uses it. Gives a reader the shape of the
+ * stack in one glance before they read a word, and doubles as navigation.
+ */
+function ToolCloud({ onPick }) {
+  const seen = new Map();
+  stages.forEach((stage) => {
+    (stage.tools || []).forEach((tool) => {
+      if (!seen.has(tool)) seen.set(tool, stage.id);
+    });
+  });
+
+  return (
+    <div className="hib-cloud">
+      <span className="hib-cloud-label">The stack behind it</span>
+      <ul className="hib-cloud-list">
+        {[...seen.entries()].map(([tool, stageId]) => (
+          <li key={tool}>
+            <button
+              type="button"
+              className="hib-tag hib-tag-button"
+              onClick={() => onPick(stageId)}
+            >
+              {tool}
+            </button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
 function ToolChips({ tools }) {
   if (!tools || tools.length === 0) return null;
 
   return (
     <ul className="hib-tools" aria-label="Tools used at this stage">
       {tools.map((tool) => (
-        <li key={tool} className="hib-tool-chip">
+        <li key={tool} className="hib-tag">
           {tool}
         </li>
       ))}
@@ -64,13 +97,12 @@ function ToolChips({ tools }) {
   );
 }
 
-function Stage({ stage, index }) {
-  const [open, setOpen] = useState(false);
+function Stage({ stage, index, open, onToggle }) {
   const panelId = `hib-panel-${stage.id}`;
   const { Icon } = stage;
 
   return (
-    <li className="hib-stage">
+    <li className="hib-stage" id={`hib-stage-${stage.id}`}>
       {/*
         A real <button>, not the role="button" div the Reading section uses:
         Enter/Space and focus semantics come free rather than being
@@ -81,7 +113,7 @@ function Stage({ stage, index }) {
         className="hib-stage-header"
         aria-expanded={open}
         aria-controls={panelId}
-        onClick={() => setOpen((prev) => !prev)}
+        onClick={onToggle}
       >
         <span className="hib-stage-icon" aria-hidden="true">
           <Icon />
@@ -115,6 +147,26 @@ function Stage({ stage, index }) {
 
 function HowIBuild() {
   const { Icon: ArchitectIcon, text: architectText } = architectNote;
+  const [openIds, setOpenIds] = useState([]);
+
+  const toggle = (id) =>
+    setOpenIds((prev) =>
+      prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]
+    );
+
+  // Picking a tag opens the stage that uses it and scrolls it into view.
+  // Opened rather than toggled: arriving at a collapsed stage you just asked
+  // to see would be a non-answer.
+  const jumpToStage = (id) => {
+    setOpenIds((prev) => (prev.includes(id) ? prev : [...prev, id]));
+    // Opening the stage is the part that matters; scrolling is a courtesy.
+    // Guarded because not every environment implements scrollIntoView, and a
+    // missing convenience should not stop the stage from opening.
+    const el = document.getElementById(`hib-stage-${id}`);
+    if (el && typeof el.scrollIntoView === "function") {
+      el.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  };
 
   return (
     <div>
@@ -132,6 +184,8 @@ function HowIBuild() {
 
           <FlowDiagram />
 
+          <ToolCloud onPick={jumpToStage} />
+
           <p className="hib-architect">
             <span className="hib-architect-icon" aria-hidden="true">
               <ArchitectIcon />
@@ -141,7 +195,13 @@ function HowIBuild() {
 
           <ol className="hib-stages">
             {stages.map((stage, index) => (
-              <Stage key={stage.id} stage={stage} index={index} />
+              <Stage
+                key={stage.id}
+                stage={stage}
+                index={index}
+                open={openIds.includes(stage.id)}
+                onToggle={() => toggle(stage.id)}
+              />
             ))}
           </ol>
 

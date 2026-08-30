@@ -96,6 +96,7 @@ Six months later the workflow has changed: a stage is obsolete, a new one matter
 - **FR-017**: The methodology MUST be presented as a loop rather than a line: what the gates catch feeds back into the rules and skills.
 - **FR-004**: The section MUST open with a visual diagram of the pipeline — specify, harness, agents, gates, ship — including the feedback path from the gates back to the harness. **Revised 2026-08-29**: replaces a requirement for merged-work case studies, which the author judged to be beside the point.
 - **FR-005**: Each stage MUST carry an icon, and the section MUST read as a visual explanation rather than a wall of prose.
+- **FR-018**: The section MUST open with a cloud of every tool named across the methodology, giving a reader the shape of the stack before reading any prose. Selecting one MUST open and reveal the stage that uses it.
 - **FR-006**: The section MUST be understandable by a reader who has never used an AI coding agent; any term of art MUST be explained where it is first used.
 - **FR-007**: All reader-facing content MUST live in a content source separate from presentation, so stages and examples can be added, reworded, reordered, or removed without changing presentation code.
 - **FR-008**: The section MUST display when the methodology was last revised.
@@ -104,7 +105,7 @@ Six months later the workflow has changed: a stage is obsolete, a new one matter
 - **FR-011**: The section MUST degrade gracefully if a linked artifact becomes unavailable — the surrounding explanation MUST remain coherent without it.
 - **FR-012**: The section MUST accommodate a stage that has no linked evidence without implying that evidence exists.
 - **FR-013**: Every stage's name and a one-line summary MUST be visible without interaction, with the stage's full detail revealed on demand. Adding a stage MUST therefore cost one line in the default view rather than a further screenful.
-- **FR-014**: Where a stage names specific tools, those names MUST live in a dedicated field of that stage's content, not embedded in its explanatory prose. The prose MUST remain meaningful if the named tools are replaced.
+- **FR-014**: **Revised 2026-08-29.** Tool names SHOULD live in a stage's dedicated field rather than its prose, so an explanation survives a tool being swapped. Stages whose subject *is* the specific tooling — the agents used, and the systems they connect to — MAY name tools in prose, because the concreteness is the point there. Every stage MUST still carry the dedicated field, since it drives the tag cloud.
 
 ### Key Entities
 

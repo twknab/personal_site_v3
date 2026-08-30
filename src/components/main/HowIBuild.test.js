@@ -91,19 +91,33 @@ describe("HowIBuild", () => {
     );
   });
 
-  it("keeps tool names out of the explanatory prose", () => {
-    // Tool names live in `tools` so an explanation stays true when the tool
-    // under it is swapped. A name leaking into `detail` defeats that.
-    const names = [...new Set(stages.flatMap((s) => s.tools || []))];
-    const leaks = [];
-    stages.forEach((stage) => {
-      stage.detail.forEach((para) => {
-        names.forEach((n) => {
-          if (para.includes(n)) leaks.push(`${stage.id}: "${n}"`);
-        });
-      });
+  it("gives every stage a tag list and renders them as tags, not buttons", () => {
+    // The inline tags are labels, not controls. Only the cloud's tags are
+    // interactive; if an inline one ever became a <button> it would invite a
+    // click that does nothing.
+    const { container } = render(<HowIBuild />);
+    const inlineTags = container.querySelectorAll(".hib-tools .hib-tag");
+
+    expect(inlineTags.length).toBeGreaterThan(0);
+    inlineTags.forEach((tag) => expect(tag.tagName).toBe("LI"));
+  });
+
+  it("offers a tag cloud that opens the stage using that tool", async () => {
+    const user = userEvent.setup();
+    const { container } = render(<HowIBuild />);
+
+    const cloudTag = container.querySelector(".hib-cloud-list .hib-tag-button");
+    expect(cloudTag).toBeInTheDocument();
+
+    const tool = cloudTag.textContent.trim();
+    const target = stages.find((st) => (st.tools || []).includes(tool));
+    const control = screen.getByRole("button", {
+      name: new RegExp(target.name, "i"),
     });
-    expect(leaks).toEqual([]);
+
+    expect(control).toHaveAttribute("aria-expanded", "false");
+    await user.click(cloudTag);
+    expect(control).toHaveAttribute("aria-expanded", "true");
   });
 
   it("states when the methodology was last revised", () => {

@@ -7,8 +7,10 @@
 // HOW TO REVISE:
 //   - Add, reorder, reword or delete entries in `flow` / `stages`. The
 //     component renders them in array order and needs no changes.
-//   - Keep `detail` prose free of tool names. Names belong in `tools`, so an
-//     explanation stays true when the tool under it is replaced.
+//   - Prefer keeping tool names in `tools` rather than in `detail`, so an
+//     explanation stays true when the tool under it is replaced. Two stages
+//     deliberately break this — naming the agents and the connected systems
+//     in prose is the point of those stages — so it is a default, not a law.
 //   - Update `lastRevised` by hand when the methodology actually changes. It
 //     is deliberately not derived from git: a computed date would move on
 //     unrelated edits and overstate how current this is.
@@ -91,7 +93,7 @@ export const stages = [
       "Work starts as a written spec and a planning pass — never straight into code.",
     detail: [
       "Anything non-trivial begins as a specification — who it is for, what must be true when it is done, what is excluded — then a separate planning pass turns it into ordered tasks before a line is written.",
-      "It costs an hour before anything visible happens, so small changes skip it. What it buys is that the disagreement happens on paper instead of three files deep.",
+      "Comprehensive specification and planning is also where the technical decisions get settled: the stack, the coding patterns, the preferred libraries, the approach and the architecture. Fixing those up front is what stops an agent quietly inventing its own.",
     ],
     tools: ["Spec Kit", "Plan mode"],
   },
@@ -103,7 +105,7 @@ export const stages = [
       "Rule sets and custom skills constrain the agents; correcting them is the real work.",
     detail: [
       "The leverage is not in any single prompt. It is in standing constraints: rule sets encoding what a project will not tolerate, and custom skills that capture a whole procedure so it runs the same way every time.",
-      "When output comes back wrong, the fix is rarely to re-prompt — it is to find the missing constraint and add it, so that class of mistake cannot recur.",
+      "So the rule sets get iterated on, and iterated on again. Each pass tightens what the agents may do until the output comes back in the shape I actually wanted, rather than something I have to rewrite.",
     ],
     tools: ["Rule sets", "Custom skills"],
   },
@@ -114,10 +116,10 @@ export const stages = [
     summary:
       "Constraints are committed files — versioned, reviewed and diffed like code.",
     detail: [
-      "Rules live next to the code, not in my head or a chat history — versioned, reviewed and diffed like anything else, binding me as much as any agent.",
-      "A rule I had only ever said out loud once got broken, shipped, and was invisible at the width I happened to test. It is now a file carrying the reason it exists and the measurement that catches it.",
+      "The rules are an evolving body of the preferred practices, patterns and intentions for a given codebase. Its architecture, its technical decisions and its house style all go into the rules and the constitution the agents read before they touch anything.",
+      "The better that body gets, the more the harness returns the right output first time — which means less prompting, less correction, fewer iterations, and materially fewer tokens.",
     ],
-    tools: ["Markdown", "Git"],
+    tools: ["Rule sets", "Constitution", "Git"],
   },
   {
     id: "two-tools",
@@ -126,10 +128,10 @@ export const stages = [
     summary:
       "I move between agents; mirrored instructions keep them interchangeable.",
     detail: [
-      "I move between assistants depending on the work and where I am. It holds together because each reads the same instructions from mirrored directories — switching mid-feature changes the interface, not the output.",
-      "Keeping the pair in step is deliberate maintenance with its own check; editing one and forgetting the other is the obvious way it rots.",
+      "I leverage multiple agentic tools at once — Claude, Cursor, and parallel local and cloud agents spun up as the work demands.",
+      "A rule links the two rule sets and holds them in parity, so I can move between agents and workflows freely: picking up in one when a quota wears out, or switching because I prefer what a particular tool produces for that kind of work.",
     ],
-    tools: ["Claude Code", "Cursor"],
+    tools: ["Claude", "Cursor", "Cloud agents"],
   },
   {
     id: "connected-tools",
@@ -138,10 +140,10 @@ export const stages = [
     summary:
       "Agents read boards, tickets and review feedback directly, rather than through me.",
     detail: [
-      "An agent that cannot see the tracker works from whatever I remembered to tell it. Connected directly, it reads acceptance criteria, board state and review comments itself.",
-      "The gain is less speed than drift: it works from the same context the team has, not my summary of it, ageing by the minute.",
+      "MCP connections wire the agents into GitLab, Figma and Atlassian — JIRA and Confluence — so they act on my behalf: moving ticket statuses, posting updates, and writing end-of-day rollups.",
+      "They also run code review, raise Slack alerts and work through the feedback before any human stamps it. Once approvals land, merging and rebasing are automated through merge-train skills.",
     ],
-    tools: ["MCP", "GitHub"],
+    tools: ["MCP", "GitLab", "Atlassian", "Figma", "Slack"],
   },
   {
     id: "parallel-sessions",
@@ -150,10 +152,10 @@ export const stages = [
     summary:
       "Multiple sessions collaborate in isolated checkouts so they cannot collide.",
     detail: [
-      "Several pieces of work are usually moving, so each session gets its own isolated copy of the repository and cannot touch another's files.",
-      "I learned that boundary the hard way: two sessions shared one folder, one swept the other's half-built feature into an unrelated commit and then stashed it mid-edit. Nothing errored — the work simply vanished.",
+      "Parallel and cloud agents, always. Each works on its own branch in its own checkout and never touches another's commit history.",
+      "Branches and diffs are stacked wherever the work allows, so agents can build on top of each other instead of queueing — or colliding. I learned that boundary the hard way: two sessions once shared a folder and one swept the other's half-built feature into an unrelated commit.",
     ],
-    tools: ["git worktree"],
+    tools: ["git worktree", "Cloud agents", "Stacked branches"],
   },
   {
     id: "away-from-desk",
@@ -162,10 +164,10 @@ export const stages = [
     summary:
       "Some runs are scheduled; others I start from a phone, out in the field.",
     detail: [
-      "Routines run on a schedule to handle the coordination layer of a job — triaging mail and messages, keeping tickets moving, pulling design board state — so the repetitive parts are done rather than queued.",
-      "The rest is mobile: I start sessions from a phone and let cloud agents build while I am out on a trail, then review what came back. It is the part I would trust least without the gates, which is why they are not optional.",
+      "Claude mobile and Cursor mobile dispatch tasks; screen-control apps let me drive a local terminal from a phone.",
+      "So planning, a feature, or a grooming pass can start while I am out in the world — which is often where the better ideas turn up.",
     ],
-    tools: ["Scheduled routines", "Claude mobile", "Cursor mobile"],
+    tools: ["Claude mobile", "Cursor mobile", "Screens Connect"],
   },
   {
     id: "review-gates",
@@ -174,22 +176,22 @@ export const stages = [
     summary:
       "Automated review and security scanning block a merge — no exemption for agent-written code.",
     detail: [
-      "Linting, tests, a production build, dependency scanning and static security analysis run on every change, and any of them can stop a merge. Agent-written work faces exactly the gate mine does.",
-      "The load-bearing word is blocking. These once ran in a mode that reported success regardless of findings — indistinguishable from safety on a dashboard, and worth nothing.",
+      "Gates and CI/CD are how quality is actually controlled: linting, security scanning, vulnerability and container scanning, automated test suites, automated code review, and author agents that work through blocking comments and nits before a human looks.",
+      "Together with the harness, this is what holds code integrity, quality and maintainability in place — and it is what every automated deployment is gated on. Nothing reaches an environment that has not passed it.",
     ],
-    tools: ["Code review", "Security scanning", "Dependency scanning"],
+    tools: ["Linting", "Security scanning", "Container scanning", "Test suites", "Automated review"],
   },
   {
     id: "automated-delivery",
     Icon: FaCloudUploadAlt,
-    name: "Automate the delivery, not just the writing",
+    name: "Infrastructure as code, never click-ops",
     summary:
-      "Once it passes, pipelines build and deploy to the cloud without me.",
+      "Terraform keeps environments reproducible and applications portable between clouds.",
     detail: [
-      "Getting an agent to write code is the easy half. The pipeline that builds a merged change, provisions what it needs and puts it in front of users is what closes the loop — otherwise a human is still the last bottleneck.",
-      "Infrastructure is described as code too, so environments are reproducible and a deployment is a reviewable change like any other.",
+      "Infrastructure is Terraform. Writing it as code keeps an application portable between cloud environments instead of welded to whatever was clicked into one console.",
+      "Click-ops is avoided on principle: no engineer remembers what they clicked, least of all across dev, staging and production. If it is not in code it does not survive the next person — or the next environment.",
     ],
-    tools: ["CI/CD", "Google Cloud", "Terraform"],
+    tools: ["Terraform", "CI/CD", "Google Cloud"],
   },
   {
     id: "iterate",
@@ -197,9 +199,9 @@ export const stages = [
     name: "Then sharpen the harness",
     summary: "Every escape becomes a new rule, a new skill, or a new gate.",
     detail: [
-      "Anything that reaches production wrong is treated as a gap in the harness, not a one-off — the response is a new rule, a sharper skill, or a check that would have caught it.",
-      "This is the part that compounds. The agents do not improve on their own; the constraints around them do.",
+      "Sharpen the harness, sharpen the gates, go again. Fix the gap, write the new rule, automate the step — and never repeat yourself in a prompt.",
+      "Add scheduled routines. Add MCP connections. Build the connectors that do not exist yet. The work is finding the gaps in the agentic flow and joining the islands that still need something carried over the fence by hand.",
     ],
-    tools: ["Rule sets", "Custom skills"],
+    tools: ["Rule sets", "Custom skills", "Scheduled routines", "MCP"],
   },
 ];

@@ -2824,14 +2824,63 @@ a.tech-badge {
   padding: 0;
 }
 
-.hib-tool-chip {
-  padding: 6px 12px;
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+// Tags, not buttons. The previous chip had a boxy radius and a solid border,
+// which read as something to click; these are lighter, fully rounded and sit
+// back into the surface.
+.hib-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 11px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
   font-family: var(--font-mono), ui-monospace, monospace;
-  font-size: 12px;
-  line-height: 1.4;
+  font-size: 11.5px;
+  letter-spacing: 0.3px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.86);
+}
+
+// --- The tag cloud ----------------------------------------------------
+// A snapshot of the stack before any prose, doubling as navigation into the
+// stage that uses each tool.
+.hib-cloud {
+  margin: 0 0 1.3rem;
+}
+
+.hib-cloud-label {
+  display: block;
+  margin-bottom: 8px;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  opacity: 0.6;
+}
+
+.hib-cloud-list {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin: 0;
+  padding: 0;
+}
+
+// The cloud's tags are interactive, so they get affordance the inline ones
+// deliberately do not — but stay tag-shaped rather than becoming buttons.
+.hib-tag-button {
+  cursor: pointer;
+  transition: transform 0.18s ease, background 0.18s ease,
+    border-color 0.18s ease, color 0.18s ease;
+
+  &:hover,
+  &:focus-visible {
+    transform: translateY(-2px);
+    background: rgba($themeVibrantYellowGreen, 0.16);
+    border-color: rgba($themeVibrantYellowGreen, 0.6);
+    color: #ffffff;
+  }
 }
 
 // --- Pipeline diagram -------------------------------------------------
@@ -3057,6 +3106,17 @@ a.tech-badge {
   }
 }
 
+// Cloud tags settle in after the diagram has drawn.
+.how-i-build.in-view .hib-cloud-list li {
+  animation: hibDetailIn 420ms ease-out backwards;
+}
+
+@for $i from 1 through 24 {
+  .how-i-build.in-view .hib-cloud-list li:nth-child(#{$i}) {
+    animation-delay: #{900 + ($i - 1) * 28}ms;
+  }
+}
+
 // Stage icons lift with their row on hover.
 .hib-stage-header {
   .hib-stage-icon {
@@ -3102,8 +3162,13 @@ a.tech-badge {
   .how-i-build.in-view .hib-flow-step.is-loop-target,
   .how-i-build.in-view .hib-flow-step::after,
   .how-i-build.in-view .hib-flow-loop-arrow,
+  .how-i-build.in-view .hib-cloud-list li,
   .hib-stage-detail > * {
     animation: none !important;
+  }
+
+  .hib-tag-button {
+    transition: none;
   }
 
   .hib-stage-header .hib-stage-icon {
