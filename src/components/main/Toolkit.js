@@ -16,9 +16,6 @@ function Toolkit() {
       <Row className="toolkit">
         <Col lg>
           <SectionHeading id="toolkit" label="Toolkit">
-            <span role="img" aria-label="toolkit">
-              🧰
-            </span>{" "}
             Toolkit
           </SectionHeading>
           <p className="toolkit-intro">

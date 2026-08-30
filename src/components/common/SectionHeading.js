@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { FaCheck, FaLink } from "react-icons/fa";
+import { gradientId, headingIcons } from "./headingIcons";
 
 /**
  * Copies a deep link to the section it sits in.
@@ -57,8 +58,20 @@ export function CopyLinkButton({ anchorId, label }) {
  * renders no id, so it cannot serve a shared link on its own.
  */
 function SectionHeading({ id, label, children }) {
+  const glyph = headingIcons[id];
+
   return (
     <h1 id={id} className="section-heading">
+      {glyph && (
+        <span className="section-heading-icon" aria-hidden="true">
+          {/*
+            fill points at a gradient painted once by <HeadingIconDefs />.
+            react-icons sets fill="currentColor" on the svg, so this has to
+            override it via style rather than a class.
+          */}
+          <glyph.Icon style={{ fill: `url(#${gradientId(id)})` }} />
+        </span>
+      )}
       <span className="section-heading-text">{children}</span>
       <CopyLinkButton anchorId={id} label={label} />
     </h1>

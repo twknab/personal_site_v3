@@ -18,9 +18,6 @@ function Skills() {
       <Row className="skills">
         <Col lg>
           <SectionHeading id="skills" label="Skills">
-            <span role="img" aria-label="about">
-              ⚒️
-            </span>{" "}
             Skills
           </SectionHeading>
           {/* TODO: Add more rows, and break skills into categories to match current resume template */}

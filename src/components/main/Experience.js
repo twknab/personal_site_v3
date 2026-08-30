@@ -23,9 +23,6 @@ function Experience() {
       <Element name="experience"></Element>
       <Row className="experience">
         <SectionHeading id="experience" label="Experience">
-          <span role="img" aria-label="about">
-            🏋️‍♂️
-          </span>{" "}
           experience
         </SectionHeading>
         <Col lg>

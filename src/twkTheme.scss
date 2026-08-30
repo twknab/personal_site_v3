@@ -3310,3 +3310,57 @@ a.tech-badge {
     transition: none !important;
   }
 }
+
+// --- Heading glyphs (experiment) --------------------------------------
+// Vector glyphs replacing the native system emoji. Filled with a per-section
+// gradient from the site palette, so they scale cleanly, look the same on
+// every platform, and match the pipeline diagram and chips rather than
+// carrying Apple's or Google's art direction.
+.section-heading-icon {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  // Tied to the heading's own size so it scales with the fluid type scale
+  // instead of drifting at large and small viewports.
+  font-size: 0.82em;
+  line-height: 1;
+  // The gradient fill leaves the glyph flat against a dark background; a soft
+  // shadow gives it the weight the emoji had.
+  filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.55));
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+// A small lift when its section scrolls in, so the glyph announces itself.
+.reveal.in-view .section-heading-icon,
+.in-view .section-heading-icon {
+  animation: headingGlyphIn 600ms cubic-bezier(0.22, 1, 0.36, 1) backwards;
+}
+
+@keyframes headingGlyphIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px) rotate(-10deg) scale(0.82);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.section-heading:hover .section-heading-icon {
+  transform: rotate(-8deg) scale(1.08);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal.in-view .section-heading-icon,
+  .in-view .section-heading-icon {
+    animation: none;
+  }
+
+  .section-heading-icon,
+  .section-heading:hover .section-heading-icon {
+    transition: none;
+    transform: none;
+  }
+}

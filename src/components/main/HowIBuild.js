@@ -178,9 +178,6 @@ function HowIBuild() {
       <Row className="how-i-build" data-testid="how-i-build">
         <Col lg>
           <SectionHeading id="how-i-build" label="How I Build">
-            <span role="img" aria-label="how i build">
-              🛠
-            </span>{" "}
             How I Build
           </SectionHeading>
 

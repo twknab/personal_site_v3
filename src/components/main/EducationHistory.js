@@ -12,9 +12,6 @@ function EducationHistory() {
       <Row className="education-history link-light-bg">
         <Col lg className="light-text-shadow">
           <SectionHeading id="education" label="Education History">
-            <span role="img" aria-label="about">
-              🎓
-            </span>{" "}
             Education History
           </SectionHeading>
           <h4>Full Stack Web Application Development: Software Engineering</h4>

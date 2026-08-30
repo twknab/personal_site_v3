@@ -95,9 +95,6 @@ function Reading() {
       <Row className="reading">
         <Col lg>
           <SectionHeading id="reading" label="Reading">
-            <span role="img" aria-label="reading">
-              📚
-            </span>{" "}
             Reading
           </SectionHeading>
 

@@ -30,9 +30,6 @@ function ProfessionalSummary() {
           lg={8}
         >
           <SectionHeading id="welcome" label="Welcome">
-            <span role="img" aria-label="welcome">
-              👋
-            </span>{" "}
             Welcome!
           </SectionHeading>
           <p className="light-text-shadow">

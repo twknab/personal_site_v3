@@ -7,6 +7,7 @@ import Experience from "./main/Experience";
 import ProfessionalSummary from "./main/ProfessionalSummary";
 import Projects from "./main/Projects";
 import HowIBuild from "./main/HowIBuild";
+import { HeadingIconDefs } from "./common/headingIcons";
 import Reading from "./main/Reading";
 import RecentlyShipped from "./main/RecentlyShipped";
 import Skills from "./main/Skills";
@@ -24,6 +25,7 @@ function MainContent({ recentActivity }) {
     <div>
       {/* TODO: add max container height if going into maintainence mode style={{height: "100vh"}}  */}
       <Container fluid className="mainContent" data-testid="main-content">
+        <HeadingIconDefs />
         <ProfessionalSummary />
         <AboutMe />
         <Skills />

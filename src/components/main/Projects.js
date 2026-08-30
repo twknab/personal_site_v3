@@ -20,9 +20,6 @@ function Projects() {
       <Row className="projects">
         <Col lg>
           <SectionHeading id="projects" label="Projects">
-            <span role="img" aria-label="about">
-              👨‍🎨
-            </span>{" "}
             Projects
           </SectionHeading>
           {/* Newest work first; the older experiments bring up the rear. */}

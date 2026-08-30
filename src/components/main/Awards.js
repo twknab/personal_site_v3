@@ -10,9 +10,6 @@ function Awards() {
       <Row className="awards">
         <Col lg>
           <SectionHeading id="awards" label="Awards">
-            <span role="img" aria-label="awards">
-              ⭐️
-            </span>{" "}
             Awards
           </SectionHeading>
           <p>

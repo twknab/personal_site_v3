@@ -9,9 +9,6 @@ function AboutMe() {
       <Row className="about-me">
         <Col lg>
           <SectionHeading id="about-me" label="About Me">
-            <span role="img" aria-label="about">
-              🗣
-            </span>{" "}
             About Me
           </SectionHeading>
           <p>

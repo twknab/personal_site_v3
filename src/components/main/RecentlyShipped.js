@@ -25,9 +25,6 @@ function RecentlyShipped({ items }) {
       <Row className="recently-shipped" data-testid="recently-shipped">
         <Col lg>
           <SectionHeading id="recently-shipped" label="Recently Shipped">
-            <span role="img" aria-label="rocket">
-              🚀
-            </span>{" "}
             Recently Shipped
           </SectionHeading>
           <p className="shipped-intro">
