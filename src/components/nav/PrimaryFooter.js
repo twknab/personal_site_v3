@@ -66,7 +66,7 @@ function PrimaryFooter({ techStack }) {
               <span className="tech-stack-label" id="tech-stack-label">
                 powered by
               </span>
-              <ul className="tech-stack-list" aria-labeledby="tech-stack-label">
+              <ul className="tech-stack-list" aria-labelledby="tech-stack-label">
                 <li>
                   <span className="tech-badge">
                     <span className="tech-badge-name">

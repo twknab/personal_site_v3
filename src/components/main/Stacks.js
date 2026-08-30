@@ -171,7 +171,7 @@ function Stacks() {
             </span>
             my favorites
           </span>
-          <ul className="stacks-modern-list" aria-labeledby="stacks-modern-label">
+          <ul className="stacks-modern-list" aria-labelledby="stacks-modern-label">
             {MODERN_STACK.map(({ name, Icon, color, gradient, href }) => (
               <li key={name}>
                 <a
