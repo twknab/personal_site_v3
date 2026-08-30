@@ -2909,15 +2909,32 @@ a.tech-badge {
   align-items: center;
   text-align: center;
   gap: 6px;
-  padding: 16px 12px;
+  overflow: hidden;
+  padding: 18px 12px 16px;
   border-radius: 12px;
   background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.16);
+  border: 1px solid rgba(var(--step-accent-rgb, 255, 255, 255), 0.16);
+  box-shadow: inset 0 0 22px -12px var(--step-accent, transparent);
+
+  // A slim bar of the step's own colour across the top.
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 3px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      var(--step-accent, #ffffff),
+      transparent
+    );
+    opacity: 0.85;
+  }
 
   // Connector between steps. The gradient is twice the connector's width and
   // slides, so a brighter segment travels along it — the pipeline reads as
   // flowing rather than as five parked boxes.
-  &:not(:last-child)::after {
+  &:not(:last-child):not(.is-loop-target)::after {
     content: "";
     position: absolute;
     top: 50%;
@@ -2926,27 +2943,58 @@ a.tech-badge {
     height: 2px;
     background-image: linear-gradient(
       90deg,
-      rgba(255, 255, 255, 0.25) 0%,
-      rgba(255, 255, 255, 0.25) 35%,
-      $themeVibrantYellowGreen 50%,
-      rgba(255, 255, 255, 0.25) 65%,
-      rgba(255, 255, 255, 0.25) 100%
+      rgba(255, 255, 255, 0.22) 0%,
+      rgba(255, 255, 255, 0.22) 35%,
+      var(--step-accent, #{$themeVibrantYellowGreen}) 50%,
+      rgba(255, 255, 255, 0.22) 65%,
+      rgba(255, 255, 255, 0.22) 100%
     );
     background-size: 200% 100%;
     background-position: 100% 0;
   }
 
-  // The step the feedback loop returns to.
+  // The step the feedback loop returns to. It gets a live conic ring in the
+  // site's full palette — the same trick as the portrait medallion, so the
+  // two read as the same visual language. `overflow: hidden` is dropped
+  // here so the glow can spill.
   &.is-loop-target {
-    border-color: rgba($themeVibrantYellowGreen, 0.55);
-    background: rgba($themeVibrantYellowGreen, 0.08);
+    overflow: visible;
+    border-color: transparent;
+    background: rgba(20, 17, 32, 0.86);
+
+    &::after {
+      content: "";
+      position: absolute;
+      inset: -2px;
+      z-index: -1;
+      border-radius: 14px;
+      --ring-angle: 0deg;
+      background: conic-gradient(
+        from var(--ring-angle),
+        #ff2d95,
+        #00d4ff,
+        $themeVibrantYellowGreen,
+        #32efa6,
+        #b026ff,
+        $themeOrange,
+        #ff2d95
+      );
+      // No connector on this one; the ring replaces it, and the connector
+      // rule below is scoped to steps that are not the loop target.
+      width: auto;
+      height: auto;
+      top: auto;
+      right: auto;
+      box-shadow: 0 0 26px -6px rgba(176, 38, 255, 0.55);
+    }
   }
 }
 
 .hib-flow-icon {
   display: inline-flex;
-  font-size: 26px;
-  color: $themeVibrantYellowGreen;
+  font-size: 28px;
+  color: var(--step-accent, #{$themeVibrantYellowGreen});
+  filter: drop-shadow(0 0 10px var(--step-accent, transparent));
 }
 
 .hib-flow-label {
@@ -3090,19 +3138,13 @@ a.tech-badge {
 }
 
 // The harness node is the loop's destination, so it breathes gently to say so.
-.how-i-build.in-view .hib-flow-step.is-loop-target {
-  animation: hibStepIn 520ms cubic-bezier(0.22, 1, 0.36, 1) backwards,
-    hibGlow 3.4s ease-in-out 1s infinite;
+.how-i-build.in-view .hib-flow-step.is-loop-target::after {
+  animation: hibRingSpin 7s linear 900ms infinite;
 }
 
-@keyframes hibGlow {
-  0%,
-  100% {
-    box-shadow: 0 0 0 0 rgba($themeVibrantYellowGreen, 0);
-  }
-
-  50% {
-    box-shadow: 0 0 18px -4px rgba($themeVibrantYellowGreen, 0.5);
+@keyframes hibRingSpin {
+  to {
+    --ring-angle: 360deg;
   }
 }
 
@@ -3161,6 +3203,7 @@ a.tech-badge {
   .how-i-build.in-view .hib-flow-step,
   .how-i-build.in-view .hib-flow-step.is-loop-target,
   .how-i-build.in-view .hib-flow-step::after,
+  .how-i-build.in-view .hib-flow-step.is-loop-target::after,
   .how-i-build.in-view .hib-flow-loop-arrow,
   .how-i-build.in-view .hib-cloud-list li,
   .hib-stage-detail > * {
@@ -3176,11 +3219,15 @@ a.tech-badge {
   }
 }
 
+// Sits under the heading as a dateline, so the section reads like a brief.
 .hib-revised {
-  padding: 1.4rem 0 0 !important;
+  padding: 0 0 0.9rem !important;
+  margin-top: -0.4rem;
   font-family: var(--font-mono), ui-monospace, monospace;
-  font-size: 12px;
-  opacity: 0.65;
+  font-size: 11.5px;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  opacity: 0.55;
 }
 
 // The chevron and the collapse are decoration; drop the motion on request.

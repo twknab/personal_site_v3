@@ -29,10 +29,13 @@ function FlowDiagram() {
   return (
     <div className="hib-flow-wrap">
       <ol className="hib-flow" aria-hidden="true">
-        {flow.map(({ id, Icon, label, caption, loop }) => (
+        {flow.map(({ id, Icon, label, caption, loop, accent }) => (
           <li
             key={id}
             className={`hib-flow-step ${loop ? "is-loop-target" : ""}`}
+            // Each step carries its own colour from the site palette, so the
+            // pipeline reads as a spectrum rather than five identical boxes.
+            style={{ "--step-accent": accent }}
           >
             <span className="hib-flow-icon">
               <Icon />
@@ -180,6 +183,8 @@ function HowIBuild() {
             How I Build
           </h1>
 
+          <p className="hib-revised">Last revised {lastRevised}</p>
+
           <p className="hib-intro">{intro}</p>
 
           <FlowDiagram />
@@ -204,8 +209,6 @@ function HowIBuild() {
               />
             ))}
           </ol>
-
-          <p className="hib-revised">Methodology last revised {lastRevised}.</p>
         </Col>
       </Row>
     </div>
