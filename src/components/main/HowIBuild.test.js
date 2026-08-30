@@ -74,6 +74,27 @@ describe("HowIBuild", () => {
     });
   });
 
+  it("joins every step to the next one, including the loop target", () => {
+    // The connectors were pseudo-elements once, and the loop target spends its
+    // ::after on the conic ring — so the connector leaving that step silently
+    // did not exist, leaving a gap mid-pipeline. Asserting the count here and
+    // the position below makes that break visible in the suite rather than
+    // only on the rendered page.
+    const { container } = render(<HowIBuild />);
+    const steps = [...container.querySelectorAll(".hib-flow-step")];
+
+    expect(container.querySelectorAll(".hib-flow-connector")).toHaveLength(
+      flow.length - 1
+    );
+
+    steps.forEach((step, i) => {
+      const connector = step.querySelector(".hib-flow-connector");
+      const isLast = i === steps.length - 1;
+      // Every step leads somewhere except the last, whatever else it is.
+      expect(Boolean(connector)).toBe(!isLast);
+    });
+  });
+
   it("hides the diagram from assistive tech, since the stages carry the same content", () => {
     // The diagram restates the stage list visually. Exposing both would make a
     // screen reader read the whole pipeline twice.

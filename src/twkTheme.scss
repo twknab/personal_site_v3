@@ -68,6 +68,17 @@ $shadow-lift: 0 22px 50px -18px rgba(0, 0, 0, 0.6), 0 6px 14px -8px rgba(0, 0, 0
 // Full-viewport fixed grain overlay for tactile, modern texture.
 .App {
   position: relative;
+  // The page must never scroll sideways. Individual causes get fixed at the
+  // source, but one stray element should not be able to break the viewport for
+  // the whole site, so this is a backstop.
+  //
+  // `clip`, not `hidden`, and the difference matters: `hidden` makes this a
+  // scroll container, which would break the sticky navigation inside it and
+  // silently swallow programmatic scrolling. `clip` clips without creating
+  // one, so sticky still resolves against the viewport.
+  //
+  // This is a guard, not a licence to leave overflow unfixed -- see #115.
+  overflow-x: clip;
 }
 
 .App::after {
@@ -487,6 +498,10 @@ navbar-nav .dropdown-menu {
 // PROFESSIONAL SUMMARY
 // *********************
 .professional-summary {
+  // Both for the particle canvas: `relative` gives it something to size and
+  // position against, `hidden` keeps it inside the rounded bottom corners.
+  position: relative;
+  overflow: hidden;
   color: $themeDarkBackground;
   border-top: 20px solid #d8e052;
   border-bottom: 20px solid #c2c76b;
@@ -499,6 +514,26 @@ navbar-nav .dropdown-menu {
     radial-gradient(at 92% 18%, rgba($themeTurquoise, 0.40) 0px, transparent 45%),
     radial-gradient(at 78% 95%, rgba($themeOrange, 0.45) 0px, transparent 48%),
     url("./assets/images/axiom-bg-pattern.png");
+}
+
+// The particle field. Fills the welcome panel and stays out of the way of
+// everything in front of it.
+.welcome-particles {
+  position: absolute;
+  // `inset` alone stretches it to the host's padding box. A `width`/`height`
+  // of 100% would fight the pixel dimensions the component sets to match the
+  // display's pixel ratio.
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+// The row's columns are static by default, which would let the positioned
+// canvas paint over them. Lifting them puts the portrait, the copy and the
+// social links back in front of the field.
+.professional-summary > [class*="col-"] {
+  position: relative;
+  z-index: 1;
 }
 
 .professional-summary-description {
@@ -2335,15 +2370,30 @@ navbar-nav .dropdown-menu {
     white-space: nowrap;
     text-transform: none;
     text-shadow: none;
+    // `display: none` rather than opacity alone. An absolutely positioned
+    // tooltip is still part of its ancestors' scrollable overflow even while
+    // invisible, and this one is ~106px wide on a 34px button. That inflated
+    // every heading it sits in and leaked past the right edge of the viewport,
+    // putting real horizontal scroll on the page. `allow-discrete` plus
+    // `@starting-style` keeps the fade; browsers without them simply show the
+    // tooltip without one.
+    display: none;
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.16s ease, transform 0.16s ease;
+    transition: opacity 0.16s ease, transform 0.16s ease,
+      display 0.16s allow-discrete;
   }
 
   &:hover::after,
   &:focus-visible::after {
+    display: block;
     opacity: 1;
     transform: translateX(-50%);
+
+    @starting-style {
+      opacity: 0;
+      transform: translateX(-50%) translateY(3px);
+    }
   }
 }
 
@@ -2957,14 +3007,28 @@ a.tech-badge {
 // match. aria-hidden — the stage list below carries the same content.
 .hib-flow-wrap {
   margin: 1.6rem 0 1.4rem;
+  // The connectors are drawn outside their step, in the gap before the next
+  // one, so a mistake here escapes upward: nothing between this and <body>
+  // clips horizontally, and a stray 17px connector became real page scroll.
+  // `clip`, not `hidden` — it clips without creating a scroll container, and
+  // leaves the vertical axis visible so the loop ring's glow still spills.
+  overflow-x: clip;
 }
 
 .hib-flow {
   list-style: none;
   display: flex;
-  flex-wrap: wrap;
+  // Never wrap. Wrapping broke the five steps into 3 + 2 and left the step
+  // ending the first row with a connector pointing sideways into nothing --
+  // and past the container, which is what put scroll on the page. Below
+  // 768px the media query stacks these into a column instead.
+  flex-wrap: nowrap;
   align-items: stretch;
-  gap: 10px;
+  // The connectors live in this gap and are sized from it, so the two are
+  // driven by one number. Wide enough that a travelling dot has somewhere to
+  // travel — at 10px the connector was too short to read as a line at all.
+  --hib-gap: 18px;
+  gap: var(--hib-gap);
   margin: 0;
   padding: 0;
 }
@@ -2972,23 +3036,31 @@ a.tech-badge {
 .hib-flow-step {
   position: relative;
   flex: 1 1 150px;
+  // Flex items will not shrink below their min-content width unless told to,
+  // which is what forced the wrap above rather than letting the steps narrow.
+  min-width: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
   gap: 6px;
-  overflow: hidden;
+  // Deliberately NOT `overflow: hidden`. The connectors sit outside this box
+  // by design, so clipping the box clips them away entirely — which is exactly
+  // what happened when the top bar below was added. The bar is inset instead
+  // of clipped, and the icon's glow gets to spill as a bonus.
   padding: 18px 12px 16px;
   border-radius: 12px;
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(var(--step-accent-rgb, 255, 255, 255), 0.16);
   box-shadow: inset 0 0 22px -12px var(--step-accent, transparent);
 
-  // A slim bar of the step's own color across the top.
+  // A slim bar of the step's own color across the top. Held clear of the
+  // corners so the rounded border never cuts across it; the gradient fades to
+  // transparent at both ends, so the inset is invisible.
   &::before {
     content: "";
     position: absolute;
-    inset: 0 0 auto 0;
+    inset: 0 10px auto 10px;
     height: 3px;
     background: linear-gradient(
       90deg,
@@ -2999,34 +3071,10 @@ a.tech-badge {
     opacity: 0.85;
   }
 
-  // Connector between steps. The gradient is twice the connector's width and
-  // slides, so a brighter segment travels along it — the pipeline reads as
-  // flowing rather than as five parked boxes.
-  &:not(:last-child):not(.is-loop-target)::after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    right: -12px;
-    width: 12px;
-    height: 2px;
-    background-image: linear-gradient(
-      90deg,
-      rgba(255, 255, 255, 0.22) 0%,
-      rgba(255, 255, 255, 0.22) 35%,
-      var(--step-accent, #{$themeVibrantYellowGreen}) 50%,
-      rgba(255, 255, 255, 0.22) 65%,
-      rgba(255, 255, 255, 0.22) 100%
-    );
-    background-size: 200% 100%;
-    background-position: 100% 0;
-  }
-
   // The step the feedback loop returns to. It gets a live conic ring in the
   // site's full palette — the same trick as the portrait medallion, so the
-  // two read as the same visual language. `overflow: hidden` is dropped
-  // here so the glow can spill.
+  // two read as the same visual language.
   &.is-loop-target {
-    overflow: visible;
     border-color: transparent;
     background: rgba(20, 17, 32, 0.86);
 
@@ -3047,14 +3095,38 @@ a.tech-badge {
         $themeOrange,
         #ff2d95
       );
-      // No connector on this one; the ring replaces it, and the connector
-      // rule below is scoped to steps that are not the loop target.
-      width: auto;
-      height: auto;
-      top: auto;
-      right: auto;
       box-shadow: 0 0 26px -6px rgba(176, 38, 255, 0.55);
     }
+  }
+}
+
+// --- The connector between two steps ----------------------------------
+// A rail with a lit dot running along it toward the next box. Rendered as a
+// real element, not a pseudo-element, so it can coexist with the loop
+// target's ring — see the note in `FlowDiagram`.
+.hib-flow-connector {
+  position: absolute;
+  top: 50%;
+  right: calc(var(--hib-gap, 18px) * -1);
+  width: var(--hib-gap, 18px);
+  height: 2px;
+  margin-top: -1px;
+  background: rgba(255, 255, 255, 0.22);
+  pointer-events: none;
+
+  // The dot. Centred with margins rather than a transform so the animation
+  // below owns `transform` outright and has nothing to preserve.
+  &::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 5px;
+    height: 5px;
+    margin: -2.5px 0 0 -2.5px;
+    border-radius: 50%;
+    background: var(--step-accent, #{$themeVibrantYellowGreen});
+    box-shadow: 0 0 9px 1px var(--step-accent, transparent);
   }
 }
 
@@ -3102,13 +3174,19 @@ a.tech-badge {
   }
 
   // Connector turns to point downward when the steps stack.
-  .hib-flow-step:not(:last-child)::after {
+  .hib-flow-connector {
     top: auto;
     right: auto;
     left: 50%;
-    bottom: -12px;
+    bottom: calc(var(--hib-gap, 18px) * -1);
     width: 2px;
-    height: 12px;
+    height: var(--hib-gap, 18px);
+    margin: 0 0 0 -1px;
+
+    &::after {
+      top: 0;
+      left: 50%;
+    }
   }
 }
 
@@ -3156,10 +3234,13 @@ a.tech-badge {
   .how-i-build.in-view .hib-flow-step:nth-child(#{$i}) {
     animation-delay: #{($i - 1) * 110}ms;
 
-    &::after {
-      // Each connector pulses after its own step has landed, so the pulse
-      // chases the entrance down the line instead of firing all at once.
-      animation: hibPulse 2.6s ease-in-out #{($i - 1) * 110 + 700}ms infinite;
+    // Each dot sets off after its own step has landed, so the flow chases the
+    // entrance down the line instead of all four firing in lockstep.
+    // Linear, not eased: a dot carrying something down a pipeline moves at a
+    // constant rate. Easing made it loiter at both ends and dart through the
+    // middle, which reads as a bouncing bead rather than flow.
+    .hib-flow-connector::after {
+      animation: hibFlowDot 2.4s linear #{($i - 1) * 160 + 700}ms infinite;
     }
   }
 }
@@ -3176,14 +3257,47 @@ a.tech-badge {
   }
 }
 
-@keyframes hibPulse {
+// The dot fades in as it leaves and out as it arrives, so it reads as one
+// thing flowing continuously rather than a bead snapping back to the start.
+@keyframes hibFlowDot {
   0% {
-    background-position: 100% 0;
+    transform: translateX(0);
+    opacity: 0;
   }
 
-  45%,
+  20%,
+  80% {
+    opacity: 1;
+  }
+
   100% {
-    background-position: -100% 0;
+    transform: translateX(var(--hib-gap, 18px));
+    opacity: 0;
+  }
+}
+
+// Same travel, rotated, for when the steps stack into a column.
+@keyframes hibFlowDotDown {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+
+  20%,
+  80% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(var(--hib-gap, 18px));
+    opacity: 0;
+  }
+}
+
+// Placed after the @for block above so it wins on order, not specificity.
+@media (max-width: 767px) {
+  .how-i-build.in-view .hib-flow-step .hib-flow-connector::after {
+    animation-name: hibFlowDotDown;
   }
 }
 
@@ -3270,8 +3384,8 @@ a.tech-badge {
 @media (prefers-reduced-motion: reduce) {
   .how-i-build.in-view .hib-flow-step,
   .how-i-build.in-view .hib-flow-step.is-loop-target,
-  .how-i-build.in-view .hib-flow-step::after,
   .how-i-build.in-view .hib-flow-step.is-loop-target::after,
+  .how-i-build.in-view .hib-flow-step .hib-flow-connector::after,
   .how-i-build.in-view .hib-flow-loop-arrow,
   .how-i-build.in-view .hib-cloud-list li,
   .hib-stage-detail > * {

@@ -6,12 +6,18 @@ import SectionHeading from "../common/SectionHeading";
 import bioPhoto from "../../assets/images/twksmall-966x966.jpeg";
 import { FaLinkedin, FaGithubSquare, FaStackOverflow } from "react-icons/fa";
 import LottieFigure from "../fun/LottieFigure";
+import ParticleField from "../fun/ParticleField";
 import { heroAnimation } from "../../assets/lottie";
 
 function ProfessionalSummary() {
   return (
     <div>
       <Row className="professional-summary light-text-shadow">
+        {/*
+          Sits behind everything else in this row. It measures its own parent,
+          so it has to be a child of the row itself rather than of a column.
+        */}
+        <ParticleField className="welcome-particles" />
         <Col xs={12} s={12} md={12} lg={4} className="tilt bio-photo-col">
           <div className="bio-photo-ring">
             <Image src={bioPhoto.src} roundedCircle fluid className="bio-photo" />
