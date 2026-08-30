@@ -154,8 +154,9 @@ function ProjectGallery({ images, projectName }) {
               type="button"
               className="project-gallery-frame"
               onClick={(event) => open(index, event)}
-              // The visible caption repeats the alt text, so the image inside
-              // is decorative here — otherwise the label is announced twice.
+              // The thumbnail carries no visible caption, so its button has to
+              // say what the image is; the <img> stays decorative to avoid
+              // announcing the same thing twice.
               aria-label={`${image.alt} — view larger, ${index + 1} of ${count}`}
             >
               <img
@@ -166,9 +167,6 @@ function ProjectGallery({ images, projectName }) {
                 width={image.src?.width}
                 height={image.src?.height}
               />
-              <span className="project-gallery-caption" aria-hidden="true">
-                {image.alt}
-              </span>
             </button>
           </li>
         ))}
@@ -191,9 +189,6 @@ function ProjectGallery({ images, projectName }) {
             onTouchEnd={onTouchEnd}
           >
             <div className="project-lightbox-bar">
-              <p id={titleId} className="project-lightbox-title">
-                {active.alt}
-              </p>
               <button
                 type="button"
                 className="project-lightbox-close"
@@ -242,9 +237,19 @@ function ProjectGallery({ images, projectName }) {
               )}
             </div>
 
-            <p id={counterId} className="project-lightbox-counter" role="status">
-              {activeIndex + 1} of {count}
-            </p>
+            {/* Caption sits under the screenshot, where a caption belongs. */}
+            <div className="project-lightbox-footer">
+              <p id={titleId} className="project-lightbox-title">
+                {active.alt}
+              </p>
+              <p
+                id={counterId}
+                className="project-lightbox-counter"
+                role="status"
+              >
+                {activeIndex + 1} of {count}
+              </p>
+            </div>
           </div>
         </div>
       )}

@@ -37,11 +37,36 @@ describe("ProjectGallery", () => {
     const { container } = render(
       <ProjectGallery images={IMAGES} projectName="Demo" />
     );
-    // The caption is visible text and the button is already labelled, so the
-    // <img> itself must be decorative or the label is read out twice over.
+    // The button carries the label, so the <img> must stay decorative or the
+    // same text is read out twice over.
     container
       .querySelectorAll(".project-gallery-frame img")
       .forEach((img) => expect(img).toHaveAttribute("alt", ""));
+  });
+
+  it("puts no caption on the thumbnail", () => {
+    const { container } = render(
+      <ProjectGallery images={IMAGES} projectName="Demo" />
+    );
+    // Captions belong under the image in the lightbox, not overlaid on the
+    // grid, where they covered the screenshot they were describing.
+    expect(
+      container.querySelector(".project-gallery-caption")
+    ).not.toBeInTheDocument();
+    expect(container.querySelector(".project-gallery")).not.toHaveTextContent(
+      "Dashboard view"
+    );
+  });
+
+  it("shows the caption beneath the screenshot, not above it", () => {
+    render(<ProjectGallery images={IMAGES} projectName="Demo" />);
+    openFirst();
+    const panel = dialog().querySelector(".project-lightbox-panel");
+    const image = panel.querySelector(".project-lightbox-image");
+    const caption = panel.querySelector(".project-lightbox-title");
+    expect(caption).toHaveTextContent("Dashboard view");
+    // DOCUMENT_POSITION_FOLLOWING: the caption comes after the image.
+    expect(image.compareDocumentPosition(caption) & 4).toBeTruthy();
   });
 
   it("lazy-loads thumbnails so the homepage does not fetch every screenshot", () => {

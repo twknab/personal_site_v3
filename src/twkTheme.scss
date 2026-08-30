@@ -1341,40 +1341,13 @@ navbar-nav .dropdown-menu {
       transform: scale(1.08);
     }
 
-    .project-gallery-caption {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-}
-
-.project-gallery-caption {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  margin: 0;
-  padding: 28px 12px 10px;
-  font-size: 0.78rem;
-  letter-spacing: 0.02em;
-  color: #fff;
-  background: linear-gradient(
-    to top,
-    rgba(0, 0, 0, 0.82) 0%,
-    rgba(0, 0, 0, 0) 100%
-  );
-  opacity: 0.82;
-  transform: translateY(4px);
-  transition: opacity 0.3s ease, transform 0.3s ease;
-  pointer-events: none;
-}
-
-// The lightbox. Full-bleed dark surface; the screenshot is the content, so
-// everything else stays out of its way.
-.project-lightbox {
+    .project-lightbox {
   position: fixed;
   inset: 0;
-  z-index: 2000;
+  // Above every other fixed layer on the site: the scroll-progress bar is at
+  // 10001, the confetti overlay at 10000, the cursor trail at 9998. At 2000
+  // this dialog rendered underneath all three.
+  z-index: 10100;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1404,13 +1377,22 @@ navbar-nav .dropdown-menu {
 .project-lightbox-bar {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 14px;
+  justify-content: flex-end;
+}
+
+// Caption and position, under the screenshot where a caption belongs.
+.project-lightbox-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  text-align: center;
 }
 
 .project-lightbox-title {
   margin: 0;
   font-size: 0.95rem;
+  line-height: 1.35;
   color: $themeVibrantYellowGreenLight;
 }
 
@@ -1561,8 +1543,7 @@ navbar-nav .dropdown-menu {
   .project-block,
   .project-block .project-icon,
   .project-gallery-frame,
-  .project-gallery-frame img,
-  .project-gallery-caption {
+  .project-gallery-frame img {
     transition: none;
   }
 
