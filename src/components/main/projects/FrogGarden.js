@@ -5,18 +5,27 @@ import Image from "react-bootstrap/Image";
 import Row from "react-bootstrap/Row";
 import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
 import frogGardenIco from "../../../assets/images/apps/froggarden-ico.png";
-import flowDark from "../../../assets/images/projects/froggarden/flow-dark.png";
-import flowLight from "../../../assets/images/projects/froggarden/flow-light.png";
 import focusMode from "../../../assets/images/projects/froggarden/focus-mode.png";
+import goldenHour from "../../../assets/images/projects/froggarden/golden-hour.png";
+import quietGrove from "../../../assets/images/projects/froggarden/quiet-grove.png";
+import sakuraDrift from "../../../assets/images/projects/froggarden/sakura-drift.png";
+import taskList from "../../../assets/images/projects/froggarden/task-list.png";
+import violetHour from "../../../assets/images/projects/froggarden/violet-hour.png";
 import ProjectGallery from "./ProjectGallery";
 
 const REPO = "https://github.com/twknab/zen-frog-todo";
 const LIVE = "https://zenfrog.netlify.app";
 
+// The app ships eighteen palettes, so four of them lead -- the range is the
+// feature. Captured from the running app with the same seeded tasks each
+// time, so the only thing changing between shots is the theme.
 const SHOTS = [
-  { src: focusMode, alt: "Focus Mode with bonsai and frog friends" },
-  { src: flowDark, alt: "Dashboard in dark theme" },
-  { src: flowLight, alt: "Dashboard in light theme" },
+  { src: quietGrove, alt: "Quiet Grove, the default" },
+  { src: violetHour, alt: "Violet Hour" },
+  { src: goldenHour, alt: "Golden Hour, in light mode" },
+  { src: sakuraDrift, alt: "Sakura Drift" },
+  { src: taskList, alt: "The day's tasks, largest one first" },
+  { src: focusMode, alt: "A focus session" },
 ];
 
 function FrogGarden() {

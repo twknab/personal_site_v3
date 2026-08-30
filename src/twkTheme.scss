@@ -1340,8 +1340,12 @@ navbar-nav .dropdown-menu {
     img {
       transform: scale(1.08);
     }
+  }
+}
 
-    .project-lightbox {
+// The lightbox. Full-bleed dark surface; the screenshot is the content, so
+// everything else stays out of its way.
+.project-lightbox {
   position: fixed;
   inset: 0;
   // Above every other fixed layer on the site: the scroll-progress bar is at
