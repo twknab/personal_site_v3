@@ -65,5 +65,5 @@ export const furtherReading = {
   label: "Google Research — Industrial Agentic Engineering",
   href: "https://research.google/pubs/industrial-agentic-engineering/",
   note:
-    "Google's write-up of the same idea, where the harness is what turns a model into an agent.",
+    "Google's write-up of the same idea: the harness is what gives an agent the ability to deliver your vision, your preferences and your best practices.",
 };
