@@ -13,6 +13,7 @@ const PANEL = { width: 800, height: 400 };
 
 let ctx;
 let frames;
+let observeCallbacks;
 
 /** Runs the queued animation frames n times. */
 const advance = (n = 1) => {
@@ -83,11 +84,21 @@ beforeEach(() => {
       toJSON: () => {},
     }));
 
+  // Both observers only ever deliver during a rendering update, so neither
+  // fires in a headless run (nor, as it happens, in a backgrounded tab).
+  // Capturing their callbacks is the only way to exercise those paths.
+  observeCallbacks = { resize: null, intersect: null };
   global.ResizeObserver = class {
+    constructor(cb) {
+      observeCallbacks.resize = cb;
+    }
     observe() {}
     disconnect() {}
   };
   global.IntersectionObserver = class {
+    constructor(cb) {
+      observeCallbacks.intersect = cb;
+    }
     observe() {}
     disconnect() {}
   };
@@ -185,6 +196,35 @@ describe("ParticleField", () => {
       </div>
     );
     expect(eventsOnHost(mouse.container)).toContain("pointermove");
+  });
+
+  it("follows the host when it is resized", () => {
+    const { container } = render(<ParticleField />);
+    const canvas = container.querySelector("canvas");
+    expect(canvas.width).toBe(800);
+
+    PANEL.width = 1400;
+    PANEL.height = 600;
+    observeCallbacks.resize();
+
+    expect(canvas.width).toBe(1400);
+    expect(canvas.height).toBe(600);
+    expect(canvas.style.width).toBe("1400px");
+  });
+
+  it("stops animating while the panel is off screen", () => {
+    render(<ParticleField />);
+    advance(1);
+    expect(frames.length).toBeGreaterThan(0);
+
+    observeCallbacks.intersect([{ isIntersecting: false }]);
+    frames = [];
+    advance(1);
+    expect(frames).toHaveLength(0);
+
+    // ...and picks back up when it returns.
+    observeCallbacks.intersect([{ isIntersecting: true }]);
+    expect(frames.length).toBeGreaterThan(0);
   });
 
   it("stops animating when the tab goes to the background", () => {
