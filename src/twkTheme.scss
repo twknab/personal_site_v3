@@ -2865,7 +2865,9 @@ a.tech-badge {
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.16);
 
-  // Connector between steps.
+  // Connector between steps. The gradient is twice the connector's width and
+  // slides, so a brighter segment travels along it — the pipeline reads as
+  // flowing rather than as five parked boxes.
   &:not(:last-child)::after {
     content: "";
     position: absolute;
@@ -2873,7 +2875,16 @@ a.tech-badge {
     right: -12px;
     width: 12px;
     height: 2px;
-    background: rgba(255, 255, 255, 0.3);
+    background-image: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.25) 0%,
+      rgba(255, 255, 255, 0.25) 35%,
+      $themeVibrantYellowGreen 50%,
+      rgba(255, 255, 255, 0.25) 65%,
+      rgba(255, 255, 255, 0.25) 100%
+    );
+    background-size: 200% 100%;
+    background-position: 100% 0;
   }
 
   // The step the feedback loop returns to.
@@ -2964,6 +2975,140 @@ a.tech-badge {
   font-size: 18px;
   margin-top: 3px;
   color: $themeVibrantYellowGreen;
+}
+
+// --- Motion -----------------------------------------------------------
+// All of it keys off `.in-view`, which the scroll-reveal hook adds when the
+// section reaches the viewport, so nothing animates off-screen.
+
+// Steps arrive one after another, left to right, so the eye follows the
+// pipeline in its actual order.
+.how-i-build.in-view .hib-flow-step {
+  animation: hibStepIn 520ms cubic-bezier(0.22, 1, 0.36, 1) backwards;
+}
+
+@for $i from 1 through 5 {
+  .how-i-build.in-view .hib-flow-step:nth-child(#{$i}) {
+    animation-delay: #{($i - 1) * 110}ms;
+
+    &::after {
+      // Each connector pulses after its own step has landed, so the pulse
+      // chases the entrance down the line instead of firing all at once.
+      animation: hibPulse 2.6s ease-in-out #{($i - 1) * 110 + 700}ms infinite;
+    }
+  }
+}
+
+@keyframes hibStepIn {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes hibPulse {
+  0% {
+    background-position: 100% 0;
+  }
+
+  45%,
+  100% {
+    background-position: -100% 0;
+  }
+}
+
+// The loop arc draws itself once the steps have settled, which is what makes
+// it read as a return path rather than a stray bracket.
+.how-i-build.in-view .hib-flow-loop-arrow {
+  animation: hibLoopIn 600ms cubic-bezier(0.22, 1, 0.36, 1) 760ms backwards;
+}
+
+@keyframes hibLoopIn {
+  from {
+    opacity: 0;
+    transform: translateX(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+// The harness node is the loop's destination, so it breathes gently to say so.
+.how-i-build.in-view .hib-flow-step.is-loop-target {
+  animation: hibStepIn 520ms cubic-bezier(0.22, 1, 0.36, 1) backwards,
+    hibGlow 3.4s ease-in-out 1s infinite;
+}
+
+@keyframes hibGlow {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba($themeVibrantYellowGreen, 0);
+  }
+
+  50% {
+    box-shadow: 0 0 18px -4px rgba($themeVibrantYellowGreen, 0.5);
+  }
+}
+
+// Stage icons lift with their row on hover.
+.hib-stage-header {
+  .hib-stage-icon {
+    transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  &:hover .hib-stage-icon,
+  &:focus-visible .hib-stage-icon {
+    transform: scale(1.18) rotate(-6deg);
+  }
+}
+
+// Detail paragraphs fade up as the panel opens, so expanding feels like
+// content arriving rather than a box changing height.
+.hib-stage-detail > * {
+  animation: hibDetailIn 380ms ease-out backwards;
+}
+
+.hib-stage-detail > *:nth-child(2) {
+  animation-delay: 70ms;
+}
+
+.hib-stage-detail > *:nth-child(3) {
+  animation-delay: 140ms;
+}
+
+@keyframes hibDetailIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+// Everything above is decoration. Drop all of it on request — including the
+// looping pulse and glow, which are the parts that would actually distract.
+@media (prefers-reduced-motion: reduce) {
+  .how-i-build.in-view .hib-flow-step,
+  .how-i-build.in-view .hib-flow-step.is-loop-target,
+  .how-i-build.in-view .hib-flow-step::after,
+  .how-i-build.in-view .hib-flow-loop-arrow,
+  .hib-stage-detail > * {
+    animation: none !important;
+  }
+
+  .hib-stage-header .hib-stage-icon {
+    transition: none;
+  }
 }
 
 .hib-revised {
