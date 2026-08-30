@@ -21,7 +21,8 @@ function RoamGuru() {
     <div className="project-block">
       <Row className="project-row">
         <Col md="3" className="project-col tilt">
-          <Image src={roamGuruIco.src} className="project-icon" rounded fluid />
+          <Image src={roamGuruIco.src} className="project-icon"
+            alt="" rounded fluid />
         </Col>
         <Col md="9">
           <h3>RoamGuru</h3>

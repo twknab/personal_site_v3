@@ -12,6 +12,7 @@ function SquirrelStudio() {
           <Image
             src={squirrelStudioIco.src}
             className="project-icon"
+            alt=""
             rounded
             fluid
           />

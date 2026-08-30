@@ -17,7 +17,8 @@ function SockIt() {
           className="project-col tilt"
           onClick={() => window.open(REPO, "_blank")}
         >
-          <Image src={sockitIco.src} className="project-icon" rounded fluid />
+          <Image src={sockitIco.src} className="project-icon"
+            alt="" rounded fluid />
         </Col>
         <Col md="9">
           <h3>Sock It!</h3>

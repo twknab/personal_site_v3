@@ -29,7 +29,8 @@ function GearList() {
           className="project-col tilt"
           onClick={() => window.open(REPO, "_blank")}
         >
-          <Image src={gearListIco.src} className="project-icon" rounded fluid />
+          <Image src={gearListIco.src} className="project-icon"
+            alt="" rounded fluid />
         </Col>
         <Col md="9">
           <h3>GearList</h3>

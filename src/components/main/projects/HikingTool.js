@@ -29,7 +29,8 @@ function HikingTool() {
           className="project-col tilt"
           onClick={() => window.open(REPO, "_blank")}
         >
-          <Image src={hikingToolIco.src} className="project-icon" rounded fluid />
+          <Image src={hikingToolIco.src} className="project-icon"
+            alt="" rounded fluid />
         </Col>
         <Col md="9">
           <h3>HikingTool</h3>

@@ -1369,6 +1369,8 @@ navbar-nav .dropdown-menu {
   pointer-events: none;
 }
 
+// The lightbox. Full-bleed dark surface; the screenshot is the content, so
+// everything else stays out of its way.
 .project-lightbox {
   position: fixed;
   inset: 0;
@@ -1376,57 +1378,165 @@ navbar-nav .dropdown-menu {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 24px;
-  background: rgba(6, 8, 12, 0.82);
+  padding: 16px;
+  background: rgba(6, 8, 12, 0.88);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
+  animation: projectLightboxIn 160ms ease-out;
 }
 
 .project-lightbox-panel {
-  width: min(960px, 100%);
-  max-height: calc(100vh - 48px);
-  overflow: auto;
-  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  // Sized by its content rather than a fixed width, so a tall phone
+  // screenshot and a wide desktop one each get a panel that fits them.
+  width: auto;
+  max-width: min(1200px, 100%);
+  max-height: 100%;
+  padding: 14px;
   border-radius: 18px;
   border: 1px solid rgba(255, 255, 255, 0.12);
   background: #121820;
   box-shadow: 0 30px 80px rgba(0, 0, 0, 0.55);
+}
 
-  img {
-    display: block;
-    width: 100%;
-    height: auto;
-    border-radius: 12px;
-  }
+.project-lightbox-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
 }
 
 .project-lightbox-title {
-  margin: 0 0 12px;
+  margin: 0;
   font-size: 0.95rem;
   color: $themeVibrantYellowGreenLight;
 }
 
-.project-lightbox-actions {
+.project-lightbox-stage {
+  position: relative;
   display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 14px;
+  align-items: center;
+  justify-content: center;
+  min-height: 0;
+}
+
+// The whole point of the gallery. The screenshot is bounded by the viewport on
+// both axes and scaled down to fit, so it is never cropped and never makes the
+// panel scroll -- the application is visible in one look.
+.project-lightbox-image {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: calc(100vh - 150px);
+  object-fit: contain;
+  border-radius: 12px;
+  background: #0b0f15;
+}
+
+.project-lightbox-counter {
+  margin: 0;
+  text-align: center;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.78rem;
+  opacity: 0.75;
 }
 
 .project-lightbox-nav,
 .project-lightbox-close {
-  padding: 8px 14px;
-  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  // Comfortably past the 44px minimum touch target on every side.
+  width: 46px;
+  height: 46px;
+  padding: 0;
+  border-radius: 50%;
   border: 1px solid rgba(255, 255, 255, 0.18);
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(18, 24, 32, 0.86);
   color: #fff;
-  font-size: 0.85rem;
+  font-size: 17px;
+  cursor: pointer;
+  transition: background-color 0.18s ease, border-color 0.18s ease,
+    transform 0.18s ease;
 
   &:hover,
   &:focus-visible {
     border-color: rgba($themeTurquoise, 0.7);
-    background: rgba($themeTurquoise, 0.16);
+    background: rgba($themeTurquoise, 0.22);
     outline: none;
+  }
+
+  &:focus-visible {
+    outline: 2px solid rgba($themeTurquoise, 0.9);
+    outline-offset: 2px;
+  }
+}
+
+// The arrows float over the screenshot so the image keeps the full width of
+// the panel instead of surrendering it to a pair of gutters.
+.project-lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+
+  &.is-prev {
+    left: 10px;
+  }
+
+  &.is-next {
+    right: 10px;
+  }
+
+  &:hover {
+    transform: translateY(-50%) scale(1.06);
+  }
+}
+
+@keyframes projectLightboxIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+// On a phone the arrows would sit over the middle of the screenshot, so they
+// drop below it and the swipe gesture becomes the primary way to move.
+@media (max-width: 575.98px) {
+  .project-lightbox {
+    padding: 10px;
+  }
+
+  .project-lightbox-image {
+    max-height: calc(100vh - 190px);
+  }
+
+  .project-lightbox-nav {
+    position: static;
+    transform: none;
+
+    &:hover {
+      transform: none;
+    }
+  }
+
+  .project-lightbox-stage {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .project-lightbox-nav.is-prev {
+    order: 2;
+  }
+
+  .project-lightbox-nav.is-next {
+    order: 3;
   }
 }
 

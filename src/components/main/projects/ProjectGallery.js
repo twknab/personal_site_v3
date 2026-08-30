@@ -1,62 +1,174 @@
-import React, { useEffect, useId, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useId,
+  useRef,
+  useState,
+} from "react";
+import { FaChevronLeft, FaChevronRight, FaTimes } from "react-icons/fa";
+
+// How far a finger has to travel before it counts as a swipe rather than a tap
+// or a wobble while reading.
+const SWIPE_THRESHOLD = 45;
+
+/** Static imports arrive as an object; a plain path arrives as a string. */
+const srcOf = (src) => (typeof src === "string" ? src : src?.src);
 
 /**
- * Horizontal screenshot gallery for a project card.
- * Expects [{ src, alt }] — renders nothing when empty.
+ * Screenshot gallery for a project card: a row of thumbnails that open into a
+ * full-screen lightbox.
+ *
+ * The thumbnails are square-cropped for a tidy grid, which is only safe because
+ * the source images keep their real aspect ratio — the crop is presentational.
+ * In the lightbox the whole screenshot is shown, scaled to fit the viewport,
+ * because the point of the gallery is seeing the application.
+ *
+ * Renders nothing at all when a project has no screenshots, so a project can
+ * opt in simply by passing some.
  */
 function ProjectGallery({ images, projectName }) {
   const titleId = useId();
+  const counterId = useId();
   const [activeIndex, setActiveIndex] = useState(null);
+  const dialogRef = useRef(null);
+  // The thumbnail that opened the lightbox, so focus can go back to it.
+  const openerRef = useRef(null);
+  const touchStartX = useRef(null);
+
   const items = Array.isArray(images) ? images.filter((img) => img?.src) : [];
+  const count = items.length;
+  const isOpen = activeIndex !== null;
 
+  const close = useCallback(() => setActiveIndex(null), []);
+  const go = useCallback(
+    (delta) =>
+      setActiveIndex((i) => (i === null ? i : (i + delta + count) % count)),
+    [count]
+  );
+
+  // Keyboard: the shortcuts a lightbox is expected to honour, plus a focus trap
+  // so Tab cannot wander onto the page behind the dialog.
   useEffect(() => {
-    if (activeIndex === null) return undefined;
+    if (!isOpen) return undefined;
+
     const onKeyDown = (event) => {
-      if (event.key === "Escape") setActiveIndex(null);
-      if (event.key === "ArrowRight") {
-        setActiveIndex((i) => (i === null ? i : (i + 1) % items.length));
-      }
-      if (event.key === "ArrowLeft") {
-        setActiveIndex((i) =>
-          i === null ? i : (i - 1 + items.length) % items.length
-        );
+      switch (event.key) {
+        case "Escape":
+          event.preventDefault();
+          close();
+          break;
+        case "ArrowRight":
+          event.preventDefault();
+          go(1);
+          break;
+        case "ArrowLeft":
+          event.preventDefault();
+          go(-1);
+          break;
+        case "Home":
+          event.preventDefault();
+          setActiveIndex(0);
+          break;
+        case "End":
+          event.preventDefault();
+          setActiveIndex(count - 1);
+          break;
+        case "Tab": {
+          const focusables = dialogRef.current?.querySelectorAll("button");
+          if (!focusables?.length) break;
+          const first = focusables[0];
+          const last = focusables[focusables.length - 1];
+          // Wrap at both ends rather than letting focus escape the dialog.
+          if (event.shiftKey && document.activeElement === first) {
+            event.preventDefault();
+            last.focus();
+          } else if (!event.shiftKey && document.activeElement === last) {
+            event.preventDefault();
+            first.focus();
+          }
+          break;
+        }
+        default:
+          break;
       }
     };
-    window.addEventListener("keydown", onKeyDown);
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
+
+    document.addEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, [isOpen, go, close, count]);
+
+  // Hold the page still behind the dialog. The scrollbar's width is added back
+  // as padding, otherwise removing it shifts the whole layout sideways.
+  useEffect(() => {
+    if (!isOpen) return undefined;
+    const { body } = document;
+    const previousOverflow = body.style.overflow;
+    const previousPadding = body.style.paddingRight;
+    const gap = window.innerWidth - document.documentElement.clientWidth;
+    body.style.overflow = "hidden";
+    if (gap > 0) body.style.paddingRight = `${gap}px`;
     return () => {
-      window.removeEventListener("keydown", onKeyDown);
-      document.body.style.overflow = previousOverflow;
+      body.style.overflow = previousOverflow;
+      body.style.paddingRight = previousPadding;
     };
-  }, [activeIndex, items.length]);
+  }, [isOpen]);
 
-  if (items.length === 0) return null;
+  // Move focus into the dialog on open, and back to the thumbnail on close —
+  // without it, a keyboard user is dropped at the top of the document.
+  useEffect(() => {
+    if (isOpen) {
+      dialogRef.current?.querySelector("button")?.focus();
+      return undefined;
+    }
+    openerRef.current?.focus();
+    openerRef.current = null;
+    return undefined;
+  }, [isOpen]);
 
-  const active = activeIndex === null ? null : items[activeIndex];
+  const open = (index, event) => {
+    openerRef.current = event.currentTarget;
+    setActiveIndex(index);
+  };
+
+  const onTouchStart = (event) => {
+    touchStartX.current = event.changedTouches[0]?.clientX ?? null;
+  };
+
+  const onTouchEnd = (event) => {
+    if (touchStartX.current === null || count < 2) return;
+    const delta = (event.changedTouches[0]?.clientX ?? 0) - touchStartX.current;
+    if (Math.abs(delta) > SWIPE_THRESHOLD) go(delta < 0 ? 1 : -1);
+    touchStartX.current = null;
+  };
+
+  if (count === 0) return null;
+
+  const active = isOpen ? items[activeIndex] : null;
 
   return (
     <>
-      <ul
-        className="project-gallery"
-        aria-label={`${projectName} screenshots`}
-        data-testid="project-gallery"
-      >
+      <ul className="project-gallery" data-testid="project-gallery">
         {items.map((image, index) => (
           <li key={`${image.alt}-${index}`} className="project-gallery-card">
             <button
               type="button"
               className="project-gallery-frame"
-              onClick={() => setActiveIndex(index)}
-              aria-label={`View larger: ${image.alt}`}
+              onClick={(event) => open(index, event)}
+              // The visible caption repeats the alt text, so the image inside
+              // is decorative here — otherwise the label is announced twice.
+              aria-label={`${image.alt} — view larger, ${index + 1} of ${count}`}
             >
               <img
-                src={typeof image.src === "string" ? image.src : image.src.src}
-                alt={image.alt}
+                src={srcOf(image.src)}
+                alt=""
                 loading="lazy"
                 decoding="async"
+                width={image.src?.width}
+                height={image.src?.height}
               />
-              <span className="project-gallery-caption">{image.alt}</span>
+              <span className="project-gallery-caption" aria-hidden="true">
+                {image.alt}
+              </span>
             </button>
           </li>
         ))}
@@ -68,52 +180,71 @@ function ProjectGallery({ images, projectName }) {
           role="dialog"
           aria-modal="true"
           aria-labelledby={titleId}
-          onClick={() => setActiveIndex(null)}
+          aria-describedby={counterId}
+          onClick={close}
         >
           <div
             className="project-lightbox-panel"
+            ref={dialogRef}
             onClick={(event) => event.stopPropagation()}
+            onTouchStart={onTouchStart}
+            onTouchEnd={onTouchEnd}
           >
-            <p id={titleId} className="project-lightbox-title">
-              {active.alt}
-            </p>
-            <img
-              src={typeof active.src === "string" ? active.src : active.src.src}
-              alt={active.alt}
-            />
-            <div className="project-lightbox-actions">
-              {items.length > 1 && (
-                <>
-                  <button
-                    type="button"
-                    className="project-lightbox-nav"
-                    onClick={() =>
-                      setActiveIndex(
-                        (i) => (i - 1 + items.length) % items.length
-                      )
-                    }
-                  >
-                    Previous
-                  </button>
-                  <button
-                    type="button"
-                    className="project-lightbox-nav"
-                    onClick={() =>
-                      setActiveIndex((i) => (i + 1) % items.length)
-                    }
-                  >
-                    Next
-                  </button>
-                </>
-              )}
+            <div className="project-lightbox-bar">
+              <p id={titleId} className="project-lightbox-title">
+                {active.alt}
+              </p>
               <button
                 type="button"
                 className="project-lightbox-close"
-                onClick={() => setActiveIndex(null)}
+                onClick={close}
+                aria-label="Close screenshot viewer"
               >
-                Close
+                <FaTimes aria-hidden="true" />
               </button>
             </div>
+
+            <div className="project-lightbox-stage">
+              {count > 1 && (
+                <button
+                  type="button"
+                  className="project-lightbox-nav is-prev"
+                  onClick={() => go(-1)}
+                  aria-label="Previous screenshot"
+                >
+                  <FaChevronLeft aria-hidden="true" />
+                </button>
+              )}
+
+              {/*
+                Keyed by index so React swaps the element rather than mutating
+                the src, which would otherwise hold the previous screenshot on
+                screen until the next one decodes.
+              */}
+              <img
+                key={activeIndex}
+                className="project-lightbox-image"
+                src={srcOf(active.src)}
+                alt={`${projectName}: ${active.alt}`}
+                width={active.src?.width}
+                height={active.src?.height}
+              />
+
+              {count > 1 && (
+                <button
+                  type="button"
+                  className="project-lightbox-nav is-next"
+                  onClick={() => go(1)}
+                  aria-label="Next screenshot"
+                >
+                  <FaChevronRight aria-hidden="true" />
+                </button>
+              )}
+            </div>
+
+            <p id={counterId} className="project-lightbox-counter" role="status">
+              {activeIndex + 1} of {count}
+            </p>
           </div>
         </div>
       )}
