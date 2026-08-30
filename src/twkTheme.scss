@@ -3353,6 +3353,29 @@ a.tech-badge {
   transform: rotate(-8deg) scale(1.08);
 }
 
+// A slow breath, so the glyphs feel alive without asking for attention.
+// It sits on the inner svg rather than the span, because the span already
+// owns the hover transform and an infinite animation there would override it.
+.section-heading-icon svg {
+  animation: headingGlyphBreathe 5.5s ease-in-out infinite;
+}
+
+// Staggered so eleven headings don't inhale in unison down the page.
+.section-heading:nth-of-type(odd) .section-heading-icon svg {
+  animation-delay: -2.2s;
+}
+
+@keyframes headingGlyphBreathe {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.05);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .reveal.in-view .section-heading-icon,
   .in-view .section-heading-icon {
@@ -3363,6 +3386,10 @@ a.tech-badge {
   .section-heading:hover .section-heading-icon {
     transition: none;
     transform: none;
+  }
+
+  .section-heading-icon svg {
+    animation: none;
   }
 }
 
