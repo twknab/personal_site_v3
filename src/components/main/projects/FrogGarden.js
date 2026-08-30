@@ -6,10 +6,10 @@ import Row from "react-bootstrap/Row";
 import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
 import frogGardenIco from "../../../assets/images/apps/froggarden-ico.png";
 import focusMode from "../../../assets/images/projects/froggarden/focus-mode.png";
-import quietGrove from "../../../assets/images/projects/froggarden/quiet-grove.png";
-import sakuraDrift from "../../../assets/images/projects/froggarden/sakura-drift.png";
+import garden from "../../../assets/images/projects/froggarden/garden.png";
+import options from "../../../assets/images/projects/froggarden/options.png";
 import taskList from "../../../assets/images/projects/froggarden/task-list.png";
-import violetHour from "../../../assets/images/projects/froggarden/violet-hour.png";
+import tropicPunch from "../../../assets/images/projects/froggarden/tropic-punch.png";
 import ProjectGallery from "./ProjectGallery";
 
 const REPO = "https://github.com/twknab/zen-frog-todo";
@@ -18,12 +18,15 @@ const LIVE = "https://zenfrog.netlify.app";
 // The app ships eighteen palettes, so three of the most distinct lead --
 // the range is the feature. Captured from the running app with the same
 // seeded tasks, so the only thing changing between them is the theme.
+// Captured from a seeded garden: a full day's work grown into the tree, so
+// the canopy is mature, the frogs have gathered, and the sand is actually
+// raked -- the strokes are drawn with real pointer input, not faked.
 const SHOTS = [
-  { src: quietGrove, alt: "Quiet Grove, the default" },
-  { src: violetHour, alt: "Violet Hour" },
-  { src: sakuraDrift, alt: "Sakura Drift, in light mode" },
-  { src: taskList, alt: "The day's tasks, largest one first" },
+  { src: garden, alt: "A day's work grown: full canopy, frogs, raked sand" },
+  { src: tropicPunch, alt: "The same garden in Tropic Punch" },
+  { src: options, alt: "Palette, contrast and density, in Mirrorball" },
   { src: focusMode, alt: "A focus session" },
+  { src: taskList, alt: "The day's tasks" },
 ];
 
 function FrogGarden() {
