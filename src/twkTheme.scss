@@ -487,6 +487,10 @@ navbar-nav .dropdown-menu {
 // PROFESSIONAL SUMMARY
 // *********************
 .professional-summary {
+  // Both for the particle canvas: `relative` gives it something to size and
+  // position against, `hidden` keeps it inside the rounded bottom corners.
+  position: relative;
+  overflow: hidden;
   color: $themeDarkBackground;
   border-top: 20px solid #d8e052;
   border-bottom: 20px solid #c2c76b;
@@ -499,6 +503,26 @@ navbar-nav .dropdown-menu {
     radial-gradient(at 92% 18%, rgba($themeTurquoise, 0.40) 0px, transparent 45%),
     radial-gradient(at 78% 95%, rgba($themeOrange, 0.45) 0px, transparent 48%),
     url("./assets/images/axiom-bg-pattern.png");
+}
+
+// The particle field. Fills the welcome panel and stays out of the way of
+// everything in front of it.
+.welcome-particles {
+  position: absolute;
+  // `inset` alone stretches it to the host's padding box. A `width`/`height`
+  // of 100% would fight the pixel dimensions the component sets to match the
+  // display's pixel ratio.
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+// The row's columns are static by default, which would let the positioned
+// canvas paint over them. Lifting them puts the portrait, the copy and the
+// social links back in front of the field.
+.professional-summary > [class*="col-"] {
+  position: relative;
+  z-index: 1;
 }
 
 .professional-summary-description {
