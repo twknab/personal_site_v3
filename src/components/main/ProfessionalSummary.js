@@ -2,6 +2,7 @@ import React from "react";
 import Col from "react-bootstrap/Col";
 import Image from "react-bootstrap/Image";
 import Row from "react-bootstrap/Row";
+import SectionHeading from "../common/SectionHeading";
 import bioPhoto from "../../assets/images/twksmall-966x966.jpeg";
 import { FaLinkedin, FaGithubSquare, FaStackOverflow } from "react-icons/fa";
 import LottieFigure from "../fun/LottieFigure";
@@ -28,12 +29,12 @@ function ProfessionalSummary() {
           md={12}
           lg={8}
         >
-          <h1>
+          <SectionHeading id="welcome" label="Welcome">
             <span role="img" aria-label="welcome">
               👋
             </span>{" "}
             Welcome!
-          </h1>
+          </SectionHeading>
           <p className="light-text-shadow">
             My name is Tim. I'm a{" "}
             <b className="highlighter">Senior Full Stack Software Engineer</b>{" "}

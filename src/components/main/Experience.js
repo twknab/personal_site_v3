@@ -1,6 +1,7 @@
 import React from "react";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
+import SectionHeading from "../common/SectionHeading";
 import Scroll from "react-scroll";
 import experiences from "./experience/experienceList";
 import telepathModemImage from "../../assets/images/gateway-2000-telepath-modem.jpg";
@@ -21,12 +22,12 @@ function Experience() {
     <div>
       <Element name="experience"></Element>
       <Row className="experience">
-        <h1>
+        <SectionHeading id="experience" label="Experience">
           <span role="img" aria-label="about">
             🏋️‍♂️
           </span>{" "}
           experience
-        </h1>
+        </SectionHeading>
         <Col lg>
           {experiences.map((experience, index) => (
             <div

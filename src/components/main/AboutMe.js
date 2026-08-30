@@ -1,18 +1,19 @@
 import React from "react";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
+import SectionHeading from "../common/SectionHeading";
 
 function AboutMe() {
   return (
     <div>
       <Row className="about-me">
         <Col lg>
-          <h1>
+          <SectionHeading id="about-me" label="About Me">
             <span role="img" aria-label="about">
               🗣
             </span>{" "}
             About Me
-          </h1>
+          </SectionHeading>
           <p>
             My background is in software engineering{" "}
             <span role="img" aria-label="technology">

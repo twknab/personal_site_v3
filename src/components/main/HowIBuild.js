@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Col from "react-bootstrap/Col";
 import Collapse from "react-bootstrap/Collapse";
 import Row from "react-bootstrap/Row";
+import SectionHeading from "../common/SectionHeading";
 import { Element } from "react-scroll";
 import { FaChevronDown } from "react-icons/fa";
 import {
@@ -176,12 +177,12 @@ function HowIBuild() {
       <Element name="how-i-build"></Element>
       <Row className="how-i-build" data-testid="how-i-build">
         <Col lg>
-          <h1>
+          <SectionHeading id="how-i-build" label="How I Build">
             <span role="img" aria-label="how i build">
               🛠
             </span>{" "}
             How I Build
-          </h1>
+          </SectionHeading>
 
           <p className="hib-revised">Last revised {lastRevised}</p>
 

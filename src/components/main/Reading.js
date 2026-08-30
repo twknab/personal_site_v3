@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import Collapse from "react-bootstrap/Collapse";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
+import SectionHeading, { CopyLinkButton } from "../common/SectionHeading";
 import { Element } from "react-scroll";
-import { FaChevronDown, FaCheck, FaLink } from "react-icons/fa";
+import { FaChevronDown } from "react-icons/fa";
 import { currentlyReading, readingByYear } from "./reading/readingList";
 import localCovers from "./reading/localCovers";
 import placeholderCover from "../../assets/images/book-cover-placeholder.svg";
@@ -25,40 +26,6 @@ function BookCover({ slug, title }) {
       loading="lazy"
       onError={() => setFailed(true)}
     />
-  );
-}
-
-function CopyLinkButton({ anchorId, label }) {
-  const [copied, setCopied] = useState(false);
-
-  const handleCopy = async (e) => {
-    e.stopPropagation();
-    const { origin, pathname } = window.location;
-    const link = `${origin}${pathname}#${anchorId}`;
-    try {
-      await navigator.clipboard.writeText(link);
-    } catch {
-      const temp = document.createElement("textarea");
-      temp.value = link;
-      document.body.appendChild(temp);
-      temp.select();
-      document.execCommand("copy");
-      document.body.removeChild(temp);
-    }
-    setCopied(true);
-    setTimeout(() => setCopied(false), 1600);
-  };
-
-  return (
-    <button
-      type="button"
-      className={`reading-link-btn ${copied ? "is-copied" : ""}`}
-      onClick={handleCopy}
-      aria-label={`Copy link to ${label}`}
-      title={copied ? "Link copied!" : `Copy link to ${label}`}
-    >
-      {copied ? <FaCheck aria-hidden="true" /> : <FaLink aria-hidden="true" />}
-    </button>
   );
 }
 
@@ -127,12 +94,12 @@ function Reading() {
       <Element name="reading"></Element>
       <Row className="reading">
         <Col lg>
-          <h1>
+          <SectionHeading id="reading" label="Reading">
             <span role="img" aria-label="reading">
               📚
             </span>{" "}
             Reading
-          </h1>
+          </SectionHeading>
 
           {currentlyReading.length > 0 && (
             <ReadingGroup

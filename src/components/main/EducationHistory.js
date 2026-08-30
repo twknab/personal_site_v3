@@ -1,6 +1,7 @@
 import React from "react";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
+import SectionHeading from "../common/SectionHeading";
 import Scroll from "react-scroll";
 const Element = Scroll.Element;
 
@@ -10,12 +11,12 @@ function EducationHistory() {
       <Element name="education"></Element>
       <Row className="education-history link-light-bg">
         <Col lg className="light-text-shadow">
-          <h1>
+          <SectionHeading id="education" label="Education History">
             <span role="img" aria-label="about">
               🎓
             </span>{" "}
             Education History
-          </h1>
+          </SectionHeading>
           <h4>Full Stack Web Application Development: Software Engineering</h4>
           <h5>
             <a

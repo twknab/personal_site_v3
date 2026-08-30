@@ -1,6 +1,7 @@
 import React from "react";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
+import SectionHeading from "../common/SectionHeading";
 import Scroll from "react-scroll";
 import { GoGitCommit, GoGitMerge, GoRepo, GoTag } from "react-icons/go";
 const Element = Scroll.Element;
@@ -23,12 +24,12 @@ function RecentlyShipped({ items }) {
       <Element name="recently-shipped"></Element>
       <Row className="recently-shipped" data-testid="recently-shipped">
         <Col lg>
-          <h1>
+          <SectionHeading id="recently-shipped" label="Recently Shipped">
             <span role="img" aria-label="rocket">
               🚀
             </span>{" "}
             Recently Shipped
-          </h1>
+          </SectionHeading>
           <p className="shipped-intro">
             <span className="shipped-live">
               <span className="shipped-live-dot" aria-hidden="true"></span>

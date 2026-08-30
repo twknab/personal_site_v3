@@ -2246,7 +2246,8 @@ navbar-nav .dropdown-menu {
 
 // "Copy link to this year" control. Sits beside the chevron in the year
 // heading, stays subtle until hover/focus, and flashes green on copy.
-.reading-link-btn {
+.reading-link-btn,
+.section-link-btn {
   flex-shrink: 0;
   display: inline-flex;
   align-items: center;
@@ -2285,7 +2286,74 @@ navbar-nav .dropdown-menu {
   }
 }
 
-.reading-group-header:hover .reading-link-btn {
+// --- Section headings with a share control ----------------------------
+// The heading becomes a row so the control can sit hard right. The id lives
+// on the heading itself, which is what makes a copied #anchor actually jump.
+.section-heading {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  // Anchored jumps would otherwise land under the sticky nav.
+  scroll-margin-top: 90px;
+}
+
+.section-heading-text {
+  // Deliberately not flex: 1 — the control sits directly after the words it
+  // belongs to. Pushed to the far right it read as unrelated page furniture.
+  min-width: 0;
+}
+
+.section-link-btn {
+  position: relative;
+  // Headings are large; the control should read as a quiet affordance beside
+  // one, not compete with it.
+  align-self: center;
+  font-size: 15px;
+  // Visible at rest rather than hover-only: on a touch screen there is no
+  // hover, and a control nobody can discover is not a feature. Sitting beside
+  // the words rather than at the margin, it can afford to be fainter.
+  opacity: 0.45;
+
+  // Tooltip.
+  &::after {
+    content: attr(data-tip);
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%) translateY(3px);
+    z-index: 5;
+    padding: 5px 9px;
+    border-radius: 6px;
+    background: rgba(12, 10, 20, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    color: #ffffff;
+    font-family: var(--font-body), system-ui, sans-serif;
+    font-size: 11.5px;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 1.3;
+    white-space: nowrap;
+    text-transform: none;
+    text-shadow: none;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.16s ease, transform 0.16s ease;
+  }
+
+  &:hover::after,
+  &:focus-visible::after {
+    opacity: 1;
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section-link-btn::after {
+    transition: none;
+  }
+}
+
+.reading-group-header:hover .section-link-btn {
   opacity: 0.85;
 }
 

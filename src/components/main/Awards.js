@@ -1,6 +1,7 @@
 import React from "react";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
+import SectionHeading from "../common/SectionHeading";
 import { FaCaretRight } from "react-icons/fa";
 
 function Awards() {
@@ -8,12 +9,12 @@ function Awards() {
     <div>
       <Row className="awards">
         <Col lg>
-          <h1>
+          <SectionHeading id="awards" label="Awards">
             <span role="img" aria-label="awards">
               ⭐️
             </span>{" "}
             Awards
-          </h1>
+          </SectionHeading>
           <p>
             <FaCaretRight size="1.2em" />
             Received the{" "}

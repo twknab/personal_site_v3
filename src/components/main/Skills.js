@@ -1,6 +1,7 @@
 import React from "react";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
+import SectionHeading from "../common/SectionHeading";
 import Scroll from "react-scroll";
 import skills from "./skills/skillsList";
 const Element = Scroll.Element;
@@ -16,12 +17,12 @@ function Skills() {
       <Element name="skills"></Element>
       <Row className="skills">
         <Col lg>
-          <h1>
+          <SectionHeading id="skills" label="Skills">
             <span role="img" aria-label="about">
               ⚒️
             </span>{" "}
             Skills
-          </h1>
+          </SectionHeading>
           {/* TODO: Add more rows, and break skills into categories to match current resume template */}
           <Row className="skills-wrapper">
             {chunkedSkills.map((chunk, idx) => (
