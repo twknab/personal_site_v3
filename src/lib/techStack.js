@@ -18,7 +18,13 @@ export function cleanVersion(range) {
 export function getTechStack() {
   const deps = pkg.dependencies || {};
   return {
-    siteVersion: pkg.version,
+    // Only the major. Semantic versioning communicates compatibility to
+    // people who depend on your code, and nothing depends on this site --
+    // there is no API and no package. What the major *does* mean here is
+    // real: which generation of the site this is. v5 is the Next.js rebuild.
+    // Recency is already covered, precisely, by the last-commit stamp
+    // beside this badge, so the minor and patch had nothing left to say.
+    siteVersion: String(pkg.version).split(".")[0],
     // Build-machine Node major (Netlify's build image), e.g. "22".
     nodeMajor: process.version.replace(/^v/, "").split(".")[0],
     badges: Object.entries(DOCS)

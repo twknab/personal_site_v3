@@ -5,6 +5,15 @@ import Image from "react-bootstrap/Image";
 import Row from "react-bootstrap/Row";
 import { FaGithub } from "react-icons/fa";
 import sockitIco from "../../../assets/images/apps/sockit-ico.png";
+import chat from "../../../assets/images/projects/sockit/chat.png";
+import ProjectGallery from "./ProjectGallery";
+
+const SHOTS = [
+  {
+    src: chat,
+    alt: "Three people in the room, with join notices and timestamps",
+  },
+];
 
 const REPO = "https://github.com/twknab/sockets_chat";
 
@@ -55,6 +64,7 @@ function SockIt() {
           </Button>
         </Col>
       </Row>
+      <ProjectGallery images={SHOTS} projectName="Sock It!" />
     </div>
   );
 }

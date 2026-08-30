@@ -49,8 +49,9 @@ describe("Projects", () => {
 
   it("attaches screenshot galleries to projects that have them", () => {
     const galleries = document.querySelectorAll('[data-testid="project-gallery"]');
-    // SquirrelStudio (private) and Sock It! (no shots) skip galleries.
-    expect(galleries.length).toBe(titles().length - 2);
+    // Only SquirrelStudio skips one now: it is a private desktop app with no
+    // publishable UI shots. Sock It! has a freshly captured chat screenshot.
+    expect(galleries.length).toBe(titles().length - 1);
     galleries.forEach((gallery) => {
       expect(gallery.querySelectorAll("img").length).toBeGreaterThan(0);
     });
