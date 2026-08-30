@@ -31,7 +31,7 @@ function FlowDiagram() {
   return (
     <div className="hib-flow-wrap">
       <ol className="hib-flow" aria-hidden="true">
-        {flow.map(({ id, Icon, label, caption, loop, accent }) => (
+        {flow.map(({ id, Icon, label, caption, loop, accent }, index) => (
           <li
             key={id}
             className={`hib-flow-step ${loop ? "is-loop-target" : ""}`}
@@ -44,6 +44,13 @@ function FlowDiagram() {
             </span>
             <span className="hib-flow-label">{label}</span>
             <span className="hib-flow-caption">{caption}</span>
+            {/*
+              A real element rather than a pseudo-element. The loop target
+              spends its ::after on the conic ring, so drawing connectors that
+              way meant skipping the one leaving that step — a visible break in
+              the middle of the pipeline. Every step but the last gets one now.
+            */}
+            {index < flow.length - 1 && <span className="hib-flow-connector" />}
           </li>
         ))}
       </ol>
