@@ -51,8 +51,16 @@ beforeEach(() => {
     beginPath: jest.fn(),
     arc: jest.fn(),
     fill: jest.fn(),
+    fillRect: jest.fn(),
+    moveTo: jest.fn(),
+    lineTo: jest.fn(),
+    stroke: jest.fn(),
+    drawImage: jest.fn(),
+    createRadialGradient: jest.fn(() => ({ addColorStop: jest.fn() })),
     globalAlpha: 1,
+    lineWidth: 1,
     fillStyle: "",
+    strokeStyle: "",
   };
   jest
     .spyOn(HTMLCanvasElement.prototype, "getContext")
@@ -138,23 +146,34 @@ describe("ParticleField", () => {
 
   it("paints particles once the loop runs", () => {
     render(<ParticleField />);
-    expect(ctx.arc).not.toHaveBeenCalled();
+    expect(ctx.drawImage).not.toHaveBeenCalled();
 
     advance(1);
 
     expect(ctx.clearRect).toHaveBeenCalled();
-    expect(ctx.arc).toHaveBeenCalled();
-    expect(ctx.fill).toHaveBeenCalled();
+    // Each particle is blitted from its pre-rendered glow sprite.
+    expect(ctx.drawImage).toHaveBeenCalled();
   });
 
   it("keeps the particle count in its intended band", () => {
     render(<ParticleField />);
     advance(1);
 
-    // One draw per particle per frame.
-    const drawn = ctx.arc.mock.calls.length;
-    expect(drawn).toBeGreaterThanOrEqual(14);
-    expect(drawn).toBeLessThanOrEqual(70);
+    // One blit per particle per frame.
+    const drawn = ctx.drawImage.mock.calls.length;
+    expect(drawn).toBeGreaterThanOrEqual(22);
+    expect(drawn).toBeLessThanOrEqual(130);
+  });
+
+  it("builds one glow sprite per colour, once, not per frame", () => {
+    render(<ParticleField />);
+    const afterMount = ctx.createRadialGradient.mock.calls.length;
+    expect(afterMount).toBeGreaterThan(0);
+
+    advance(5);
+
+    // Sprites are built at setup; the render loop must only ever blit them.
+    expect(ctx.createRadialGradient.mock.calls.length).toBe(afterMount);
   });
 
   it("under reduced motion it paints a still frame and never starts a loop", () => {
@@ -162,7 +181,7 @@ describe("ParticleField", () => {
     render(<ParticleField />);
 
     // Painted, so the panel does not lose the texture entirely...
-    expect(ctx.arc).toHaveBeenCalled();
+    expect(ctx.drawImage).toHaveBeenCalled();
     // ...but nothing was ever scheduled, so it cannot move.
     expect(window.requestAnimationFrame).not.toHaveBeenCalled();
   });
@@ -230,7 +249,7 @@ describe("ParticleField", () => {
   it("stops animating when the tab goes to the background", () => {
     render(<ParticleField />);
     advance(1);
-    const beforeHide = ctx.arc.mock.calls.length;
+    const beforeHide = ctx.drawImage.mock.calls.length;
     expect(beforeHide).toBeGreaterThan(0);
 
     Object.defineProperty(document, "hidden", {
@@ -275,6 +294,6 @@ describe("ParticleField", () => {
     // A host with no dimensions yet must not produce particles at NaN
     // coordinates; the component waits for a real measurement instead.
     expect(ctx.setTransform).not.toHaveBeenCalled();
-    expect(ctx.arc).not.toHaveBeenCalled();
+    expect(ctx.drawImage).not.toHaveBeenCalled();
   });
 });

@@ -2,21 +2,64 @@ import React, { useEffect, useRef } from "react";
 
 // Deeper, more saturated tones than the cursor trail uses. The welcome panel
 // is a bright yellow-green, so the pale end of the palette disappears into it
-// — cyan, violet and magenta are the ones that still read against it.
-const COLORS = ["#00d4ff", "#b026ff", "#ff2d95", "#32efa6", "#fcb045"];
+// — these are the ones that still read against it. Deep violet and electric
+// blue carry the most contrast against yellow-green and do the heavy lifting.
+const COLORS = [
+  "#00d4ff",
+  "#b026ff",
+  "#ff2d95",
+  "#7b00ff",
+  "#00a3ff",
+  "#ff5cc8",
+  "#32efa6",
+];
 
 // One particle per this many square pixels, so a phone is not asked to run a
 // desktop's particle count. Clamped at both ends: too few reads as dust on the
 // screen, too many turns into texture and competes with the text.
-const AREA_PER_PARTICLE = 15000;
-const MIN_PARTICLES = 14;
-const MAX_PARTICLES = 70;
+const AREA_PER_PARTICLE = 8200;
+const MIN_PARTICLES = 22;
+const MAX_PARTICLES = 130;
 
 // How far the pointer reaches, and how hard it pushes.
-const POINTER_RADIUS = 120;
-const POINTER_PUSH = 0.9;
+const POINTER_RADIUS = 170;
+const POINTER_PUSH = 1.5;
+
+// Each particle is drawn from a pre-rendered glow sprite rather than with
+// `shadowBlur`, which is redrawn from scratch every frame and is the classic
+// way to make a canvas field stutter. One sprite per colour, painted once.
+const SPRITE_SIZE = 64;
+const SPRITE_CORE = 8;
+
+// Particles nearer than this get joined by a line. The constellation is what
+// turns loose dots into a field with structure — the effect reads as one
+// system reacting to the cursor rather than confetti that happens to drift.
+const LINK_DISTANCE = 118;
 
 const random = (min, max) => min + Math.random() * (max - min);
+
+/**
+ * Paints a soft glowing dot of one colour onto its own small canvas, once, so
+ * the render loop only ever has to blit it.
+ */
+const makeSprite = (color) => {
+  const sprite = document.createElement("canvas");
+  sprite.width = SPRITE_SIZE;
+  sprite.height = SPRITE_SIZE;
+  const sctx = sprite.getContext("2d");
+  if (!sctx) return sprite;
+
+  const mid = SPRITE_SIZE / 2;
+  const gradient = sctx.createRadialGradient(mid, mid, 0, mid, mid, mid);
+  // Solid to the core radius, then a bloom that fades to nothing at the edge.
+  gradient.addColorStop(0, color);
+  gradient.addColorStop(SPRITE_CORE / SPRITE_SIZE, color);
+  gradient.addColorStop(0.45, `${color}55`);
+  gradient.addColorStop(1, `${color}00`);
+  sctx.fillStyle = gradient;
+  sctx.fillRect(0, 0, SPRITE_SIZE, SPRITE_SIZE);
+  return sprite;
+};
 
 /**
  * An ambient field of drifting particles, drawn on a canvas sized to whatever
@@ -64,6 +107,8 @@ function ParticleField({ className = "" }) {
     const pointer = { x: null, y: null };
     const parallax = { x: 0, y: 0, targetX: 0, targetY: 0 };
 
+    const sprites = new Map(COLORS.map((c) => [c, makeSprite(c)]));
+
     const build = () => {
       const count = Math.max(
         MIN_PARTICLES,
@@ -83,8 +128,8 @@ function ParticleField({ className = "" }) {
           ox: 0,
           oy: 0,
           depth,
-          radius: random(1.1, 2.9) * depth,
-          alpha: random(0.16, 0.4),
+          radius: random(1.8, 4.6) * depth,
+          alpha: random(0.42, 0.85),
           color: COLORS[Math.floor(Math.random() * COLORS.length)],
         };
       });
@@ -113,19 +158,44 @@ function ParticleField({ className = "" }) {
 
     const draw = () => {
       ctx.clearRect(0, 0, width, height);
-      particles.forEach((p) => {
+
+      // Resolve each particle's on-screen position once; both passes need it.
+      const points = particles.map((p) => ({
+        p,
+        x: p.x + p.ox + parallax.x * p.depth,
+        y: p.y + p.oy + parallax.y * p.depth,
+      }));
+
+      // Pass one: the links, underneath, so dots always sit on top of threads.
+      ctx.lineWidth = 1;
+      for (let i = 0; i < points.length; i += 1) {
+        for (let j = i + 1; j < points.length; j += 1) {
+          const dx = points[i].x - points[j].x;
+          const dy = points[i].y - points[j].y;
+          const dist = Math.hypot(dx, dy);
+          if (dist >= LINK_DISTANCE) continue;
+          // Fades out as the pair separates, so links dissolve rather than
+          // blinking off when a particle drifts past the threshold.
+          ctx.globalAlpha = (1 - dist / LINK_DISTANCE) * 0.3;
+          ctx.strokeStyle = points[i].p.color;
+          ctx.beginPath();
+          ctx.moveTo(points[i].x, points[i].y);
+          ctx.lineTo(points[j].x, points[j].y);
+          ctx.stroke();
+        }
+      }
+
+      // Pass two: the particles, blitted from their glow sprite so the colour
+      // carries on a bright background instead of reading as a flat speck.
+      // The sprite is sized so its solid core matches the particle's radius.
+      points.forEach(({ p, x, y }) => {
+        const sprite = sprites.get(p.color);
+        if (!sprite) return;
+        const size = (p.radius * SPRITE_SIZE) / SPRITE_CORE;
         ctx.globalAlpha = p.alpha;
-        ctx.fillStyle = p.color;
-        ctx.beginPath();
-        ctx.arc(
-          p.x + p.ox + parallax.x * p.depth,
-          p.y + p.oy + parallax.y * p.depth,
-          p.radius,
-          0,
-          Math.PI * 2
-        );
-        ctx.fill();
+        ctx.drawImage(sprite, x - size / 2, y - size / 2, size, size);
       });
+
       ctx.globalAlpha = 1;
     };
 
