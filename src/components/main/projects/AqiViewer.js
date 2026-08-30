@@ -5,15 +5,27 @@ import Image from "react-bootstrap/Image";
 import Row from "react-bootstrap/Row";
 import { FaGithub } from "react-icons/fa";
 import aqiViewerIco from "../../../assets/images/apps/aqiviewer-ico.svg";
+import dashboard from "../../../assets/images/projects/aqiviewer/dashboard.png";
+import overThreshold from "../../../assets/images/projects/aqiviewer/over-threshold.png";
 import login from "../../../assets/images/projects/aqiviewer/login.png";
 import register from "../../../assets/images/projects/aqiviewer/register.png";
 import ProjectGallery from "./ProjectGallery";
 
 const REPO = "https://github.com/twknab/aqi-viewer";
 
+// The dashboard leads: it is the whole point of the app, and a gallery that
+// opened on a login form would say nothing about what this thing does.
 const SHOTS = [
-  { src: login, alt: "Login screen" },
-  { src: register, alt: "Register a new user" },
+  {
+    src: dashboard,
+    alt: "Dashboard showing Seattle at AQI 10, under a threshold of 50",
+  },
+  {
+    src: overThreshold,
+    alt: "The same reading over a threshold of 5, flagged red",
+  },
+  { src: login, alt: "Signing in" },
+  { src: register, alt: "Creating an account" },
 ];
 
 function AqiViewer() {

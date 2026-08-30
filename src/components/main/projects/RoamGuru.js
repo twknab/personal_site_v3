@@ -3,17 +3,16 @@ import Col from "react-bootstrap/Col";
 import Image from "react-bootstrap/Image";
 import Row from "react-bootstrap/Row";
 import roamGuruIco from "../../../assets/images/apps/roamguru-ico.png";
-import awards from "../../../assets/images/projects/roamguru/awards.png";
-import mapOverview from "../../../assets/images/projects/roamguru/map-overview.png";
-import readyCheck from "../../../assets/images/projects/roamguru/ready-check.png";
-import tripDetail from "../../../assets/images/projects/roamguru/trip-detail.png";
+import gearList from "../../../assets/images/projects/roamguru/gear-list.png";
+import tripsList from "../../../assets/images/projects/roamguru/trips-list.png";
 import ProjectGallery from "./ProjectGallery";
 
+// Captions describe what is actually on screen. Every one of these was wrong
+// before -- two gear lists labelled "awards" and a "ready check", a trip list
+// labelled "trip detail", and a fourth image that was not this app at all.
 const SHOTS = [
-  { src: tripDetail, alt: "Trip detail on mobile" },
-  { src: awards, alt: "Awards earned" },
-  { src: mapOverview, alt: "Trip map overview" },
-  { src: readyCheck, alt: "Ready-to-roll checklist" },
+  { src: tripsList, alt: "Trips list, filtered by trip type" },
+  { src: gearList, alt: "A gear list with per-item weight and volume" },
 ];
 
 function RoamGuru() {
