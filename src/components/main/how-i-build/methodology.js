@@ -193,8 +193,9 @@ export const stages = [
     detail: [
       "Infrastructure is Terraform. Written as code, an app stays portable between clouds instead of welded to whatever somebody clicked into one console.",
       "Click-ops is out. Nobody remembers what they clicked, least of all across dev, staging and prod.",
+      "Where it lands depends on the job. Netlify for something small that just needs to be up, container instances on Google Cloud when it needs to scale or hold state.",
     ],
-    tools: ["Terraform", "CI/CD", "Google Cloud"],
+    tools: ["Terraform", "Google Cloud", "Cloud Run", "Netlify", "CI/CD"],
   },
   {
     id: "iterate",

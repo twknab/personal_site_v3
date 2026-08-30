@@ -5,6 +5,7 @@ import Row from "react-bootstrap/Row";
 import SectionHeading from "../common/SectionHeading";
 import { Element } from "react-scroll";
 import { FaChevronDown } from "react-icons/fa";
+import { furtherReading, toolLinks } from "./how-i-build/toolLinks";
 import {
   architectNote,
   flow,
@@ -92,11 +93,34 @@ function ToolChips({ tools }) {
 
   return (
     <ul className="hib-tools" aria-label="Tools used at this stage">
-      {tools.map((tool) => (
-        <li key={tool} className="hib-tag">
-          {tool}
-        </li>
-      ))}
+      {tools.map((tool) => {
+        const link = toolLinks[tool];
+
+        // No entry means no link — the tag still renders. The methodology is
+        // never blocked on whether an icon exists for something.
+        if (!link) {
+          return (
+            <li key={tool} className="hib-tag">
+              {tool}
+            </li>
+          );
+        }
+
+        const { Icon, href } = link;
+        return (
+          <li key={tool}>
+            <a
+              className="hib-tag hib-tag-link"
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Icon className="hib-tag-icon" aria-hidden="true" />
+              {tool}
+            </a>
+          </li>
+        );
+      })}
     </ul>
   );
 }
@@ -207,6 +231,23 @@ function HowIBuild() {
               />
             ))}
           </ol>
+
+          <p className="hib-further">
+            <furtherReading.Icon
+              className="hib-further-icon"
+              aria-hidden="true"
+            />
+            <span>
+              {furtherReading.note}{" "}
+              <a
+                href={furtherReading.href}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {furtherReading.label}
+              </a>
+            </span>
+          </p>
         </Col>
       </Row>
     </div>

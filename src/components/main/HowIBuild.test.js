@@ -91,15 +91,29 @@ describe("HowIBuild", () => {
     );
   });
 
-  it("gives every stage a tag list and renders them as tags, not buttons", () => {
-    // The inline tags are labels, not controls. Only the cloud's tags are
-    // interactive; if an inline one ever became a <button> it would invite a
-    // click that does nothing.
+  it("renders inline tags as either plain labels or real links, never buttons", () => {
+    // A tag either goes somewhere or it does not. What it must never be is a
+    // button, which would promise a click that does nothing.
     const { container } = render(<HowIBuild />);
     const inlineTags = container.querySelectorAll(".hib-tools .hib-tag");
 
     expect(inlineTags.length).toBeGreaterThan(0);
-    inlineTags.forEach((tag) => expect(tag.tagName).toBe("LI"));
+    inlineTags.forEach((tag) => {
+      expect(["LI", "A"]).toContain(tag.tagName);
+      if (tag.tagName === "A") {
+        expect(tag.getAttribute("href")).toMatch(/^https:\/\//);
+        expect(tag).toHaveAttribute("rel", expect.stringContaining("noopener"));
+      }
+    });
+  });
+
+  it("links every tool that has a destination, and leaves the rest as labels", () => {
+    const { container } = render(<HowIBuild />);
+    const linked = container.querySelectorAll(".hib-tools .hib-tag-link");
+
+    // Every linked tag carries a brand mark alongside its name.
+    linked.forEach((tag) => expect(tag.querySelector("svg")).toBeTruthy());
+    expect(linked.length).toBeGreaterThan(5);
   });
 
   it("offers a tag cloud that opens the stage using that tool", async () => {

@@ -3365,3 +3365,57 @@ a.tech-badge {
     transform: none;
   }
 }
+
+// --- Tool tags that link out ------------------------------------------
+// A tag with a destination gets its brand mark and a hover state. Tags
+// without one keep the plain treatment, so the row stays visually even.
+.hib-tag-link {
+  gap: 6px;
+  color: rgba(255, 255, 255, 0.9) !important;
+  text-decoration: none;
+  transition: background 0.18s ease, border-color 0.18s ease,
+    transform 0.18s ease, color 0.18s ease;
+
+  &:hover,
+  &:focus-visible {
+    transform: translateY(-1px);
+    background: rgba($themeVibrantYellowGreen, 0.16);
+    border-color: rgba($themeVibrantYellowGreen, 0.55);
+    color: #ffffff !important;
+    text-decoration: none;
+  }
+}
+
+.hib-tag-icon {
+  flex-shrink: 0;
+  font-size: 13px;
+  opacity: 0.85;
+}
+
+// --- Further reading ---------------------------------------------------
+.hib-further {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  max-width: 72ch;
+  margin-top: 1.4rem;
+  padding: 12px 14px !important;
+  border-left: 3px solid rgba($themeTurquoise, 0.7);
+  border-radius: 0 8px 8px 0;
+  background: rgba(255, 255, 255, 0.04);
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.hib-further-icon {
+  flex-shrink: 0;
+  margin-top: 3px;
+  font-size: 16px;
+  color: $themeTurquoise;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hib-tag-link {
+    transition: none;
+  }
+}
