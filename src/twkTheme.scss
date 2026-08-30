@@ -3324,9 +3324,10 @@ a.tech-badge {
   // instead of drifting at large and small viewports.
   font-size: 1.02em;
   line-height: 1;
-  // The gradient fill leaves the glyph flat against a dark background; a soft
-  // shadow gives it the weight the emoji had.
-  filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.55));
+  // A coloured bloom under the glyph as well as the shadow, so the neon in
+  // the gradient reads as light rather than as flat paint.
+  filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.55))
+    drop-shadow(0 0 12px rgba(176, 38, 255, 0.45));
   transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
 }
 

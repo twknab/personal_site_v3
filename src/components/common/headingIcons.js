@@ -28,20 +28,32 @@ import {
   FaTools,
 } from "react-icons/fa";
 
+// Three stops rather than two, with a neon in the middle, so each glyph runs
+// through a colour it did not start or end on. That mid tone is what makes it
+// read as the site's psychedelic gradients rather than a flat two-tone fade.
 export const headingIcons = {
   // A campfire rather than a raised hand: FaHandSparkles read as "stop", and
   // the hero photo right beside it is a fire on a beach at night.
-  welcome: { Icon: FaCampground, from: "#ffd86b", to: "#ff2d95" },
-  "about-me": { Icon: FaSeedling, from: "#32efa6", to: "#00d4ff" },
-  skills: { Icon: FaTools, from: "#d8e052", to: "#fcb045" },
-  projects: { Icon: FaPalette, from: "#b026ff", to: "#ff2d95" },
-  "how-i-build": { Icon: FaDraftingCompass, from: "#00d4ff", to: "#b026ff" },
-  "recently-shipped": { Icon: FaRocket, from: "#ff2d95", to: "#fcb045" },
-  toolkit: { Icon: FaToolbox, from: "#32efa6", to: "#d8e052" },
-  experience: { Icon: FaDumbbell, from: "#fcb045", to: "#ff2d95" },
-  education: { Icon: FaGraduationCap, from: "#00d4ff", to: "#32efa6" },
-  awards: { Icon: FaAward, from: "#ffd86b", to: "#fcb045" },
-  reading: { Icon: FaBookOpen, from: "#b026ff", to: "#00d4ff" },
+  welcome: {
+    Icon: FaCampground,
+    stops: ["#fff3b0", "#ff2d95", "#b026ff"],
+  },
+  "about-me": { Icon: FaSeedling, stops: ["#32efa6", "#00d4ff", "#b026ff"] },
+  skills: { Icon: FaTools, stops: ["#d8e052", "#fcb045", "#ff2d95"] },
+  projects: { Icon: FaPalette, stops: ["#00d4ff", "#b026ff", "#ff2d95"] },
+  "how-i-build": {
+    Icon: FaDraftingCompass,
+    stops: ["#00d4ff", "#32efa6", "#d8e052"],
+  },
+  "recently-shipped": {
+    Icon: FaRocket,
+    stops: ["#ff2d95", "#fcb045", "#ffd86b"],
+  },
+  toolkit: { Icon: FaToolbox, stops: ["#32efa6", "#d8e052", "#00d4ff"] },
+  experience: { Icon: FaDumbbell, stops: ["#fcb045", "#ff2d95", "#b026ff"] },
+  education: { Icon: FaGraduationCap, stops: ["#00d4ff", "#32efa6", "#d8e052"] },
+  awards: { Icon: FaAward, stops: ["#ffd86b", "#fcb045", "#ff2d95"] },
+  reading: { Icon: FaBookOpen, stops: ["#b026ff", "#00d4ff", "#32efa6"] },
 };
 
 export const gradientId = (id) => `heading-grad-${id}`;
@@ -63,7 +75,7 @@ export function HeadingIconDefs() {
       style={{ position: "absolute" }}
     >
       <defs>
-        {Object.entries(headingIcons).map(([id, { from, to }]) => (
+        {Object.entries(headingIcons).map(([id, { stops }]) => (
           <linearGradient
             key={id}
             id={gradientId(id)}
@@ -72,8 +84,26 @@ export function HeadingIconDefs() {
             x2="100%"
             y2="100%"
           >
-            <stop offset="0%" stopColor={from} />
-            <stop offset="100%" stopColor={to} />
+            {stops.map((color, i) => (
+              <stop
+                key={color + i}
+                offset={`${(i / (stops.length - 1)) * 100}%`}
+                stopColor={color}
+              />
+            ))}
+            {/*
+              The gradient's angle sweeps rather than sitting still, so the
+              colours travel across the glyph. Slow on purpose — this is
+              eleven headings down a page, not a light show.
+            */}
+            <animateTransform
+              attributeName="gradientTransform"
+              type="rotate"
+              from="0 0.5 0.5"
+              to="360 0.5 0.5"
+              dur="14s"
+              repeatCount="indefinite"
+            />
           </linearGradient>
         ))}
       </defs>
