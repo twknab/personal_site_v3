@@ -55,9 +55,8 @@ function ProfessionalSummary() {
             <b className="highlighter">FAANG</b> and fast-paced{" "}
             <b className="highlighter">startups</b>, and I'm skillful across all
             stages of the{" "}
-            <b className="highlighter">Software Development Life Cycle</b> (
-            <b className="highlighter">SDLC</b> /{" "}
-            <b className="highlighter">AI-SDLC</b>) and{" "}
+            <b className="highlighter">Agentic Software Development Life Cycle</b>{" "}
+            (<b className="highlighter">AI-SDLC</b>) and{" "}
             <b className="highlighter">scrum/agile</b> methodologies.{" "}
             <br />
             <br />
