@@ -31,7 +31,24 @@ const BADGE_ICONS = {
   Sass: { Icon: SiSass, color: "#cc6699" },
 };
 
-function PrimaryFooter({ techStack }) {
+// Fixed locale and UTC rather than the visitor's: a timestamp that renders
+// differently per machine makes the served HTML disagree with what React
+// renders on hydration.
+function formatCommitStamp(isoTime) {
+  const d = new Date(isoTime);
+  if (Number.isNaN(d.getTime())) return "";
+  return new Intl.DateTimeFormat("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+    hour: "numeric",
+    minute: "2-digit",
+    timeZone: "UTC",
+    timeZoneName: "short",
+  }).format(d);
+}
+
+function PrimaryFooter({ techStack, lastCommit }) {
   return (
     <div>
       <Container
@@ -176,6 +193,29 @@ function PrimaryFooter({ techStack }) {
               <a href="https://timknab.dev">timknab.dev</a>
             </p>
           </Col>
+          {/*
+            Null whenever the fetch failed, so a broken lookup shows nothing
+            rather than a dead stamp. A site claiming to be live should not
+            advertise a fetch that didn't work.
+          */}
+          {lastCommit && (
+            <Col lg="auto" className="last-commit">
+              <p>
+                <span className="last-commit-dot" aria-hidden="true" />
+                last commit{" "}
+                <a
+                  href={lastCommit.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {lastCommit.shortSha}
+                </a>{" "}
+                <time dateTime={lastCommit.isoTime}>
+                  {formatCommitStamp(lastCommit.isoTime)}
+                </time>
+              </p>
+            </Col>
+          )}
         </Row>
       </Container>
     </div>

@@ -201,3 +201,29 @@ export async function fetchRecentActivity() {
     return [];
   }
 }
+
+// The footer's "last commit" stamp. Same server-side, ISR-cached path as the
+// activity strip, so visitors never call GitHub and the site asks at most once
+// per revalidation window.
+//
+// Returns null on any failure. The footer then renders nothing rather than a
+// broken stamp — a site claiming to be live should not advertise a dead fetch.
+export async function fetchLastCommit(repo = `${GITHUB_USER}/personal_site_v3`) {
+  try {
+    const res = await githubFetch(`${API_ROOT}/repos/${repo}/commits/main`);
+    if (!res.ok) return null;
+    const data = await res.json();
+    const sha = data?.sha;
+    const isoTime = data?.commit?.committer?.date || data?.commit?.author?.date;
+    if (!sha || !isoTime) return null;
+
+    return {
+      sha,
+      shortSha: sha.slice(0, 7),
+      isoTime,
+      url: data?.html_url || `https://github.com/${repo}/commit/${sha}`,
+    };
+  } catch {
+    return null;
+  }
+}

@@ -2,6 +2,7 @@ import React from "react";
 import Col from "react-bootstrap/Col";
 import Image from "react-bootstrap/Image";
 import Row from "react-bootstrap/Row";
+import SectionHeading from "../common/SectionHeading";
 import bioPhoto from "../../assets/images/twksmall-966x966.jpeg";
 import { FaLinkedin, FaGithubSquare, FaStackOverflow } from "react-icons/fa";
 import LottieFigure from "../fun/LottieFigure";
@@ -28,12 +29,9 @@ function ProfessionalSummary() {
           md={12}
           lg={8}
         >
-          <h1>
-            <span role="img" aria-label="welcome">
-              👋
-            </span>{" "}
+          <SectionHeading id="welcome" label="Welcome">
             Welcome!
-          </h1>
+          </SectionHeading>
           <p className="light-text-shadow">
             My name is Tim. I'm a{" "}
             <b className="highlighter">Senior Full Stack Software Engineer</b>{" "}
@@ -57,9 +55,8 @@ function ProfessionalSummary() {
             <b className="highlighter">FAANG</b> and fast-paced{" "}
             <b className="highlighter">startups</b>, and I'm skillful across all
             stages of the{" "}
-            <b className="highlighter">Software Development Life Cycle</b> (
-            <b className="highlighter">SDLC</b> /{" "}
-            <b className="highlighter">AI-SDLC</b>) and{" "}
+            <b className="highlighter">Agentic Software Development Life Cycle</b>{" "}
+            (<b className="highlighter">AI-SDLC</b>) and{" "}
             <b className="highlighter">scrum/agile</b> methodologies.{" "}
             <br />
             <br />

@@ -179,7 +179,7 @@ function Stacks() {
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  // Each chip carries its brand colours as custom properties:
+                  // Each chip carries its brand colors as custom properties:
                   // one accent for the spine, icon, border and glow, and a
                   // two-stop gradient washed under the surface.
                   style={{
