@@ -68,6 +68,17 @@ $shadow-lift: 0 22px 50px -18px rgba(0, 0, 0, 0.6), 0 6px 14px -8px rgba(0, 0, 0
 // Full-viewport fixed grain overlay for tactile, modern texture.
 .App {
   position: relative;
+  // The page must never scroll sideways. Individual causes get fixed at the
+  // source, but one stray element should not be able to break the viewport for
+  // the whole site, so this is a backstop.
+  //
+  // `clip`, not `hidden`, and the difference matters: `hidden` makes this a
+  // scroll container, which would break the sticky navigation inside it and
+  // silently swallow programmatic scrolling. `clip` clips without creating
+  // one, so sticky still resolves against the viewport.
+  //
+  // This is a guard, not a licence to leave overflow unfixed -- see #115.
+  overflow-x: clip;
 }
 
 .App::after {
@@ -2359,15 +2370,30 @@ navbar-nav .dropdown-menu {
     white-space: nowrap;
     text-transform: none;
     text-shadow: none;
+    // `display: none` rather than opacity alone. An absolutely positioned
+    // tooltip is still part of its ancestors' scrollable overflow even while
+    // invisible, and this one is ~106px wide on a 34px button. That inflated
+    // every heading it sits in and leaked past the right edge of the viewport,
+    // putting real horizontal scroll on the page. `allow-discrete` plus
+    // `@starting-style` keeps the fade; browsers without them simply show the
+    // tooltip without one.
+    display: none;
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.16s ease, transform 0.16s ease;
+    transition: opacity 0.16s ease, transform 0.16s ease,
+      display 0.16s allow-discrete;
   }
 
   &:hover::after,
   &:focus-visible::after {
+    display: block;
     opacity: 1;
     transform: translateX(-50%);
+
+    @starting-style {
+      opacity: 0;
+      transform: translateX(-50%) translateY(3px);
+    }
   }
 }
 
@@ -2981,12 +3007,22 @@ a.tech-badge {
 // match. aria-hidden — the stage list below carries the same content.
 .hib-flow-wrap {
   margin: 1.6rem 0 1.4rem;
+  // The connectors are drawn outside their step, in the gap before the next
+  // one, so a mistake here escapes upward: nothing between this and <body>
+  // clips horizontally, and a stray 17px connector became real page scroll.
+  // `clip`, not `hidden` — it clips without creating a scroll container, and
+  // leaves the vertical axis visible so the loop ring's glow still spills.
+  overflow-x: clip;
 }
 
 .hib-flow {
   list-style: none;
   display: flex;
-  flex-wrap: wrap;
+  // Never wrap. Wrapping broke the five steps into 3 + 2 and left the step
+  // ending the first row with a connector pointing sideways into nothing --
+  // and past the container, which is what put scroll on the page. Below
+  // 768px the media query stacks these into a column instead.
+  flex-wrap: nowrap;
   align-items: stretch;
   // The connectors live in this gap and are sized from it, so the two are
   // driven by one number. Wide enough that a travelling dot has somewhere to
@@ -3000,6 +3036,9 @@ a.tech-badge {
 .hib-flow-step {
   position: relative;
   flex: 1 1 150px;
+  // Flex items will not shrink below their min-content width unless told to,
+  // which is what forced the wrap above rather than letting the steps narrow.
+  min-width: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
