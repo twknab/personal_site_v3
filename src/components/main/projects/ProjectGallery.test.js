@@ -58,6 +58,23 @@ describe("ProjectGallery", () => {
     );
   });
 
+  it("renders the dialog on <body>, clear of any transformed ancestor", () => {
+    // A project card carries a hover transform and the section around it sets
+    // `will-change: transform`. Either makes itself the containing block for
+    // `position: fixed`, which sized the "full-screen" dialog against the card
+    // instead of the viewport. Portalling is what keeps it truly full-screen.
+    const { container } = render(
+      <div style={{ transform: "translateY(-4px)" }}>
+        <ProjectGallery images={IMAGES} projectName="Demo" />
+      </div>
+    );
+    fireEvent.click(container.querySelector(".project-gallery-frame"));
+
+    const d = screen.getByRole("dialog");
+    expect(d.parentElement).toBe(document.body);
+    expect(container.contains(d)).toBe(false);
+  });
+
   it("shows the caption beneath the screenshot, not above it", () => {
     render(<ProjectGallery images={IMAGES} projectName="Demo" />);
     openFirst();

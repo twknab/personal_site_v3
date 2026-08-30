@@ -5,6 +5,7 @@ import React, {
   useRef,
   useState,
 } from "react";
+import { createPortal } from "react-dom";
 import { FaChevronLeft, FaChevronRight, FaTimes } from "react-icons/fa";
 
 // How far a finger has to travel before it counts as a swipe rather than a tap
@@ -172,7 +173,14 @@ function ProjectGallery({ images, projectName }) {
         ))}
       </ul>
 
-      {active && (
+      {/*
+        `document` is always there by the time this renders: the dialog only
+        exists after a click, which cannot happen during server rendering. The
+        guard is belt and braces for any future non-DOM renderer.
+      */}
+      {active &&
+        typeof document !== "undefined" &&
+        createPortal(
         <div
           className="project-lightbox"
           role="dialog"
@@ -251,7 +259,13 @@ function ProjectGallery({ images, projectName }) {
               </p>
             </div>
           </div>
-        </div>
+        </div>,
+        // Straight onto <body>. A project card carries a hover `transform` and
+        // the section around it sets `will-change: transform`; either one makes
+        // itself the containing block for `position: fixed`, so the dialog was
+        // being sized and placed against the card instead of the viewport. It
+        // was never actually full-screen.
+        document.body
       )}
     </>
   );

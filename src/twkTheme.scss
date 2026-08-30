@@ -1405,6 +1405,10 @@ navbar-nav .dropdown-menu {
   display: flex;
   align-items: center;
   justify-content: center;
+  // Takes whatever height is left once the close bar and caption have taken
+  // theirs. `min-height: 0` is what lets a flex item shrink below its content,
+  // and without it the image simply overflowed onto the caption.
+  flex: 1 1 auto;
   min-height: 0;
 }
 
@@ -1416,7 +1420,12 @@ navbar-nav .dropdown-menu {
   width: auto;
   height: auto;
   max-width: 100%;
-  max-height: calc(100vh - 150px);
+  // A viewport fraction, not a percentage of the stage. A percentage would
+  // resolve against a parent whose own height is only a max, which makes it
+  // compute to `none` -- that is how the image ended up overlapping the
+  // caption and running off the bottom of the screen. Leaving the rest of the
+  // viewport free means the panel always has room for the caption beneath.
+  max-height: 72vh;
   object-fit: contain;
   border-radius: 12px;
   background: #0b0f15;
@@ -1499,8 +1508,9 @@ navbar-nav .dropdown-menu {
     padding: 10px;
   }
 
+
   .project-lightbox-image {
-    max-height: calc(100vh - 190px);
+    max-height: 58vh;
   }
 
   .project-lightbox-nav {
