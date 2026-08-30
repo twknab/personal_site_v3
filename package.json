@@ -1,6 +1,7 @@
 {
   "name": "tk_version3_website",
   "version": "5.1.0",
+  "license": "UNLICENSED",
   "private": true,
   "dependencies": {
     "bootstrap": "^4.6.0",
