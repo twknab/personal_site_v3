@@ -3964,11 +3964,14 @@ a.tech-badge {
   }
 }
 
-// Stacks under the copyright on small screens, centered with it.
+// Stacks under the copyright on small screens, centered with it. Stacking
+// also makes it the last thing in the footer, where it sat hard against the
+// bottom edge -- hence the breathing room underneath.
 @media (max-width: 991px) {
   .last-commit {
     justify-content: center;
     margin-top: 8px;
+    margin-bottom: 18px;
   }
 }
 
