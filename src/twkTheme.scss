@@ -203,7 +203,7 @@ code {
   // block — the tops of the letterforms stay clear, which is what keeps 25 of
   // these from turning back into wallpaper.
   //
-  // Third pass tunes the colour rather than the geometry. The old #dbe45c was
+  // Third pass tunes the color rather than the geometry. The old #dbe45c was
   // a muted olive-lime that sat too close to the hero's own yellow-green
   // backdrop, so the swipe read as a slightly different shade of background
   // instead of as ink. It now runs electric lime into a deeper chartreuse,
@@ -511,8 +511,8 @@ navbar-nav .dropdown-menu {
 // The portrait column stretches to the full row height (flex default), but its
 // contents sat at the top, so the medallion rode high against the taller text
 // column. Centring the column's own contents keeps it on the row's midline at
-// any text length, and align-items keeps it horizontally centred once the
-// columns stack on mobile — which is the behaviour that was already correct.
+// any text length, and align-items keeps it horizontally centerd once the
+// columns stack on mobile — which is the behavior that was already correct.
 .bio-photo-col {
   display: flex;
   flex-direction: column;
@@ -590,11 +590,11 @@ navbar-nav .dropdown-menu {
 //
 // Hovering the portrait does three things at once: the golden ring drops from
 // an 8s idle rotation to a 1.4s sprint, the photo turns a full circle and
-// swells slightly at the halfway point, and a ring of coloured sparks flies
+// swells slightly at the halfway point, and a ring of colored sparks flies
 // outward and fades.
 //
-// The spark ring is a single 10px element at the centre carrying eight
-// coloured box-shadows placed around a circle; scaling and rotating that one
+// The spark ring is a single 10px element at the center carrying eight
+// colored box-shadows placed around a circle; scaling and rotating that one
 // element throws all eight outward together, which is far cheaper than eight
 // animated nodes. It sits above the photo and is pointer-events: none, so it
 // never interrupts the hover it is reacting to.
@@ -868,11 +868,11 @@ navbar-nav .dropdown-menu {
 // Both the artwork row and the chip row carry .stacks, so while the gradients
 // sat on .stacks each row painted its own copy relative to its own box: the
 // green glow landed at the artwork row's bottom-right and the turquoise glow
-// restarted at the chip row's top-centre, leaving a hard band across the seam.
+// restarted at the chip row's top-center, leaving a hard band across the seam.
 // Painting once on the wrapper lets the mesh flow through the whole section.
 .stacks-section {
   // Only the header and footer are ever full-bleed. Every content section is
-  // capped and centred — `.row` does that via max-width + auto margins, and
+  // capped and centerd — `.row` does that via max-width + auto margins, and
   // this wrapper replaced two `.row`s, so it has to carry the same cap or the
   // section bleeds past its neighbours on wide displays (185px each side at
   // 2400px before this was added).
@@ -954,7 +954,7 @@ navbar-nav .dropdown-menu {
 
 // Vector chips for the current frameworks, sharing the footer badge language
 // (mono label, small radius, lifted on hover) but inverted for the stacks
-// section's light background: pale card, dark text, brand-coloured glyph.
+// section's light background: pale card, dark text, brand-colored glyph.
 // The chip row becomes the section's bottom edge, and the artwork row above
 // hands its border and radius over, so the two render as one continuous card
 // rather than two stacked ones with a seam between them.
@@ -1025,8 +1025,8 @@ navbar-nav .dropdown-menu {
   border-radius: 10px;
   // Two layers: a near-opaque white veil over the technology's own brand
   // gradient. The veil is what keeps the dark label legible — the brand
-  // colours read as a tint rather than a background you have to fight. On
-  // hover the veil thins and the brand colours come forward.
+  // colors read as a tint rather than a background you have to fight. On
+  // hover the veil thins and the brand colors come forward.
   background-image:
     linear-gradient(150deg, rgba(255, 255, 255, 0.87) 0%, rgba(255, 255, 255, 0.7) 100%),
     linear-gradient(150deg, var(--chip-from, #ffffff) 0%, var(--chip-to, #f4f7ea) 100%);
@@ -1041,7 +1041,7 @@ navbar-nav .dropdown-menu {
   transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1),
     box-shadow 0.22s ease, border-color 0.22s ease;
 
-  // Brand-coloured spine down the left edge, so each chip is identifiable
+  // Brand-colored spine down the left edge, so each chip is identifiable
   // before you read it and the row isn't four identical white pills.
   &::before {
     content: "";
@@ -1076,7 +1076,7 @@ navbar-nav .dropdown-menu {
     background-image:
       linear-gradient(150deg, rgba(255, 255, 255, 0.78) 0%, rgba(255, 255, 255, 0.56) 100%),
       linear-gradient(150deg, var(--chip-from, #ffffff) 0%, var(--chip-to, #f4f7ea) 100%);
-    // Lift plus a glow tinted to the chip's own brand colour.
+    // Lift plus a glow tinted to the chip's own brand color.
     box-shadow: 0 10px 20px -8px rgba(0, 0, 0, 0.55),
       0 0 14px -4px var(--chip-accent, transparent);
 
@@ -1097,7 +1097,7 @@ navbar-nav .dropdown-menu {
 .stack-chip-icon {
   flex-shrink: 0;
   font-size: 22px;
-  // Inherits each chip's brand colour from the custom property.
+  // Inherits each chip's brand color from the custom property.
   color: var(--chip-accent, #1d1d1d);
   transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -1186,7 +1186,7 @@ navbar-nav .dropdown-menu {
   }
 
   // Buttons that carry a leading icon. inline-flex keeps the glyph optically
-  // centred against the cap height instead of sitting on the text baseline,
+  // centerd against the cap height instead of sitting on the text baseline,
   // and the margin above already spaces multiple buttons on one row.
   .btn.project-btn {
     display: inline-flex;
@@ -2984,7 +2984,7 @@ a.tech-badge {
   border: 1px solid rgba(var(--step-accent-rgb, 255, 255, 255), 0.16);
   box-shadow: inset 0 0 22px -12px var(--step-accent, transparent);
 
-  // A slim bar of the step's own colour across the top.
+  // A slim bar of the step's own color across the top.
   &::before {
     content: "";
     position: absolute;

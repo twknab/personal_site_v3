@@ -54,4 +54,4 @@ Three Partial categories from the ambiguity scan were resolved. All 16 checklist
 - **Constraints & Tradeoffs** (was Partial) → Resolved. Reader-facing content may name specific tools, but only inside a dedicated per-stage field, never woven into prose. Added FR-014 and SC-009. This keeps the spec itself tool-agnostic while letting the shipped content be concrete, and makes a tool swap a one-field edit.
 - **Domain & Data Model** (was Partial) → Resolved. The Stage entity now carries a one-line summary and an optional tools list.
 
-Checked specifically that the additions did not introduce implementation detail: FR-013 and FR-014 describe reader-facing behaviour and content structure, and name no framework, library, or product.
+Checked specifically that the additions did not introduce implementation detail: FR-013 and FR-014 describe reader-facing behavior and content structure, and name no framework, library, or product.

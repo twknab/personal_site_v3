@@ -34,7 +34,7 @@ function FlowDiagram() {
           <li
             key={id}
             className={`hib-flow-step ${loop ? "is-loop-target" : ""}`}
-            // Each step carries its own colour from the site palette, so the
+            // Each step carries its own color from the site palette, so the
             // pipeline reads as a spectrum rather than five identical boxes.
             style={{ "--step-accent": accent }}
           >

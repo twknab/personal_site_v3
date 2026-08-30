@@ -89,7 +89,7 @@ Six months later the workflow has changed: a stage is obsolete, a new one matter
 ### Functional Requirements
 
 - **FR-001**: The section MUST present the methodology as an ordered sequence of stages, each explaining what it is, what problem it solves, and why it is worth its cost.
-- **FR-002**: The section MUST cover, at minimum: writing a specification before implementation; standing rules committed alongside the code; two different agent tools kept behaviourally identical; selecting a model per task as a capability-versus-cost tradeoff; agents connected directly to the systems where work is tracked and reviewed; work initiated while away from a desk, both on a schedule and from a phone; running multiple agent sessions in parallel without collision; and automated review gates every change must pass before merge.
+- **FR-002**: The section MUST cover, at minimum: writing a specification before implementation; standing rules committed alongside the code; two different agent tools kept behaviorally identical; selecting a model per task as a capability-versus-cost tradeoff; agents connected directly to the systems where work is tracked and reviewed; work initiated while away from a desk, both on a schedule and from a phone; running multiple agent sessions in parallel without collision; and automated review gates every change must pass before merge.
 - **FR-015**: The section MUST make clear that the practice described spans work beyond this repository, so a reader does not mistake a nearly-static portfolio for the whole of it.
 - **FR-003**: **Revised 2026-08-29.** Per-claim evidence links are removed. The section describes the practice; it does not litigate it. Prose MUST NOT imply artifacts exist where they do not, but no stage is required to cite one.
 - **FR-016**: The section MUST establish that the author's role is architectural — designing constraints and reviewing output — while several collaborating agents write and deliver the work.
@@ -141,7 +141,7 @@ Six months later the workflow has changed: a stage is obsolete, a new one matter
 - A blog, or any commitment to recurring published content.
 - Executing agents live on the page, or any interactive demonstration of an agent working.
 - Publishing raw agent transcripts or conversation logs.
-- Any backend service, stored state, or authenticated behaviour.
+- Any backend service, stored state, or authenticated behavior.
 - Automatically generating the methodology content from repository history — the content is deliberately authored.
 
 ## Traceability

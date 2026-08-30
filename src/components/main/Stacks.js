@@ -171,7 +171,7 @@ function Stacks() {
             </span>
             my favorites
           </span>
-          <ul className="stacks-modern-list" aria-labelledby="stacks-modern-label">
+          <ul className="stacks-modern-list" aria-labeledby="stacks-modern-label">
             {MODERN_STACK.map(({ name, Icon, color, gradient, href }) => (
               <li key={name}>
                 <a
@@ -179,7 +179,7 @@ function Stacks() {
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  // Each chip carries its brand colours as custom properties:
+                  // Each chip carries its brand colors as custom properties:
                   // one accent for the spine, icon, border and glow, and a
                   // two-stop gradient washed under the surface.
                   style={{
