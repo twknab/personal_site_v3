@@ -511,7 +511,7 @@ navbar-nav .dropdown-menu {
 // The portrait column stretches to the full row height (flex default), but its
 // contents sat at the top, so the medallion rode high against the taller text
 // column. Centring the column's own contents keeps it on the row's midline at
-// any text length, and align-items keeps it horizontally centerd once the
+// any text length, and align-items keeps it horizontally centered once the
 // columns stack on mobile — which is the behavior that was already correct.
 .bio-photo-col {
   display: flex;
@@ -872,7 +872,7 @@ navbar-nav .dropdown-menu {
 // Painting once on the wrapper lets the mesh flow through the whole section.
 .stacks-section {
   // Only the header and footer are ever full-bleed. Every content section is
-  // capped and centerd — `.row` does that via max-width + auto margins, and
+  // capped and centered — `.row` does that via max-width + auto margins, and
   // this wrapper replaced two `.row`s, so it has to carry the same cap or the
   // section bleeds past its neighbours on wide displays (185px each side at
   // 2400px before this was added).
@@ -1186,7 +1186,7 @@ navbar-nav .dropdown-menu {
   }
 
   // Buttons that carry a leading icon. inline-flex keeps the glyph optically
-  // centerd against the cap height instead of sitting on the text baseline,
+  // centered against the cap height instead of sitting on the text baseline,
   // and the margin above already spaces multiple buttons on one row.
   .btn.project-btn {
     display: inline-flex;

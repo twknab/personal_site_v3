@@ -120,7 +120,8 @@ Standing constraints live alongside them as **rules**, mirrored the same way:
 
 | Rule | Constraint |
 | --- | --- |
-| `full-bleed-layout` | Only the header and footer run full width; every content section is capped at 2000px and centerd. |
+| `full-bleed-layout` | Only the header and footer run full width; every content section is capped at 2000px and centered. |
+| `site-versioning` | When to bump the site version shown in the footer. Judged by what a visitor would notice, not by diff size. |
 
 **The convention:** any change to a skill or rule updates *both* copies in the same commit. Only the wrapper differs — a `> Mirrors …` blockquote on the Claude side, YAML frontmatter on the Cursor side. Parity checks for both live in the `skills-sync` skill.
 

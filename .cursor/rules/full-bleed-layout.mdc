@@ -1,11 +1,11 @@
 ---
-description: Only the header and footer run full width; every content section is capped and centerd
+description: Only the header and footer run full width; every content section is capped and centered
 alwaysApply: true
 ---
 
 # Full-bleed layout
 
-**Only the top navigation and the footer are ever full width.** Every content section — hero, skills, stacks, projects, toolkit, experience, education, awards, reading, recently-shipped — is capped and centerd, so the page reads as a stack of cards inset from the viewport edges.
+**Only the top navigation and the footer are ever full width.** Every content section — hero, skills, stacks, projects, toolkit, experience, education, awards, reading, recently-shipped — is capped and centered, so the page reads as a stack of cards inset from the viewport edges.
 
 ## How the cap is applied
 
