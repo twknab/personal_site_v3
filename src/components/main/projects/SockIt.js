@@ -5,19 +5,29 @@ import Image from "react-bootstrap/Image";
 import Row from "react-bootstrap/Row";
 import { FaGithub } from "react-icons/fa";
 import sockitIco from "../../../assets/images/apps/sockit-ico.png";
+import chat from "../../../assets/images/projects/sockit/chat.png";
+import ProjectGallery from "./ProjectGallery";
+
+const SHOTS = [
+  {
+    src: chat,
+    alt: "Three people in the room, with join notices and timestamps",
+  },
+];
+
+const REPO = "https://github.com/twknab/sockets_chat";
 
 function SockIt() {
   return (
-    <div>
+    <div className="project-block">
       <Row className="project-row">
         <Col
           md="3"
           className="project-col tilt"
-          onClick={() =>
-            window.open("https://github.com/twknab/sockets_chat", "_blank")
-          }
+          onClick={() => window.open(REPO, "_blank")}
         >
-          <Image src={sockitIco.src} className="project-icon" rounded fluid />
+          <Image src={sockitIco.src} className="project-icon"
+            alt="" rounded fluid />
         </Col>
         <Col md="9">
           <h3>Sock It!</h3>
@@ -44,7 +54,7 @@ function SockIt() {
           <Button
             variant="primary"
             size="lg"
-            href="https://github.com/twknab/sockets_chat"
+            href={REPO}
             target="_blank"
             rel="noopener noreferrer"
             className="project-btn"
@@ -54,6 +64,7 @@ function SockIt() {
           </Button>
         </Col>
       </Row>
+      <ProjectGallery images={SHOTS} projectName="Sock It!" />
     </div>
   );
 }

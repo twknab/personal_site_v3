@@ -15,7 +15,9 @@ describe("App", () => {
     expect(queryAllByText(/Projects/i).length).toBeGreaterThan(0);
     expect(queryAllByText(/Experience/i).length).toBeGreaterThan(0);
     expect(queryAllByText(/Education History/i).length).toBeGreaterThan(0);
-    expect(getByText(/Awards/i)).toBeInTheDocument();
+    // Scoped like the Home link above: a project screenshot caption now
+    // also contains "Awards", so the bare text matcher is ambiguous.
+    expect(getByRole("heading", { name: /Awards/i })).toBeInTheDocument();
     expect(getByText(/Crafted with/i)).toBeInTheDocument();
   });
 });

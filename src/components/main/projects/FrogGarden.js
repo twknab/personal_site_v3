@@ -5,20 +5,41 @@ import Image from "react-bootstrap/Image";
 import Row from "react-bootstrap/Row";
 import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
 import frogGardenIco from "../../../assets/images/apps/froggarden-ico.png";
+import focusMode from "../../../assets/images/projects/froggarden/focus-mode.png";
+import garden from "../../../assets/images/projects/froggarden/garden.png";
+import options from "../../../assets/images/projects/froggarden/options.png";
+import taskList from "../../../assets/images/projects/froggarden/task-list.png";
+import tropicPunch from "../../../assets/images/projects/froggarden/tropic-punch.png";
+import ProjectGallery from "./ProjectGallery";
 
 const REPO = "https://github.com/twknab/zen-frog-todo";
 const LIVE = "https://zenfrog.netlify.app";
 
+// The app ships eighteen palettes, so three of the most distinct lead --
+// the range is the feature. Captured from the running app with the same
+// seeded tasks, so the only thing changing between them is the theme.
+// Captured from a seeded garden: a full day's work grown into the tree, so
+// the canopy is mature, the frogs have gathered, and the sand is actually
+// raked -- the strokes are drawn with real pointer input, not faked.
+const SHOTS = [
+  { src: garden, alt: "A day's work grown: full canopy, frogs, raked sand" },
+  { src: tropicPunch, alt: "The same garden in Tropic Punch" },
+  { src: options, alt: "Palette, contrast and density, in Mirrorball" },
+  { src: focusMode, alt: "A focus session" },
+  { src: taskList, alt: "The day's tasks" },
+];
+
 function FrogGarden() {
   return (
-    <div>
+    <div className="project-block">
       <Row className="project-row">
         <Col
           md="3"
           className="project-col tilt"
           onClick={() => window.open(REPO, "_blank")}
         >
-          <Image src={frogGardenIco.src} className="project-icon" rounded fluid />
+          <Image src={frogGardenIco.src} className="project-icon"
+            alt="" rounded fluid />
         </Col>
         <Col md="9">
           <h3>Frog Garden</h3>
@@ -96,6 +117,7 @@ function FrogGarden() {
           </Button>
         </Col>
       </Row>
+      <ProjectGallery images={SHOTS} projectName="Frog Garden" />
     </div>
   );
 }

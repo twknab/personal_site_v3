@@ -1256,6 +1256,322 @@ navbar-nav .dropdown-menu {
 .project-icon {
   width: 150px;
   height: 150px;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.project-block {
+  margin-bottom: 2.25rem;
+  padding: 1.25rem 1rem 1.5rem;
+  border-radius: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.02);
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease,
+    border-color 0.35s ease,
+    background-color 0.35s ease;
+
+  &:hover,
+  &:focus-within {
+    transform: translateY(-4px);
+    border-color: rgba($themeTurquoise, 0.35);
+    background: rgba(255, 255, 255, 0.04);
+    box-shadow: 0 18px 40px -24px rgba(0, 0, 0, 0.85),
+      0 0 0 1px rgba($themeTurquoise, 0.12);
+
+    .project-icon {
+      transform: scale(1.04) rotate(-1.5deg);
+      box-shadow: 0 12px 28px -14px rgba($themeTurquoise, 0.55);
+    }
+  }
+}
+
+// Screenshot strip under each project — gallery cards, not a dense grid dump.
+.project-gallery {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(132px, 132px));
+  gap: 12px;
+  margin: 0.5rem 0 0;
+  padding: 0.35rem 0.35rem 0;
+  justify-content: start;
+}
+
+.project-gallery-card {
+  width: 132px;
+  min-width: 132px;
+}
+
+.project-gallery-frame {
+  position: relative;
+  display: block;
+  width: 132px;
+  height: 132px;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  background: #0b0f15;
+  cursor: zoom-in;
+  text-align: left;
+  box-shadow: $shadow-soft;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    object-position: center top;
+    transition: transform 0.45s ease;
+  }
+
+  &:hover,
+  &:focus-visible {
+    transform: translateY(-6px);
+    border-color: rgba($themeVibrantYellowGreenLight, 0.55);
+    box-shadow: $shadow-lift, 0 0 28px -12px rgba($themeTurquoise, 0.55);
+    outline: none;
+
+    img {
+      transform: scale(1.08);
+    }
+  }
+}
+
+// The lightbox. Full-bleed dark surface; the screenshot is the content, so
+// everything else stays out of its way.
+.project-lightbox {
+  position: fixed;
+  inset: 0;
+  // Above every other fixed layer on the site: the scroll-progress bar is at
+  // 10001, the confetti overlay at 10000, the cursor trail at 9998. At 2000
+  // this dialog rendered underneath all three.
+  z-index: 10100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(6, 8, 12, 0.88);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  animation: projectLightboxIn 160ms ease-out;
+}
+
+.project-lightbox-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  // Sized by its content rather than a fixed width, so a tall phone
+  // screenshot and a wide desktop one each get a panel that fits them.
+  width: auto;
+  max-width: min(1200px, 100%);
+  max-height: 100%;
+  padding: 14px;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: #121820;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.55);
+}
+
+.project-lightbox-bar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+// Caption and position, under the screenshot where a caption belongs.
+.project-lightbox-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  text-align: center;
+}
+
+.project-lightbox-title {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.35;
+  color: $themeVibrantYellowGreenLight;
+}
+
+.project-lightbox-stage {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  // Takes whatever height is left once the close bar and caption have taken
+  // theirs. `min-height: 0` is what lets a flex item shrink below its content,
+  // and without it the image simply overflowed onto the caption.
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+// The whole point of the gallery. The screenshot is bounded by the viewport on
+// both axes and scaled down to fit, so it is never cropped and never makes the
+// panel scroll -- the application is visible in one look.
+.project-lightbox-image {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  // A viewport fraction, not a percentage of the stage. A percentage would
+  // resolve against a parent whose own height is only a max, which makes it
+  // compute to `none` -- that is how the image ended up overlapping the
+  // caption and running off the bottom of the screen. Leaving the rest of the
+  // viewport free means the panel always has room for the caption beneath.
+  max-height: 72vh;
+  object-fit: contain;
+  border-radius: 12px;
+  background: #0b0f15;
+}
+
+.project-lightbox-counter {
+  margin: 0;
+  text-align: center;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.78rem;
+  opacity: 0.75;
+}
+
+.project-lightbox-nav,
+.project-lightbox-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  // Comfortably past the 44px minimum touch target on every side.
+  width: 46px;
+  height: 46px;
+  padding: 0;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(18, 24, 32, 0.86);
+  color: #fff;
+  font-size: 17px;
+  cursor: pointer;
+  transition: background-color 0.18s ease, border-color 0.18s ease,
+    transform 0.18s ease;
+
+  &:hover,
+  &:focus-visible {
+    border-color: rgba($themeTurquoise, 0.7);
+    background: rgba($themeTurquoise, 0.22);
+    outline: none;
+  }
+
+  &:focus-visible {
+    outline: 2px solid rgba($themeTurquoise, 0.9);
+    outline-offset: 2px;
+  }
+}
+
+// The arrows float over the screenshot so the image keeps the full width of
+// the panel instead of surrendering it to a pair of gutters.
+.project-lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+
+  &.is-prev {
+    left: 10px;
+  }
+
+  &.is-next {
+    right: 10px;
+  }
+
+  &:hover {
+    transform: translateY(-50%) scale(1.06);
+  }
+}
+
+@keyframes projectLightboxIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+// On a phone the arrows would sit over the middle of the screenshot, so they
+// drop below it and the swipe gesture becomes the primary way to move.
+@media (max-width: 575.98px) {
+  .project-lightbox {
+    padding: 10px;
+  }
+
+
+  .project-lightbox-image {
+    max-height: 58vh;
+  }
+
+  .project-lightbox-nav {
+    position: static;
+    transform: none;
+
+    &:hover {
+      transform: none;
+    }
+  }
+
+  .project-lightbox-stage {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .project-lightbox-nav.is-prev {
+    order: 2;
+  }
+
+  .project-lightbox-nav.is-next {
+    order: 3;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .project-gallery {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+    padding-bottom: 8px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .project-gallery-card {
+    flex: 0 0 132px;
+    width: 132px;
+    scroll-snap-align: start;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-block,
+  .project-block .project-icon,
+  .project-gallery-frame,
+  .project-gallery-frame img {
+    transition: none;
+  }
+
+  .project-block:hover,
+  .project-block:focus-within,
+  .project-gallery-frame:hover,
+  .project-gallery-frame:focus-visible {
+    transform: none;
+  }
+
+  .project-gallery-frame:hover img,
+  .project-gallery-frame:focus-visible img {
+    transform: none;
+  }
 }
 
 // *********************
@@ -3643,11 +3959,14 @@ a.tech-badge {
   }
 }
 
-// Stacks under the copyright on small screens, centered with it.
+// Stacks under the copyright on small screens, centered with it. Stacking
+// also makes it the last thing in the footer, where it sat hard against the
+// bottom edge -- hence the breathing room underneath.
 @media (max-width: 991px) {
   .last-commit {
     justify-content: center;
     margin-top: 8px;
+    margin-bottom: 18px;
   }
 }
 

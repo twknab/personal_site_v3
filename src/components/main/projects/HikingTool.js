@@ -5,19 +5,32 @@ import Image from "react-bootstrap/Image";
 import Row from "react-bootstrap/Row";
 import { FaGithub } from "react-icons/fa";
 import hikingToolIco from "../../../assets/images/apps/hikingtool-ico.png";
+import addHike from "../../../assets/images/projects/hikingtool/add-hike.png";
+import allHikes from "../../../assets/images/projects/hikingtool/all-hikes.png";
+import dashboard from "../../../assets/images/projects/hikingtool/dashboard.png";
+import viewHike from "../../../assets/images/projects/hikingtool/view-hike.png";
+import ProjectGallery from "./ProjectGallery";
+
+const REPO = "https://github.com/twknab/mean_hike";
+
+const SHOTS = [
+  { src: dashboard, alt: "Hiking dashboard" },
+  { src: viewHike, alt: "Completed hike with trip reports" },
+  { src: addHike, alt: "Add a new hike" },
+  { src: allHikes, alt: "All hikes list" },
+];
 
 function HikingTool() {
   return (
-    <div>
+    <div className="project-block">
       <Row className="project-row">
         <Col
           md="3"
           className="project-col tilt"
-          onClick={() =>
-            window.open("https://github.com/twknab/mean_hike", "_blank")
-          }
+          onClick={() => window.open(REPO, "_blank")}
         >
-          <Image src={hikingToolIco.src} className="project-icon" rounded fluid />
+          <Image src={hikingToolIco.src} className="project-icon"
+            alt="" rounded fluid />
         </Col>
         <Col md="9">
           <h3>HikingTool</h3>
@@ -64,7 +77,7 @@ function HikingTool() {
           <Button
             variant="primary"
             size="lg"
-            href="https://github.com/twknab/mean_hike"
+            href={REPO}
             target="_blank"
             rel="noopener noreferrer"
             className="project-btn"
@@ -74,6 +87,7 @@ function HikingTool() {
           </Button>
         </Col>
       </Row>
+      <ProjectGallery images={SHOTS} projectName="HikingTool" />
     </div>
   );
 }

@@ -5,19 +5,36 @@ import Image from "react-bootstrap/Image";
 import Row from "react-bootstrap/Row";
 import { FaGithub } from "react-icons/fa";
 import gearListIco from "../../../assets/images/apps/gearlist-ico.png";
+import about from "../../../assets/images/projects/gearlist/about.png";
+import addItem from "../../../assets/images/projects/gearlist/add-item.png";
+import dashboard from "../../../assets/images/projects/gearlist/dashboard.png";
+import gearListShot from "../../../assets/images/projects/gearlist/gear-list.png";
+import login from "../../../assets/images/projects/gearlist/login.png";
+import ProjectGallery from "./ProjectGallery";
+
+const REPO = "https://github.com/twknab/gear_list_MEVN";
+
+// Captured from the running app against a seeded database, so the weights
+// and totals on screen are the app's own arithmetic rather than mock text.
+const SHOTS = [
+  { src: dashboard, alt: "Gear lists with their total weights" },
+  { src: gearListShot, alt: "Inside a list, item by item" },
+  { src: addItem, alt: "Adding a piece of gear" },
+  { src: about, alt: "What the app is for" },
+  { src: login, alt: "Signing in" },
+];
 
 function GearList() {
   return (
-    <div>
+    <div className="project-block">
       <Row className="project-row">
         <Col
           md="3"
           className="project-col tilt"
-          onClick={() =>
-            window.open("https://github.com/twknab/gear_list_MEVN", "_blank")
-          }
+          onClick={() => window.open(REPO, "_blank")}
         >
-          <Image src={gearListIco.src} className="project-icon" rounded fluid />
+          <Image src={gearListIco.src} className="project-icon"
+            alt="" rounded fluid />
         </Col>
         <Col md="9">
           <h3>GearList</h3>
@@ -70,7 +87,7 @@ function GearList() {
           <Button
             variant="primary"
             size="lg"
-            href="https://github.com/twknab/gear_list_MEVN"
+            href={REPO}
             target="_blank"
             rel="noopener noreferrer"
             className="project-btn"
@@ -80,6 +97,7 @@ function GearList() {
           </Button>
         </Col>
       </Row>
+      <ProjectGallery images={SHOTS} projectName="GearList" />
     </div>
   );
 }
