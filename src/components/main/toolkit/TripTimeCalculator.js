@@ -96,7 +96,7 @@ const WIND_DIRECTIONS = [
   { value: "tail", label: "Tail" },
 ];
 
-// One control per question: a labelled row of mutually exclusive buttons.
+// One control per question: a labeled row of mutually exclusive buttons.
 // Radios in trench coats — aria-pressed carries the state to screen readers.
 function Segmented({ label, options, value, onChange }) {
   return (
@@ -530,7 +530,7 @@ const MODES = [
 
 const DISCLAIMERS = {
   hiking:
-    "Estimates are for education and rough planning only. Trails, weather, and fitness vary — carry the Ten Essentials and your own judgement.",
+    "Estimates are for education and rough planning only. Trails, weather, and fitness vary — carry the Ten Essentials and your own judgment.",
   kayaking:
     "Estimates are for education only — not navigation or safety advice. Wind, waves, and tide behave locally and change fast: check the marine forecast and current tables, file a float plan, and dress for the water.",
 };

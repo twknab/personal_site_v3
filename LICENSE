@@ -1,0 +1,41 @@
+Copyright (c) 2021-2026 Tim Knab. All rights reserved.
+
+This repository contains the source code, design, written content, and
+assets of timknab.dev, a personal portfolio site. It is published publicly
+so the work can be read, referenced, and learned from. Publishing it does
+not place it in the public domain and does not grant an open source
+license.
+
+PERMITTED
+
+  - Viewing, reading, and cloning this repository.
+  - Referring to it, quoting short excerpts with attribution, and learning
+    from the techniques and approaches demonstrated here.
+  - Running it locally for the purpose of evaluating or understanding it.
+
+NOT PERMITTED WITHOUT PRIOR WRITTEN PERMISSION
+
+  - Republishing this site, or a substantially similar site, in whole or in
+    part.
+  - Reusing the written content, personal biography, photographs, project
+    descriptions, reading list, or other personal material.
+  - Reusing the visual design, layout, or branding as the basis of another
+    person's or organization's site.
+  - Any commercial use.
+
+THIRD-PARTY MATERIAL
+
+This repository depends on third-party packages, and includes third-party
+assets such as book cover images and technology logos. Those remain the
+property of their respective owners and are governed by their own licenses
+and terms, not by this one. Nothing here grants any right to them.
+
+NO WARRANTY
+
+This software is provided "as is", without warranty of any kind, express or
+implied, including but not limited to the warranties of merchantability,
+fitness for a particular purpose, and noninfringement. In no event shall the
+author be liable for any claim, damages, or other liability arising from,
+out of, or in connection with the software or its use.
+
+For permission requests, contact the author via the links on timknab.dev.

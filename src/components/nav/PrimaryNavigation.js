@@ -82,6 +82,12 @@ function PrimaryNavigation() {
                   Projects
                 </NavDropdown.Item>
                 <NavDropdown.Item
+                  onClick={() => handleNavClick("how-i-build")}
+                  active={activeItem === "how-i-build"}
+                >
+                  How I Build
+                </NavDropdown.Item>
+                <NavDropdown.Item
                   onClick={() => handleNavClick("toolkit")}
                   active={activeItem === "toolkit"}
                 >
