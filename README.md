@@ -120,27 +120,27 @@ Standing constraints live alongside them as **rules**, mirrored the same way:
 
 | Rule | Constraint |
 | --- | --- |
-| `full-bleed-layout` | Only the header and footer run full width; every content section is capped at 2000px and centred. |
+| `full-bleed-layout` | Only the header and footer run full width; every content section is capped at 2000px and centered. |
+| `site-versioning` | When to bump the site version shown in the footer. Judged by what a visitor would notice, not by diff size. |
 
 **The convention:** any change to a skill or rule updates *both* copies in the same commit. Only the wrapper differs — a `> Mirrors …` blockquote on the Claude side, YAML frontmatter on the Cursor side. Parity checks for both live in the `skills-sync` skill.
 
-## Roadmap & Ideas
+## Roadmap
 
-**Next up** (in planned order — see the linked issues for full specs)
-- [x] Migrate to Next.js 14 + React 18 ([#76](https://github.com/twknab/personal_site_v3/issues/76)) — the foundation for everything below.
-- [ ] **Recently shipped** — a live GitHub activity strip, server-fetched with ISR caching ([#78](https://github.com/twknab/personal_site_v3/issues/78)).
-- [ ] **Reading list upgrade** — per-book takeaways, topic filter chips, and a stats line ([#79](https://github.com/twknab/personal_site_v3/issues/79)).
-- [ ] **Ask Tim** — an AI chat agent grounded exclusively in this site's content, powered by Vertex AI (Gemini) behind a server route ([#77](https://github.com/twknab/personal_site_v3/issues/77)).
-- [ ] Bump Next.js 14 → 15/16 and React 19 once `lottie-react` / `react-scroll` peer ranges allow, clearing the remaining npm audit advisories ([#80](https://github.com/twknab/personal_site_v3/issues/80)).
+Planned work lives on the board and in the issues, not in this file — a
+roadmap kept in a README goes stale the moment anything is reprioritized.
 
-**Future work**
-- [ ] **Adventure map** — an interactive Washington trail map (Leaflet/MapLibre) of hikes and paddles, merging the engineering + environmental-science identities.
-- [ ] "Book a call" — a toggleable [Calendly](https://calendly.com/) scheduling widget that can be switched on/off.
-- [ ] Tie in creative projects — feature the **Adventures with TK** YouTube channel (latest videos / embed).
-- [ ] Blog section — articles on coding challenges and the dev soft-skills journey.
-- [ ] Animated intro / loading screen.
-- [ ] Interactive widgets or small JS games.
-- [ ] Hand-drawn illustrations as section accents and an end-of-page flourish.
+- **[Project board](https://github.com/users/twknab/projects/2)** — what's
+  queued, in progress, and done, with priority.
+- **[Issues](https://github.com/twknab/personal_site_v3/issues)** — the specs
+  themselves. Each substantive issue carries its own scope and acceptance
+  criteria.
+
+## License
+
+All rights reserved — see [LICENSE](./LICENSE). The repository is public so
+the work can be read and learned from; the content, design and personal
+material are not licensed for reuse.
 
 ---
 

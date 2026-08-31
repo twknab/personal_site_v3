@@ -13,13 +13,6 @@
 // (see Reading.js).
 export const currentlyReading = [
   {
-    slug: "clean-craftsmanship",
-    author: "Martin, Robert C.",
-    title: "Clean Craftsmanship: Disciplines, Standards, and Ethics",
-    publisher: "Addison-Wesley Professional",
-    year: 2021,
-  },
-  {
     slug: "navigation-sea-state-weather",
     author: "Pardy, Michael, JF Marleau, Andrew Woodford and Piper Harris",
     title:
@@ -36,6 +29,13 @@ export const readingByYear = [
   {
     year: 2026,
     books: [
+      {
+        slug: "clean-craftsmanship",
+        author: "Martin, Robert C.",
+        title: "Clean Craftsmanship: Disciplines, Standards, and Ethics",
+        publisher: "Addison-Wesley Professional",
+        year: 2021,
+      },
       {
         slug: "maxalding",
         author: "Saldo, Monte",

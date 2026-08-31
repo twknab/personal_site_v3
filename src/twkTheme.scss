@@ -68,6 +68,17 @@ $shadow-lift: 0 22px 50px -18px rgba(0, 0, 0, 0.6), 0 6px 14px -8px rgba(0, 0, 0
 // Full-viewport fixed grain overlay for tactile, modern texture.
 .App {
   position: relative;
+  // The page must never scroll sideways. Individual causes get fixed at the
+  // source, but one stray element should not be able to break the viewport for
+  // the whole site, so this is a backstop.
+  //
+  // `clip`, not `hidden`, and the difference matters: `hidden` makes this a
+  // scroll container, which would break the sticky navigation inside it and
+  // silently swallow programmatic scrolling. `clip` clips without creating
+  // one, so sticky still resolves against the viewport.
+  //
+  // This is a guard, not a licence to leave overflow unfixed -- see #115.
+  overflow-x: clip;
 }
 
 .App::after {
@@ -203,7 +214,7 @@ code {
   // block — the tops of the letterforms stay clear, which is what keeps 25 of
   // these from turning back into wallpaper.
   //
-  // Third pass tunes the colour rather than the geometry. The old #dbe45c was
+  // Third pass tunes the color rather than the geometry. The old #dbe45c was
   // a muted olive-lime that sat too close to the hero's own yellow-green
   // backdrop, so the swipe read as a slightly different shade of background
   // instead of as ink. It now runs electric lime into a deeper chartreuse,
@@ -487,6 +498,10 @@ navbar-nav .dropdown-menu {
 // PROFESSIONAL SUMMARY
 // *********************
 .professional-summary {
+  // Both for the particle canvas: `relative` gives it something to size and
+  // position against, `hidden` keeps it inside the rounded bottom corners.
+  position: relative;
+  overflow: hidden;
   color: $themeDarkBackground;
   border-top: 20px solid #d8e052;
   border-bottom: 20px solid #c2c76b;
@@ -501,6 +516,26 @@ navbar-nav .dropdown-menu {
     url("./assets/images/axiom-bg-pattern.png");
 }
 
+// The particle field. Fills the welcome panel and stays out of the way of
+// everything in front of it.
+.welcome-particles {
+  position: absolute;
+  // `inset` alone stretches it to the host's padding box. A `width`/`height`
+  // of 100% would fight the pixel dimensions the component sets to match the
+  // display's pixel ratio.
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+// The row's columns are static by default, which would let the positioned
+// canvas paint over them. Lifting them puts the portrait, the copy and the
+// social links back in front of the field.
+.professional-summary > [class*="col-"] {
+  position: relative;
+  z-index: 1;
+}
+
 .professional-summary-description {
   height: 100%;
   margin-top: auto;
@@ -511,8 +546,8 @@ navbar-nav .dropdown-menu {
 // The portrait column stretches to the full row height (flex default), but its
 // contents sat at the top, so the medallion rode high against the taller text
 // column. Centring the column's own contents keeps it on the row's midline at
-// any text length, and align-items keeps it horizontally centred once the
-// columns stack on mobile — which is the behaviour that was already correct.
+// any text length, and align-items keeps it horizontally centered once the
+// columns stack on mobile — which is the behavior that was already correct.
 .bio-photo-col {
   display: flex;
   flex-direction: column;
@@ -590,11 +625,11 @@ navbar-nav .dropdown-menu {
 //
 // Hovering the portrait does three things at once: the golden ring drops from
 // an 8s idle rotation to a 1.4s sprint, the photo turns a full circle and
-// swells slightly at the halfway point, and a ring of coloured sparks flies
+// swells slightly at the halfway point, and a ring of colored sparks flies
 // outward and fades.
 //
-// The spark ring is a single 10px element at the centre carrying eight
-// coloured box-shadows placed around a circle; scaling and rotating that one
+// The spark ring is a single 10px element at the center carrying eight
+// colored box-shadows placed around a circle; scaling and rotating that one
 // element throws all eight outward together, which is far cheaper than eight
 // animated nodes. It sits above the photo and is pointer-events: none, so it
 // never interrupts the hover it is reacting to.
@@ -868,11 +903,11 @@ navbar-nav .dropdown-menu {
 // Both the artwork row and the chip row carry .stacks, so while the gradients
 // sat on .stacks each row painted its own copy relative to its own box: the
 // green glow landed at the artwork row's bottom-right and the turquoise glow
-// restarted at the chip row's top-centre, leaving a hard band across the seam.
+// restarted at the chip row's top-center, leaving a hard band across the seam.
 // Painting once on the wrapper lets the mesh flow through the whole section.
 .stacks-section {
   // Only the header and footer are ever full-bleed. Every content section is
-  // capped and centred — `.row` does that via max-width + auto margins, and
+  // capped and centered — `.row` does that via max-width + auto margins, and
   // this wrapper replaced two `.row`s, so it has to carry the same cap or the
   // section bleeds past its neighbours on wide displays (185px each side at
   // 2400px before this was added).
@@ -954,7 +989,7 @@ navbar-nav .dropdown-menu {
 
 // Vector chips for the current frameworks, sharing the footer badge language
 // (mono label, small radius, lifted on hover) but inverted for the stacks
-// section's light background: pale card, dark text, brand-coloured glyph.
+// section's light background: pale card, dark text, brand-colored glyph.
 // The chip row becomes the section's bottom edge, and the artwork row above
 // hands its border and radius over, so the two render as one continuous card
 // rather than two stacked ones with a seam between them.
@@ -1025,8 +1060,8 @@ navbar-nav .dropdown-menu {
   border-radius: 10px;
   // Two layers: a near-opaque white veil over the technology's own brand
   // gradient. The veil is what keeps the dark label legible — the brand
-  // colours read as a tint rather than a background you have to fight. On
-  // hover the veil thins and the brand colours come forward.
+  // colors read as a tint rather than a background you have to fight. On
+  // hover the veil thins and the brand colors come forward.
   background-image:
     linear-gradient(150deg, rgba(255, 255, 255, 0.87) 0%, rgba(255, 255, 255, 0.7) 100%),
     linear-gradient(150deg, var(--chip-from, #ffffff) 0%, var(--chip-to, #f4f7ea) 100%);
@@ -1041,7 +1076,7 @@ navbar-nav .dropdown-menu {
   transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1),
     box-shadow 0.22s ease, border-color 0.22s ease;
 
-  // Brand-coloured spine down the left edge, so each chip is identifiable
+  // Brand-colored spine down the left edge, so each chip is identifiable
   // before you read it and the row isn't four identical white pills.
   &::before {
     content: "";
@@ -1076,7 +1111,7 @@ navbar-nav .dropdown-menu {
     background-image:
       linear-gradient(150deg, rgba(255, 255, 255, 0.78) 0%, rgba(255, 255, 255, 0.56) 100%),
       linear-gradient(150deg, var(--chip-from, #ffffff) 0%, var(--chip-to, #f4f7ea) 100%);
-    // Lift plus a glow tinted to the chip's own brand colour.
+    // Lift plus a glow tinted to the chip's own brand color.
     box-shadow: 0 10px 20px -8px rgba(0, 0, 0, 0.55),
       0 0 14px -4px var(--chip-accent, transparent);
 
@@ -1097,7 +1132,7 @@ navbar-nav .dropdown-menu {
 .stack-chip-icon {
   flex-shrink: 0;
   font-size: 22px;
-  // Inherits each chip's brand colour from the custom property.
+  // Inherits each chip's brand color from the custom property.
   color: var(--chip-accent, #1d1d1d);
   transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -1186,7 +1221,7 @@ navbar-nav .dropdown-menu {
   }
 
   // Buttons that carry a leading icon. inline-flex keeps the glyph optically
-  // centred against the cap height instead of sitting on the text baseline,
+  // centered against the cap height instead of sitting on the text baseline,
   // and the margin above already spaces multiple buttons on one row.
   .btn.project-btn {
     display: inline-flex;
@@ -2246,7 +2281,8 @@ navbar-nav .dropdown-menu {
 
 // "Copy link to this year" control. Sits beside the chevron in the year
 // heading, stays subtle until hover/focus, and flashes green on copy.
-.reading-link-btn {
+.reading-link-btn,
+.section-link-btn {
   flex-shrink: 0;
   display: inline-flex;
   align-items: center;
@@ -2285,7 +2321,89 @@ navbar-nav .dropdown-menu {
   }
 }
 
-.reading-group-header:hover .reading-link-btn {
+// --- Section headings with a share control ----------------------------
+// The heading becomes a row so the control can sit hard right. The id lives
+// on the heading itself, which is what makes a copied #anchor actually jump.
+.section-heading {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  // Anchored jumps would otherwise land under the sticky nav.
+  scroll-margin-top: 90px;
+}
+
+.section-heading-text {
+  // Deliberately not flex: 1 — the control sits directly after the words it
+  // belongs to. Pushed to the far right it read as unrelated page furniture.
+  min-width: 0;
+}
+
+.section-link-btn {
+  position: relative;
+  // Headings are large; the control should read as a quiet affordance beside
+  // one, not compete with it.
+  align-self: center;
+  font-size: 15px;
+  // Visible at rest rather than hover-only: on a touch screen there is no
+  // hover, and a control nobody can discover is not a feature. Sitting beside
+  // the words rather than at the margin, it can afford to be fainter.
+  opacity: 0.45;
+
+  // Tooltip.
+  &::after {
+    content: attr(data-tip);
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%) translateY(3px);
+    z-index: 5;
+    padding: 5px 9px;
+    border-radius: 6px;
+    background: rgba(12, 10, 20, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    color: #ffffff;
+    font-family: var(--font-body), system-ui, sans-serif;
+    font-size: 11.5px;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 1.3;
+    white-space: nowrap;
+    text-transform: none;
+    text-shadow: none;
+    // `display: none` rather than opacity alone. An absolutely positioned
+    // tooltip is still part of its ancestors' scrollable overflow even while
+    // invisible, and this one is ~106px wide on a 34px button. That inflated
+    // every heading it sits in and leaked past the right edge of the viewport,
+    // putting real horizontal scroll on the page. `allow-discrete` plus
+    // `@starting-style` keeps the fade; browsers without them simply show the
+    // tooltip without one.
+    display: none;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.16s ease, transform 0.16s ease,
+      display 0.16s allow-discrete;
+  }
+
+  &:hover::after,
+  &:focus-visible::after {
+    display: block;
+    opacity: 1;
+    transform: translateX(-50%);
+
+    @starting-style {
+      opacity: 0;
+      transform: translateX(-50%) translateY(3px);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section-link-btn::after {
+    transition: none;
+  }
+}
+
+.reading-group-header:hover .section-link-btn {
   opacity: 0.85;
 }
 
@@ -2705,3 +2823,837 @@ a.tech-badge {
 // Google Fonts are loaded via <link> in app/layout.js, not here: CSS requires
 // @import to precede all other rules, and these sat at the bottom of the file.
 @import "bootstrap/scss/bootstrap.scss";
+
+// *********************
+// HOW I BUILD
+// *********************
+//
+// No wrapper div: this section is a `.row`, which inherits the 2000px cap and
+// auto margins from the global rule. A wrapper would silently drop that and
+// bleed past its neighbours above 2000px — invisible at desktop widths, which
+// is exactly how it shipped once before (see .claude/rules/full-bleed-layout.md).
+.how-i-build {
+  border-bottom: 20px solid #2b2440;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  background-color: #1f1b2e;
+  background-image:
+    radial-gradient(at 12% 0%, rgba($themeTurquoise, 0.22) 0px, transparent 52%),
+    radial-gradient(at 88% 100%, rgba($themePurple, 0.42) 0px, transparent 55%),
+    url("./assets/images/dark-dot-bg-pattern.png");
+}
+
+.hib-intro {
+  max-width: 68ch;
+  opacity: 0.92;
+}
+
+.hib-stages {
+  list-style: none;
+  margin: 1rem 0 0;
+  padding: 0;
+}
+
+.hib-stage {
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+
+  &:last-child {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+  }
+}
+
+.hib-stage-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  width: 100%;
+  // Comfortable thumb target; the row is taller than this in practice.
+  min-height: 44px;
+  padding: 16px 4px;
+  background: none;
+  border: 0;
+  text-align: left;
+  color: inherit;
+  cursor: pointer;
+  transition: background 0.2s ease;
+
+  &:hover,
+  &:focus-visible {
+    background: rgba(255, 255, 255, 0.05);
+  }
+}
+
+.hib-stage-index {
+  flex-shrink: 0;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 13px;
+  padding-top: 4px;
+  color: $themeVibrantYellowGreen;
+}
+
+.hib-stage-heading {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1 1 auto;
+  // Without this a long summary can force the flex row wider than its column.
+  min-width: 0;
+}
+
+.hib-stage-name {
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-size: 1.05rem;
+  line-height: 1.3;
+}
+
+.hib-stage-summary {
+  font-size: 0.95rem;
+  line-height: 1.45;
+  opacity: 0.82;
+}
+
+.hib-chevron {
+  flex-shrink: 0;
+  margin-top: 6px;
+  transition: transform 0.25s ease;
+
+  &.is-open {
+    transform: rotate(180deg);
+  }
+}
+
+.hib-stage-detail {
+  padding: 0 4px 20px 46px;
+
+  p {
+    max-width: 68ch;
+    padding: 0 0 0.85rem;
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+}
+
+.hib-tools {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0 0 0.9rem;
+  padding: 0;
+}
+
+// Tags, not buttons. The previous chip had a boxy radius and a solid border,
+// which read as something to click; these are lighter, fully rounded and sit
+// back into the surface.
+.hib-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 11px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 11.5px;
+  letter-spacing: 0.3px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.86);
+}
+
+// --- The tag cloud ----------------------------------------------------
+// A snapshot of the stack before any prose, doubling as navigation into the
+// stage that uses each tool.
+.hib-cloud {
+  margin: 0 0 1.3rem;
+}
+
+.hib-cloud-label {
+  display: block;
+  margin-bottom: 8px;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  opacity: 0.6;
+}
+
+.hib-cloud-list {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin: 0;
+  padding: 0;
+}
+
+// The cloud's tags are interactive, so they get affordance the inline ones
+// deliberately do not — but stay tag-shaped rather than becoming buttons.
+.hib-tag-button {
+  cursor: pointer;
+  transition: transform 0.18s ease, background 0.18s ease,
+    border-color 0.18s ease, color 0.18s ease;
+
+  &:hover,
+  &:focus-visible {
+    transform: translateY(-2px);
+    background: rgba($themeVibrantYellowGreen, 0.16);
+    border-color: rgba($themeVibrantYellowGreen, 0.6);
+    color: #ffffff;
+  }
+}
+
+// --- Pipeline diagram -------------------------------------------------
+// Flex rather than a fixed SVG so it reflows: a horizontal run on wide
+// screens, a vertical stack on phones, with the connectors rotating to
+// match. aria-hidden — the stage list below carries the same content.
+.hib-flow-wrap {
+  margin: 1.6rem 0 1.4rem;
+  // The connectors are drawn outside their step, in the gap before the next
+  // one, so a mistake here escapes upward: nothing between this and <body>
+  // clips horizontally, and a stray 17px connector became real page scroll.
+  // `clip`, not `hidden` — it clips without creating a scroll container, and
+  // leaves the vertical axis visible so the loop ring's glow still spills.
+  overflow-x: clip;
+}
+
+.hib-flow {
+  list-style: none;
+  display: flex;
+  // Never wrap. Wrapping broke the five steps into 3 + 2 and left the step
+  // ending the first row with a connector pointing sideways into nothing --
+  // and past the container, which is what put scroll on the page. Below
+  // 768px the media query stacks these into a column instead.
+  flex-wrap: nowrap;
+  align-items: stretch;
+  // The connectors live in this gap and are sized from it, so the two are
+  // driven by one number. Wide enough that a travelling dot has somewhere to
+  // travel — at 10px the connector was too short to read as a line at all.
+  --hib-gap: 18px;
+  gap: var(--hib-gap);
+  margin: 0;
+  padding: 0;
+}
+
+.hib-flow-step {
+  position: relative;
+  flex: 1 1 150px;
+  // Flex items will not shrink below their min-content width unless told to,
+  // which is what forced the wrap above rather than letting the steps narrow.
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 6px;
+  // Deliberately NOT `overflow: hidden`. The connectors sit outside this box
+  // by design, so clipping the box clips them away entirely — which is exactly
+  // what happened when the top bar below was added. The bar is inset instead
+  // of clipped, and the icon's glow gets to spill as a bonus.
+  padding: 18px 12px 16px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(var(--step-accent-rgb, 255, 255, 255), 0.16);
+  box-shadow: inset 0 0 22px -12px var(--step-accent, transparent);
+
+  // A slim bar of the step's own color across the top. Held clear of the
+  // corners so the rounded border never cuts across it; the gradient fades to
+  // transparent at both ends, so the inset is invisible.
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0 10px auto 10px;
+    height: 3px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      var(--step-accent, #ffffff),
+      transparent
+    );
+    opacity: 0.85;
+  }
+
+  // The step the feedback loop returns to. It gets a live conic ring in the
+  // site's full palette — the same trick as the portrait medallion, so the
+  // two read as the same visual language.
+  &.is-loop-target {
+    border-color: transparent;
+    background: rgba(20, 17, 32, 0.86);
+
+    &::after {
+      content: "";
+      position: absolute;
+      inset: -2px;
+      z-index: -1;
+      border-radius: 14px;
+      --ring-angle: 0deg;
+      background: conic-gradient(
+        from var(--ring-angle),
+        #ff2d95,
+        #00d4ff,
+        $themeVibrantYellowGreen,
+        #32efa6,
+        #b026ff,
+        $themeOrange,
+        #ff2d95
+      );
+      box-shadow: 0 0 26px -6px rgba(176, 38, 255, 0.55);
+    }
+  }
+}
+
+// --- The connector between two steps ----------------------------------
+// A rail with a lit dot running along it toward the next box. Rendered as a
+// real element, not a pseudo-element, so it can coexist with the loop
+// target's ring — see the note in `FlowDiagram`.
+.hib-flow-connector {
+  position: absolute;
+  top: 50%;
+  right: calc(var(--hib-gap, 18px) * -1);
+  width: var(--hib-gap, 18px);
+  height: 2px;
+  margin-top: -1px;
+  background: rgba(255, 255, 255, 0.22);
+  pointer-events: none;
+
+  // The dot. Centred with margins rather than a transform so the animation
+  // below owns `transform` outright and has nothing to preserve.
+  &::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 5px;
+    height: 5px;
+    margin: -2.5px 0 0 -2.5px;
+    border-radius: 50%;
+    background: var(--step-accent, #{$themeVibrantYellowGreen});
+    box-shadow: 0 0 9px 1px var(--step-accent, transparent);
+  }
+}
+
+.hib-flow-icon {
+  display: inline-flex;
+  font-size: 28px;
+  color: var(--step-accent, #{$themeVibrantYellowGreen});
+  filter: drop-shadow(0 0 10px var(--step-accent, transparent));
+}
+
+.hib-flow-label {
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.2;
+}
+
+.hib-flow-caption {
+  font-size: 0.78rem;
+  line-height: 1.35;
+  opacity: 0.75;
+}
+
+.hib-flow-loop {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0.85rem 0 0 !important;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+.hib-flow-loop-arrow {
+  flex: 0 0 auto;
+  width: 46px;
+  height: 10px;
+  border-left: 2px solid rgba($themeVibrantYellowGreen, 0.7);
+  border-bottom: 2px solid rgba($themeVibrantYellowGreen, 0.7);
+  border-bottom-left-radius: 8px;
+}
+
+@media (max-width: 767px) {
+  .hib-flow {
+    flex-direction: column;
+  }
+
+  // Connector turns to point downward when the steps stack.
+  .hib-flow-connector {
+    top: auto;
+    right: auto;
+    left: 50%;
+    bottom: calc(var(--hib-gap, 18px) * -1);
+    width: 2px;
+    height: var(--hib-gap, 18px);
+    margin: 0 0 0 -1px;
+
+    &::after {
+      top: 0;
+      left: 50%;
+    }
+  }
+}
+
+// --- The architect note ----------------------------------------------
+.hib-architect {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  max-width: 72ch;
+  padding: 14px 16px !important;
+  border-left: 3px solid $themeVibrantYellowGreen;
+  border-radius: 0 8px 8px 0;
+  background: rgba(255, 255, 255, 0.05);
+  font-size: 0.98rem;
+  line-height: 1.55;
+}
+
+.hib-architect-icon {
+  flex-shrink: 0;
+  font-size: 20px;
+  margin-top: 2px;
+  color: $themeVibrantYellowGreen;
+}
+
+// --- Per-stage icon ---------------------------------------------------
+.hib-stage-icon {
+  flex-shrink: 0;
+  display: inline-flex;
+  font-size: 18px;
+  margin-top: 3px;
+  color: $themeVibrantYellowGreen;
+}
+
+// --- Motion -----------------------------------------------------------
+// All of it keys off `.in-view`, which the scroll-reveal hook adds when the
+// section reaches the viewport, so nothing animates off-screen.
+
+// Steps arrive one after another, left to right, so the eye follows the
+// pipeline in its actual order.
+.how-i-build.in-view .hib-flow-step {
+  animation: hibStepIn 520ms cubic-bezier(0.22, 1, 0.36, 1) backwards;
+}
+
+@for $i from 1 through 5 {
+  .how-i-build.in-view .hib-flow-step:nth-child(#{$i}) {
+    animation-delay: #{($i - 1) * 110}ms;
+
+    // Each dot sets off after its own step has landed, so the flow chases the
+    // entrance down the line instead of all four firing in lockstep.
+    // Linear, not eased: a dot carrying something down a pipeline moves at a
+    // constant rate. Easing made it loiter at both ends and dart through the
+    // middle, which reads as a bouncing bead rather than flow.
+    .hib-flow-connector::after {
+      animation: hibFlowDot 2.4s linear #{($i - 1) * 160 + 700}ms infinite;
+    }
+  }
+}
+
+@keyframes hibStepIn {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+// The dot fades in as it leaves and out as it arrives, so it reads as one
+// thing flowing continuously rather than a bead snapping back to the start.
+@keyframes hibFlowDot {
+  0% {
+    transform: translateX(0);
+    opacity: 0;
+  }
+
+  20%,
+  80% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateX(var(--hib-gap, 18px));
+    opacity: 0;
+  }
+}
+
+// Same travel, rotated, for when the steps stack into a column.
+@keyframes hibFlowDotDown {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+
+  20%,
+  80% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(var(--hib-gap, 18px));
+    opacity: 0;
+  }
+}
+
+// Placed after the @for block above so it wins on order, not specificity.
+@media (max-width: 767px) {
+  .how-i-build.in-view .hib-flow-step .hib-flow-connector::after {
+    animation-name: hibFlowDotDown;
+  }
+}
+
+// The loop arc draws itself once the steps have settled, which is what makes
+// it read as a return path rather than a stray bracket.
+.how-i-build.in-view .hib-flow-loop-arrow {
+  animation: hibLoopIn 600ms cubic-bezier(0.22, 1, 0.36, 1) 760ms backwards;
+}
+
+@keyframes hibLoopIn {
+  from {
+    opacity: 0;
+    transform: translateX(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+// The harness node is the loop's destination, so it breathes gently to say so.
+.how-i-build.in-view .hib-flow-step.is-loop-target::after {
+  animation: hibRingSpin 7s linear 900ms infinite;
+}
+
+@keyframes hibRingSpin {
+  to {
+    --ring-angle: 360deg;
+  }
+}
+
+// Cloud tags settle in after the diagram has drawn.
+.how-i-build.in-view .hib-cloud-list li {
+  animation: hibDetailIn 420ms ease-out backwards;
+}
+
+@for $i from 1 through 24 {
+  .how-i-build.in-view .hib-cloud-list li:nth-child(#{$i}) {
+    animation-delay: #{900 + ($i - 1) * 28}ms;
+  }
+}
+
+// Stage icons lift with their row on hover.
+.hib-stage-header {
+  .hib-stage-icon {
+    transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  &:hover .hib-stage-icon,
+  &:focus-visible .hib-stage-icon {
+    transform: scale(1.18) rotate(-6deg);
+  }
+}
+
+// Detail paragraphs fade up as the panel opens, so expanding feels like
+// content arriving rather than a box changing height.
+.hib-stage-detail > * {
+  animation: hibDetailIn 380ms ease-out backwards;
+}
+
+.hib-stage-detail > *:nth-child(2) {
+  animation-delay: 70ms;
+}
+
+.hib-stage-detail > *:nth-child(3) {
+  animation-delay: 140ms;
+}
+
+@keyframes hibDetailIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+// Everything above is decoration. Drop all of it on request — including the
+// looping pulse and glow, which are the parts that would actually distract.
+@media (prefers-reduced-motion: reduce) {
+  .how-i-build.in-view .hib-flow-step,
+  .how-i-build.in-view .hib-flow-step.is-loop-target,
+  .how-i-build.in-view .hib-flow-step.is-loop-target::after,
+  .how-i-build.in-view .hib-flow-step .hib-flow-connector::after,
+  .how-i-build.in-view .hib-flow-loop-arrow,
+  .how-i-build.in-view .hib-cloud-list li,
+  .hib-stage-detail > * {
+    animation: none !important;
+  }
+
+  .hib-tag-button {
+    transition: none;
+  }
+
+  .hib-stage-header .hib-stage-icon {
+    transition: none;
+  }
+}
+
+// Sits under the heading as a dateline, so the section reads like a brief.
+.hib-revised {
+  padding: 0 0 0.9rem !important;
+  margin-top: -0.4rem;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 11.5px;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  opacity: 0.55;
+}
+
+// The chevron and the collapse are decoration; drop the motion on request.
+@media (prefers-reduced-motion: reduce) {
+  .hib-chevron,
+  .hib-stage-header {
+    transition: none;
+  }
+
+  .how-i-build .collapse,
+  .how-i-build .collapsing {
+    transition: none !important;
+  }
+}
+
+// --- Heading glyphs (experiment) --------------------------------------
+// Vector glyphs replacing the native system emoji. Filled with a per-section
+// gradient from the site palette, so they scale cleanly, look the same on
+// every platform, and match the pipeline diagram and chips rather than
+// carrying Apple's or Google's art direction.
+.section-heading-icon {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  // Tied to the heading's own size so it scales with the fluid type scale
+  // instead of drifting at large and small viewports.
+  font-size: 1.02em;
+  line-height: 1;
+  // A coloured bloom under the glyph as well as the shadow, so the neon in
+  // the gradient reads as light rather than as flat paint. It pulses with the
+  // breath, which is what stops the movement looking like a plain resize.
+  filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.55))
+    drop-shadow(0 0 12px rgba(176, 38, 255, 0.45));
+  animation: headingGlyphGlow 3.8s ease-in-out infinite;
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+// A small lift when its section scrolls in, so the glyph announces itself.
+.reveal.in-view .section-heading-icon,
+.in-view .section-heading-icon {
+  animation: headingGlyphIn 600ms cubic-bezier(0.22, 1, 0.36, 1) backwards;
+}
+
+@keyframes headingGlyphIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px) rotate(-10deg) scale(0.82);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.section-heading:hover .section-heading-icon {
+  transform: rotate(-8deg) scale(1.08);
+}
+
+// The glyphs move enough to read as alive. The first pass was a 5% scale over
+// 5.5s, which was too polite to notice at all. Now a wider swing with a tilt
+// and a shifting glow, on a shorter cycle.
+// It sits on the inner svg rather than the span, because the span already owns
+// the hover transform and an infinite animation there would override it.
+.section-heading-icon svg {
+  animation: headingGlyphBreathe 3.8s ease-in-out infinite;
+}
+
+@keyframes headingGlyphGlow {
+  0%,
+  100% {
+    filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.55))
+      drop-shadow(0 0 10px rgba(176, 38, 255, 0.35));
+  }
+
+  35% {
+    filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.6))
+      drop-shadow(0 0 22px rgba(0, 212, 255, 0.75));
+  }
+}
+
+// Staggered so eleven headings don't move in unison down the page.
+.section-heading:nth-of-type(odd) .section-heading-icon svg,
+.section-heading:nth-of-type(odd) .section-heading-icon {
+  animation-delay: -1.6s;
+}
+
+@keyframes headingGlyphBreathe {
+  0%,
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+
+  30% {
+    transform: scale(1.13) rotate(-4deg);
+  }
+
+  65% {
+    transform: scale(1.04) rotate(3deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal.in-view .section-heading-icon,
+  .in-view .section-heading-icon {
+    animation: none;
+  }
+
+  .section-heading-icon,
+  .section-heading:hover .section-heading-icon {
+    transition: none;
+    transform: none;
+  }
+
+  .section-heading-icon,
+  .section-heading-icon svg {
+    animation: none;
+  }
+}
+
+// --- Tool tags that link out ------------------------------------------
+// A tag with a destination gets its brand mark and a hover state. Tags
+// without one keep the plain treatment, so the row stays visually even.
+.hib-tag-link {
+  gap: 6px;
+  color: rgba(255, 255, 255, 0.9) !important;
+  text-decoration: none;
+  transition: background 0.18s ease, border-color 0.18s ease,
+    transform 0.18s ease, color 0.18s ease;
+
+  &:hover,
+  &:focus-visible {
+    transform: translateY(-1px);
+    background: rgba($themeVibrantYellowGreen, 0.16);
+    border-color: rgba($themeVibrantYellowGreen, 0.55);
+    color: #ffffff !important;
+    text-decoration: none;
+  }
+}
+
+.hib-tag-icon {
+  flex-shrink: 0;
+  font-size: 13px;
+  opacity: 0.85;
+}
+
+// --- Further reading ---------------------------------------------------
+.hib-further {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  max-width: 72ch;
+  margin-top: 1.4rem;
+  padding: 12px 14px !important;
+  border-left: 3px solid rgba($themeTurquoise, 0.7);
+  border-radius: 0 8px 8px 0;
+  background: rgba(255, 255, 255, 0.04);
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.hib-further-icon {
+  flex-shrink: 0;
+  margin-top: 3px;
+  font-size: 16px;
+  color: $themeTurquoise;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hib-tag-link {
+    transition: none;
+  }
+}
+
+// --- Last commit stamp -------------------------------------------------
+// Bottom right of the footer, opposite the copyright. Gives the page a pulse:
+// a real repo that moved recently, not a brochure last touched years ago.
+.last-commit {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  p {
+    display: inline-flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 0;
+    padding: 0 !important;
+    font-family: var(--font-mono), ui-monospace, monospace;
+    font-size: 11.5px;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.75);
+  }
+
+  a {
+    color: $themeVibrantYellowGreen !important;
+    font-weight: 400 !important;
+
+    &:hover,
+    &:focus-visible {
+      text-decoration: underline;
+    }
+  }
+
+  time {
+    opacity: 0.75;
+  }
+}
+
+// A slow blink, so the stamp reads as a heartbeat rather than a label.
+.last-commit-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: $themeVibrantYellowGreen;
+  box-shadow: 0 0 8px rgba($themeVibrantYellowGreen, 0.9);
+  animation: lastCommitPulse 2.4s ease-in-out infinite;
+}
+
+@keyframes lastCommitPulse {
+  0%,
+  100% {
+    opacity: 0.45;
+    transform: scale(0.85);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+// Stacks under the copyright on small screens, centered with it.
+@media (max-width: 991px) {
+  .last-commit {
+    justify-content: center;
+    margin-top: 8px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .last-commit-dot {
+    animation: none;
+    opacity: 1;
+  }
+}

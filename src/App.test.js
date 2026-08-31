@@ -4,8 +4,11 @@ import App from './App';
 
 describe("App", () => {
   it('successfully renders Homepage', () => {
-    const { getByText, queryAllByText } = render(<App />);
-    expect(getByText(/Home/i)).toBeInTheDocument();
+    const { getByText, queryAllByText, getByRole } = render(<App />);
+    // Scoped to the nav link rather than a bare /Home/i text match: the page
+    // now contains prose using the word "home", which made the loose matcher
+    // ambiguous. The assertion was always meant to be about navigation.
+    expect(getByRole("link", { name: "Home" })).toBeInTheDocument();
     expect(getByText(/Welcome/i)).toBeInTheDocument();
     expect(getByText(/About Me/i)).toBeInTheDocument();
     expect(queryAllByText(/Skills/i).length).toBeGreaterThan(0);

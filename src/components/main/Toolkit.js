@@ -1,6 +1,7 @@
 import React from "react";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
+import SectionHeading from "../common/SectionHeading";
 import { Element } from "react-scroll";
 import TripTimeCalculator from "./toolkit/TripTimeCalculator";
 
@@ -14,12 +15,9 @@ function Toolkit() {
       <Element name="toolkit"></Element>
       <Row className="toolkit">
         <Col lg>
-          <h1>
-            <span role="img" aria-label="toolkit">
-              🧰
-            </span>{" "}
+          <SectionHeading id="toolkit" label="Toolkit">
             Toolkit
-          </h1>
+          </SectionHeading>
           <p className="toolkit-intro">
             Working pieces pulled out of the projects — an estimator you can
             actually run. Less polished than a product, more honest than a

@@ -1,5 +1,8 @@
 import HomeClient from "./HomeClient";
-import { fetchRecentActivity } from "../src/lib/githubActivity";
+import {
+  fetchLastCommit,
+  fetchRecentActivity,
+} from "../src/lib/githubActivity";
 import { getTechStack } from "../src/lib/techStack";
 
 // ISR: the page (and its GitHub activity fetch) regenerates at most hourly.
@@ -8,7 +11,16 @@ import { getTechStack } from "../src/lib/techStack";
 export const revalidate = 3600;
 
 export default async function Page() {
-  const recentActivity = await fetchRecentActivity();
+  const [recentActivity, lastCommit] = await Promise.all([
+    fetchRecentActivity(),
+    fetchLastCommit(),
+  ]);
   const techStack = getTechStack();
-  return <HomeClient recentActivity={recentActivity} techStack={techStack} />;
+  return (
+    <HomeClient
+      recentActivity={recentActivity}
+      techStack={techStack}
+      lastCommit={lastCommit}
+    />
+  );
 }
