@@ -4,7 +4,13 @@ import dynamic from "next/dynamic";
 // Loaded client-side only so the (browser-only) lottie-web engine is never
 // imported until an animation is actually rendered. This keeps it out of
 // server rendering, the jsdom test environment, and the initial bundle.
-const Lottie = dynamic(() => import("lottie-react"), { ssr: false });
+// lottie-react 3 dropped its default export in favour of a named `Lottie`.
+// `dynamic()` hands React whatever the promise resolves to, so without
+// picking the export out here React receives the module object itself and
+// throws "Element type is invalid" — which takes the whole page down.
+const Lottie = dynamic(() => import("lottie-react").then((m) => m.Lottie), {
+  ssr: false,
+});
 
 /**
  * Thin wrapper around lottie-react that renders a Lottie animation, or nothing
