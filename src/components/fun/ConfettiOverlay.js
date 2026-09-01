@@ -5,7 +5,13 @@ import confettiAnimation from "../../assets/lottie/confetti.json";
 // Loaded client-side only: the lottie-web engine is browser-only, so it must
 // stay out of server rendering, the initial bundle, and the jsdom test
 // environment.
-const Lottie = dynamic(() => import("lottie-react"), { ssr: false });
+// lottie-react 3 dropped its default export in favour of a named `Lottie`.
+// `dynamic()` hands React whatever the promise resolves to, so without
+// picking the export out here React receives the module object itself and
+// throws "Element type is invalid" — which takes the whole page down.
+const Lottie = dynamic(() => import("lottie-react").then((m) => m.Lottie), {
+  ssr: false,
+});
 
 /**
  * Full-screen confetti that "rains down" once on page load, then unmounts so it
