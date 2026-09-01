@@ -1533,6 +1533,17 @@ navbar-nav .dropdown-menu {
   letter-spacing: 0.4px;
   text-transform: uppercase;
   color: var(--shipped-accent);
+  // Branch names arrive as one unbroken token -- "7 pushes to
+  // dependabot/npm_and_yarn/next-react-b97610233b" has nowhere ordinary to
+  // break, so without this it runs straight out through the side of the card.
+  // `.shipped-repo` already does this; this line was simply missed.
+  overflow-wrap: anywhere;
+  // And clamped like the commit subject below it, so one long branch cannot
+  // stretch its card taller than the rest of the row.
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 
   @media (min-width: 1200px) {
     font-size: 11px;
