@@ -9,6 +9,9 @@ import confettiAnimation from "../../assets/lottie/confetti.json";
 // `dynamic()` hands React whatever the promise resolves to, so without
 // picking the export out here React receives the module object itself and
 // throws "Element type is invalid" — which takes the whole page down.
+// v3 also renamed the props: the animation goes in as `src`, and event
+// callbacks hang off `subscriptions`; unrecognized props are spread onto the
+// rendered div, so the old names fail silently.
 const Lottie = dynamic(() => import("lottie-react").then((m) => m.Lottie), {
   ssr: false,
 });
@@ -34,10 +37,10 @@ function ConfettiOverlay() {
   return (
     <div className="confetti-overlay" aria-hidden="true">
       <Lottie
-        animationData={confettiAnimation}
+        src={confettiAnimation}
         loop={false}
         autoplay
-        onComplete={() => setFinished(true)}
+        subscriptions={{ complete: () => setFinished(true) }}
         rendererSettings={{ preserveAspectRatio: "xMidYMid slice" }}
         style={{ width: "100%", height: "100%" }}
       />

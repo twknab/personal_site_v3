@@ -8,6 +8,8 @@ import dynamic from "next/dynamic";
 // `dynamic()` hands React whatever the promise resolves to, so without
 // picking the export out here React receives the module object itself and
 // throws "Element type is invalid" — which takes the whole page down.
+// v3 also renamed the props: the animation goes in as `src`; unrecognized
+// props are spread onto the rendered div, so the old names fail silently.
 const Lottie = dynamic(() => import("lottie-react").then((m) => m.Lottie), {
   ssr: false,
 });
@@ -42,7 +44,7 @@ function LottieFigure({
       role="img"
       aria-label={ariaLabel}
     >
-      <Lottie animationData={animationData} loop={loop} autoplay={autoplay} />
+      <Lottie src={animationData} loop={loop} autoplay={autoplay} />
     </div>
   );
 }
