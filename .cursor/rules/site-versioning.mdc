@@ -5,7 +5,14 @@ alwaysApply: true
 
 # Site versioning
 
-The version in `package.json` is not internal bookkeeping. It is rendered to visitors as a badge in the footer, generated from that file by `src/lib/techStack.js`, so it is a public claim about how current the site is. A version that never moves while the site visibly changes reads worse than showing none at all.
+The version in `package.json` is not internal bookkeeping. Its **major** is
+rendered to visitors as the footer's site badge (`v5`), generated from that file
+by `src/lib/techStack.js`, so it is a public claim about which generation of the
+site this is. The badge deliberately shows the major alone — the site is a
+website, not a library, so `5.1.1` in the footer read as a release number nobody
+asked for. Minor and patch still move in `package.json` and still matter: they
+are the changelog, and the badge picks up a new major automatically when the
+site is next rebuilt.
 
 ## When to bump
 

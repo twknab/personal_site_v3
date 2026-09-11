@@ -99,7 +99,7 @@ function PrimaryFooter({ techStack, lastCommit }) {
                       className="tech-badge-version"
                       style={{ "--badge-accent": "var(--theme-vibrant-yellow-green)" }}
                     >
-                      v{techStack.siteVersion}
+                      v{techStack.siteMajor}
                     </span>
                   </span>
                 </li>
