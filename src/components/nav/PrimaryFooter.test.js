@@ -40,7 +40,7 @@ describe("PrimaryFooter", () => {
 
 describe("PrimaryFooter tech-stack badges", () => {
   const techStack = {
-    siteVersion: "5.0.0",
+    siteMajor: "5",
     nodeMajor: "22",
     badges: [
       { name: "Next.js", version: "14.2.30", url: "https://nextjs.org" },
@@ -54,7 +54,7 @@ describe("PrimaryFooter tech-stack badges", () => {
       (el) => el.textContent
     );
     expect(badges).toEqual([
-      "timknab.devv5.0.0",
+      "timknab.devv5",
       "Next.js14.2.30",
       "React18.3.1",
       "Node22",

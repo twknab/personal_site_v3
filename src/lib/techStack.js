@@ -18,7 +18,9 @@ export function cleanVersion(range) {
 export function getTechStack() {
   const deps = pkg.dependencies || {};
   return {
-    siteVersion: pkg.version,
+    // Major only: the footer chip names a site generation ("v5"), not a
+    // library release — minor/patch stay in package.json for the changelog.
+    siteMajor: pkg.version.split(".")[0],
     // Build-machine Node major (Netlify's build image), e.g. "22".
     nodeMajor: process.version.replace(/^v/, "").split(".")[0],
     badges: Object.entries(DOCS)
