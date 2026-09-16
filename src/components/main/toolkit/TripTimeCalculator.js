@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from "react";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
-import { FaChevronDown, FaHiking, FaUndo } from "react-icons/fa";
+import { FaChevronDown, FaFire, FaHiking, FaUndo } from "react-icons/fa";
 import { GiCanoe } from "react-icons/gi";
 import {
   BOOK_TIME_DEFAULTS,
@@ -9,6 +9,11 @@ import {
   formatDuration,
 } from "./hikingTime";
 import { estimateKayakTime, KAYAK_TIME_DEFAULTS } from "./kayakTime";
+import {
+  estimateStoveFuel,
+  formatGrams,
+  STOVE_FUEL_DEFAULTS,
+} from "./stoveFuel";
 
 const HIKING_PRESETS = [
   { label: "Rattlesnake Ledge", miles: 4, gain: 1160 },
@@ -65,6 +70,33 @@ const HIKING_TUNING = [
   },
 ];
 
+const FUEL_PRESETS = [
+  {
+    label: "Weekend at the lakes",
+    litersPerDay: 1.5,
+    days: 2,
+    elevationFt: 4500,
+    wind: "sheltered",
+    water: "alpine",
+  },
+  {
+    label: "Enchantments core zone",
+    litersPerDay: 2,
+    days: 3,
+    elevationFt: 7000,
+    wind: "breezy",
+    water: "alpine",
+  },
+  {
+    label: "Winter snow camp",
+    litersPerDay: 3,
+    days: 2,
+    elevationFt: 5000,
+    wind: "windy",
+    water: "snow",
+  },
+];
+
 const KAYAK_TUNING = [
   {
     key: "paddleSpeedKn",
@@ -83,6 +115,49 @@ const KAYAK_TUNING = [
     step: 1,
   },
 ];
+
+const FUEL_TUNING = [
+  {
+    key: "gramsPerLiter",
+    label: "Stove baseline",
+    unit: "g/L",
+    min: 8,
+    max: 20,
+    step: 0.5,
+  },
+  {
+    key: "reservePercent",
+    label: "Fuel reserve",
+    unit: "%",
+    min: 0,
+    max: 50,
+    step: 5,
+  },
+];
+
+const STOVE_WIND = [
+  { value: "sheltered", label: "Sheltered" },
+  { value: "breezy", label: "Breezy" },
+  { value: "windy", label: "Windy" },
+];
+
+const WATER_SOURCE_OPTIONS = [
+  { value: "stream", label: "Stream" },
+  { value: "alpine", label: "Alpine" },
+  { value: "snow", label: "Snowmelt" },
+];
+
+const COUNT_WORDS = ["", "one", "two", "three", "four", "five", "six"];
+
+// "one 230 g canister", "two 450 g + one 110 g canisters".
+function describeCanisters(canisters) {
+  if (!canisters.length) return null;
+  const parts = canisters.map(
+    ({ sizeG, count }) => `${COUNT_WORDS[count] || count} ${sizeG} g`
+  );
+  const total = canisters.reduce((sum, c) => sum + c.count, 0);
+  return `${parts.join(" + ")} ${total === 1 ? "canister" : "canisters"}`;
+}
 
 const CURRENT_DIRECTIONS = [
   { value: "against", label: "Against" },
@@ -523,9 +598,204 @@ function KayakingPanel() {
   );
 }
 
+function FuelPanel() {
+  const [litersPerDay, setLitersPerDay] = useState("1.5");
+  const [days, setDays] = useState("2");
+  const [elevationFt, setElevationFt] = useState("5000");
+  const [wind, setWind] = useState("sheltered");
+  const [water, setWater] = useState("stream");
+  const [tuning, setTuning] = useState(STOVE_FUEL_DEFAULTS);
+
+  const result = useMemo(
+    () =>
+      estimateStoveFuel(litersPerDay, days, {
+        ...tuning,
+        elevationFeet: elevationFt,
+        windCondition: wind,
+        waterSource: water,
+      }),
+    [litersPerDay, days, elevationFt, wind, water, tuning]
+  );
+
+  const segments = [
+    { key: "flat", label: "Bringing water to a boil", grams: result.heatGrams },
+    { key: "climb", label: "Wind and exposure", grams: result.windGrams },
+    { key: "rest", label: "Reserve", grams: result.reserveGrams },
+  ].map((seg) => ({
+    ...seg,
+    share: result.totalGrams
+      ? `${(seg.grams / result.totalGrams) * 100}%`
+      : "0%",
+  }));
+
+  const canisterNote = describeCanisters(result.canisters);
+
+  return (
+    <div data-testid="stove-fuel-calculator">
+      <p className="toolkit-card-blurb">
+        The gear-shop rule says a canister stove burns 5&ndash;8 g of gas per
+        half-liter boil. What moves the number is everything around the pot:
+        wind strips heat before it reaches the water, melting snow costs about
+        as much as the boil itself &mdash; and altitude, counterintuitively,
+        makes each boil slightly <em>cheaper</em>, because up high the pot
+        boils before it ever reaches 100&nbsp;&deg;C.
+      </p>
+
+      <Row className="toolkit-calc">
+        <Col md="5" className="toolkit-calc-inputs">
+          <NumberField
+            id="fuel-liters"
+            label="Water boiled per day"
+            unit="L"
+            unitTitle="Liters — 1 L is two 500 mL boils"
+            value={litersPerDay}
+            onChange={setLitersPerDay}
+            step="0.25"
+          />
+          <NumberField
+            id="fuel-days"
+            label="Trip length"
+            unit="days"
+            value={days}
+            onChange={setDays}
+            step="1"
+          />
+          <NumberField
+            id="fuel-elevation"
+            label="Cooking elevation"
+            unit="ft"
+            unitTitle="Boiling point drops about 1 °C per 1,000 ft"
+            value={elevationFt}
+            onChange={setElevationFt}
+            step="500"
+          />
+
+          <div className="toolkit-field">
+            <span className="toolkit-field-label">Wind at the stove</span>
+            <Segmented
+              label="Wind at the stove"
+              options={STOVE_WIND}
+              value={wind}
+              onChange={setWind}
+            />
+          </div>
+
+          <div className="toolkit-field">
+            <span className="toolkit-field-label">Water source</span>
+            <Segmented
+              label="Water source"
+              options={WATER_SOURCE_OPTIONS}
+              value={water}
+              onChange={setWater}
+            />
+          </div>
+
+          <div className="toolkit-presets">
+            <span className="toolkit-presets-label">Try one</span>
+            {FUEL_PRESETS.map((preset) => (
+              <button
+                key={preset.label}
+                type="button"
+                className="toolkit-preset"
+                onClick={() => {
+                  setLitersPerDay(String(preset.litersPerDay));
+                  setDays(String(preset.days));
+                  setElevationFt(String(preset.elevationFt));
+                  setWind(preset.wind);
+                  setWater(preset.water);
+                }}
+              >
+                {preset.label}
+              </button>
+            ))}
+          </div>
+        </Col>
+
+        <Col md="7" className="toolkit-calc-output">
+          <div className="toolkit-result">
+            <span className="toolkit-result-label">Pack about</span>
+            <span className="toolkit-result-value" data-testid="fuel-total">
+              {formatGrams(result.totalGrams)}
+            </span>
+            <span className="toolkit-speed">
+              boils at ≈ {Math.round(result.boilTempC)} °C
+              {canisterNote ? ` · ${canisterNote}` : ""}
+            </span>
+          </div>
+
+          <div
+            className="toolkit-bar"
+            role="img"
+            aria-label={`Boiling ${formatGrams(
+              result.heatGrams
+            )}, wind ${formatGrams(result.windGrams)}, reserve ${formatGrams(
+              result.reserveGrams
+            )}`}
+          >
+            {segments.map(({ key, share }) => (
+              <span
+                key={key}
+                className={`toolkit-bar-seg toolkit-bar-seg--${key}`}
+                style={{ width: share }}
+              />
+            ))}
+          </div>
+
+          <ul className="toolkit-breakdown">
+            {segments.map(({ key, label, grams }) => (
+              <li key={key}>
+                <span className={`toolkit-dot toolkit-dot--${key}`} />
+                <span className="toolkit-breakdown-label">{label}</span>
+                <span className="toolkit-breakdown-value">
+                  {formatGrams(grams)}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </Col>
+      </Row>
+
+      <Tuning
+        idPrefix="ftune"
+        note="14 g per liter is a mid-pack canister stove with a lid on the pot. An integrated system (Jetboil, WindBurner) runs nearer 9; a bare burner with no windscreen nearer 18. The honest way to know yours: boil a measured liter at home and weigh the canister before and after."
+        tuning={tuning}
+        config={FUEL_TUNING}
+        defaults={STOVE_FUEL_DEFAULTS}
+        onChange={(key, value) =>
+          setTuning((prev) =>
+            key === null ? value : { ...prev, [key]: value }
+          )
+        }
+      />
+
+      <p className="toolkit-formula">
+        <code>
+          fuel = liters × {tuning.gramsPerLiter} g/L × (boil − water temp) ÷ 85
+          × wind + {tuning.reservePercent}% reserve
+        </code>
+      </p>
+
+      <p className="toolkit-provenance">
+        Grams round up on purpose — a canister that dies one breakfast early
+        is a worse trip than 40 spare grams. Baseline rule of thumb from{" "}
+        <a
+          href="https://www.rei.com/learn/expert-advice/how-much-stove-fuel.html"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          REI&rsquo;s fuel-planning guide
+        </a>
+        ; the elevation term is the ~1&nbsp;&deg;C of boiling point lost per
+        1,000&nbsp;ft.
+      </p>
+    </div>
+  );
+}
+
 const MODES = [
   { value: "hiking", label: "Hiking", Icon: FaHiking },
   { value: "kayaking", label: "Kayaking", Icon: GiCanoe },
+  { value: "fuel", label: "Fuel", Icon: FaFire },
 ];
 
 const DISCLAIMERS = {
@@ -533,6 +803,7 @@ const DISCLAIMERS = {
     "Estimates are for education and rough planning only. Trails, weather, and fitness vary — carry the Ten Essentials and your own judgment.",
   kayaking:
     "Estimates are for education only — not navigation or safety advice. Wind, waves, and tide behave locally and change fast: check the marine forecast and current tables, file a float plan, and dress for the water.",
+  fuel: "Estimates are for education and rough planning only — not a substitute for knowing your own stove. Pots, lids, flame discipline, and cold canisters all move the number: test your setup at home and carry more than the math says.",
 };
 
 function TripTimeCalculator() {
@@ -541,7 +812,7 @@ function TripTimeCalculator() {
   return (
     <div className="toolkit-card" data-testid="trip-time-calculator">
       <div className="toolkit-card-head">
-        <h3>Trip time estimator</h3>
+        <h3>Trip estimator</h3>
         <span className="toolkit-tag">
           {mode === "hiking" ? "Algorithm · 2017" : "Algorithm · 2026"}
         </span>
@@ -564,7 +835,9 @@ function TripTimeCalculator() {
         </div>
       </div>
 
-      {mode === "hiking" ? <HikingPanel /> : <KayakingPanel />}
+      {mode === "hiking" && <HikingPanel />}
+      {mode === "kayaking" && <KayakingPanel />}
+      {mode === "fuel" && <FuelPanel />}
 
       <p className="toolkit-disclaimer">{DISCLAIMERS[mode]}</p>
     </div>

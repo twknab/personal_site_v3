@@ -135,3 +135,89 @@ describe("Toolkit kayaking mode", () => {
     expect(kayakNote.textContent).toMatch(/not navigation or safety advice/i);
   });
 });
+
+describe("Toolkit fuel mode", () => {
+  const switchToFuel = () => {
+    const btn = Array.from(
+      document.querySelectorAll(".toolkit-mode-btn")
+    ).find((b) => b.textContent.includes("Fuel"));
+    fireEvent.click(btn);
+  };
+
+  const fuelTotal = () =>
+    document.querySelector('[data-testid="fuel-total"]').textContent;
+
+  it("switches to the stove-fuel estimator on the toggle", () => {
+    switchToFuel();
+    expect(
+      document.querySelector('[data-testid="stove-fuel-calculator"]')
+    ).toBeTruthy();
+    expect(
+      document.querySelector('[data-testid="hiking-time-calculator"]')
+    ).toBeNull();
+  });
+
+  it("shows the default worked example on first paint", () => {
+    switchToFuel();
+    // 1.5 L/day × 2 days at 5,000 ft (95 °C boil) from a 15 °C stream:
+    // 3 × 14 × 80/85 ≈ 39.5 g, +20% reserve ≈ 47.4 → rounds up to 48 g,
+    // which fits the smallest canister.
+    expect(fuelTotal()).toBe("48 g");
+    expect(document.querySelector(".toolkit-speed").textContent).toContain(
+      "95 °C"
+    );
+    expect(document.querySelector(".toolkit-speed").textContent).toContain(
+      "one 110 g canister"
+    );
+  });
+
+  it("charges less fuel per boil as elevation rises", () => {
+    switchToFuel();
+    setInput("fuel-elevation", "0");
+    const seaLevel = fuelTotal();
+    setInput("fuel-elevation", "10000");
+    const alpine = fuelTotal();
+    expect(parseInt(alpine, 10)).toBeLessThan(parseInt(seaLevel, 10));
+  });
+
+  it("bills snowmelt and wind hard enough to change the canister", () => {
+    switchToFuel();
+    const snowBtn = Array.from(
+      document.querySelectorAll(".toolkit-seg-btn")
+    ).find((b) => b.textContent === "Snowmelt");
+    const windyBtn = Array.from(
+      document.querySelectorAll(".toolkit-seg-btn")
+    ).find((b) => b.textContent === "Windy");
+    fireEvent.click(snowBtn);
+    fireEvent.click(windyBtn);
+    expect(fuelTotal()).toBe("156 g");
+    expect(document.querySelector(".toolkit-speed").textContent).toContain(
+      "one 230 g canister"
+    );
+  });
+
+  it("applies a preset when its button is clicked", () => {
+    switchToFuel();
+    const preset = Array.from(
+      document.querySelectorAll(".toolkit-preset")
+    ).find((b) => b.textContent === "Winter snow camp");
+    fireEvent.click(preset);
+    expect(document.getElementById("fuel-liters").value).toBe("3");
+    expect(document.getElementById("fuel-days").value).toBe("2");
+    expect(document.getElementById("fuel-elevation").value).toBe("5000");
+  });
+
+  it("survives emptied inputs instead of rendering NaN", () => {
+    switchToFuel();
+    setInput("fuel-liters", "");
+    setInput("fuel-days", "");
+    expect(fuelTotal()).toBe("0 g");
+  });
+
+  it("shows its own education-only disclaimer", () => {
+    switchToFuel();
+    expect(
+      document.querySelector(".toolkit-disclaimer").textContent
+    ).toMatch(/knowing your own stove/i);
+  });
+});
