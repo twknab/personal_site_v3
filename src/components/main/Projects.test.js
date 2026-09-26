@@ -14,7 +14,11 @@ const titles = () =>
 
 describe("Projects", () => {
   it("leads with the newest work", () => {
-    expect(titles().slice(0, 2)).toEqual(["SquirrelStudio", "Frog Garden"]);
+    expect(titles().slice(0, 3)).toEqual([
+      "Mail Digest",
+      "SquirrelStudio",
+      "Frog Garden",
+    ]);
   });
 
   it("keeps the existing projects", () => {
@@ -27,6 +31,14 @@ describe("Projects", () => {
         "Sock It!",
       ])
     );
+  });
+
+  it("links Mail Digest to its repository", () => {
+    const link = document.querySelector(
+      'a[href="https://github.com/twknab/mail-digest"]'
+    );
+    expect(link).toBeTruthy();
+    expect(link.textContent).toMatch(/view on github/i);
   });
 
   it("parks AQI Viewer at the bottom of the list", () => {
