@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="300" height="300"
+     role="img" aria-label="Mail Digest">
+  <defs>
+    <linearGradient id="md-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#23272b"/>
+      <stop offset="1" stop-color="#14171a"/>
+    </linearGradient>
+  </defs>
+  <rect width="300" height="300" rx="70" fill="url(#md-bg)"/>
+  <!-- The envelope is the source; the bars beneath are what survives triage:
+       fewer, shorter, ranked. -->
+  <path d="M66 80h168a14 14 0 0 1 14 14v61a14 14 0 0 1-14 14H66a14 14 0 0 1-14-14V94a14 14 0 0 1 14-14z"
+        fill="none" stroke="#d9d6d1" stroke-width="14" stroke-linejoin="round"/>
+  <path d="M54 96l96 54 96-54" fill="none" stroke="#d9d6d1"
+        stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="76" y="202" width="148" height="16" rx="8" fill="#e09055"/>
+  <rect x="96" y="230" width="108" height="16" rx="8" fill="#e09055" opacity=".7"/>
+  <rect x="120" y="258" width="60"  height="16" rx="8" fill="#e09055" opacity=".45"/>
+</svg>

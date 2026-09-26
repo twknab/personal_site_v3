@@ -7,6 +7,7 @@ import FitnessTracker from "./projects/FitnessTracker";
 import FrogGarden from "./projects/FrogGarden";
 import GearList from "./projects/GearList";
 import HikingTool from "./projects/HikingTool";
+import MailDigest from "./projects/MailDigest";
 import RoamGuru from "./projects/RoamGuru";
 import SockIt from "./projects/SockIt";
 import SquirrelStudio from "./projects/SquirrelStudio";
@@ -23,6 +24,7 @@ function Projects() {
             Projects
           </SectionHeading>
           {/* Newest work first; the older experiments bring up the rear. */}
+          <MailDigest />
           <SquirrelStudio />
           <FrogGarden />
           <RoamGuru />

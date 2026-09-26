@@ -14,7 +14,11 @@ const titles = () =>
 
 describe("Projects", () => {
   it("leads with the newest work", () => {
-    expect(titles().slice(0, 2)).toEqual(["SquirrelStudio", "Frog Garden"]);
+    expect(titles().slice(0, 3)).toEqual([
+      "Mail Digest",
+      "SquirrelStudio",
+      "Frog Garden",
+    ]);
   });
 
   it("keeps the existing projects", () => {
@@ -27,6 +31,15 @@ describe("Projects", () => {
         "Sock It!",
       ])
     );
+  });
+
+  it("describes Mail Digest without claiming it is public", () => {
+    // The repository is private, so the card must not imply a link exists.
+    const card = Array.from(document.querySelectorAll("h3")).find(
+      (h) => h.textContent === "Mail Digest"
+    ).closest("div.row");
+    expect(card.textContent).toMatch(/private development/i);
+    expect(card.querySelector('a[href*="github.com"]')).toBeNull();
   });
 
   it("parks AQI Viewer at the bottom of the list", () => {
