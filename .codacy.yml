@@ -6,10 +6,18 @@
 # Codacy's bundled linters are redundant here — and its ESLint walks into
 # subdirectories that have no config of their own, erroring with
 # "No ESLint configuration found in /src/src/...".
+#
+# JSHint is disabled for the same reason, and because it runs here with no
+# esversion set: it reports every `const` as "available in ES6 (use
+# 'esversion: 6')" and flags the unused `React` import that all nine project
+# components carry. Both are style findings on codebase-wide patterns, and
+# both only ever appear on whichever files a PR happens to touch.
 engines:
   eslint:
     enabled: false
   stylelint:
+    enabled: false
+  jshint:
     enabled: false
 
 exclude_paths:
