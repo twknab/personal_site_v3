@@ -1,14 +1,22 @@
 import React from "react";
+import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Image from "react-bootstrap/Image";
 import Row from "react-bootstrap/Row";
+import { FaGithub } from "react-icons/fa";
 import mailDigestIco from "../../../assets/images/apps/maildigest-ico.svg";
+
+const REPO = "https://github.com/twknab/mail-digest";
 
 function MailDigest() {
   return (
     <div>
       <Row className="project-row">
-        <Col md="3" className="project-col tilt">
+        <Col
+          md="3"
+          className="project-col tilt"
+          onClick={() => window.open(REPO, "_blank")}
+        >
           <Image
             src={mailDigestIco.src}
             alt="Mail Digest app icon"
@@ -72,8 +80,19 @@ function MailDigest() {
               Claude
             </a>{" "}
             doing the triage itself. Runs entirely on one Mac; credentials live
-            in the Keychain and nothing is uploaded. In private development.
+            in the Keychain and nothing is uploaded.
           </p>
+          <Button
+            variant="primary"
+            size="lg"
+            href={REPO}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="project-btn"
+          >
+            <FaGithub aria-hidden="true" />
+            View on GitHub
+          </Button>
         </Col>
       </Row>
     </div>

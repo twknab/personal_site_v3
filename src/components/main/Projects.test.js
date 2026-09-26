@@ -33,13 +33,12 @@ describe("Projects", () => {
     );
   });
 
-  it("describes Mail Digest without claiming it is public", () => {
-    // The repository is private, so the card must not imply a link exists.
-    const card = Array.from(document.querySelectorAll("h3")).find(
-      (h) => h.textContent === "Mail Digest"
-    ).closest("div.row");
-    expect(card.textContent).toMatch(/private development/i);
-    expect(card.querySelector('a[href*="github.com"]')).toBeNull();
+  it("links Mail Digest to its repository", () => {
+    const link = document.querySelector(
+      'a[href="https://github.com/twknab/mail-digest"]'
+    );
+    expect(link).toBeTruthy();
+    expect(link.textContent).toMatch(/view on github/i);
   });
 
   it("parks AQI Viewer at the bottom of the list", () => {
