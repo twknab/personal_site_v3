@@ -3,7 +3,13 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import SectionHeading from "../common/SectionHeading";
 import Scroll from "react-scroll";
-import { GoGitCommit, GoGitMerge, GoRepo, GoTag } from "react-icons/go";
+import {
+  GoGitCommit,
+  GoGitMerge,
+  GoGlobe,
+  GoRepo,
+  GoTag,
+} from "react-icons/go";
 const Element = Scroll.Element;
 
 // Per-kind accent color (CSS var consumed by the card styles) + icon.
@@ -12,6 +18,8 @@ const KIND_STYLES = {
   merge: { accent: "var(--theme-purple)", Icon: GoGitMerge },
   release: { accent: "var(--theme-orange)", Icon: GoTag },
   create: { accent: "var(--theme-green)", Icon: GoRepo },
+  public: { accent: "var(--theme-green)", Icon: GoGlobe },
+  repo: { accent: "var(--theme-orange)", Icon: GoRepo },
 };
 
 // Live GitHub activity strip (#78). Items are fetched and cached server-side;
@@ -32,13 +40,14 @@ function RecentlyShipped({ items }) {
               <span className="shipped-live-dot" aria-hidden="true"></span>
               live
             </span>
-            Commits, merges, and releases — straight from my public GitHub
-            activity.
+            Commits, merges, releases, and newly public repos — one card per
+            project, straight from my public GitHub.
           </p>
           <div className="shipped-strip-wrap">
             <ul className="shipped-strip">
               {items.map((item) => {
-                const { accent, Icon } = KIND_STYLES[item.kind] || KIND_STYLES.push;
+                const { accent, Icon } =
+                  KIND_STYLES[item.kind] || KIND_STYLES.push;
                 return (
                   <li
                     key={item.id}

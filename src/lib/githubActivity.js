@@ -12,12 +12,18 @@ export const REVALIDATE_SECONDS = 3600;
 
 // The public events API ships slim payloads: pushes carry no commit list and
 // merged PRs no title, so the top items get one enrichment lookup each
-// (head-commit message / PR title). Budget stays ≤ 7 requests per window.
+// (head-commit message / PR title). One more request lists public repos to
+// backfill the strip. Budget stays ≤ 8 requests per window.
+//
+// Each repo gets at most one card (its newest activity). Without that cap the
+// site's own busy repo filled every slot and hid everything else.
 const KIND_LABELS = {
   push: "pushed to",
   merge: "merged a PR in",
   release: "cut a release of",
   create: "started a new repo",
+  public: "open-sourced",
+  repo: "updated",
 };
 
 function repoShortName(fullName) {
@@ -39,7 +45,8 @@ export function formatRelativeTime(isoTime, nowMs = Date.now()) {
   const seconds = Math.max(0, Math.floor((nowMs - then) / 1000));
   if (seconds < 60) return "just now";
   const minutes = Math.floor(seconds / 60);
-  if (minutes < 60) return minutes === 1 ? "1 minute ago" : `${minutes} minutes ago`;
+  if (minutes < 60)
+    return minutes === 1 ? "1 minute ago" : `${minutes} minutes ago`;
   const hours = Math.floor(minutes / 60);
   if (hours < 24) return hours === 1 ? "1 hour ago" : `${hours} hours ago`;
   const days = Math.floor(hours / 24);
@@ -107,6 +114,12 @@ function classifyEvent(event) {
         url: release.html_url || `https://github.com/${repo}/releases`,
       };
     }
+    case "PublicEvent":
+      return {
+        ...base,
+        kind: "public",
+        url: `https://github.com/${repo}`,
+      };
     case "CreateEvent": {
       if (payload.ref_type !== "repository") return null;
       return {
@@ -121,24 +134,8 @@ function classifyEvent(event) {
   }
 }
 
-// Turns the raw (newest-first) event list into at most MAX_ITEMS display
-// items: classify, collapse consecutive pushes to the same repo into one item
-// (keeping the newest head/time and counting the rest), then label.
-export function buildActivityItems(events, nowMs = Date.now()) {
-  if (!Array.isArray(events)) return [];
-  const items = [];
-  for (const event of events) {
-    const item = classifyEvent(event);
-    if (!item) continue;
-    const previous = items[items.length - 1];
-    if (previous && previous.kind === "push" && item.kind === "push" && previous.repo === item.repo) {
-      previous.count += 1;
-      continue;
-    }
-    items.push(item);
-    if (items.length > MAX_ITEMS) break;
-  }
-  return items.slice(0, MAX_ITEMS).map((item) => ({
+function labelItem(item, nowMs) {
+  return {
     ...item,
     label:
       item.kind === "push"
@@ -147,7 +144,67 @@ export function buildActivityItems(events, nowMs = Date.now()) {
           ? `merged PR #${item.prNumber}`
           : KIND_LABELS[item.kind],
     timeAgo: formatRelativeTime(item.isoTime, nowMs),
-  }));
+  };
+}
+
+// Turns the raw (newest-first) event list into at most MAX_ITEMS display
+// items: classify, keep only each repo's newest item (a push counts every push
+// to that repo in the feed), then label.
+export function buildActivityItems(events, nowMs = Date.now()) {
+  if (!Array.isArray(events)) return [];
+  const byRepo = new Map();
+  const items = [];
+  for (const event of events) {
+    const item = classifyEvent(event);
+    if (!item) continue;
+    const existing = byRepo.get(item.repo);
+    if (existing) {
+      if (existing.kind === "push" && item.kind === "push") existing.count += 1;
+      continue;
+    }
+    byRepo.set(item.repo, item);
+    items.push(item);
+  }
+  return items.slice(0, MAX_ITEMS).map((item) => labelItem(item, nowMs));
+}
+
+// Fills the strip up to MAX_ITEMS with recently pushed public repos the event
+// feed doesn't already show — work done while a repo was still private never
+// reaches the public feed. Forks and archived repos are skipped.
+export function backfillWithRepos(items, repos, nowMs = Date.now()) {
+  if (!Array.isArray(items)) items = [];
+  if (!Array.isArray(repos) || items.length >= MAX_ITEMS)
+    return items.slice(0, MAX_ITEMS);
+  const shown = new Set(items.map((item) => item.repo));
+  const extra = repos
+    .filter(
+      (repo) =>
+        repo &&
+        repo.full_name &&
+        !repo.fork &&
+        !repo.archived &&
+        !repo.private &&
+        repo.pushed_at,
+    )
+    .filter((repo) => !shown.has(repo.full_name))
+    .sort((a, b) => Date.parse(b.pushed_at) - Date.parse(a.pushed_at))
+    .slice(0, MAX_ITEMS - items.length)
+    .map((repo) =>
+      labelItem(
+        {
+          id: `repo-${repo.id ?? repo.full_name}`,
+          kind: "repo",
+          repo: repo.full_name,
+          repoName: repo.name || repoShortName(repo.full_name),
+          isoTime: repo.pushed_at,
+          detail: repo.description || null,
+          count: 1,
+          url: repo.html_url || `https://github.com/${repo.full_name}`,
+        },
+        nowMs,
+      ),
+    );
+  return [...items, ...extra];
 }
 
 function githubFetch(url) {
@@ -167,7 +224,9 @@ function githubFetch(url) {
 async function enrichItem(item) {
   try {
     if (item.kind === "push" && item.headSha) {
-      const res = await githubFetch(`${API_ROOT}/repos/${item.repo}/commits/${item.headSha}`);
+      const res = await githubFetch(
+        `${API_ROOT}/repos/${item.repo}/commits/${item.headSha}`,
+      );
       if (!res.ok) return;
       const commit = await res.json();
       const message = commit?.commit?.message;
@@ -175,7 +234,9 @@ async function enrichItem(item) {
         item.detail = message.split("\n")[0];
       }
     } else if (item.kind === "merge" && item.prNumber) {
-      const res = await githubFetch(`${API_ROOT}/repos/${item.repo}/pulls/${item.prNumber}`);
+      const res = await githubFetch(
+        `${API_ROOT}/repos/${item.repo}/pulls/${item.prNumber}`,
+      );
       if (!res.ok) return;
       const pr = await res.json();
       if (typeof pr?.title === "string" && pr.title.length > 0) {
@@ -187,16 +248,29 @@ async function enrichItem(item) {
   }
 }
 
-export async function fetchRecentActivity() {
+async function fetchPublicRepos() {
   try {
     const res = await githubFetch(
-      `${API_ROOT}/users/${GITHUB_USER}/events/public?per_page=100`
+      `${API_ROOT}/users/${GITHUB_USER}/repos?type=owner&sort=pushed&per_page=20`,
     );
-    if (!res.ok) return [];
-    const events = await res.json();
+    return res.ok ? await res.json() : [];
+  } catch {
+    return [];
+  }
+}
+
+export async function fetchRecentActivity() {
+  try {
+    const [eventsRes, repos] = await Promise.all([
+      githubFetch(
+        `${API_ROOT}/users/${GITHUB_USER}/events/public?per_page=100`,
+      ),
+      fetchPublicRepos(),
+    ]);
+    const events = eventsRes.ok ? await eventsRes.json() : [];
     const items = buildActivityItems(events);
     await Promise.allSettled(items.map(enrichItem));
-    return items;
+    return backfillWithRepos(items, repos);
   } catch {
     return [];
   }
@@ -208,7 +282,9 @@ export async function fetchRecentActivity() {
 //
 // Returns null on any failure. The footer then renders nothing rather than a
 // broken stamp — a site claiming to be live should not advertise a dead fetch.
-export async function fetchLastCommit(repo = `${GITHUB_USER}/personal_site_v3`) {
+export async function fetchLastCommit(
+  repo = `${GITHUB_USER}/personal_site_v3`,
+) {
   try {
     const res = await githubFetch(`${API_ROOT}/repos/${repo}/commits/main`);
     if (!res.ok) return null;
