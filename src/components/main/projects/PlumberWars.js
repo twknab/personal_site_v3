@@ -33,12 +33,22 @@ function PlumberWars() {
             which their crew races a foul-mouthed rival truck across Seattle and
             then fixes the job. The repairs are the real thing: sixteen of the
             most common calls in the Puget Sound area, each broken into the
-            steps a plumber actually takes, so the pro tips teach you why you
-            shut the angle stop before pulling a cartridge. Every pixel is drawn
-            in code &mdash; a small painter with ordered dithering, lit volumes
-            and auto-outlines builds the Space Needle, the houses and every face
-            at load time &mdash; and the chiptune soundtrack is synthesized live
-            with the{" "}
+            steps a plumber actually takes, with pro tips and a &ldquo;How pros
+            do it&rdquo; card for every job that explains the standard behind
+            the fix, from trap seals to the 80 psi limit on house pressure.
+            Every pixel is drawn in code &mdash; a small painter with ordered
+            dithering, lit volumes and auto-outlines builds the Space Needle,
+            the houses, every face and a dispatch map traced from real
+            coordinates at load time &mdash; and each neighborhood opens with
+            pixel art converted from openly licensed{" "}
+            <a
+              href="https://commons.wikimedia.org"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Wikimedia Commons
+            </a>{" "}
+            photos. The EDM soundtrack is synthesized live with the{" "}
             <a
               href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API"
               target="_blank"
@@ -46,7 +56,7 @@ function PlumberWars() {
             >
               Web Audio API
             </a>
-            . The trash talk is voiced with{" "}
+            , and the trash talk is voiced with{" "}
             <a
               href="https://cloud.google.com/text-to-speech"
               target="_blank"
@@ -54,8 +64,17 @@ function PlumberWars() {
             >
               Google Cloud Text-to-Speech
             </a>
-            , and a test fails the build if a line ships unrecorded or the
-            README drifts from the game. Built with{" "}
+            . Players post their totals to a global leaderboard in{" "}
+            <a
+              href="https://firebase.google.com/docs/firestore"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Firestore
+            </a>
+            , served by a zero-dependency Node server on Cloud Run, and a test
+            fails the build if a line ships unrecorded or the README drifts
+            from the game. Built with{" "}
             <a
               href="https://phaser.io"
               target="_blank"
@@ -71,7 +90,7 @@ function PlumberWars() {
             >
               Claude
             </a>
-            , phone-first, and served from Cloud Run. Contains language.
+            , phone-first. Contains language.
           </p>
           <Button
             variant="primary"
