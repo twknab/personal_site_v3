@@ -15,9 +15,9 @@ const titles = () =>
 describe("Projects", () => {
   it("leads with the newest work", () => {
     expect(titles().slice(0, 3)).toEqual([
+      "Plumber Wars",
       "Mail Digest",
       "SquirrelStudio",
-      "Frog Garden",
     ]);
   });
 
@@ -29,16 +29,29 @@ describe("Projects", () => {
         "HikingTool",
         "Fitness Tracker",
         "Sock It!",
-      ])
+      ]),
     );
   });
 
   it("links Mail Digest to its repository", () => {
     const link = document.querySelector(
-      'a[href="https://github.com/twknab/mail-digest"]'
+      'a[href="https://github.com/twknab/mail-digest"]',
     );
     expect(link).toBeTruthy();
     expect(link.textContent).toMatch(/view on github/i);
+  });
+
+  it("links Plumber Wars to the game and its repository", () => {
+    const repo = document.querySelector(
+      'a[href="https://github.com/twknab/plumber-wars"]',
+    );
+    expect(repo).toBeTruthy();
+    expect(repo.textContent).toMatch(/view on github/i);
+    const play = document.querySelector(
+      'a[href="https://plumber-wars-980128349276.us-west1.run.app"]',
+    );
+    expect(play).toBeTruthy();
+    expect(play.textContent).toMatch(/play it/i);
   });
 
   it("parks AQI Viewer at the bottom of the list", () => {
@@ -47,7 +60,7 @@ describe("Projects", () => {
 
   it("links Frog Garden to its repository", () => {
     const link = document.querySelector(
-      'a[href="https://github.com/twknab/zen-frog-todo"]'
+      'a[href="https://github.com/twknab/zen-frog-todo"]',
     );
     expect(link).toBeTruthy();
     expect(link.textContent).toMatch(/view on github/i);
