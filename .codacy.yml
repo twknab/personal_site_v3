@@ -12,6 +12,8 @@
 # 'esversion: 6')" and flags the unused `React` import that all nine project
 # components carry. Both are style findings on codebase-wide patterns, and
 # both only ever appear on whichever files a PR happens to touch.
+# Note: with a project token, Codacy's dashboard settings decide which tools run, so JSHint can still
+# run even though it's disabled below. .jshintrc sets esversion so it at least understands modern JS.
 engines:
   eslint:
     enabled: false
