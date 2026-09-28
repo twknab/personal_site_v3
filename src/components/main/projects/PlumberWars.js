@@ -7,7 +7,7 @@ import { FaGamepad, FaGithub } from "react-icons/fa";
 import plumberWarsIco from "../../../assets/images/apps/plumberwars-ico.png";
 
 const REPO = "https://github.com/twknab/plumber-wars";
-const PLAY = "https://plumber-wars-980128349276.us-west1.run.app";
+const PLAY = "https://plumberwars.timknab.dev";
 
 function PlumberWars() {
   return (
