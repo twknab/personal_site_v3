@@ -48,7 +48,7 @@ describe("Projects", () => {
     expect(repo).toBeTruthy();
     expect(repo.textContent).toMatch(/view on github/i);
     const play = document.querySelector(
-      'a[href="https://plumber-wars-980128349276.us-west1.run.app"]',
+      'a[href="https://plumberwars.timknab.dev"]',
     );
     expect(play).toBeTruthy();
     expect(play.textContent).toMatch(/play it/i);
