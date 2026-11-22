@@ -1,4 +1,3 @@
-import React from "react";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Image from "react-bootstrap/Image";
