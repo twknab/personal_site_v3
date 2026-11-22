@@ -35,6 +35,7 @@ import taoism from "../../../assets/images/book-covers/taoism.jpg";
 import twentyFourHoursADay from "../../../assets/images/book-covers/twenty-four-hours-a-day.jpg";
 import understandingDistributedSystems from "../../../assets/images/book-covers/understanding-distributed-systems.png";
 import vibeCoding from "../../../assets/images/book-covers/vibe-coding.png";
+import visualizingGoogleCloud from "../../../assets/images/book-covers/visualizing-google-cloud.jpg";
 import wisdomOfMikeMentzer from "../../../assets/images/book-covers/wisdom-of-mike-mentzer.jpg";
 
 const localCovers = {
@@ -67,6 +68,7 @@ const localCovers = {
   "twenty-four-hours-a-day": twentyFourHoursADay,
   "understanding-distributed-systems": understandingDistributedSystems,
   "vibe-coding": vibeCoding,
+  "visualizing-google-cloud": visualizingGoogleCloud,
   "wisdom-of-mike-mentzer": wisdomOfMikeMentzer,
 };
 

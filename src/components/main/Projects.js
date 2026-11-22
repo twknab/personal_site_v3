@@ -3,6 +3,7 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import SectionHeading from "../common/SectionHeading";
 import AqiViewer from "./projects/AqiViewer";
+import CloudBar from "./projects/CloudBar";
 import FitnessTracker from "./projects/FitnessTracker";
 import FrogGarden from "./projects/FrogGarden";
 import GearList from "./projects/GearList";
@@ -27,6 +28,7 @@ function Projects() {
           {/* Newest work first; the older experiments bring up the rear. */}
           <PlumberWars />
           <MailDigest />
+          <CloudBar />
           <SquirrelStudio />
           <FrogGarden />
           <RoamGuru />

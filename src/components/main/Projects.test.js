@@ -14,9 +14,10 @@ const titles = () =>
 
 describe("Projects", () => {
   it("leads with the newest work", () => {
-    expect(titles().slice(0, 3)).toEqual([
+    expect(titles().slice(0, 4)).toEqual([
       "Plumber Wars",
       "Mail Digest",
+      "CloudBar",
       "SquirrelStudio",
     ]);
   });
@@ -36,6 +37,14 @@ describe("Projects", () => {
   it("links Mail Digest to its repository", () => {
     const link = document.querySelector(
       'a[href="https://github.com/twknab/mail-digest"]',
+    );
+    expect(link).toBeTruthy();
+    expect(link.textContent).toMatch(/view on github/i);
+  });
+
+  it("links CloudBar to its repository", () => {
+    const link = document.querySelector(
+      'a[href="https://github.com/twknab/gcp-system-tray-admin"]',
     );
     expect(link).toBeTruthy();
     expect(link.textContent).toMatch(/view on github/i);

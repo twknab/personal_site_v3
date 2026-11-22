@@ -20,6 +20,14 @@ export const currentlyReading = [
     publisher: "SKILS",
     year: "2020 (2nd ed.)",
   },
+  {
+    slug: "visualizing-google-cloud",
+    author: "Vergadia, Priyanka",
+    title:
+      "Visualizing Google Cloud: 101 Illustrated References for Cloud Engineers and Architects",
+    publisher: "Wiley",
+    year: 2022,
+  },
 ];
 
 // Completed reading grouped by year, newest first. Each year renders as a
