@@ -45,6 +45,10 @@ const REMOTE_SOURCES = {
     olCoverByIsbn("9780986561313"),
     archiveThumb("navigationseasta0000unse"),
   ],
+  "visualizing-google-cloud": [
+    olCoverByIsbn("9781119816324"),
+    "https://media.wiley.com/product_data/coverImage300/27/11198163/1119816327.jpg",
+  ],
   // 2026
   "beachcombers-guide": [
     olCoverByIsbn("9781550178371"),
