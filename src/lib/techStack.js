@@ -21,7 +21,7 @@ export function getTechStack() {
     // Major only: the footer chip names a site generation ("v5"), not a
     // library release — minor/patch stay in package.json for the changelog.
     siteMajor: pkg.version.split(".")[0],
-    // Build-machine Node major (Netlify's build image), e.g. "22".
+    // Build-machine Node major (the Deploy workflow's runner, from .nvmrc), e.g. "22".
     nodeMajor: process.version.replace(/^v/, "").split(".")[0],
     badges: Object.entries(DOCS)
       .filter(([dep]) => deps[dep])

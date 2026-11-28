@@ -6,7 +6,7 @@ A custom portfolio site for **Tim Knab**, full-stack software engineer — built
 
 🌐 **[https://timknab.dev](https://timknab.dev)**
 
-Continuously deployed from `main` via Netlify, with deploy previews on every pull request.
+A static export (`next build` → `out/`) served by **Firebase Hosting** in the `timknab-site` Google Cloud project. Every merge to `main` deploys it through the **Deploy** workflow; run that workflow by hand to refresh the GitHub-activity strip without a merge. Hosting, the deploy identity and DNS at name.com are all Terraform in [`infra/terraform/`](infra/terraform/README.md).
 
 ## Tech Stack
 
@@ -19,7 +19,7 @@ Continuously deployed from `main` via Netlify, with deploy previews on every pul
 | Navigation | [react-scroll](https://www.npmjs.com/package/react-scroll) (smooth in-page scrolling) |
 | Icons | [react-icons](https://react-icons.github.io/react-icons/) |
 | Testing | [Jest](https://jestjs.io/) + [React Testing Library](https://testing-library.com/) |
-| Hosting / CI | [Netlify](https://www.netlify.com/), GitHub Actions |
+| Hosting / CI | [Firebase Hosting](https://firebase.google.com/docs/hosting), [Terraform](https://www.terraform.io/), GitHub Actions |
 
 ## Site Sections
 
@@ -73,8 +73,8 @@ src/
 npm install      # install dependencies
 npm run dev      # run the dev server at http://localhost:3000
 npm test         # run the Jest test suite
-npm run build    # production build into /.next
-npm run start    # serve the production build locally
+npm run build    # static export into /out
+npx serve out    # serve the export locally
 npm run lint     # ESLint (next/core-web-vitals)
 ```
 
@@ -83,15 +83,16 @@ npm run lint     # ESLint (next/core-web-vitals)
 **Pre-merge — every pull request:**
 
 - **App CI** *(blocking)* — ESLint (`next/core-web-vitals`), the Jest test suite, and a production `next build`. A failure in any step blocks the merge.
-- **Netlify deploy preview** — a live preview URL for the branch (the visual check).
+- **Visual check** — run `npm run dev` locally; there are no per-PR preview URLs since the move off Netlify.
 - **npm audit** *(blocking)* — fails on any high-severity advisory in the dependency tree.
 - **Dependency Review** *(blocking)* — fails a PR that introduces a known-vulnerable dependency.
 - **Codacy Security Scan** *(blocking)* — static security analysis; findings upload to the GitHub Security tab and annotate the PR.
 
 **Post-merge — every push to `main`:**
 
-- **App CI** re-runs on the merged tree, catching bad merges or direct pushes even though Netlify deploys them.
-- **Lighthouse** audits the live https://timknab.dev after the Netlify deploy settles (3 runs, artifacts + shareable report links) — performance, accessibility, best practices, SEO. Also runs monthly on a schedule to catch drift between merges.
+- **Deploy** builds the static export and publishes it to Firebase Hosting (keyless: Workload Identity Federation, main branch only).
+- **App CI** re-runs on the merged tree, catching bad merges or direct pushes.
+- **Lighthouse** audits the live https://timknab.dev once the Deploy workflow finishes (3 runs, artifacts + shareable report links) — performance, accessibility, best practices, SEO. Also runs monthly on a schedule to catch drift between merges.
 
 > ℹ️ These were all informational until the repo went public and the Next 16 + React 19 upgrade ([#95](https://github.com/twknab/personal_site_v3/pull/95)) cleared the last unfixable advisories. GitHub Advanced Security is free on public repos, so SARIF upload and Dependency Review now work, and `npm audit` reports 0 — a permanently-green check hides regressions, so all three fail the build now.
 

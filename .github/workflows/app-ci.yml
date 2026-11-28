@@ -2,7 +2,7 @@
 #
 # The primary quality gate. Runs on every pull request (pre-merge) and again
 # on main after merge (post-merge verification, so a bad merge or a direct
-# push to main is caught even though Netlify deploys it).
+# push to main is caught; the Deploy workflow publishes main independently).
 #
 # Unlike the security scans (Codacy, npm audit, Dependency Review), every
 # step here is BLOCKING — a lint error, failing test, or broken production
