@@ -1,7 +1,7 @@
 # Lighthouse (post-deploy)
 #
-# Post-merge value: after a merge to main, Netlify redeploys timknab.dev;
-# this workflow then audits the LIVE site for performance, accessibility,
+# Post-merge value: after a merge to main, the Deploy workflow publishes
+# timknab.dev to Firebase Hosting; this workflow then audits the LIVE site for performance, accessibility,
 # best practices, and SEO — the numbers that actually matter for a portfolio.
 #
 # Reports are uploaded as run artifacts and to Lighthouse CI's temporary
@@ -12,12 +12,15 @@
 name: Lighthouse
 
 on:
-  push:
+  # Runs once the deploy has finished, so it audits what was just published.
+  workflow_run:
+    workflows: [ "Deploy" ]
+    types: [ completed ]
     branches: [ "main" ]
   workflow_dispatch:
   schedule:
     # Monthly drift check even when nothing merges (covers dependency-less
-    # regressions: expired headers, Netlify config drift, font/CDN changes).
+    # regressions: expired headers, hosting config drift, font/CDN changes).
     - cron: '15 9 3 * *'
 
 permissions:
@@ -27,13 +30,8 @@ jobs:
   lighthouse:
     name: Audit live site
     runs-on: ubuntu-latest
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     steps:
-      # Netlify needs a few minutes to build + deploy the merge before the
-      # live site reflects it. Skip the wait for manual/scheduled runs.
-      - name: Wait for Netlify deploy
-        if: github.event_name == 'push'
-        run: sleep 240
-
       - name: Run Lighthouse
         uses: treosh/lighthouse-ci-action@3e7e23fb74242897f95c0ba9cabad3d0227b9b18 # v12
         with:

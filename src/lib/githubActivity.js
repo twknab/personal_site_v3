@@ -1,8 +1,7 @@
 // Server-side GitHub activity feed for the "Recently Shipped" strip (#78).
 //
-// Fetched only from server components with Next.js ISR caching, so visitors
-// never hit the GitHub API and the site calls it at most once per revalidation
-// window. Every failure path resolves to [] — the section hides itself rather
+// Fetched only at build time (the site is a static export), so visitors never
+// hit the GitHub API; the strip is as fresh as the last deploy. Every failure path resolves to [] — the section hides itself rather
 // than ever showing an error or empty skeleton.
 
 const GITHUB_USER = "twknab";

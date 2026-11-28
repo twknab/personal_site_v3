@@ -1,0 +1,52 @@
+# Deploy timknab.dev to Firebase Hosting (project timknab-site).
+#
+# Every push to main builds the static export (out/) and publishes it. The
+# GitHub activity strip is fetched during this build, so it is as fresh as the
+# last merge; run this workflow by hand to refresh it without a merge.
+#
+# No key is stored in GitHub: the job signs in to Google Cloud through
+# Workload Identity Federation as site-deployer@timknab-site, and the provider
+# only accepts tokens from this repository's main branch.
+name: Deploy
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Build and deploy to Firebase Hosting
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - run: npm ci
+
+      - name: Build static export
+        run: npm run build
+        env:
+          # Raises the GitHub API rate limit for the activity strip.
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@7c6bc770dae815cd3e89ee6cdf493a5fab2cc093 # v3
+        with:
+          workload_identity_provider: projects/339591396766/locations/global/workloadIdentityPools/github/providers/personal-site
+          service_account: site-deployer@timknab-site.iam.gserviceaccount.com
+
+      - name: Deploy
+        run: npx --yes firebase-tools@15 deploy --only hosting --project timknab-site --non-interactive

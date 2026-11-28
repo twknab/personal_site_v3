@@ -28,3 +28,13 @@ yarn-error.log*
 /.next/
 /out/
 next-env.d.ts
+
+# Firebase CLI
+.firebase/
+firebase-debug.log
+
+# Terraform
+infra/terraform/.terraform/
+*.tfstate
+*.tfstate.*
+tfplan
