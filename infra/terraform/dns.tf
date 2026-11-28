@@ -55,18 +55,23 @@ resource "namedotcom_record" "zone" {
   host        = each.value.host
   record_type = each.value.type
   answer      = each.value.answer
+
+  # name.com refuses records for a domain not on its nameservers.
+  depends_on = [namedotcom_domain_nameservers.domain]
 }
 
 # The cutover: points the domain at name.com's own DNS (away from Netlify's).
-# Records above are inert until this is applied.
+# It has to come first — name.com rejects records for a domain that is not on
+# its nameservers. Resolvers keep asking Netlify's (still-live) zone until the
+# old NS records expire, so the site stays up while this propagates.
 resource "namedotcom_domain_nameservers" "domain" {
   domain_name = var.domain
+  # name.com assigns each account its own set; asking for the generic
+  # ns1-4.name.com is silently rewritten to these.
   nameservers = [
-    "ns1.name.com",
-    "ns2.name.com",
-    "ns3.name.com",
-    "ns4.name.com",
+    "ns1qsy.name.com",
+    "ns2dqx.name.com",
+    "ns3gnv.name.com",
+    "ns4hmp.name.com",
   ]
-
-  depends_on = [namedotcom_record.zone]
 }

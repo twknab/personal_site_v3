@@ -30,6 +30,14 @@ The name.com credentials are an API token from
 <https://www.name.com/account/settings/api>, kept in a local file readable
 only by you. They never go in a `.tf` or `.tfvars` file.
 
+Two name.com quirks, both hit on the first apply:
+
+- name.com gives each account its own nameservers (here `ns1qsy`, `ns2dqx`,
+  `ns3gnv`, `ns4hmp`). Asking for the generic `ns1.name.com` set is rewritten
+  to those and Terraform reports an inconsistent result.
+- Creating two records at the same host in parallel can fail with
+  "Parameter Value Error - Dns Error". Re-running the apply creates the rest.
+
 After an apply, `terraform output firebase_required_dns` lists what Firebase
 wants at the DNS host. `dns.tf` should already match it; if Firebase ever asks
 for something new, change `dns.tf` rather than the name.com dashboard.
